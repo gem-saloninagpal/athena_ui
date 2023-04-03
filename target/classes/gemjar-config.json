@@ -1,0 +1,27 @@
+{
+  "environment": "dev",
+  "projectName": "athena-ui",
+  "reportName": "Athena UI Report",
+  "gemjarSubID": "test_id",
+  "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
+  "glueCode":"com.gemini.athena.stepdefinitions",
+  "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "email_report": "null",
+  "email_to": "false",
+  "email_cc": "",
+  "dev": {
+    "browserName": "chrome",
+    "launchUrl": "https://athenalndint-dev.geminisolutions.com",
+    "browserTimeout": 200
+  },
+  "prod": {
+    "browserName": "chrome",
+    "launchUrl": "https://groupdev.pramericalife.in/",
+    "browserTimeout": 200
+  },
+  "beta": {
+    "browserName": "chrome",
+    "launchUrl": "https://athenalndint-dev.geminisolutions.com",
+    "browserTimeout": 200
+  }
+}
