@@ -11,7 +11,7 @@
   "email_cc": "",
   "dev": {
     "browserName": "chrome",
-    "launchUrl": "https://athenalndint-dev.geminisolutions.com",
+    "launchUrl": "https://athena-dev.geminisolutions.com",
     "browserTimeout": 200
   },
   "prod": {
