@@ -13,7 +13,7 @@ public class MyLocators {
     public static By sidebar=By.xpath("//p-toolbar//em");
     public static String selectModule="//span[contains(text(),'input')]//parent::a";
     public static String button="//button[@label='input']";
-    public static String header="//h6";
+    public static String header="(//h6[contains(@class,'text')])[1]";
     public static By fieldsError=By.xpath("//input//following::small");
     public static By crossIcon=By.xpath("//button[contains(@class,'close')]");
 
@@ -27,6 +27,9 @@ public class MyLocators {
     public static By athenaLogo=By.xpath("//div[contains(@class,'gem-image-logo')]");
     public static By popupMsg=By.xpath("//div[contains(@class,'p-toast-detail')]");
     public static By passwordFormatError=By.xpath("//input[@id='password']//parent::span//following::small");
+
+    public static By passwordFormatError1=By.xpath("//input[@id='password']//following::small");
+
     public static By selectCampusDropdown=By.xpath("//p-dropdown[@formcontrolname='campus']//span[contains(@class,'chevron-down')]//parent::div");
     public static By selectCampus=By.xpath("//span[text()='Other, Other']//parent::li//parent::p-dropdownitem");
     public static By selectExperienceLevelDropdown=By.xpath("//label[contains(text(),'Experience Level')]//preceding::div[1]");
@@ -56,7 +59,11 @@ public class MyLocators {
     public static By tabSelected=By.xpath("//li[contains(@class,'highlight')]//span");
     public static String numTest="//p-tabpanel[@ng-reflect-header='input']//div[@class='card hover-effect']";
     public static String testTab=   "//span[text()='input']//parent::a";
-    public static By message=By.xpath("//h5");
+    public static String message="//p-tabpanel[@header='input']//h5";
+    public static String profile="//span[text()='input']//parent::a";
+    public static String passwordFields="//label[text()='fieldName']//following::input";
+    public static By confirmPassword=By.xpath("//label[text()='Confirm Password']//following::input");
+    public static By testDate=By.xpath("//b[text()='Date']//parent::p");
 
     // private static String input;
  //   public static String selectTab="(//li[@role='presentation'])["+(input)+"]//parent::a";

@@ -5,6 +5,7 @@
   "gemjarSubID": "test_id",
   "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
   "glueCode":"com.gemini.athena.stepdefinitions",
+  "tags":"@regression01",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "email_report": "null",
   "email_to": "false",
