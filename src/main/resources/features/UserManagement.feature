@@ -2,6 +2,7 @@ Feature: User Management features
 
     Background:
      Given Login using "athena@geminisolutions.com" and "gem_password"
+      And Wait while screen loads
 
 
       @regression1
@@ -113,7 +114,7 @@ Feature: User Management features
             |module         |button  |page           |error   |role1   |tab    |popupMsg     |index|role2|role3|
             |User Management|Register|User Management|required|Admin  |Employees|already exist|1  |Invigilator|Learner|
 
-  @regression
+  @regression1
           Scenario Outline: Verify user is unable to edit role of a candidate
             Given Select "<module>" from sidebar
             Then Switch to tab "<tab>", "<index>"

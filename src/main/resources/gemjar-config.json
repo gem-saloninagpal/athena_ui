@@ -1,18 +1,19 @@
 {
   "environment": "dev",
-  "projectName": "athena-ui",
-  "reportName": "Athena UI Report",
-  "gemjarSubID": "test_id",
-  "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
-  "glueCode":"com.gemini.athena.stepdefinitions",
-  "tags":"@regression01",
+  "project_name": "ATHENA",
+  "report_name": "Athena UI Report",
+  "glue_code":"com.gemini.athena.stepdefinitions",
+  "tags":"@regression1",
+  "jewel_user": "saloni",
+  "feature":"src/main/resources/features",
+  "jewel_bridge_token": "067700b2-b467-4edf-96f6-1c4484f890991686738195902",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
-  "email_report": "null",
+  "email_report": "n",
   "email_to": "false",
   "email_cc": "",
   "dev": {
     "browserName": "chrome",
-    "launchUrl": "https://athena-dev.geminisolutions.com",
+    "launchUrl": "http://localhost:4200/",
     "browserTimeout": 200
   },
   "prod": {
