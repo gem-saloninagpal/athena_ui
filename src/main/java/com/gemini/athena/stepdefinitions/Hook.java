@@ -12,9 +12,6 @@ public class Hook {
  //   static WebDriver driver;
     @Before
     public static void hook() throws GemException {
-//        ChromeOptions options=new ChromeOptions();
-//        options.addArguments("headless");
-//        driver=new ChromeDriver(options);
         DriverManager.setUpBrowser();
 
     }

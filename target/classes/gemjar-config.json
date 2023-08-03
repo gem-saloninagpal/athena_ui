@@ -3,21 +3,18 @@
   "project_name": "ATHENA",
   "report_name": "Athena UI Report",
   "glue_code":"com.gemini.athena.stepdefinitions",
-  "tags":"@regression1",
-  "jewel_user": "saloni",
+  "tags":"@regression012",
+  "jewel_user1": "saloni",
   "feature":"src/main/resources/features",
-  "jewel_bridge_token": "067700b2-b467-4edf-96f6-1c4484f890991686738195902",
+  "jewel_bridge_token1": "eb309270-b933-4469-af72-6e051464e2ad1687930868387",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
-  "email_report": "n",
-  "email_to": "false",
-  "email_cc": "",
   "dev": {
-    "browserName": "chrome",
-    "launchUrl": "http://localhost:4200/",
-    "browserTimeout": 200
+    "browser_name": "chrome",
+    "launch_url": "https://athena-dev.geminisolutions.com",
+    "browser_timeout": 200
   },
   "prod": {
-    "browserName": "chrome",
+    "browser_name": "chrome",
     "launchUrl": "https://groupdev.pramericalife.in/",
     "browserTimeout": 200
   },

@@ -44,8 +44,10 @@ public class MyLocators {
     public static By rolesOption=By.xpath("//div[contains(@class,'p-dropdown p-component')]//span[@class='ng-star-inserted']");
     public static By actionsIcon=By.xpath("(//tbody)[2]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
     public static By editProfile=By.xpath("//label[text()='Edit Profile']//parent::div");
-    public static By enableEditing=By.xpath("//span[@class='p-inputswitch-slider']");
+    public static By enableEditing=By.xpath("//span[@class='p-inputswitch-slider']//parent::div");
+    public static By enableEditing1=By.xpath("//p-inputswitch[@class='prime-switch']");
     public static By rolesField=By.xpath("//p-multiselect[@formcontrolname='roleDetails']//input");
+    public static By rolesField1=By.xpath("//p-multiselect[@formcontrolname='roleDetails']");
     public static By userStatus=By.xpath("//p-togglebutton//span[@class='p-button-label']");
     public static By statusButton=By.xpath("//p-togglebutton");
     public static By employeeActionsIcon=By.xpath("(//span[contains(@class,'pi pi-ellipsis')]//parent::button)");
@@ -78,9 +80,9 @@ public class MyLocators {
     public static By questionsscreen=By.xpath("//div//athena-questions-screen");
     public static String pageNavigate="//a[contains(@href,'input')]";
     public static String nextBtn="(//button[@label='input'])[2]";
-    public static String sectionSelected="//p[text()='input']";
+    public static String sectionSelected="//p[contains(text(),'input')]";
     public static By sectionsDropdown=By.xpath("//p-dropdown[@placeholder='Select Category']");
-    public static String sectionOptions="//span[text()='Logical']//parent::li//parent::p-dropdownitem";
+    public static String sectionOptions="//span[text()='input']//parent::li//parent::p-dropdownitem";
     public static By textarea=By.xpath("//div//textarea");
     public static By selectOption=By.xpath("//p-radiobutton[@name='groupname']");
     public static By paletteBtn=By.xpath("//athena-question-palette//button");
@@ -96,6 +98,17 @@ public class MyLocators {
     public static By sectionName=By.xpath("//athena-questions-screen//div//p[@id='header']");
     public static By questionNum=By.xpath("//div[contains(@class,'question-number')]//span");
     public static By rightKey=By.xpath("//button[contains(@icon,'right')]");
+    public static String testSubmitButton="//button[text()='input']";
+    public static By backToDashboard=By.xpath("//p-button[@label='Back To Dashboard']//button");
+    public static String completedTest="//div[contains(text(),'input')]";
+    public static By employeeFirstName=By.xpath("(//tbody)[1]//td");
+    public static By candidateFirstName=By.xpath("(//tbody)[2]//td");
+    public static By oldPasswordField=By.xpath("//input[@formcontrolname='oldPassword']");
+    public static By contentFields=By.xpath("//span[@class='p-float-label']//input");
+    public static By listbox=By.xpath("//div[@class='othertag-disable']//input[@aria-haspopup='listbox']");
+    public static By fileUpload=By.xpath("//input[@id='getFile']");
+    public static By contentInputFields=By.xpath("//div[@class='othertag-disable']//input");
+    public static By spinner=By.xpath("//div[@role='alert' and @class='p-progress-spinner']");
 
     // private static String input;
  //   public static String selectTab="(//li[@role='presentation'])["+(input)+"]//parent::a";

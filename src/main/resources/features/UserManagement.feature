@@ -1,13 +1,14 @@
 Feature: User Management features
 
     Background:
+      Given Navigate to page "login"
      Given Login using "athena@geminisolutions.com" and "gem_password"
-      And Wait while screen loads
+   #   And Wait while screen loads
 
 
-      @regression1
+      @regression101
     Scenario Outline: Register Role- Learner, Admin, Invigilator, Super Admin
-      Given Select "<module>" from sidebar
+      Given Select "<module>", "<submodule>" from sidebar
       Then Click the button "<button>"
       And Verify user is navigated to page "<page>"
       Then Click the button "<button>"
@@ -17,7 +18,7 @@ Feature: User Management features
       Then Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
       Then Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
       Then Click the button "<button>"
-      Then Switch to tab "<tab>", "<index>"
+      Then Switch to "Learners"
       Then Verify "<role>" is registered "abcKk","def"
       Then Click the button "<button>"
       Then Select a role from dropdown "<role>"
@@ -34,7 +35,7 @@ Feature: User Management features
 
   @regression1
     Scenario Outline: Register Role- Candidate
-      Given Select "<module>" from sidebar
+      Given Select "<module>", "<submodule>" from sidebar
       Then Click the button "<button>"
       And Verify user is navigated to page "<page>"
       Then Click the button "<button>"
@@ -63,7 +64,7 @@ Feature: User Management features
 
   @regression1
       Scenario Outline: Register user with multiple roles
-        Given Select "<module>" from sidebar
+        Given Select "<module>", "<submodule>" from sidebar
         Then Click the button "<button>"
         And Verify user is navigated to page "<page>"
         Then Click the button "<button>"
@@ -75,7 +76,7 @@ Feature: User Management features
         Then Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
         Then Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
         Then Click the button "<button>"
-        Then Switch to tab "<tab>", "<index>"
+        Then Switch to "Employees"
         Then Verify "<role1>" is registered "abcKk","def"
         Then Verify the role of registered user "<role1>","<role2>","<role3>"
         Then Click the button "<button>"
@@ -90,11 +91,11 @@ Feature: User Management features
 
   @regression1
         Scenario Outline: Validating roles of user from user's id
-          Given Select "<module>" from sidebar
+          Given Select "<module>", "<submodule>" from sidebar
           Then Click the button "<button>"
           And Verify user is navigated to page "<page>"
           Then Click the button "<button>"
-          And Verify the error displayed in input fields "<error>" "7"
+          And Verify the error displayed in input fields "<error>" "<countMandatoryFields>"
           Then Select a role from dropdown "<role1>"
           Then Select a role from dropdown "<role2>"
           Then Select a role from dropdown "<role3>"
@@ -102,7 +103,7 @@ Feature: User Management features
           Then Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
           Then Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
           Then Click the button "<button>"
-          Then Switch to tab "<tab>", "<index>"
+          Then Switch to "Employees"
           Then Verify "<role1>" is registered "abcKk","def"
           Then Verify the role of registered user "<role1>","<role2>","<role3>"
           Then Logout of portal
@@ -111,12 +112,12 @@ Feature: User Management features
           Then Verify the roles through user's id "<role1>", "<role2>", "<role3>"
 
           Examples:
-            |module         |button  |page           |error   |role1   |tab    |popupMsg     |index|role2|role3|
-            |User Management|Register|User Management|required|Admin  |Employees|already exist|1  |Invigilator|Learner|
+            |module         |button  |page           |error   |role1   |role2|role3       |countMandatoryFields|
+            |User Management|Register|User Management|required|Admin  |Invigilator|Learner|7                   |
 
   @regression1
           Scenario Outline: Verify user is unable to edit role of a candidate
-            Given Select "<module>" from sidebar
+            Given Select "<module>", "<submodule>" from sidebar
             Then Switch to tab "<tab>", "<index>"
             Then Select Actions icon of first candidate displayed
             And Select Edit Profile option
@@ -125,12 +126,12 @@ Feature: User Management features
             And Verify user not able to edit role
 
             Examples:
-            | module        | tab     | index | string |
-            |User Management|Candidate|2      |Candidate|
+            | module        | tab     | index | string    |
+            |User Management|Candidate|2      |Update User|
 
-  @regression1
+  @regression10
           Scenario Outline: Verify active/inactive user
-            Given Select "<module>" from sidebar
+            Given Select "<module>", "<submodule>" from sidebar
             Then Switch to tab "<tab>", "<index>"
             Then Select Actions icon of first record displayed in Employees
             And Select Edit Profile option
@@ -146,12 +147,12 @@ Feature: User Management features
             Then Verify the updated status
 
             Examples:
-              | module        | tab     | index | string    |string1|
-              |User Management|Employees|1      |Employees|User Management / Update User|
+              | module        | tab     | index |string1|
+              |User Management|Employees|1      |User Management / Update User|
 
-  @regression1
+  @regression10
           Scenario Outline: Change role and validate
-            Given Select "<module>" from sidebar
+            Given Select "<module>", "<submodule>" from sidebar
             Then Switch to tab "<tab>", "<index>"
             Then Select Actions icon of first record displayed in Employees
             And Select Edit Profile option
@@ -165,8 +166,8 @@ Feature: User Management features
             Then Verify the role of registered user "<new role>","",""
 
             Examples:
-              | module        | tab     | index | string  |role1  |role2      |new role|string1|
-              |User Management|Employees|1      |Employees|Learner|Super Admin|Admin   |User Management / Update User|
+              | module        | tab     | index |role1  |role2      |new role|string1|
+              |User Management|Employees|1      |Learner|Super Admin|Admin   |User Management / Update User|
 
 
 
