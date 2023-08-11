@@ -109,6 +109,14 @@ public class MyLocators {
     public static By fileUpload=By.xpath("//input[@id='getFile']");
     public static By contentInputFields=By.xpath("//div[@class='othertag-disable']//input");
     public static By spinner=By.xpath("//div[@role='alert' and @class='p-progress-spinner']");
+    public static By contentData=By.xpath("//tbody[@class='p-datatable-tbody']/tr[1]/td");
+    public static By assignmentDescription=By.xpath("//div[contains(@class,'p-editor')]//p");
+    public static By assignmentInputFields=By.xpath("//athena-add-new-assignment//input");
+    public static By learnerLastName=By.xpath("(//tbody)[3]//td[2]");
+    public static By candidateLastName=By.xpath("(//tbody)[2]//td[2]");
+    public static By employeeLastName=By.xpath("(//tbody)[1]//td[2]");
+    public static By contentActionsIcon=By.xpath("//tr//button[contains(@class,'p-button')]");
+
 
     // private static String input;
  //   public static String selectTab="(//li[@role='presentation'])["+(input)+"]//parent::a";

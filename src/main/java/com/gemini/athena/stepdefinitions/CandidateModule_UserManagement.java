@@ -32,7 +32,6 @@ public class CandidateModule_UserManagement {
         try {
 
             DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
-            DriverAction.waitSec(5);
             System.out.println(randomString);
 
             //if new role is registered through the email, login using same email
@@ -81,7 +80,6 @@ public class CandidateModule_UserManagement {
 
     @Then("^Click the button \"([^\"]*)\"$")
     public void clickTheButton(String buttonName) throws InterruptedException {
-    //    Thread.sleep(2000);
         try {
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
         }catch(Exception e){
@@ -93,7 +91,7 @@ public class CandidateModule_UserManagement {
     @And("^Verify user is navigated to page \"([^\"]*)\"$")
     public void verifyUserNavigated(String pageTitle) {
         try {
-            Thread.sleep(3000);
+            DriverAction.waitSec(3);
             //verify the page through header
             String header = DriverAction.getElementText(By.xpath(MyLocators.header));
             if (header.contains(pageTitle)) {
@@ -112,8 +110,8 @@ public class CandidateModule_UserManagement {
             //verify the mandatory fields display error if not filled.
             List<WebElement> fields = DriverAction.getElements(MyLocators.fieldsError);
             int c = 0;
-            for (int i = 0; i < fields.size(); i++) {
-                if (fields.get(i).getText().contains(error)) {
+            for(WebElement wb:fields){
+                if(wb.getText().contains(error)){
                     c++;
                 }
             }
@@ -134,7 +132,7 @@ public class CandidateModule_UserManagement {
             //select a role while registering
         DriverAction.click(MyLocators.dropdownIcon, "Click the dropdown icon", "List of options displays.");
         DriverAction.click(By.xpath(MyLocators.option.replace("input", role)));
-         //   Thread.sleep(2000);
+
             DriverAction.click(MyLocators.crossIcon);
         }
         catch (Exception e) {
@@ -184,13 +182,16 @@ public class CandidateModule_UserManagement {
             //verify the registered user
             if(role.equals("Learners")) {
                  firstName = DriverAction.getElementText(MyLocators.learnerFirstName);
-                 lastName = DriverAction.getElementText(By.xpath("(//tbody)[3]//td[2]"));
+                 lastName = DriverAction.getElementText(MyLocators.learnerLastName);
+
             }else if(role.equals("Candidates")){
                 firstName = DriverAction.getElementText(MyLocators.candidateFirstName);
-                lastName = DriverAction.getElementText(By.xpath("(//tbody)[2]//td[2]"));
+                lastName = DriverAction.getElementText(MyLocators.candidateLastName);
+
             }else{
                 firstName = DriverAction.getElementText(MyLocators.employeeFirstName);
-                lastName = DriverAction.getElementText(By.xpath("(//tbody)[1]//td[2]"));
+                lastName = DriverAction.getElementText(MyLocators.employeeLastName);
+
             }
             if (firstName.contains(name) && lastName.contains(lname)) {
                 GemTestReporter.addTestStep("Verify learner is registered", "Successfully verified the registered learner " + name, STATUS.PASS, DriverAction.takeSnapShot());
@@ -252,7 +253,7 @@ public class CandidateModule_UserManagement {
     @Then("Enter password {string} and verify the required format {string}")
     public void enterPassword(String password, String format) {
         try {
-            Thread.sleep(3000);
+            DriverAction.waitUntilElementIsClickable(MyLocators.passwordField);
             //verify the password is created based on required standards.
             DriverAction.typeText(MyLocators.passwordField, password);
             String error = DriverAction.getElementText(MyLocators.passwordFormatError1);
@@ -706,11 +707,6 @@ public class CandidateModule_UserManagement {
         Date d2 = sdformat.parse(monthNumber2 + " " + endingDate[3] + " " + endingDate[4]);
         GemTestReporter.addTestStep("Get the test end date", "End date is" + sdformat.format(d2), STATUS.PASS);
 
-        //validate current date is within start and end date range
-//        DateFormat formatter = new SimpleDateFormat("MM dd yyyy");
-//        Calendar obj = Calendar.getInstance();
-//        String currentDate = formatter.format(obj.getTime());
-//        Date curr = sdformat.parse(currentDate);
 
         Date current = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("MM dd yyyy");
@@ -887,7 +883,7 @@ try {
     @Then("Navigate to page {string}")
     public void pageNavigate(String page) throws InterruptedException {
         try {
-            wait(6000);
+            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)));
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
             GemTestReporter.addTestStep("Navigate to page-"+page, "Exception encountered- " + e, STATUS.ERR);
@@ -921,7 +917,7 @@ try {
     @Then("^Verify user is able to save answers \"([^\"]*)\"$")
     public void verifyAnswers(String questionStatus) {
         try {
-            Thread.sleep(4000);
+            DriverAction.waitSec(4);
             String status = DriverAction.getAttributeName(MyLocators.paletteBtn, "class");
 
             //if answer selected is saved
@@ -1035,7 +1031,7 @@ try {
                 if(k!=0) {
                     expandSections();
                 }
-                Thread.sleep(2000);
+                DriverAction.waitSec(2);
                 DriverAction.click(sections.get(k));
                 int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
                 for (int i = 0; i < totalQues; i++) {
