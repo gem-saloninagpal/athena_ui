@@ -4,9 +4,9 @@
   "report_name": "Athena UI Report",
   "glue_code":"com.gemini.athena.stepdefinitions",
   "tags":"@regression012",
-  "jewel_user1": "saloni",
+  "jewel_user": "radhikari",
   "feature":"src/main/resources/features",
-  "jewel_bridge_token1": "eb309270-b933-4469-af72-6e051464e2ad1687930868387",
+  "jewel_bridge_token": "f092aa69-b769-4c16-8613-f6fe4aa6c6b31683869671673",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "dev": {
     "browser_name": "chrome",

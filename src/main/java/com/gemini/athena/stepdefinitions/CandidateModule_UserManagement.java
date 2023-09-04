@@ -45,6 +45,7 @@ public class CandidateModule_UserManagement {
             DriverAction.waitUntilElementClickable(MyLocators.loginBtn,90);
             DriverAction.click(MyLocators.loginBtn);
 
+
             //wait while the page loads.
             if(DriverAction.isExist(MyLocators.spinner));
             DriverAction.waitUntilElementDisappear(MyLocators.spinner,20);
@@ -836,6 +837,7 @@ try {
     @Then("^Check the instructions checkbox$")
     public void instructionsCheckbox() {
         try {
+
             DriverAction.click(MyLocators.instructionsCheckbox);
             GemTestReporter.addTestStep("Check the instructions checkbox", "Successfully checked the instructions checkbox.", STATUS.PASS);
         }catch (Exception e) {
