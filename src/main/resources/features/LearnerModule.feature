@@ -4,7 +4,7 @@ Feature: Learner module features
     Given Navigate to page "login"
     Then Login using "rahul23@gmail.com" and "abc@123"
 
-
+  @regression012
   Scenario Outline: Course Resume Validation
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
@@ -16,7 +16,7 @@ Feature: Learner module features
       |Learner|
 
 
-
+  @regression012
   Scenario Outline: Course completion and Download
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
@@ -27,7 +27,7 @@ Feature: Learner module features
       |Learner|
 
 
-
+  @regression012
   Scenario Outline: Validate Ongoing and Completed Course Count
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
@@ -40,7 +40,7 @@ Feature: Learner module features
       |Learner|
 
 
-
+  @regression012
   Scenario Outline: Course catalog validation
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"

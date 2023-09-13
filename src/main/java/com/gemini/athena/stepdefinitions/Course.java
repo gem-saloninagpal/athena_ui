@@ -22,6 +22,7 @@ import java.util.List;
 public class Course {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
     String courseName=" ";
+    String assignedCourseName=" ";
     @Then("^Verify the Owner of the Created Course$")
     public void verifyOwner(){
         try{
@@ -58,6 +59,7 @@ public class Course {
             }
             else
             {
+                GemTestReporter.addTestStep("Profile dropdown visibility", "No Profile dropdown is there on ui", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
 
@@ -73,8 +75,10 @@ public class Course {
     public void treeInfo(){
         try{
 //            List<WebElement> list1 = DriverAction.getElements(By.xpath(LearnerModule_Locators.courseArea.replace("itr", String.valueOf(i))));
+
            boolean isPresent=false;
            boolean isPresent1=false;
+           DriverAction.waitUntilElementAppear(By.xpath("//span[text()='Add Course Info']"),120);
             DriverAction.scrollToBottom();
              for(int i=1;i<=2;i++)
             {
@@ -134,14 +138,9 @@ public class Course {
             String upload=inputFields.get(i).getAttribute("type");
             //dropdown
             if(dropdown!=null&&dropdown.equals("listbox")){
-//                List<WebElement>dropdownFields=DriverAction.getElements(MyLocators.dropdownIcon);
                 DriverAction.click(By.xpath(Course_Locators.dropdownIcon.replace("itr",String.valueOf(c))));
                 c++;
-//                DriverAction.click(dropdownFields.get(i));
                 DriverAction.click(By.xpath(Course_Locators.option.replace("input",inputValues[i])));
-                if(DriverAction.isDisplayed(MyLocators.crossIcon)){
-                    DriverAction.click(MyLocators.crossIcon);
-                }
             }
             //file-upload
             else if(upload!=null&&upload.equals("file")){
@@ -149,10 +148,8 @@ public class Course {
             }
             //textbox
             else{
-
                 DriverAction.typeText(inputFields.get(i),inputValues[i]);
             }
-
         }
 
 
@@ -232,8 +229,8 @@ public class Course {
            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
        }
     }
-@Then("^Validate Add to Course$")
-    public void addToCourse(){
+@Then("^Validate Add to Course \"([^\"]*)\"$")
+    public void addToCourse(String message){
       try{
           //In this function we are first verifying the Add to course div is empty if not we are first deleting it.
           //And after that we are adding to Course.
@@ -274,12 +271,17 @@ if(DriverAction.isDisplayed(Course_Locators.addIcon))
 {
     DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
 }
-DriverAction.waitSec(3);
-if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Content successfully added. Add more!"))))
+//DriverAction.waitSec(3);
+if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input",message))))
 {
     GemTestReporter.addTestStep("Content is added","content is added successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
 }
+//else {
+//    if (DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input", "Assignment successfully added. Add more!")))) {
+//        GemTestReporter.addTestStep("Content is added", "Assignment successfully added. Add more!", STATUS.PASS, DriverAction.takeSnapShot());
+//    }
+//}
 String getContent=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[1]//td[1]"));
 String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
 if(getContent.equals(contentAfterSelecting))
@@ -361,7 +363,8 @@ public void editAndVerify(){
 
             }
 
-            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+            DriverAction.waitSec(5);
             DriverAction.click(Course_Locators.courseTypeDropdown);
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
             DriverAction.click(Course_Locators.draftOrPublishDropdown);
@@ -408,10 +411,10 @@ public void editAndVerify(){
                     } catch (AWTException e) {
                         e.printStackTrace();
                     }
-                    DriverAction.typeText(Course_Locators.courseNameInput,"copy");
+                    DriverAction.typeText(Course_Locators.courseNameInput,"Copy");
                     String courseNameAfterEdit=DriverAction.getElementText(Course_Locators.courseNameInput);
 
-                        if(courseNameAfterEdit.equals("copy"))
+                        if(courseNameAfterEdit.equals("Copy"))
                         {
                             GemTestReporter.addTestStep("Course Name is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
                         }
@@ -442,10 +445,10 @@ public void editAndVerify(){
                     } catch (AWTException e) {
                         e.printStackTrace();
                     }
-                    DriverAction.typeText(Course_Locators.courseDescription,"copy");
+                    DriverAction.typeText(Course_Locators.courseDescription,"Copy");
                     String descriptionAfterEdit=DriverAction.getElementText(Course_Locators.courseDescription);
 
-                        if(descriptionAfterEdit.equals("copy"))
+                        if(descriptionAfterEdit.equals("Copy"))
                         {
                             GemTestReporter.addTestStep("Course Description is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
                         }
@@ -540,7 +543,7 @@ public void editAndVerify(){
                     DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                     String fetchedCourseNameAfterEdit=DriverAction.getElementText(Course_Locators.draftedCourse);
                     System.out.print(fetchedCourseNameAfterEdit);
-                    if(fetchedCourseName.equals("copy"))
+                    if(fetchedCourseName.equals("Copy"))
                     {
                         GemTestReporter.addTestStep("Course is Editable","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -634,7 +637,8 @@ else
 
            }
 
-           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+           DriverAction.waitSec(5);
            DriverAction.click(Course_Locators.courseTypeDropdown);
            DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
            DriverAction.click(Course_Locators.draftOrPublishDropdown);
@@ -693,6 +697,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 DriverAction.click(Course_Locators.draftOrPublishDropdown);
                 DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Published")));
                 String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
+                DriverAction.waitSec(5);
                 if(fetchedPublishedCourseName.equals(courseName))
                 {
                     GemTestReporter.addTestStep("Course is published finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -720,8 +725,10 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 
         try {
             //Assign a Learner to a course
-            DriverAction.waitSec(5);
+//            DriverAction.waitSec(5);
+            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
+                assignedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if(DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input","Assign Learners"))));
                 {
@@ -729,8 +736,12 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
+                        DriverAction.waitSec(5);
                         DriverAction.typeText(Course_Locators.nameFilterInput,"rahul23@gmail.com");
+                        DriverAction.waitSec(5);
+//                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
+
                     }
                 }
             }
@@ -745,10 +756,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void switchRole(String role)
 {
     try{
+        DriverAction.waitSec(5);
         DriverAction.click(LearnerModule_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
-        if(DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input",role))))
+        if(DriverAction.isDisplayed(By.xpath(Course_Locators.userOption.replace("input",role))))
         {
-            DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input",role)));
+            DriverAction.click(By.xpath(Course_Locators.userOption.replace("input",role)));
         }
         DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
 
@@ -758,4 +770,163 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
         GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
     }
 }
+@And("^Filter the course and complete it$")
+    public void filterCompleteCourse(){
+        try{
+            DriverAction.waitSec(5);
+            if(DriverAction.isDisplayed(Course_Locators.courseFilterInput))
+            {
+                DriverAction.typeText(Course_Locators.courseFilterInput,assignedCourseName);
+
+            }
+            DriverAction.waitSec(5);
+            DriverAction.click(LearnerModule_Locators.courseDropdown);
+            DriverAction.waitSec(3);
+            DriverAction.click(LearnerModule_Locators.courseFilterdiv);
+            DriverAction.scrollToBottom();
+            if(DriverAction.isDisplayed(LearnerModule_Locators.viewCourseBtn))
+            {
+                DriverAction.click(LearnerModule_Locators.viewCourseBtn,"clicked on View Course Button","Successfully clicked on view course button");
+                if(DriverAction.isDisplayed(LearnerModule_Locators.startCourseBtn))
+                {
+                    DriverAction.click(LearnerModule_Locators.startCourseBtn,"clicked on Start Course Button","Successfully clicked on Start course button");
+                }
+//                DriverAction.scrollToBottom();
+                DriverAction.waitSec(3);
+                if (DriverAction.getElement(LearnerModule_Locators.vedio).isDisplayed()) {
+                    DriverAction.click(LearnerModule_Locators.vedio);
+                }
+                DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
+                if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
+                    DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
+                }
+                //Assignment
+                DriverAction.typeText(LearnerModule_Locators.answerArea, "demo_content");
+                DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
+
+                if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn))
+                {
+                    DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
+                }
+                DriverAction.waitSec(10);
+                DriverAction.click(Course_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
+                if(DriverAction.isDisplayed(By.xpath(Course_Locators.userOption.replace("input","Super Admin"))))
+                {
+                    DriverAction.click(By.xpath(Course_Locators.userOption.replace("input","Super Admin")));
+                }
+                DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
+
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+}
+@Then("^Verify the Learner Report \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
+    public void verifyLearnerReport(String learner,String email,String percentage,String status){
+        try{
+
+if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
+{
+    DriverAction.typeText(Course_Locators.courseFilterTagInput,assignedCourseName);
+//    DriverAction.scrollToBottom();
+}
+            if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
+                assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
+                DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
+                if (DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports"))))
+                {
+                    DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports")));
+                }
+            }
+            if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
+            {
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+                DriverAction.scrollToBottom();
+            }
+            List<WebElement> list1 =DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table//tr)[2]//td"));
+            for (WebElement element : list1) {
+                String text = element.getText();
+                if(text.equals(learner))
+                {
+                    GemTestReporter.addTestStep("Learner Name match the report","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                }
+                if(text.equals(email))
+                {
+                    GemTestReporter.addTestStep("Learner Email match the report","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                }
+                if(text.equals(percentage))
+                {
+                    GemTestReporter.addTestStep("Learner percentage is 100%,therefore completed the course","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                }
+                if(text.equals(status))
+                {
+                    GemTestReporter.addTestStep("Learner status is completed","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                }
+                if(DriverAction.isDisplayed(Course_Locators.contentsReport))
+                {
+                    DriverAction.click(Course_Locators.contentsReport);
+                }
+                if(DriverAction.isDisplayed(Course_Locators.assignmentReport))
+                {
+                    DriverAction.click(Course_Locators.assignmentReport);
+                }
+               String content=DriverAction.getElementText(Course_Locators.contentStatus);
+                String assignment=DriverAction.getElementText(Course_Locators.assignmentStatus);
+                if(content.equals("Completed")&&assignment.equals("Completed"))
+                {
+                    GemTestReporter.addTestStep("Completed Assignment and Content","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                }
+                else {
+                    GemTestReporter.addTestStep("Completed Assignment and Content","UnSuccessfully", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+
+    //
+                }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+}
+
+@When("^Reattempt the test to the user$")
+    public void reattemptTest(){
+        try{
+            if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
+                assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
+                DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
+                if (DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports"))))
+                {
+                    DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports")));
+                }
+            }
+            if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
+            {
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+
+            }
+            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+            DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
+            if(DriverAction.isDisplayed(Course_Locators.reattemptLabel))
+            {
+                DriverAction.click(Course_Locators.reattemptLabel, "clicked on reattempt option", "Successfully clicked");
+            }
+            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+}
+
     }

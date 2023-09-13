@@ -24,7 +24,7 @@ public class Course_Locators {
     public static By addIconEdit=By.xpath("(//i[contains(@class,'pi pi-plus')])[2]");
     public static By deleteIcon=By.xpath("//i[contains(@class,'pi pi-trash')]");
 
-    public static String popup="//div[text()='input'";
+    public static String popup="//div[text()='input']";
     public static By addToCourseBtn=By.xpath("//span[text()='Add To Course']//parent::button");
 
     public static By addAssignmentBtn=By.xpath(" //button//span[text()='Add New Assignment']");
@@ -55,18 +55,26 @@ public class Course_Locators {
 
     public static String adminOption="//label[text()='input']//parent::div";
 
+    public static String userOption="//span[text()='input']//parent::li";
+
     public static By nameFilterInput=By.xpath("//input[@placeholder='Name/Email']");
 
+    public static By courseFilterInput=By.xpath("//input[@placeholder='Search Courses']");
 
+    public static By userDropdown=By.xpath("//div[contains(@class,'p-dropdown-trigger')]//span");
 
+    public static By courseFilterTagInput=By.xpath("//input[@placeholder='Search by Name/Tags']");
 
-    //span[contains(@class,'pi pi-check')]
+    public static By nameTagFilterInput=By.xpath("//input[@placeholder='Search by Name']");
 
-    //span//input[@id='courseName']
-    //*[@class='p-progress-spinner-svg']
+    public static By contentsReport=By.xpath("//u[text()='Contents']");
 
+    public static By assignmentReport=By.xpath("//u[text()='Assignments']");
 
+    public static By contentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[14]");
 
+    public static By assignmentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[24]");
 
+    public static By reattemptLabel=By.xpath("//label[text()='Reattempt Course']");
 
 }

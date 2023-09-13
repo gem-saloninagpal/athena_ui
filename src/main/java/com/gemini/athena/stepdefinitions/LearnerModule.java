@@ -124,8 +124,8 @@ public class LearnerModule {
     public void CompleteCourse() {
         try {
                 //In this we are completing the course and downloading the certificate.
-            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-//            DriverAction.waitSec(20);
+//            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+            DriverAction.waitSec(10);
             DriverAction.scrollToBottom();
             if (DriverAction.getElement(LearnerModule_Locators.resumeBtn2).isDisplayed()) {
                 GemTestReporter.addTestStep("Verify Resume button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
@@ -275,14 +275,17 @@ public class LearnerModule {
                     } else {
                         GemTestReporter.addTestStep("Finish and Submit button is visible on ui", "Finish and Submit button is not visible on ui.", STATUS.FAIL);
                     }
+                    DriverAction.waitSec(5);
 
                     if (DriverAction.isExist(LearnerModule_Locators.proceedBtn)) {
                         DriverAction.click(LearnerModule_Locators.proceedBtn, "proceed button is visible on ui", "successfully clicked proceed button.");
                     } else {
                         GemTestReporter.addTestStep("proceed button is visible on ui", "proceed button is not visible on ui.", STATUS.FAIL);
                     }
+                    DriverAction.waitSec(5);
 
                     DriverAction.click(LearnerModule_Locators.backtoCourse, "back to course button is visible on ui", "successfully clicked back to course button.");
+                    DriverAction.waitSec(5);
 
                     if (DriverAction.getElement(LearnerModule_Locators.downloadCertificate).isDisplayed()) {
                         GemTestReporter.addTestStep("Verify download Certificate button is visible on ui", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
@@ -427,7 +430,7 @@ public class LearnerModule {
             if (DriverAction.getElement(LearnerModule_Locators.courseCatalogbtn).isDisplayed()) {
                 DriverAction.click(LearnerModule_Locators.courseCatalogbtn);
             }
-//            DriverAction.waitSec(10);
+            DriverAction.waitSec(10);
             DriverAction.click(LearnerModule_Locators.courseDropdown);
 
             int catagoryCount = 0;
@@ -437,7 +440,7 @@ public class LearnerModule {
 
             boolean isTrue = true;
             while (isTrue) {
-//                DriverAction.waitSec(5);
+                DriverAction.waitSec(5);
                 DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                 List<WebElement> catagory = DriverAction.getElements(LearnerModule_Locators.courseCatagory);
                 System.out.println(catagory.size());
@@ -496,13 +499,13 @@ public class LearnerModule {
         try {
             //In this we are validating the count of Ongoing and Completed course.
             int count = 0;
-//            DriverAction.waitSec(5);
+            DriverAction.waitSec(5);
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
             String CompletedCount = DriverAction.getElementText(LearnerModule_Locators.completedCourseCount);
             String activeCount = DriverAction.getElementText(LearnerModule_Locators.activeCourseCount);
 
             for (int i = 1; i <= 3; i++) {
-//                DriverAction.waitSec(5);
+                DriverAction.waitSec(5);
                 DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                 String CourseType = DriverAction.getElement(By.xpath(LearnerModule_Locators.courseType.replace("itr", String.valueOf(i)))).getText();
                 DriverAction.click(By.xpath(LearnerModule_Locators.courseType.replace("itr", String.valueOf(i))));

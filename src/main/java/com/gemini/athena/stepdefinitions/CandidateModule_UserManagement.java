@@ -62,6 +62,8 @@ public class CandidateModule_UserManagement {
     @Given("^Select \"([^\"]*)\", \"([^\"]*)\" from sidebar$")
     public void selectFromSidebar(String module, String submodule) {
         try {
+//            DriverAction.waitSec(5);
+//            DriverAction.waitUntilElementDisappear(MyLocators.spinner,20);
             //open sidebar
                 DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
             //select a module from sidebar
@@ -885,6 +887,7 @@ try {
     @Then("Navigate to page {string}")
     public void pageNavigate(String page) throws InterruptedException {
         try {
+            DriverAction.waitSec(20);
             DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)));
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
