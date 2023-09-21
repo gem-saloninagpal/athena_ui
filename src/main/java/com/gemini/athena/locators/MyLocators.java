@@ -20,8 +20,9 @@ public class MyLocators {
     public static By crossIcon=By.xpath("//button[contains(@class,'close')]");
 
     public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
+    public static By fieldsDropdown=By.xpath("//div[@fxlayout='row wrap']//span[contains(@class,'chevron-down')]//parent::div");
     public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
-    public static String option="//li[@aria-label='input']//parent::p-multiselectitem";
+    public static String option="//span[contains(text(),'input')]//parent::li";
     public static By inputFields=By.xpath("//input[contains(@class,'fieldsDesign')]");
 
     public static String switchTab="//span[text()='input']//parent::a";
@@ -116,6 +117,33 @@ public class MyLocators {
     public static By candidateLastName=By.xpath("(//tbody)[2]//td[2]");
     public static By employeeLastName=By.xpath("(//tbody)[1]//td[2]");
     public static By contentActionsIcon=By.xpath("//tr//button[contains(@class,'p-button')]");
+    public static String editOptions="//label[text()='input']//parent::div";
+    public static By assignmentMarks=By.xpath("//input[@formcontrolname=\"assignmentMarks\"]");
+    public static By assignmentTagDisplayed=By.xpath("//tbody//tr[1]//td[3]");
+    public static By assignmentMarksDisplayed=By.xpath("//tbody//tr[1]//td[4]");
+    public static By contentTags=By.xpath("//p-multiselect[@formcontrolname=\"contentTag\"]");
+    public static By contentDuration=By.xpath("//p-inputmask[@formcontrolname='duration']//input");
+    public static By contentTagDisplayed=By.xpath("//tbody//tr//td[2]");
+    public static By contentDurationDisplayed=By.xpath("//tbody//tr//td[3]");
+    public static By switchStatus=By.xpath("//p-inputswitch[@ng-reflect-text='Active']");
+    public static By statusDropdown=By.xpath("//p-dropdown[@placeholder='Status']");
+    public static By inactiveStatusBar= By.xpath("//tbody//tr//p-inputswitch");
+    public static By getTestName=By.xpath("//div[@class='card hover-effect']//h6//div");
+    public static By loginVia=By.xpath("//p-dropdown[@placeholder='Select Option']");
+    public static By viewReport=By.xpath("//button[@label='View Report' and contains(@class,'instBtn')]");
+    public static By saveNext=By.xpath("//button[contains(text(),'Save & Next')]");
+    public static By invigilationAlert=By.xpath("//strong[contains(text(),'automatic submission')]");
+    public static By batchActionsIcon=By.xpath("//div[@class='p-card-body']//button[contains(@class,'p-button')]");
+    public static By addCourse=By.xpath("//i[@ptooltip='Add Course']");
+    public static By addedCourseName=By.xpath("(//thead)[2]//following::tbody//td");
+    public static By recentlyAddedCourse=By.xpath("//div[@class='p-card-body']//div[contains(@class,'name')]");
+    public static By owner=By.xpath("//div[contains(@class,'multiselect')]//span");
+    public static By userEmail=By.xpath("//div[@class='upper-card-details']//div[2]/div");
+    public static By batchInputFields=By.xpath("//form[contains(@class,'ng-invalid')]//input");
+    public static By batchCreated=By.xpath("//div[@class='p-card-body']//div[contains(@class,'name')]");
+    public static String createBatch="//button[contains(@ng-reflect-label,'input')]";
+    public static By searchbox=By.xpath("//input[@type='search']");
+    public static String dropdown="//p-dropdown[@placeholder='input']";
 
 
     // private static String input;

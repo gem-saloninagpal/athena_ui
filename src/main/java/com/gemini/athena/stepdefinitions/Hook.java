@@ -13,7 +13,7 @@ public class Hook {
     @Before
     public static void hook() throws GemException {
         DriverManager.setUpBrowser();
-
     }
 
 }
+
