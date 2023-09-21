@@ -1,36 +1,33 @@
-Feature: Candidate module features
+Feature: Candidate module features - HARTRON
 
   Background:Check login to candidate module
-    Given Navigate to page "login"
-    Then Login using "candidate@gmail.com" and "abc@123"
-   # And Wait while screen loads
+    Given Expand the login via dropdown
+    And Select "Email" from dropdown
+    Then Login using "automate@gmail.com" and "abc@123"
+    And Change resolution
 
 
-  @regressionCandidate
-  Scenario Outline: Login flow for Candidate
+  @candidateModule
+  Scenario: Login flow for Candidate
     When Expand info dropdown from navbar
-    Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
+    Then Verify the options present in dropdown "Profile", "Change Password", "Logout"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "candidate@gmail.com"
+    Then Verify the email of candidate "automate@gmail.com"
+
+
+  @candidateModule
+  Scenario Outline: Verify the default tab selected and number of tests assigned
+    Then Verify the default tab selected "<tab>"
+    Then Verify the number of Tests "<activeTests>", "<tab>"
+    And Switch to "Completed Tests"
+    Then Verify the number of Tests "<completedTests>", "<tab2>"
 
     Examples:
-      |option1|option2        |option3|
-      |Profile|Change Password|Logout |
+      | tab          | activeTests | completedTests | tab2            |
+      | Active Tests | 3           | 0              | Completed Tests |
 
-#  @regressionCandidate
-#  Scenario Outline: Verify the default tab selected and number of tests assigned
-#    Then Verify the default tab selected "<tab>"
-#    Then Verify the number of Tests "<activeTests>", "<tab>"
-#    And Switch to "Completed Tests"
-#    Then Verify the number of Tests "<completedTests>", "<tab2>"
-
-#    Examples:
-#      |tab         |activeTests|completedTests|tab2|
-#      |Active Tests|1          |0             |Completed Tests|
-
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Explore tests in Profile
-  #  Then Verify Candidate is logged in
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
     And Select "Profile" from dropdown
@@ -38,10 +35,10 @@ Feature: Candidate module features
     Then Verify user navigates to dashboard
 
     Examples:
-      |option1|option2        |option3|
-      |Profile|Change Password|Logout |
+      | option1 | option2         | option3 |
+      | Profile | Change Password | Logout  |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Validate password errors
     And Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
@@ -59,38 +56,43 @@ Feature: Candidate module features
     Then Verify the popup message "Password updated successfully!"
 
     Examples:
-      |option1|option2        |option3|error                 |countMandatoryFields|countMandatoryFields1|
-      |Profile|Change Password|Logout |This Field is required|3                   |1                   |
+      | option1 | option2         | option3 | error                  | countMandatoryFields | countMandatoryFields1 |
+      | Profile | Change Password | Logout  | This Field is required | 3                    | 1                     |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify current date is within test date range
-    And Verify the default tab selected "<tab>"
+    Then Verify the default tab selected "<tab>"
+    And Verify the number of Tests "<activeTests>", "<tab>"
     Then Get start and end date of test and verify current date is within range
 
     Examples:
-      |tab         |activeTests|
-      |Active Tests|1          |
+      | tab          | activeTests |
+      | Active Tests | 3           |
 
-  @regressionCandidate
-  Scenario: View test report
+  @candidateModule
+  Scenario Outline: View test report
     When Switch to "Completed Tests"
-    And Click the button "View Report"
+    Then Verify the number of Tests "<completedTests>", "<tabName>"
+    And Click on View Report
     Then Verify the report screen
 
-  @regressionCandidate
+    Examples:
+      | completedTests | tabName         |
+      | 0              | Completed Tests |
+
+  @candidateModule
   Scenario Outline: Verify the test that is started
     Then Verify the default tab selected "<tab>"
     And Start test "<testName>" and verify instructions video is displayed
     Then Verify user is navigated to desired test "<testName>"
 
     Examples:
-      |tab         |activeTests|testName|
-      |Active Tests|5          |NewCheckEdit|
+      | tab          | activeTests | testName     |
+      | Active Tests | 3           | NewCheckEdit |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify selected section gets opened
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Verify user is navigated to desired test "<testName>"
     Then Check the instructions checkbox
     Then Click the button "NEXT"
@@ -99,16 +101,15 @@ Feature: Candidate module features
     And Click on the section ticket "<sectionName>"
     Then Verify there is no change in sections screen
     And Click the button "Attempt"
-    Then Verify user navigates to questions screen of the selected section "<sectionName>"
+    Then Verify user navigates to questions screen of the selected section "Technical"
 
     Examples:
-      |testName |sectionName|
-      |NewCheckEdit  | Technical |
+      | testName     | sectionName |
+      | NewCheckEdit | Technical   |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Navigation between the sections
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -121,30 +122,28 @@ Feature: Candidate module features
     Then Verify user navigates to questions screen of the selected section "Technical"
 
     Examples:
-      |testName |sectionName|
-      |  NewCheckEdit|  Logical|
+      | testName     | sectionName |
+      | NewCheckEdit | Logical   |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify user is able to save answers
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
     When Click the Yes button
     And Click the button "Attempt"
     And Select or type an answer
-    And Click the button "Save & Next"
+    And Click the button Save & Next
     Then Verify user is able to save answers "<questionStatus>"
 
     Examples:
-      |testName    |questionStatus|
-      | NewCheckEdit |  submitted   |
+      | testName     | questionStatus |
+      | NewCheckEdit | submitted      |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify clear functionality
     Then Start test "<testName>" and verify instructions video is displayed
-    Then Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     Then Click the button "NEXT"
     And Verify dialog box appears
@@ -155,13 +154,12 @@ Feature: Candidate module features
     Then Verify the answer got cleared
 
     Examples:
-      |testName   |
-      | NewCheckEdit|
+      | testName     |
+      | NewCheckEdit |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify the question count after attempting a particular section
     Then Start test "<testName>" and verify instructions video is displayed
-    Then Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     Then Click the button "NEXT"
     And Verify dialog box appears
@@ -171,13 +169,12 @@ Feature: Candidate module features
     Then Validate questions count "<total>", "<attempted>", "<unattempted>"
 
     Examples:
-      |testName  |total|attempted|unattempted|
-      |NewCheckEdit|  2   | 2        |  0         |
+      | testName     | total | attempted | unattempted |
+      | NewCheckEdit | 2     | 2         | 0           |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify entire test flow
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -188,32 +185,30 @@ Feature: Candidate module features
     Then Validate questions count "<total>", "<attempted>", "<unattempted>"
 
     Examples:
-      |testName            |total |attempted|unattempted|
-      |testMultipleSections|  5   | 5       |  0        |
+      | testName             | total | attempted | unattempted |
+      | testMultipleSections | 5     | 5         | 0           |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Verify clear functionality after saving an answer
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
     When Click the Yes button
     And Click the button "Attempt"
     And Select or type an answer
-    And Click the button "Save & Next"
+    And Click the button Save & Next
     And Click the left arrow button
     And Click the button "Clear"
     Then Verify the answer got cleared
 
     Examples:
-      |testName     |
-      |NewCheckEdit |
+      | testName     |
+      | NewCheckEdit |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Refresh while attempting test
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -221,18 +216,17 @@ Feature: Candidate module features
     And Click the button "Attempt"
     And Click on the section ticket "<sectionName>"
     And Select or type an answer
-    And Click the button "Save & Next"
+    And Click the button Save & Next
     And Refresh the page, cancel alert and verify user is on same page
     And Refresh the page, accept alert and verify user navigates to instructions screen
 
     Examples:
-      |testName |sectionName|questionNo|
-      | mcqTest | Logical |       2  |
+      | testName | sectionName | questionNo |
+      | mcqTest  | Logical     | 2          |
 
-  @regressionCandidate
+  @candidateModule1
   Scenario Outline: Validate the functionality of arrow key
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     And Verify dialog box appears
@@ -242,46 +236,46 @@ Feature: Candidate module features
     Then Verify key disables on last question
 
     Examples:
-      |totalQues|testName|
-      |5        |   NewCheckEdit     |
+      | totalQues | testName     |
+      | 5         | NewCheckEdit |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Save a question without answering it
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
     When Click the Yes button
     And Click the button "Attempt"
-    And Click the button "Save & Next"
+    And Click the button Save & Next
     Then Verify the popup message "to save the answer"
 
     Examples:
-      |testName|
-      | NewCheckEdit       |
+      | testName     |
+      | NewCheckEdit |
 
-  @regressionCandidate
+  @candidateModule
   Scenario Outline: Finish a test and check in completed tests tab
     When Start test "<testName>" and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
     When Click the Yes button
     And Click the button "Attempt"
     And Select or type an answer
-    And Click the button "Save & Next"
+    And Click the button Save & Next
     And Click the button "Finish Test"
     And Click the "Yes" button after finishing test
     Then Verify user navigates to test summary screen
+    When Click the button "Proceed"
     When Select Back To Dashboard
     And Switch to "Completed Tests"
     Then Verify "<testName>" is present in completed tests
 
     Examples:
-      |testName |
-      |  NewCheckEdit|
+      | testName     |
+      | NewCheckEdit |
+
 
 
 

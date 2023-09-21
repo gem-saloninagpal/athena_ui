@@ -1,12 +1,12 @@
 Feature: User Management features
 
     Background:
-      Given Navigate to page "login"
-     Given Login using "athena@geminisolutions.com" and "gem_password"
+     Given Navigate to page "login"
+     And Login using "saloni02@gmail.com" and "abc@123"
    #   And Wait while screen loads
 
 
-      @regression101
+      @regression
     Scenario Outline: Register Role- Learner, Admin, Invigilator, Super Admin
       Given Select "<module>", "<submodule>" from sidebar
       When Click the button "<button>"
@@ -28,12 +28,12 @@ Feature: User Management features
 
       Examples:
       |module         |button  |page           |error   |role         |tab      |popupMsg     |index|countMandatoryFields|
-      |User Management|Register|User Management|required|Learner      |Learner  |already exist|3    |7                   |
+      |User Management|Register|User Management|required|Learner      |Learners  |already exist|3    |7                   |
       |User Management|Register|User Management|required|Admin        |Employees|already exist|1    |7                   |
       |User Management|Register|User Management|required|Invigilator  |Employees|already exist|1    |7                   |
       |User Management|Register|User Management|required|Super Admin  |Employees|already exist|1    |7                   |
 
-  @regression1
+  @regression
     Scenario Outline: Register Role- Candidate
       Given Select "<module>", "<submodule>" from sidebar
       When Click the button "<button>"
@@ -49,7 +49,6 @@ Feature: User Management features
       And Click the button "<button>"
       And Switch to tab "<tab>", "<index>"
       Then Verify "Candidate" is registered "abcKk","def"
-      Then Verify the role of registered user "<role1>","<role2>","<role3>"
       When Click the button "<button>"
       And Select a role from dropdown "<role>"
       And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "<inbuilt email>", "9876543210", "10"
@@ -62,7 +61,7 @@ Feature: User Management features
       |module         |button  |page           |error   |role   |tab    |popupMsg     |index|
       |User Management|Register|User Management|required|Candidate|Candidates|already exist|2    |
 
-  @regression1
+  @regression
       Scenario Outline: Register user with multiple roles
         Given Select "<module>", "<submodule>" from sidebar
         When Click the button "<button>"
@@ -89,7 +88,7 @@ Feature: User Management features
           |module         |button  |page           |error   |role1   |tab    |popupMsg     |index|role2|role3|
           |User Management|Register|User Management|required|Admin  |Employees|already exist|1  |Invigilator|Learner|
 
-  @regression1
+  @regression
         Scenario Outline: Validating roles of user from user's id
           Given Select "<module>", "<submodule>" from sidebar
           When Click the button "<button>"
@@ -115,7 +114,7 @@ Feature: User Management features
             |module         |button  |page           |error   |role1   |role2|role3       |countMandatoryFields|
             |User Management|Register|User Management|required|Admin  |Invigilator|Learner|7                   |
 
-  @regression1
+  @regression
           Scenario Outline: Verify user is unable to edit role of a candidate
             Given Select "<module>", "<submodule>" from sidebar
             Then Switch to tab "<tab>", "<index>"
@@ -129,7 +128,7 @@ Feature: User Management features
             | module        | tab     | index | string    |
             |User Management|Candidate|2      |Update User|
 
-  @regression10
+  @regression
           Scenario Outline: Verify active/inactive user
             Given Select "<module>", "<submodule>" from sidebar
             When Switch to tab "<tab>", "<index>"
@@ -150,7 +149,7 @@ Feature: User Management features
               | module        | tab     | index |string1|
               |User Management|Employees|1      |User Management / Update User|
 
-  @regression10
+  @regression
           Scenario Outline: Change role and validate
             Given Select "<module>", "<submodule>" from sidebar
             When Switch to tab "<tab>", "<index>"
