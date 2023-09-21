@@ -47,21 +47,6 @@ Feature:Course module features
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|
       | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|
 
-  Scenario Outline: Create Course verify Course Summary
-    Given Select "<module>", "<submodule>" from sidebar
-    When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
-    And Enter course description "<description>"
-    And Click the button "Add Content"
-    And Validate Add to Course "<contentMessage>"
-    And Validate Filter functionality "<assignmentName>"
-    And Validate Add to Course "<assignmentMessage>"
-    Then Validate Course Summary Screen
-    Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|
-
-
   Scenario Outline: Edit and verify the course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
@@ -73,6 +58,20 @@ Feature:Course module features
     And Validate Add to Course "<assignmentMessage>"
     Then Edit the Created Course and Verify
 
+    Examples:
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|
+
+  Scenario Outline: Create Course verify Course Summary
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click the button until it appear "Create Course"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter course description "<description>"
+    And Click the button until it appear "Add Content"
+    And Validate Add to Course "<contentMessage>"
+    And Validate Filter functionality "<assignmentName>"
+    And Validate Add to Course "<assignmentMessage>"
+    Then Validate Course Summary Screen
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|
       | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|

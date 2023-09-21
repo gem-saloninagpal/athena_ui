@@ -10,6 +10,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -62,8 +64,10 @@ public class CandidateModule_UserManagement {
     @Given("^Select \"([^\"]*)\", \"([^\"]*)\" from sidebar$")
     public void selectFromSidebar(String module, String submodule) {
         try {
-//            DriverAction.waitSec(5);
-//            DriverAction.waitUntilElementDisappear(MyLocators.spinner,20);
+//           DriverAction.waitUntilElementAppear(MyLocators.sidebar,120);
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(MyLocators.sidebar));
+//            element.click();
             //open sidebar
                 DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
             //select a module from sidebar
@@ -80,10 +84,10 @@ public class CandidateModule_UserManagement {
         }
     }
 
-
     @Then("^Click the button \"([^\"]*)\"$")
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
+
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
         }catch(Exception e){
             System.out.print("Exception encountered!");
@@ -887,7 +891,7 @@ try {
     @Then("Navigate to page {string}")
     public void pageNavigate(String page) throws InterruptedException {
         try {
-            DriverAction.waitSec(20);
+//            DriverAction.waitSec(20);
             DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)));
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
@@ -1203,6 +1207,25 @@ try {
             DriverAction.typeText(MyLocators.oldPasswordField, password);
         }catch (Exception e) {
             GemTestReporter.addTestStep("Enter a password in old password fields", "Exception encountered- " + e, STATUS.ERR);
+        }
+    }
+    @Given("^Select \"([^\"]*)\" from sidebar$")
+    public void selectFromSidebarLearner(String module) {
+        try {
+//           DriverAction.waitUntilElementAppear(MyLocators.sidebar,120);
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(MyLocators.sidebar));
+//            element.click();
+            //open sidebar
+            DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
+            //select a module from sidebar
+            DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", module)));
+
+
+            //close sidebar
+            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Select module from sidebar", "Throws exception", STATUS.ERR, DriverAction.takeSnapShot());
         }
     }
 

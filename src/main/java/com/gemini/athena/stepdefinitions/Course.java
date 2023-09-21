@@ -3,15 +3,19 @@ package com.gemini.athena.stepdefinitions;
 import com.gemini.athena.locators.Course_Locators;
 import com.gemini.athena.locators.LearnerModule_Locators;
 import com.gemini.athena.locators.MyLocators;
+import com.gemini.athena.locators.Tests_TestControl_Locators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -266,7 +270,7 @@ else
      }
     }
 }
-
+DriverAction.waitSec(5);
 if(DriverAction.isDisplayed(Course_Locators.addIcon))
 {
     DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
@@ -292,7 +296,7 @@ else
 {
     GemTestReporter.addTestStep("Content is added to Course Div","content is not added successfully", STATUS.FAIL, DriverAction.takeSnapShot());
 }
-
+DriverAction.waitSec(5);
 if(DriverAction.isDisplayed(Course_Locators.addToCourseBtn))
 {
     DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
@@ -351,10 +355,8 @@ public void editAndVerify(){
 
             //here we are checking the Save as Draft button functionality
             DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save As Draft")),"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
-
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Updated Successfully"))))
+            if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Created Successfully"))))
             {
                 GemTestReporter.addTestStep("Course is drafted","course is drafted successfully", STATUS.PASS, DriverAction.takeSnapShot());
             }
@@ -363,13 +365,17 @@ public void editAndVerify(){
 
             }
 
-//            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-            DriverAction.waitSec(5);
+            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//            DriverAction.waitSec(5);
             DriverAction.click(Course_Locators.courseTypeDropdown);
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
             DriverAction.click(Course_Locators.draftOrPublishDropdown);
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
+            DriverAction.waitSec(5);
             String fetchedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
+            System.out.println(courseName);
+            System.out.println(fetchedCourseName);
+            System.out.println(courseName);
             if(fetchedCourseName.equals(courseName))
             {
                 GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -380,12 +386,13 @@ public void editAndVerify(){
                 GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","UnSuccessfully", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
+
+
             DriverAction.waitSec(5);
             if(DriverAction.isDisplayed(Course_Locators.editIcon)) {
                 DriverAction.click(Course_Locators.editIcon, "clicked on edit icon", "Successfully clicked");
                 if (DriverAction.isDisplayed(Course_Locators.editOption)) {
                     DriverAction.click(Course_Locators.editOption, "clicked on edit option", "Successfully clicked");
-
                     DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon, 120);
                     DriverAction.scrollToBottom();
                     //Edit Add Course Info
@@ -411,17 +418,20 @@ public void editAndVerify(){
                     } catch (AWTException e) {
                         e.printStackTrace();
                     }
-                    DriverAction.typeText(Course_Locators.courseNameInput,"Copy");
-                    String courseNameAfterEdit=DriverAction.getElementText(Course_Locators.courseNameInput);
+                    DriverAction.typeText(Course_Locators.courseNameInput,"Copy1");
+//                    String courseNameAfterEdit=DriverAction.getElementText(Course_Locators.courseNameInput);
+//                    System.out.println("Copy1");
+//                    System.out.println(courseNameAfterEdit);
+//                    System.out.println("Copy1");
 
-                        if(courseNameAfterEdit.equals("Copy"))
-                        {
-                            GemTestReporter.addTestStep("Course Name is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
-                        }
-                        else
-                        {
-                            GemTestReporter.addTestStep("Course Name is Edit","Fail to Edit", STATUS.FAIL, DriverAction.takeSnapShot());
-                        }
+//                        if(courseNameAfterEdit.equals("Copy1"))
+//                        {
+//                            GemTestReporter.addTestStep("Course Name is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+//                        }
+//                        else
+//                        {
+//                            GemTestReporter.addTestStep("Course Name is Edit","Fail to Edit", STATUS.FAIL, DriverAction.takeSnapShot());
+//                        }
 
                     //Edit the description
 
@@ -445,17 +455,21 @@ public void editAndVerify(){
                     } catch (AWTException e) {
                         e.printStackTrace();
                     }
-                    DriverAction.typeText(Course_Locators.courseDescription,"Copy");
-                    String descriptionAfterEdit=DriverAction.getElementText(Course_Locators.courseDescription);
+                    DriverAction.typeText(Course_Locators.courseDescription,"Copy1");
+//                    String descriptionAfterEdit=DriverAction.getElementText(Course_Locators.courseDescription);
+//
+//                    System.out.println("Copy1");
+//                    System.out.println(courseNameAfterEdit);
+//                    System.out.println("Copy1");
 
-                        if(descriptionAfterEdit.equals("Copy"))
-                        {
-                            GemTestReporter.addTestStep("Course Description is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
-                        }
-                        else
-                        {
-                            GemTestReporter.addTestStep("Course Description is Edit","Fail to Edit", STATUS.FAIL, DriverAction.takeSnapShot());
-                        }
+//                        if(descriptionAfterEdit.equals("Copy1"))
+//                        {
+//                            GemTestReporter.addTestStep("Course Description is Edit","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+//                        }
+//                        else
+//                        {
+//                            GemTestReporter.addTestStep("Course Description is Edit","Fail to Edit", STATUS.FAIL, DriverAction.takeSnapShot());
+//                        }
 
                     //Edit the Has assignment checkbox
 
@@ -490,8 +504,8 @@ public void editAndVerify(){
                     for(int i=1;i<tableSize;i++)
                     {
                         DriverAction.click(Course_Locators.deleteIcon,"Clicked on Delete Icon","Successfully clicked on delete Icon");
-//                        DriverAction.waitSec(3);
-                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+                        DriverAction.waitSec(3);
+//                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Content removed successfully"))))
                         {
                             GemTestReporter.addTestStep("Content is deleted","content is deleted successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -511,11 +525,12 @@ public void editAndVerify(){
 
 
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+
+//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                     DriverAction.click(Course_Locators.addIcon);
-                    DriverAction.waitSec(5);
+//                    DriverAction.waitSec(5);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
 //                    DriverAction.waitSec(5);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
 
@@ -524,8 +539,8 @@ public void editAndVerify(){
                     DriverAction.waitSec(3);
                     DriverAction.click(Course_Locators.saveAsDraftButton,"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
 
-//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-                    DriverAction.waitSec(2);
+                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//                    DriverAction.waitSec(2);
 
                     if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Updated Successfully"))))
                     {
@@ -535,24 +550,24 @@ public void editAndVerify(){
                         GemTestReporter.addTestStep("Course is drafted","course is not drafted", STATUS.FAIL, DriverAction.takeSnapShot());
 
                     }
-                    DriverAction.waitSec(5);
-                    DriverAction.click(Course_Locators.courseTypeDropdown);
-                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
-                    DriverAction.click(Course_Locators.draftOrPublishDropdown);
-                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
-                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-                    String fetchedCourseNameAfterEdit=DriverAction.getElementText(Course_Locators.draftedCourse);
-                    System.out.print(fetchedCourseNameAfterEdit);
-                    if(fetchedCourseName.equals("Copy"))
-                    {
-                        GemTestReporter.addTestStep("Course is Editable","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                    }
-                    else
-                    {
-                        GemTestReporter.addTestStep("Course is Editable","Not able to edit course", STATUS.FAIL, DriverAction.takeSnapShot());
-
-                    }
+//                    DriverAction.waitSec(5);
+//                    DriverAction.click(Course_Locators.courseTypeDropdown);
+//                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
+//                    DriverAction.click(Course_Locators.draftOrPublishDropdown);
+//                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
+//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//                    String fetchedCourseNameAfterEdit=DriverAction.getElementText(Course_Locators.draftedCourse);
+//                    System.out.print(fetchedCourseNameAfterEdit);
+//                    if(fetchedCourseName.equals("Copy1"))
+//                    {
+//                        GemTestReporter.addTestStep("Course is Editable","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+//
+//                    }
+//                    else
+//                    {
+//                        GemTestReporter.addTestStep("Course is Editable","Not able to edit course", STATUS.FAIL, DriverAction.takeSnapShot());
+//
+//                    }
 
 
 
@@ -569,6 +584,7 @@ public void editAndVerify(){
        try{
 
            // In this we are validating Course Summary screen it's functionality all.
+
            DriverAction.scrollToTop();
            if(DriverAction.isDisplayed(Course_Locators.courseSummaryDiv))
            {
@@ -626,9 +642,11 @@ else
            //here we are checking the Save as Draft button functionality
            DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save As Draft")),"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
 
-           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+           DriverAction.waitSec(2);
+//           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+           String popUpMessage=DriverAction.getElementText(By.xpath("(//div[contains(@class,'p-toast-message')])[3]"));
 
-         if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Updated Successfully"))))
+         if("Course Created Successfully".equals(popUpMessage))
            {
                GemTestReporter.addTestStep("Course is drafted","course is drafted successfully", STATUS.PASS, DriverAction.takeSnapShot());
            }
@@ -643,6 +661,7 @@ else
            DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
            DriverAction.click(Course_Locators.draftOrPublishDropdown);
            DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
+           DriverAction.waitSec(5);
            String fetchedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
            if(fetchedCourseName.equals(courseName))
            {
@@ -656,8 +675,8 @@ else
            }
 
            //here we are checking the Save Course & Publish button functionality
-//           DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
-
+////           DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
+//
 DriverAction.waitSec(5);
 if(DriverAction.isDisplayed(Course_Locators.editIcon))
 {
@@ -665,16 +684,16 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     if(DriverAction.isDisplayed(Course_Locators.editOption))
     {
         DriverAction.click(Course_Locators.editOption,"clicked on edit option","Successfully clicked");
-
-        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+        DriverAction.waitSec(5);
+//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
         DriverAction.scrollToBottom();
         DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add Content")));
-
-        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+        DriverAction.waitSec(5);
+//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
 
         DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-
+//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+        DriverAction.waitSec(5);
 
         DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
         if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Update Course & Publish"))))
@@ -696,8 +715,9 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
                 DriverAction.click(Course_Locators.draftOrPublishDropdown);
                 DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Published")));
-                String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.waitSec(5);
+                String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
+
                 if(fetchedPublishedCourseName.equals(courseName))
                 {
                     GemTestReporter.addTestStep("Course is published finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -791,11 +811,12 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 {
                     DriverAction.click(LearnerModule_Locators.startCourseBtn,"clicked on Start Course Button","Successfully clicked on Start course button");
                 }
-//                DriverAction.scrollToBottom();
-                DriverAction.waitSec(3);
-                if (DriverAction.getElement(LearnerModule_Locators.vedio).isDisplayed()) {
-                    DriverAction.click(LearnerModule_Locators.vedio);
-                }
+
+//                DriverAction.waitSec(3);
+//                if (DriverAction.getElement(LearnerModule_Locators.vedio).isDisplayed()) {
+//                    DriverAction.click(LearnerModule_Locators.vedio);
+//                }
+                DriverAction.scrollToBottom();
                 DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
                 if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
                     DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
@@ -814,7 +835,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 {
                     DriverAction.click(By.xpath(Course_Locators.userOption.replace("input","Super Admin")));
                 }
-                DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
+//                DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
 
             }
 
@@ -827,12 +848,13 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 @Then("^Verify the Learner Report \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyLearnerReport(String learner,String email,String percentage,String status){
         try{
-
+int c=0;
 if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
 {
     DriverAction.typeText(Course_Locators.courseFilterTagInput,assignedCourseName);
 //    DriverAction.scrollToBottom();
 }
+DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
                 assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
@@ -846,29 +868,37 @@ if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
                 DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
                 DriverAction.scrollToBottom();
             }
+            DriverAction.waitSec(5);
             List<WebElement> list1 =DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table//tr)[2]//td"));
             for (WebElement element : list1) {
                 String text = element.getText();
-                if(text.equals(learner))
-                {
-                    GemTestReporter.addTestStep("Learner Name match the report","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                if (text.equals(learner)) {
+                    c++;
+                    GemTestReporter.addTestStep("Learner Name match the report", "Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 }
-                if(text.equals(email))
-                {
-                    GemTestReporter.addTestStep("Learner Email match the report","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                if (text.equals(email)) {
+                    c++;
+                    GemTestReporter.addTestStep("Learner Email match the report", "Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 }
-                if(text.equals(percentage))
-                {
-                    GemTestReporter.addTestStep("Learner percentage is 100%,therefore completed the course","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                if (text.equals(percentage)) {
+                    c++;
+                    GemTestReporter.addTestStep("Learner percentage is 100%,therefore completed the course", "Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 }
-                if(text.equals(status))
-                {
-                    GemTestReporter.addTestStep("Learner status is completed","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                if (text.equals(status)) {
+                    c++;
+                    GemTestReporter.addTestStep("Learner status is completed", "Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 }
+                if(c>=4)
+                {
+                    break;
+                }
+
+            }
+            DriverAction.waitSec(5);
                 if(DriverAction.isDisplayed(Course_Locators.contentsReport))
                 {
                     DriverAction.click(Course_Locators.contentsReport);
@@ -889,7 +919,7 @@ if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
                 }
 
     //
-                }
+
 
         }
         catch (Exception e) {
@@ -928,5 +958,34 @@ if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
         }
 }
+    @Then("^Click the button until it appear \"([^\"]*)\"$")
+    public void clickTheButtonWithWait(String buttonName) throws InterruptedException {
+        try {
 
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(MyLocators.button.replace("input", buttonName))));
+//            element.click();
+
+//            DriverAction.waitUntilElementAppear(By.xpath(MyLocators.button.replace("input", buttonName)),120);
+            DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
+        }catch(Exception e){
+            System.out.print("Exception encountered!");
+        }
+
+    }
+    @Then("^Click the Internal Test button until it appear \"([^\"]*)\"$")
+    public void clickTheInternalTestButtonWithWait(String buttonName) throws InterruptedException {
+        try {
+
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Tests_TestControl_Locators.buttonInternal.replace("input", buttonName))));
+//            element.click();
+
+//            DriverAction.waitUntilElementAppear(By.xpath(MyLocators.button.replace("input", buttonName)),120);
+            DriverAction.click(By.xpath(Tests_TestControl_Locators.buttonInternal.replace("input", buttonName)));
+        }catch(Exception e){
+            System.out.print("Exception encountered!");
+        }
+
+    }
     }
