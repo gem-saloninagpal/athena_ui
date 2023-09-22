@@ -12,7 +12,7 @@
   "tags": "@candidateModule",
   "dev": {
     "browser_name": "chrome",
-    "launch_url": "https://athena-dev.geminisolutions.com"
+    "launch_url": "https://athena-hartron-dev.geminisolutions.com/"
   }
 
 }

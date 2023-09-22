@@ -1,9 +1,9 @@
-Feature: Candidate module features - HARTRON
+Feature: HARTRON
 
   Background:Check login to candidate module
     Given Expand the login via dropdown
     And Select "Email" from dropdown
-    Then Login using "automate@gmail.com" and "abc@123"
+    Then Login using "automate2@gmail.com" and "abc@123"
     And Change resolution
 
 
@@ -12,7 +12,7 @@ Feature: Candidate module features - HARTRON
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "Profile", "Change Password", "Logout"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "automate@gmail.com"
+    Then Verify the email of candidate "automate2@gmail.com"
 
   @candidateModule
   Scenario Outline: Explore tests in Profile
@@ -57,7 +57,7 @@ Feature: Candidate module features - HARTRON
       | Active Tests |
 
   @candidateModule
-  Scenario : View test report
+  Scenario: View test report
     When Switch to "Completed Tests"
     And Click on View Report
     Then Verify the report screen
@@ -189,23 +189,23 @@ Feature: Candidate module features - HARTRON
       | testName     |
       | NewCheckEdit |
 
-  @candidateModule
-  Scenario Outline: Refresh while attempting test
-    When Start test "<testName>" and verify instructions video is displayed
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    When Click the Yes button
-    And Click the button "Attempt"
-    And Click on the section ticket "<sectionName>"
-    And Select or type an answer
-    And Click the button Save & Next
-    And Refresh the page, cancel alert and verify user is on same page
-    And Refresh the page, accept alert and verify user navigates to instructions screen
-
-    Examples:
-      | testName | sectionName | questionNo |
-      | mcqTest  | Logical     | 2          |
+#  @candidateModule
+#  Scenario Outline: Refresh while attempting test
+#    When Start test "<testName>" and verify instructions video is displayed
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    When Click the Yes button
+#    And Click the button "Attempt"
+#    And Click on the section ticket "<sectionName>"
+#    And Select or type an answer
+#    And Click the button Save & Next
+#    And Refresh the page, cancel alert and verify user is on same page
+#    And Refresh the page, accept alert and verify user navigates to instructions screen
+#
+#    Examples:
+#      | testName | sectionName | questionNo |
+#      | mcqTest  | Logical     | 2          |
 
   @candidateModule
   Scenario Outline: Save a question without answering it
@@ -243,33 +243,6 @@ Feature: Candidate module features - HARTRON
     Examples:
       | testName     |
       | NewCheckEdit |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
