@@ -155,8 +155,6 @@ public class Course {
                 DriverAction.typeText(inputFields.get(i),inputValues[i]);
             }
         }
-
-
     }
     catch (Exception e) {
         logger.info("Exception occurred", e);
@@ -166,10 +164,22 @@ public class Course {
     @And("^Enter course description \"([^\"]*)\"$")
     public void courseDescription(String description) {
         try{
+            if (DriverAction.isExist(Course_Locators.courseDescription,120)) {
+                DriverAction.typeText(Course_Locators.courseDescription,description);
+                DriverAction.scrollToBottom();
+            }
+            else {
+            GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", STATUS.FAIL,
+                    DriverAction.takeSnapShot());
+        }
+            if (DriverAction.isExist(Course_Locators.checkboxs,120)) {
+                DriverAction.click(Course_Locators.checkboxs);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on checkbox", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
 
-            DriverAction.typeText(Course_Locators.courseDescription,description);
-            DriverAction.scrollToBottom();
-            DriverAction.click(Course_Locators.checkboxs);
         }catch(Exception e){
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Enter course description","Exception encountered- "+e,STATUS.ERR);
@@ -181,7 +191,7 @@ public class Course {
        try{
            //In this we are filter the data and verifying weather we are getting the expected result or not
            int c=0;
-           if(DriverAction.isDisplayed(Course_Locators.addContentTagInput))
+           if (DriverAction.isExist(Course_Locators.addContentTagInput,120))
            {
                DriverAction.typeText(Course_Locators.addContentTagInput,Name);
            }
@@ -238,9 +248,9 @@ public class Course {
       try{
           //In this function we are first verifying the Add to course div is empty if not we are first deleting it.
           //And after that we are adding to Course.
-if(DriverAction.isDisplayed(Course_Locators.addToCourseDiv))
+          if (DriverAction.isExist(Course_Locators.addToCourseDiv,120))
 {
-    if(DriverAction.isDisplayed(Course_Locators.addToCourseBtn))
+    if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
     {
         if(DriverAction.isEnabled(Course_Locators.addToCourseBtn))
         {
@@ -262,30 +272,42 @@ else
     int tableSize=addCourseTable.size();
     for(int i=1;i<tableSize;i++)
     {
-     DriverAction.click(Course_Locators.deleteIcon,"Clicked on Delete Icon","Successfully clicked on delete Icon");
+        if (DriverAction.isExist(Course_Locators.deleteIcon,120)) {
+            DriverAction.click(Course_Locators.deleteIcon,"Clicked on Delete Icon","Successfully clicked on delete Icon");
+        } else {
+            GemTestReporter.addTestStep("Error Occur", "Fail to click on delete icon", STATUS.FAIL,
+                    DriverAction.takeSnapShot());
+        }
+
      DriverAction.waitSec(3);
      if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Content removed successfully"))))
      {
          GemTestReporter.addTestStep("Content is deleted","content is deleted successfully", STATUS.PASS, DriverAction.takeSnapShot());
      }
+     else {
+         GemTestReporter.addTestStep("Error Occur", "popup does not appear", STATUS.FAIL,
+                 DriverAction.takeSnapShot());
+     }
     }
 }
 DriverAction.waitSec(5);
-if(DriverAction.isDisplayed(Course_Locators.addIcon))
+if (DriverAction.isExist(Course_Locators.addIcon,120))
 {
     DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
 }
-//DriverAction.waitSec(3);
+else {
+    GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
+            DriverAction.takeSnapShot());
+}
+
 if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input",message))))
 {
     GemTestReporter.addTestStep("Content is added","content is added successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
 }
-//else {
-//    if (DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input", "Assignment successfully added. Add more!")))) {
-//        GemTestReporter.addTestStep("Content is added", "Assignment successfully added. Add more!", STATUS.PASS, DriverAction.takeSnapShot());
-//    }
-//}
+else {
+    GemTestReporter.addTestStep("Error Occur", "popup does not appear", STATUS.FAIL,
+            DriverAction.takeSnapShot());
+}
 String getContent=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[1]//td[1]"));
 String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
 if(getContent.equals(contentAfterSelecting))
@@ -297,9 +319,13 @@ else
     GemTestReporter.addTestStep("Content is added to Course Div","content is not added successfully", STATUS.FAIL, DriverAction.takeSnapShot());
 }
 DriverAction.waitSec(5);
-if(DriverAction.isDisplayed(Course_Locators.addToCourseBtn))
+if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
 {
     DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
+}
+else {
+    GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", STATUS.FAIL,
+            DriverAction.takeSnapShot());
 }
       }
       catch (Exception e) {
@@ -961,12 +987,8 @@ DriverAction.waitSec(5);
     @Then("^Click the button until it appear \"([^\"]*)\"$")
     public void clickTheButtonWithWait(String buttonName) throws InterruptedException {
         try {
-
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(MyLocators.button.replace("input", buttonName))));
-//            element.click();
-
-//            DriverAction.waitUntilElementAppear(By.xpath(MyLocators.button.replace("input", buttonName)),120);
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
         }catch(Exception e){
             System.out.print("Exception encountered!");
@@ -987,5 +1009,17 @@ DriverAction.waitSec(5);
             System.out.print("Exception encountered!");
         }
 
+    }
+    @And("^Enter course description for Test \"([^\"]*)\"$")
+    public void courseDescriptionTest(String description) {
+        try{
+
+            DriverAction.typeText(Course_Locators.courseDescription,description);
+            DriverAction.scrollToBottom();
+            DriverAction.click(Tests_TestControl_Locators.hasTestCheckbox);
+        }catch(Exception e){
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Enter course description","Exception encountered- "+e,STATUS.ERR);
+        }
     }
     }

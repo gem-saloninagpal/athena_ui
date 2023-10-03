@@ -8,6 +8,7 @@
   "feature":"src/main/resources/features",
   "jewel_bridge_token": "f092aa69-b769-4c16-8613-f6fe4aa6c6b31683869671673",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "jewel_screen_shots": "y",
   "dev": {
     "browser_name": "chrome",
     "launch_url": "https://athena-dev.geminisolutions.com",

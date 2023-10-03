@@ -6,6 +6,8 @@ public class Tests_TestControl_Locators {
     public static String date="//span[text()='date']";
     public static By testInputFields=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
 
+    public static By trainingTestInputFields=By.xpath("//form[@class='ng-pristine ng-invalid ng-touched']//input");
+
     public static By testInputFieldsInternal=By.xpath("//form[@class='ng-invalid ng-touched ng-dirty']//input");
 
     //form[@class='ng-invalid ng-touched ng-dirty']//input
@@ -36,18 +38,27 @@ public class Tests_TestControl_Locators {
 
     public static By saveButton=By.xpath("//button//span[text()='Save']");
 
+    public static By submitBtn=By.xpath("//button//span[text()='SUBMIT']");
+
+
+
     public static By continueButton=By.xpath("//button//span[text()='Continue']");
 
+
+    //button//span[text()='Add New Test']
+
+    public static By addNewTestBtn=By.xpath(" //button//span[text()='Add New Test']");
     public static By createdTestText=By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table//tr//td)[1]");
 
     public static By createdTestTextInternal=By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr//td[1]");
 
+    public static By createdTestTextTraining=By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[3]//tr//td[1]");
 
     public static By threeDotIcon=By.xpath("(//span[contains(@class,'pi pi-ellipsis')])[1]");
 
     public static By threeDotInternal=By.xpath("(//span[contains(@class,'pi pi-ellipsis')])[11]");
 
-
+    public static By threeDotTrainingTest=By.xpath(" (//span[contains(@class,'pi pi-ellipsis')])[21]");
 
     public static String threeDotOption="//div//label[text()='input']";
 
@@ -73,7 +84,7 @@ public class Tests_TestControl_Locators {
 
     public static By testControlFilterInputInternal=By.xpath("(//span[@class='p-input-icon-right p-ml-auto']//input)[2]");
 
-
+    public static By testControlFilterInputTraining=By.xpath("(//span[@class='p-input-icon-right p-ml-auto']//input)[3]");
     public static By statusColumn=By.xpath("//span[@class='p-tag-value']");
 
     public static By activeTestHeadingList=By.xpath("(//div[@class='card-adjustments'])[1]//div[@class='rounded m-2 ng-star-inserted']//h6");
@@ -91,44 +102,28 @@ public class Tests_TestControl_Locators {
     public static String checkboxDiv="//span[text()='input']/preceding-sibling::p-checkbox//div";
 
 
-//span[text()='Internal Test']/preceding-sibling::p-checkbox//div
+    public static By closeVideoIcon=By.xpath("//span[contains(@class,'p-dialog-header-close-icon pi pi-times')]");
+
+
+    public static By percentageIcon=By.xpath("//i[contains(@class,'pi pi-percentage ng-star-inserted')]");
+
+    public static By marksInput=By.xpath("//input[@class='marks ng-untouched ng-pristine ng-invalid p-inputtext p-component']");
+
+
+    public static By status=By.xpath("//div[@class='testinfo pass']");
+
+    public static By hasTestCheckbox=By.xpath("(//div[@class='p-checkbox-box'])[2]");
+
+    public static By addToCourse=By.xpath("//span[text()='Add To Course']");
+
+
+    public static By searchInputCourse=By.xpath("//input[@placeholder='Search by Name/Tags']");
 
 
 
 
 
-    //span[@class='p-tag-value']
-
-//span[@class='p-input-icon-right p-ml-auto']//input
 
 
-
-
-    //h4[text()='Summary']
-
-    //button[text()=' Start Test ']
-
-
-
-    //div//label[text()='Candidates Assigned']
-//    (//span[contains(@class,'pi pi-ellipsis')])[1]
-
-
-    //button//span[text()='Continue']
-
-    //button//span[text()='Save']
-
-//button[text()=' Submit ']
-    //div//span[text()='Question Type']
-    //div//span[text()='Difficulty']
-    //div//span[text()='Level']
-    //div//span[@class='p-inputnumber p-component']
-
-    //button//span[text()='Import Random']
-
-    //button//span[text()='Add Questions']
-
-    //label[text()='HH:MM*']
-    //label[text()='Cut Off Percentage*']
 
 }

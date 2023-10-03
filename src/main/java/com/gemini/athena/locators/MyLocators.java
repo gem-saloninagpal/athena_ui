@@ -11,7 +11,7 @@ public class MyLocators {
     public static By usernameField=By.xpath("//input[@formcontrolname='username']");
     public static By passwordField=By.xpath("//input[@formcontrolname='password']");
     public static By dashboard=By.xpath("//h6[text()='Dashboard']");
-    public static By loginBtn=By.xpath("//button[@label='LOGIN']");
+    public static By loginBtn=By.xpath("//button[@label='Sign in']");
     public static By sidebar=By.xpath("//p-toolbar//em");
     public static String selectModule="//span[contains(text(),'input')]//parent::a";
     public static String button="//button[@label='input']";
