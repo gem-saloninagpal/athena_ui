@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>athena-ui</artifactId>
+    <artifactId>JEWEL-API</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -18,14 +18,26 @@
         <dependency>
             <groupId>com.gemecosystem.gemjar</groupId>
             <artifactId>gemjar-core</artifactId>
-            <version>1.2.9.1</version>
+            <version>1.2.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools -->
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-devtools</artifactId>-->
-<!--            <version>4.0.0-rc-1</version>-->
-<!--        </dependency>-->
+
+        <!-- Some extra dependencies -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
+        </dependency>
 
     </dependencies>
     <build>

@@ -1,0 +1,18 @@
+{
+  "normal_user": {
+    "username": "perf-test",
+    "password": "e2fc714c4727ee9395f324cd2e7f331f"
+  },
+  "admin_user": {
+    "username": "",
+    "password": ""
+  },
+  "super_admin_user": {
+    "username": "",
+    "password": ""
+  },
+  "initial_project_id": "426",
+  "initial_project_name": "PROJECT01",
+  "emailID": "test.jewel@geminisolutions.com,test.jewel2@geminisolutions.com",
+  "machine": "JEWEL"
+}

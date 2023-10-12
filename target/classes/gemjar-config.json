@@ -1,18 +1,32 @@
 {
   "environment": "dev",
   "project_name": "ATHENA",
-  "report_name": "FEATURE FRAMEWORK DEMO",
-  "jewel_user": "saloni",
-  "jewel_bridge_token": "eb309270-b933-4469-af72-6e051464e2ad1687930868387",
-  "enter_point": "https://apis.gemecosystem.com/enter-point",
-  "feature": "src/main/resources/features",
-  "console_report": "n",
+  "report_name": "Athena UI Report",
+  "glue_code":"com.gemini.athena.stepdefinitions",
+  "tags":"@regression012",
+  "jewel_user": "radhikari",
+  "feature":"src/main/resources/features",
+  "jewel_bridge_token": "f092aa69-b769-4c16-8613-f6fe4aa6c6b31683869671673",
   "email_report": "n",
-  "glue_code": "com.gemini.athena.stepdefinitions",
-  "tags": "@candidateModule",
+  "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "jewel_screen_shots": "y",
   "dev": {
     "browser_name": "chrome",
-    "launch_url": "https://athena-hartron-dev.geminisolutions.com/"
-  }
+    "launch_url": "https://athena-dev.geminisolutions.com",
+    "browser_timeout": 200,
+    "getUser": "api/users",
+    "getAllActiveCampus": "api/getAllActiveCampus"
 
+  },
+  "prod": {
+    "browser_name": "chrome",
+    "launchUrl": "https://groupdev.pramericalife.in/",
+    "browserTimeout": 200
+  },
+  "beta": {
+    "browserName": "chrome",
+    "launchUrl": "https://athenalndint-dev.geminisolutions.com",
+    "browserTimeout": 200,
+    "getUser": "api/users"
+  }
 }
