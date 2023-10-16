@@ -1,5 +1,9 @@
 package com.qa.gemini.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.gemini.generic.api.utils.ApiInvocation;
 import com.gemini.generic.api.utils.Request;
 import com.gemini.generic.api.utils.Response;
@@ -22,6 +26,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 import static com.qa.gemini.utils.ReportingUtils.Report.LOGGER_EXCEPTION;
 import static com.qa.gemini.utils.ReportingUtils.Report.PASS_TEST_STATUS;
@@ -253,7 +261,77 @@ public class CommonUtils {
             GemTestReporter.addTestStep("Select module from sidebar", "Throws exception", STATUS.ERR, DriverAction.takeSnapShot());
         }
     }
+    public static String readProperties(String property) throws IOException { // Function to read Data from Properties File
+        FileReader read = new FileReader("src/main/resources/config.properties");
+        Properties credential = new Properties();
+        credential.load(read);
+        return credential.getProperty(property);
+    }
 
+    public static Response hitPostApiWithParams(String url, String reqMethod, String paramKey, String paramValue) throws Exception {
+        Response response = new Response();
+        try {
+            GemTestReporter.addTestStep("URL of the API", url, STATUS.INFO);
+            GemTestReporter.addTestStep("Request Method", reqMethod.toUpperCase(), STATUS.INFO);
+            List<String> paramKeys = Arrays.asList(paramKey.split(",")), paramValues = Arrays.asList(paramValue.split(","));
+            String params = new String();
+            Map<String, String> parameters = new HashMap<>();
+            for (int i = 0; i < paramKeys.size(); i++) {
+//                if (paramKeys.get(i).equals("userId")) {
+//                    params = params + "Parameter Key: " + paramKeys.get(i) + " | Parameter Value: " + CommonUtils.readProperties("username") + "<BR>";
+//                    parameters.put(paramKeys.get(i), CommonUtils.readProperties("username"));
+//                    continue;
+//                }
+                params = params + "Parameter Key: " + paramKeys.get(i) + " | Parameter Value: " + paramValues.get(i) + "<BR>";
+                parameters.put(paramKeys.get(i), paramValues.get(i));
+            }
+            GemTestReporter.addTestStep("Parameters", params, STATUS.INFO);
 
+            Request request = new Request();
 
+            request.setRequestPayload(parameters.toString());
+//            request.setParameter(parameters);
+            request.setBaseUrl(url);
+            request.setMethod(reqMethod);
+            request.setHeader("Authorization", "Bearer " + tokenForAuth);
+            response = ApiInvocation.handleRequest(request);
+
+            GemTestReporter.addTestStep("Response Body", beautifyResponseBody(response.getResponseBody()), STATUS.INFO);
+
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Hit Api: " + url, "Unable to hit API", STATUS.FAIL);
+            throw e;
+        }
+
+        return response;
+    }
+    public static String beautifyResponseBody(String unformattedBody) throws JsonProcessingException {
+        String formattedBody = new String();
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+
+            JsonNode tree = objectMapper.readTree(unformattedBody);
+            formattedBody = objectMapper.writeValueAsString(tree);
+        } catch (Exception e) {
+            return unformattedBody;
+        }
+        return formattedBody;
+
+    }
+    public static void matchStatusCodes(int expectedStatus, int actualStatus) {
+        if (actualStatus == expectedStatus) {
+            GemTestReporter.addTestStep("Response Status Verification", "Expected: " + expectedStatus + "<BR>Observed: " + actualStatus, STATUS.PASS);
+        } else {
+            GemTestReporter.addTestStep("Response Status Verification", "Expected: " + expectedStatus + "<BR>Observed: " + actualStatus, STATUS.FAIL);
+        }
+    }
+
+    public static void matchResponseMessage(String expectedMessage, String actualMessage) {
+        if (actualMessage.contains(expectedMessage)) {
+            GemTestReporter.addTestStep("Response Message", "Expected: " + expectedMessage + "<BR>Observed: " + actualMessage, STATUS.PASS);
+        } else {
+            GemTestReporter.addTestStep("Response Message", "Expected: " + expectedMessage + "<BR>Observed: " + actualMessage, STATUS.FAIL);
+        }
+    }
 }

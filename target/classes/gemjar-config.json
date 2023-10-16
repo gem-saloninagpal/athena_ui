@@ -15,7 +15,11 @@
     "launch_url": "https://athena-dev.geminisolutions.com",
     "browser_timeout": 200,
     "getUser": "api/users",
-    "getAllActiveCampus": "api/getAllActiveCampus"
+    "getAllActiveCampus": "api/getAllActiveCampus",
+    "getActiveTest": "api/getActiveTest?isInternalTest=false&isTrainingTest=false&myTest=false",
+    "getAllPaginatedTests": "api/getAllPaginatedTests?pageNumber=0&pageSize=10&searchParam=&campusMasterId=&myTest=false",
+    "getAllCampus": "api/getAllCampus",
+    "reattemptTest": "api/reattemptTest"
 
   },
   "prod": {
