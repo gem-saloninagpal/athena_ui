@@ -1,6 +1,6 @@
-package com.gemini.athena.stepdefinitions;
+package com.gemini.athenaUi.stepdefinitions;
 
-import com.gemini.athena.locators.MyLocators;
+import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
@@ -130,10 +130,17 @@ public class ContentAssignment {
 
                         DriverAction.click(dropdownFields.get(k));
                         k++;
-                    DriverAction.click(By.xpath(MyLocators.option.replace("input",inputValues[i])));
-//                    if(DriverAction.isDisplayed(MyLocators.crossIcon)){
-//                        DriverAction.click(MyLocators.crossIcon);
-//                    }
+
+                    if(DriverAction.isDisplayed(By.xpath(MyLocators.option.replace("input",inputValues[i])))) {
+                        DriverAction.click(By.xpath(MyLocators.option.replace("input", inputValues[i])));
+                    }else{
+
+                    }
+                    if(DriverAction.isDisplayed(MyLocators.crossIcon)){
+                        DriverAction.click(MyLocators.crossIcon);
+                    }else{
+
+                    }
                 }
                 //file-upload
                 else if(upload!=null&&upload.equals("file")){
@@ -147,7 +154,7 @@ public class ContentAssignment {
 
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, STATUS.ERR,DriverAction.takeSnapShot());
         }
 
 
@@ -203,6 +210,7 @@ public class ContentAssignment {
     public void verifyAssignmentUpdated(String tag, String marks) {
 
         try {
+            Thread.sleep(2000);
             String tagDisplayed = DriverAction.getElementText(MyLocators.assignmentTagDisplayed);
             String marksDisplayed = DriverAction.getElementText(MyLocators.assignmentMarksDisplayed);
             if (tagDisplayed.contains(tag) && marksDisplayed.equals(marks)) {

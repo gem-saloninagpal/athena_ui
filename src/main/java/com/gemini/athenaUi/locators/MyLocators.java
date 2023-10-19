@@ -1,19 +1,14 @@
-package com.gemini.athena.locators;
+package com.gemini.athenaUi.locators;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class MyLocators {
     public static By usernameField=By.xpath("//input[@formcontrolname='username']");
     public static By passwordField=By.xpath("//input[@formcontrolname='password']");
-    public static By dashboard=By.xpath("//h6[text()='Dashboard']");
+    public static By dashboard=By.xpath("//h6[contains(text(),'User Dashboard')]");
     public static By loginBtn=By.xpath("//button[@label='LOGIN']");
     public static By sidebar=By.xpath("//p-toolbar//em");
-    public static String selectModule="//span[contains(text(),'input')]//parent::a";
+    public static String selectModule="//span[text()='input']//parent::a";
     public static String button="//button[@label='input']";
     public static String header="(//h6[contains(@class,'text')])[1]";
     public static By fieldsError=By.xpath("//input//following::small");
@@ -23,6 +18,7 @@ public class MyLocators {
     public static By fieldsDropdown=By.xpath("//div[@fxlayout='row wrap']//span[contains(@class,'chevron-down')]//parent::div");
     public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
     public static String option="//span[contains(text(),'input')]//parent::li";
+    public static String option1="//span[contains(text(),'input')]//parent::li//parent::p-multiselectitem";
     public static By inputFields=By.xpath("//input[contains(@class,'fieldsDesign')]");
 
     public static String switchTab="//span[text()='input']//parent::a";
@@ -133,10 +129,11 @@ public class MyLocators {
     public static By viewReport=By.xpath("//button[@label='View Report' and contains(@class,'instBtn')]");
     public static By saveNext=By.xpath("//button[contains(text(),'Save & Next')]");
     public static By invigilationAlert=By.xpath("//strong[contains(text(),'automatic submission')]");
-    public static By batchActionsIcon=By.xpath("//div[@class='p-card-body']//button[contains(@class,'p-button')]");
+    public static By batchActionsIcon=By.xpath("(//div[@class='p-card-body']//button[contains(@class,'p-button')])[1]");
     public static By addCourse=By.xpath("//i[@ptooltip='Add Course']");
-    public static By addedCourseName=By.xpath("(//thead)[2]//following::tbody//td");
+    public static By addedCourseName=By.xpath("(//thead)[2]//following::tbody//td[1]");
     public static By recentlyAddedCourse=By.xpath("//div[@class='p-card-body']//div[contains(@class,'name')]");
+    public static By recentlyAddedCourseAfterEdit=By.xpath("(//div[@class='p-card-body']//div[contains(@class,'name')])[1]");
     public static By owner=By.xpath("//div[contains(@class,'multiselect')]//span");
     public static By userEmail=By.xpath("//div[@class='upper-card-details']//div[2]/div");
     public static By batchInputFields=By.xpath("//form[contains(@class,'ng-invalid')]//input");
@@ -144,6 +141,7 @@ public class MyLocators {
     public static String createBatch="//button[contains(@ng-reflect-label,'input')]";
     public static By searchbox=By.xpath("//input[@type='search']");
     public static String dropdown="//p-dropdown[@placeholder='input']";
+    public static By signInBtn=By.xpath("//button[@label='Sign in']");
 
 
     // private static String input;

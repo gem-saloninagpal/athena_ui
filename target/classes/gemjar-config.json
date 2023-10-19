@@ -7,12 +7,24 @@
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "feature": "src/main/resources/features",
   "console_report": "n",
+  "jewel_screen_shots": "y",
   "email_report": "n",
   "glue_code": "com.gemini.athena.stepdefinitions",
-  "tags": "@candidateModule",
+  "tags": "@batch",
+  "browser_options": "[--incognito]",
+  "event_firing": "y",
+  "azure_integration": {
+    "azure_project": "",
+    "azure_pat_token": "",
+    "azure_workflow": [
+      "Bug Fixed"
+    ],
+    "azure_assigned_to": "",
+    "azure_testcase_flag": "Y"
+  },
   "dev": {
-    "browser_name": "chrome",
-    "launch_url": "https://athena-hartron-dev.geminisolutions.com/"
+    "browser_name": "edge",
+    "launch_url": "https://athena-dev.geminisolutions.com/"
   }
 
 }

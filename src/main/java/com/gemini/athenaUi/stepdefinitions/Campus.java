@@ -1,7 +1,7 @@
-package com.gemini.athena.stepdefinitions;
+package com.gemini.athenaUi.stepdefinitions;
 
-import com.gemini.athena.locators.CampusLocators;
-import com.gemini.athena.locators.MyLocators;
+import com.gemini.athenaUi.locators.CampusLocators;
+import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.gemini.athena.stepdefinitions.CandidateModule_UserManagement.*;
+import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.*;
 
 public class Campus {
 
@@ -68,6 +68,7 @@ public class Campus {
     @And("^Search a campus$")
     public void searchCampus() {
         try {
+            Thread.sleep(3000);
             DriverAction.typeText(MyLocators.searchbox, name);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, STATUS.ERR);
@@ -89,12 +90,12 @@ public class Campus {
         try {
             String campus = DriverAction.getElementText(CampusLocators.registeredCampus);
             if (campus.contains(name)) {
-                GemTestReporter.addTestStep("Verify campus is registered", "Successfully registered the campus", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify campus is registered", "Successfully registered the campus", STATUS.PASS,DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify campus is registered", "Could not verify the registered campus", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify campus is registered", "Could not verify the registered campus", STATUS.FAIL,DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify campus is registered", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify campus is registered", "Exception encountered- " + e, STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 

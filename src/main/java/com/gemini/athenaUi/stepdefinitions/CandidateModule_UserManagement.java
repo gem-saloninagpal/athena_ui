@@ -1,6 +1,6 @@
-package com.gemini.athena.stepdefinitions;
+package com.gemini.athenaUi.stepdefinitions;
 
-import com.gemini.athena.locators.MyLocators;
+import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
@@ -32,7 +32,7 @@ public class CandidateModule_UserManagement {
 
         try {
 
-            DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
+       //     DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
             System.out.println(randomString);
 
             //if new role is registered through the email, login using same email
@@ -43,10 +43,12 @@ public class CandidateModule_UserManagement {
 //                DriverAction.typeText(MyLocators.usernameField, randomString);
 //            }
             DriverAction.typeText(MyLocators.passwordField, password);
-            DriverAction.waitUntilElementClickable(MyLocators.loginBtn,90);
-            DriverAction.click(MyLocators.loginBtn);
+            DriverAction.waitUntilElementClickable(MyLocators.signInBtn,90);
+ //           DriverAction.click(MyLocators.loginBtn);
+            DriverAction.click(MyLocators.signInBtn);
 
             Thread.sleep(25000);
+
 
             //wait while the page loads.
 //            if(DriverAction.isExist(MyLocators.spinner));
@@ -56,6 +58,8 @@ public class CandidateModule_UserManagement {
             if (DriverAction.isExist(MyLocators.dashboard)) {
                 GemTestReporter.addTestStep("Verify dashboard is displayed", "Successfully displayed the dashboard.", STATUS.PASS, DriverAction.takeSnapShot());
             }
+            Thread.sleep(3000);
+            changeResolution1();
         } catch (Exception e) {
             System.out.print("Could not login to Athena.");
         }
@@ -108,6 +112,7 @@ public class CandidateModule_UserManagement {
     @Then("^Click the button \"([^\"]*)\"$")
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
+            Thread.sleep(4000);
 
                 if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More")) {
                     DriverAction.scrollToBottom();
@@ -286,7 +291,7 @@ public class CandidateModule_UserManagement {
             name=randomString;
             randomString = randomString.concat("@gmail.com");
             System.out.println("Random String is: " + randomString);
-            return randomString;
+            return name;
         }catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+" Exception occured while generating unique email.");
         }
@@ -359,6 +364,7 @@ public class CandidateModule_UserManagement {
     @Then("^Logout of portal$")
     public void logout() {
         try {
+            Thread.sleep(16000);
             DriverAction.waitUntilElementAppear(MyLocators.navbarDropdown,2);
             DriverAction.click(MyLocators.navbarDropdown, "Click dropdown icon of navbar.", "Successfully clicked the dropdown icon.");
             DriverAction.click(MyLocators.logoutOption, "Select logout from the options.", "Successfully selected Logout.");
@@ -665,9 +671,9 @@ public class CandidateModule_UserManagement {
     public void selectFromDropdown(String option) {
         try{
                 Thread.sleep(6000);
-            if(DriverAction.isExist(By.xpath(MyLocators.profile.replace("input",option)))) {
+            if(DriverAction.isDisplayed(By.xpath(MyLocators.profile.replace("input",option)))) {
                 DriverAction.click(By.xpath(MyLocators.profile.replace("input", option)), "Select " + option + " from dropdown", "Successfully selected " + option + " from dropdown.");
-            }else if(DriverAction.isExist(By.xpath(MyLocators.sectionOptions.replace("input", option)))){
+            }else if(DriverAction.isDisplayed(By.xpath(MyLocators.sectionOptions.replace("input", option)))){
                 DriverAction.click(By.xpath(MyLocators.sectionOptions.replace("input", option)), "Select " + option + " from dropdown", "Successfully selected " + option + " from dropdown.");
             }else{
                 GemTestReporter.addReasonOfFailure("Option not selected from dropdown.");
@@ -932,6 +938,7 @@ try {
     public void pageNavigate(String page) {
         try {
             Thread.sleep(15000);
+        //    DriverAction.waitUntilElementClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)),120);
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
             GemTestReporter.addTestStep("Navigate to page-"+page, "Exception encountered- " + e, STATUS.ERR);

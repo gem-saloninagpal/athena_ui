@@ -1,4 +1,4 @@
-package com.gemini.athena.locators;
+package com.gemini.athenaUi.locators;
 
 import org.openqa.selenium.By;
 
