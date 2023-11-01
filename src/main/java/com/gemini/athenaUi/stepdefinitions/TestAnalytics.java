@@ -14,19 +14,19 @@ import java.util.List;
 import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.*;
 public class TestAnalytics {
 
-    int activeStatistics;
-    int ongoingEvents;
-    int upcomingEvents;
-    String campusName;
-    String count;
-    int passCount;
-    int passedCandidates;
+    int _activeStatistics;
+    int _ongoingEvents;
+    int _upcomingEvents;
+    String _campusName;
+    String _count;
+    int _passCount;
+    int _passedCandidates;
 
     @And("^Get active test statistics$")
     public void getActiveStatistics(){
         try{
-            activeStatistics= DriverAction.getElements(TestAnalyticsLocators.activeStats).size();
-            GemTestReporter.addTestStep("Get active test statistics","The active statistics are- "+activeStatistics, STATUS.PASS,DriverAction.takeSnapShot());
+            _activeStatistics = DriverAction.getElements(TestAnalyticsLocators.activeStats).size();
+            GemTestReporter.addTestStep("Get active test statistics","The active statistics are- "+ _activeStatistics, STATUS.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
             GemTestReporter.addTestStep("Get active test statistics","Exception encountered- "+e,STATUS.ERR);
         }
@@ -35,11 +35,12 @@ public class TestAnalytics {
     @Then("^Compare ongoing and upcoming events with active statistics$")
     public void compareOngoingAndUpcomingEventsWithActiveStatistics() {
          try{
-             ongoingEvents=DriverAction.getElements(TestAnalyticsLocators.events).size();
+             _ongoingEvents =DriverAction.getElements(TestAnalyticsLocators.events).size();
              DriverAction.click(TestAnalyticsLocators.ongoingEventsDropdown);
              DriverAction.click(TestAnalyticsLocators.selectUpcomingEvents);
-             upcomingEvents=DriverAction.getElements(TestAnalyticsLocators.events).size();
-             if(ongoingEvents+upcomingEvents==activeStatistics){
+             _upcomingEvents =DriverAction.getElements(TestAnalyticsLocators.events).size();
+             //sum of ongoing and upcoming tests should be equal to active tests
+             if(_ongoingEvents + _upcomingEvents == _activeStatistics){
                  GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Successfully validated the ongoing and upcoming events.",STATUS.PASS,DriverAction.takeSnapShot());
              }else{
                  GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Could not validate the ongoing and upcoming events.",STATUS.FAIL,DriverAction.takeSnapShot());
@@ -52,11 +53,13 @@ public class TestAnalytics {
     @When("^Get the pass count of first campus displayed$")
     public void getThePassCountOfFirstCampusDisplayed() {
         try{
-            campusName=DriverAction.getElementText(TestAnalyticsLocators.campus);
-            name=campusName;
-            count=DriverAction.getElementText(TestAnalyticsLocators.passCount);
-            passCount=Integer.parseInt(count);
-            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Successfully fetched the pass count as- "+passCount+" of campus- "+campusName,STATUS.PASS,DriverAction.takeSnapShot());
+            //fetching campus name
+            _campusName =DriverAction.getElementText(TestAnalyticsLocators.campus);
+            _name = _campusName;
+            //count of candidates passed from a particular campus
+            _count =DriverAction.getElementText(TestAnalyticsLocators.passCount);
+            _passCount =Integer.parseInt(_count);
+            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Successfully fetched the pass count as- "+ _passCount +" of campus- "+ _campusName,STATUS.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
             GemTestReporter.addTestStep("Get the pass count of first campus displayed","Exception encountered- "+e,STATUS.ERR);
         }
@@ -67,11 +70,13 @@ public class TestAnalytics {
         try{
             List<WebElement> candidates=DriverAction.getElements(TestAnalyticsLocators.passedCandidates);
             for(int i=0;i<candidates.size();i++) {
+                //splitting the text present on test ticket and taking passed candidate count
                 String[] num = candidates.get(i).getText().split(" ");
                 String passed=num[0];
-                passedCandidates+=Integer.parseInt(passed);
+                //adding the passed count of all the tests from a particular campus
+                _passedCandidates +=Integer.parseInt(passed);
             }
-            if(passedCandidates==passCount){
+            if(_passedCandidates == _passCount){
                 GemTestReporter.addTestStep("Verify the passed candidates","Successfully verified the passed candidates",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
                 GemTestReporter.addTestStep("Verify the passed candidates","Could not verify the passed candidates",STATUS.FAIL,DriverAction.takeSnapShot());

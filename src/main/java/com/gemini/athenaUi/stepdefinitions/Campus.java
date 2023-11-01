@@ -15,19 +15,17 @@ import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement
 
 public class Campus {
 
-
-    //   String randomString="";
-    String tpoEmail = "";
+    String _tpoEmail = "";
 
     @Then("^Enter respective values in campus fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void campusValues(String location, String university, String tpoName, String tpoEmail, String tpoContact, String description) {
         try {
             //enter the details in fields while registering a campus
             generateUniqueEmail();
-            tpoEmail = "a" + randomString;
+            tpoEmail = "a" + _randomString;
             List<WebElement> campusFields = DriverAction.getElements(MyLocators.inputFields);
             //here randomString is campus mail
-            String[] campusValues = {name, randomString, location, university, tpoName, tpoEmail, tpoContact, description};
+            String[] campusValues = {_name, _randomString, location, university, tpoName, tpoEmail, tpoContact, description};
 
             for (int i = 0; i < campusFields.size(); i++) {
                 campusFields.get(i).clear();
@@ -40,36 +38,11 @@ public class Campus {
         }
     }
 
-//    @Then("^Verify campus is registered$")
-//    public void verifyCampusRegistered() {
-//        try {
-//            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.button.replace("input","Register Campus")));
-//            List<WebElement>campus = DriverAction.getElements(CampusLocators.registeredCampus);
-//            int c=0;
-//            String campusName="";
-//            boolean isExist=false;
-//            for (WebElement webElement : campus) {
-//                campusName = webElement.getText();
-//                c++;
-//                if (campusName.contains(name)) {
-//                    isExist = true;
-//                    GemTestReporter.addTestStep("Verify campus is registered", "Successfully verified the registered campus.", STATUS.PASS);
-//                    break;
-//                }
-//            }
-//            if(c==campus.size()&& !isExist){
-//                GemTestReporter.addTestStep("Verify campus is registered","Could not verify the registered campus.",STATUS.FAIL);
-//            }
-//        }catch(Exception e){
-//            GemTestReporter.addTestStep("Verify campus is registered","Exception encountered- "+e,STATUS.ERR);
-//        }
-//    }
-
     @And("^Search a campus$")
     public void searchCampus() {
         try {
             Thread.sleep(3000);
-            DriverAction.typeText(MyLocators.searchbox, name);
+            DriverAction.typeText(MyLocators.searchbox, _name);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -89,7 +62,7 @@ public class Campus {
     public void verifyCampusRegistered() {
         try {
             String campus = DriverAction.getElementText(CampusLocators.registeredCampus);
-            if (campus.contains(name)) {
+            if (campus.contains(_name)) {
                 GemTestReporter.addTestStep("Verify campus is registered", "Successfully registered the campus", STATUS.PASS,DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify campus is registered", "Could not verify the registered campus", STATUS.FAIL,DriverAction.takeSnapShot());
@@ -102,15 +75,18 @@ public class Campus {
     @Then("^Verify campus is updated \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyCampusUpdated(String tpoName, String tpoContact, String location, String university) {
         try {
-            String[] campusValues = {name, "", tpoName, tpoContact, tpoEmail, location, university};
+            String[] campusValues = {_name, "", tpoName, tpoContact, _tpoEmail, location, university};
             List<WebElement> row = DriverAction.getElements(CampusLocators.rowLength);
             int c = 0;
+
+            //comparing updated fields with the values passed
             for (int i = 0; i < row.size()-1; i++) {
                 String value = row.get(i).getText();
                 if (value.contains(campusValues[i])) {
                     c++;
                 }
             }
+            //verifies if the count matches
             if (c == row.size() - 1) {
                 GemTestReporter.addTestStep("Verify campus is updated", "Successfully verified the campus is updated.", STATUS.PASS);
             } else {

@@ -1,7 +1,6 @@
 Feature: Create campus functionality
 
   Background:
-  #  Given Navigate to page "login"
     And Logout of portal
     And Login using "saloni02@gmail.com" and "abc@123"
 

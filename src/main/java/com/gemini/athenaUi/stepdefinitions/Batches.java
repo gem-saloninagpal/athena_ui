@@ -13,14 +13,15 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class Batches {
-    String courseName="";
-    String email="";
-    String batchName="";
-    String courseState="";
+    String _courseName ="";
+    String _email ="";
+    String _batchName ="";
+    String _courseState ="";
 
     @And("^Click actions icon of a batch$")
     public void batchActionsIcon(){
         try {
+            //expand the action icon of batch
             Thread.sleep(2000);
             DriverAction.click(MyLocators.batchActionsIcon);
             GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", STATUS.PASS);
@@ -31,25 +32,29 @@ public class Batches {
 
     @And("^Select \"([^\"]*)\" from actions dropdown$")
     public void selectFromActionsDropdown(String option) throws InterruptedException {
-        Thread.sleep(5000);
-        courseState=option;
-        DriverAction.click(By.xpath(MyLocators.editOptions.replace("input",option)));
+        try {
+            Thread.sleep(5000);
+            _courseState = option;
+            //select option from dropdown
+            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)));
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @And("^Add a course in batch$")
     public void addCourseInBatch() {
         try{
+            //add a course in batch
             Thread.sleep(3000);
             DriverAction.click(MyLocators.addCourse);
-      //      wait(2000);
-
-
             List<WebElement>addedCourses=DriverAction.getElements(MyLocators.addedCourseName);
             int total= addedCourses.size();
-            courseName=DriverAction.getElementText(addedCourses.get(total-1));
-          //  courseName=DriverAction.getElementText(text);
-            System.out.print(courseName);
-            GemTestReporter.addTestStep("Add course in a batch","Successfully added the course- "+courseName+" in batch.",STATUS.PASS);
+
+            //store added course in a string
+            _courseName =DriverAction.getElementText(addedCourses.get(total-1));
+            System.out.print(_courseName);
+            GemTestReporter.addTestStep("Add course in a batch","Successfully added the course- "+ _courseName +" in batch.",STATUS.PASS);
         }catch(Exception e){
             GemTestReporter.addTestStep("Add course in a batch","Exception encountered- "+e,STATUS.ERR);
         }
@@ -60,10 +65,11 @@ public class Batches {
         try {
             Thread.sleep(5000);
             DriverAction.scrollToBottom();
+            //get the list of all added courses and verify the last course is recently added
             List<WebElement>courses=DriverAction.getElements(MyLocators.recentlyAddedCourse);
             int total= courses.size();
             String course = DriverAction.getElementText(courses.get(total-1));
-            if (course.contains(courseName)) {
+            if (course.contains(_courseName)) {
                 GemTestReporter.addTestStep("Verify added course displays in batch summary", "Successfully verified added course displays in batch summary.", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify added course displays in batch summary", "Could not verify added course displays in batch summary.", STATUS.FAIL);
@@ -77,8 +83,8 @@ public class Batches {
     @Then("^Get email of user$")
     public void getEmail() {
         try {
-            email = DriverAction.getElementText(MyLocators.userEmail);
-            GemTestReporter.addTestStep("Get email of user", "Successfully fetched the email- " +email, STATUS.PASS);
+            _email = DriverAction.getElementText(MyLocators.userEmail);
+            GemTestReporter.addTestStep("Get email of user", "Successfully fetched the email- " + _email, STATUS.PASS);
         }catch(Exception e){
             GemTestReporter.addTestStep("Get email of user","Exception encountered- "+e,STATUS.ERR);
         }
@@ -88,7 +94,7 @@ public class Batches {
     public void verifyOwnerOfBatchSelected() {
         try {
             String owner = DriverAction.getElementText(MyLocators.owner);
-            if (email.contains(owner)) {
+            if (_email.contains(owner)) {
                 GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Successfully verified the owner of batch is selected by default.", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Could not verify owner of batch is selected by default.", STATUS.FAIL);
@@ -103,14 +109,15 @@ public class Batches {
     public void enterInBatchFields(String fileLocation, String owner) {
 
         try {
+            //entering batch name, owner, description and uploading file
             List<WebElement> inputFields= DriverAction.getElements(MyLocators.batchInputFields);
             System.out.print(inputFields.size());
-            batchName= RandomStringUtils.randomAlphanumeric(10);
-            batchName="a"+batchName;
-            String[] inputValues ={batchName,fileLocation,owner};
+            _batchName = RandomStringUtils.randomAlphanumeric(10);
+            _batchName ="a"+ _batchName;
+            String[] inputValues ={_batchName,fileLocation,owner};
             int k=0;
             for(int i=0;i<inputFields.size();i++){
-                if(i==1&&courseState.equals("Edit")){
+                if(i==1&& _courseState.equals("Edit")){
                     continue;
                 }
                 Thread.sleep(2000);
@@ -150,10 +157,9 @@ public class Batches {
     public void verifyBatchCreatedUpdated() {
 
         try {
-          //  DriverAction.waitUntilElementAppear(MyLocators.batchCreated,10);
             Thread.sleep(15000);
             String batch = DriverAction.getElementText(MyLocators.batchCreated);
-            if (batch.contains(batchName)) {
+            if (batch.contains(_batchName)) {
                 GemTestReporter.addTestStep("Verify batch is created/updated", "Successfully verified the batch is created/updated.", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify batch is created/updated", "Could not verify the created/updated batch", STATUS.FAIL);
@@ -173,14 +179,16 @@ public class Batches {
     public void enterInBatchFieldsOnEdit(String fileLocation, String owner) {
 
         try {
+
+            //editing batch name, owner, uploaded file etc.
             List<WebElement> inputFields= DriverAction.getElements(MyLocators.batchInputFields);
             System.out.print(inputFields.size());
-            batchName= RandomStringUtils.randomAlphanumeric(10);
-            batchName="a"+batchName;
-            String[] inputValues ={batchName,"",fileLocation,owner};
+            _batchName = RandomStringUtils.randomAlphanumeric(10);
+            _batchName ="a"+ _batchName;
+            String[] inputValues ={_batchName,"",fileLocation,owner};
             int k=0;
             for(int i=0;i<inputFields.size();i++){
-                if(i==1&&courseState.equals("Edit")){
+                if(i==1&& _courseState.equals("Edit")){
                     continue;
                 }
                 Thread.sleep(2000);
@@ -222,7 +230,7 @@ public class Batches {
             Thread.sleep(5000);
             DriverAction.scrollToBottom();
             String course=DriverAction.getElementText(MyLocators.recentlyAddedCourseAfterEdit);
-            if (course.contains(courseName)) {
+            if (course.contains(_courseName)) {
                 GemTestReporter.addTestStep("Verify added course displays in batch summary", "Successfully verified added course displays in batch summary.", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify added course displays in batch summary", "Could not verify added course displays in batch summary.", STATUS.FAIL);

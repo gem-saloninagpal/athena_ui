@@ -17,7 +17,7 @@ public class MyLocators {
     public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
     public static By fieldsDropdown=By.xpath("//div[@fxlayout='row wrap']//span[contains(@class,'chevron-down')]//parent::div");
     public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
-    public static String option="//span[contains(text(),'input')]//parent::li";
+    public static String option="//span[text()='input']//parent::li";
     public static String option1="//span[contains(text(),'input')]//parent::li//parent::p-multiselectitem";
     public static By inputFields=By.xpath("//input[contains(@class,'fieldsDesign')]");
 

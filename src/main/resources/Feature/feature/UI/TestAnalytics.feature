@@ -2,7 +2,6 @@ Feature:  Test Analytics module
 
   Background:
     And Logout of portal
-#    Given Navigate to page "login"
     And Login using "saloni02@gmail.com" and "abc@123"
     
     Scenario Outline: Compare active tests statistics with ongoing and upcoming events

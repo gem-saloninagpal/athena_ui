@@ -15,23 +15,23 @@ import java.util.List;
 
 public class ContentAssignment {
 
-    String contentName="";
-    String assignmentName="";
+    String _contentName ="";
+    String _assignmentName ="";
 
     @Then("^Enter respective values in content fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void enterContent(String contentTags, String filetype, String duration, String file) {
         try {
             List<WebElement> inputFields= DriverAction.getElements(MyLocators.contentInputFields);
-            contentName= RandomStringUtils.randomAlphanumeric(10);
-            contentName="s"+contentName;
+            _contentName = RandomStringUtils.randomAlphanumeric(10);
+            _contentName ="s"+ _contentName;
 
-            System.out.println(contentName);
-            String inputValues[]={contentName,contentTags,filetype,duration};
+            System.out.println(_contentName);
+            String inputValues[]={_contentName,contentTags,filetype,duration};
             int k=0;
             for(int i=0;i<inputFields.size();i++){
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("type");
-                //dropdown
+                //if dropdown is present
                 if(dropdown!=null&&dropdown.equals("listbox")){
 
                     List<WebElement>dropdownFields=DriverAction.getElements(MyLocators.fieldsDropdown);
@@ -39,15 +39,16 @@ public class ContentAssignment {
                     DriverAction.click(dropdownFields.get(k));
                     k++;
                     DriverAction.click(By.xpath(MyLocators.option.replace("input",inputValues[i])));
-//                    if(DriverAction.isDisplayed(MyLocators.crossIcon)){
-//                        DriverAction.click(MyLocators.crossIcon);
-//                    }
+                    //close the dropdown
+                    if(DriverAction.isDisplayed(MyLocators.crossIcon)){
+                        DriverAction.click(MyLocators.crossIcon);
+                    }
                 }
-                //file-upload
+                //if file-upload
                 else if(upload!=null&&upload.equals("file")){
                      DriverAction.fileUpload(inputFields.get(i),file);
                 }
-                //textbox
+                //if textbox is present
                 else{
 
                     Thread.sleep(2000);
@@ -76,7 +77,9 @@ public class ContentAssignment {
 
         try {
             Thread.sleep(7000);
-            String[] contentData = {contentName, contentTag, duration, fileType};
+
+            //checking if the created fields match the field values passed by us
+            String[] contentData = {_contentName, contentTag, duration, fileType};
             List<WebElement> verifyContent = DriverAction.getElements(MyLocators.contentData);
             int c = 0;
             for (int i = 0; i < verifyContent.size(); i++) {
@@ -117,36 +120,34 @@ public class ContentAssignment {
 
         try {
             List<WebElement> inputFields= DriverAction.getElements(MyLocators.assignmentInputFields);
-            assignmentName= RandomStringUtils.randomAlphanumeric(10);
-            assignmentName="a"+assignmentName;
-            String inputValues[]={assignmentName,assignmentTag,marks,duration,category,fileLocation};
+            _assignmentName = RandomStringUtils.randomAlphanumeric(10);
+            //adding 'a' at start because assignment name does not start with a digit
+            _assignmentName ="a"+ _assignmentName;
+            String inputValues[]={_assignmentName,assignmentTag,marks,duration,category,fileLocation};
             int k=0;
             for(int i=0;i<inputFields.size()-1;i++){
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("type");
-                //dropdown
+                //if dropdown is present
                 if(dropdown!=null&&dropdown.equals("listbox")){
                     List<WebElement>dropdownFields=DriverAction.getElements(MyLocators.fieldsDropdown);
 
                         DriverAction.click(dropdownFields.get(k));
                         k++;
 
+                    //select an option from dropdown
                     if(DriverAction.isDisplayed(By.xpath(MyLocators.option.replace("input",inputValues[i])))) {
                         DriverAction.click(By.xpath(MyLocators.option.replace("input", inputValues[i])));
-                    }else{
-
                     }
                     if(DriverAction.isDisplayed(MyLocators.crossIcon)){
                         DriverAction.click(MyLocators.crossIcon);
-                    }else{
-
                     }
                 }
-                //file-upload
+                //if file-upload field is present
                 else if(upload!=null&&upload.equals("file")){
                     DriverAction.fileUpload(inputFields.get(i),fileLocation);
                 }
-                //textbox
+                //if textbox is present
                 else{
 
                     DriverAction.typeText(inputFields.get(i),inputValues[i]);
@@ -164,7 +165,7 @@ public class ContentAssignment {
     public void verifyAssignment(String category, String tags, String marks) {
         try {
             Thread.sleep(7000);
-            String[] contentData = {assignmentName, category, tags, marks};
+            String[] contentData = {_assignmentName, category, tags, marks};
             List<WebElement> verifyContent = DriverAction.getElements(MyLocators.contentData);
             int c = 0;
             for (int i = 0; i < verifyContent.size(); i++) {
@@ -188,22 +189,32 @@ public class ContentAssignment {
 
     @When("^Click Actions icon of recently created content/assignment$")
     public void contentActionIcon() throws InterruptedException {
-      //  DriverAction.waitUntilElementIsClickable(MyLocators.contentActionsIcon);
+        try {
             Thread.sleep(5000);
-            DriverAction.click(MyLocators.contentActionsIcon);
+            DriverAction.click(MyLocators.contentActionsIcon,"Click Actions icon of recently created content/assignment");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click Actions icon of recently created content/assignment","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @When("^Update values in assignment fields \"([^\"]*)\", \"([^\"]*)\"$")
     public void updateValuesInAssignment(String tag, String marks) {
 
-        List<WebElement>dropdownFields=DriverAction.getElements(MyLocators.dropdownIcon);
+        try {
+            //expand dropdown
+            List<WebElement> dropdownFields = DriverAction.getElements(MyLocators.dropdownIcon);
 
-        DriverAction.click(dropdownFields.get(0));
-        DriverAction.click(By.xpath(MyLocators.option.replace("input",tag)));
-        if(DriverAction.isExist(MyLocators.crossIcon)){
-            DriverAction.click(MyLocators.crossIcon);
+            DriverAction.click(dropdownFields.get(0));
+            //select an option from dropdown
+            DriverAction.click(By.xpath(MyLocators.option.replace("input", tag)));
+            if (DriverAction.isExist(MyLocators.crossIcon)) {
+                DriverAction.click(MyLocators.crossIcon);
+            }
+            //enter marks
+            DriverAction.typeText(MyLocators.assignmentMarks, marks);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Update values in assignment fields","Exception encountered- "+e,STATUS.ERR);
         }
-        DriverAction.typeText(MyLocators.assignmentMarks,marks);
     }
 
     @Then("^Verify assignment is updated \"([^\"]*)\", \"([^\"]*)\"$")
@@ -211,6 +222,7 @@ public class ContentAssignment {
 
         try {
             Thread.sleep(2000);
+            //verifying the updated tag and marks
             String tagDisplayed = DriverAction.getElementText(MyLocators.assignmentTagDisplayed);
             String marksDisplayed = DriverAction.getElementText(MyLocators.assignmentMarksDisplayed);
             if (tagDisplayed.contains(tag) && marksDisplayed.equals(marks)) {
@@ -226,6 +238,7 @@ public class ContentAssignment {
     @When("^Update values in content fields \"([^\"]*)\", \"([^\"]*)\"$")
     public void updateContentFields(String tags, String duration) {
         try {
+            //Update content tag and duration
             DriverAction.click(MyLocators.contentTags);
             DriverAction.click(By.xpath(MyLocators.option.replace("input", tags)));
             DriverAction.typeText(MyLocators.contentDuration, duration);
@@ -274,6 +287,7 @@ public class ContentAssignment {
         try{
             Thread.sleep(4000);
             String value=DriverAction.getAttributeName(MyLocators.inactiveStatusBar,"ng-reflect-model");
+            //if status bar's attribute is false that means content/assignment is deactivated
             if(value.equals("false")){
                 GemTestReporter.addTestStep("Verify deactivated content","Successfully verified deactivated content.",STATUS.PASS,DriverAction.takeSnapShot());
             }else{

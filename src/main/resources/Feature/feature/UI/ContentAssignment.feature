@@ -1,10 +1,8 @@
 Feature:Content and Assignment features
 
   Background:Check login to candidate module
-  #  Given Navigate to page "login"
     And Logout of portal
     And Login using "saloni02@gmail.com" and "abc@123"
- #   And Wait while screen loads
 
   @regression
     Scenario Outline:Add content without adding course info
@@ -110,7 +108,7 @@ Feature:Content and Assignment features
           Examples:
           |module        |submodule         |
           |Manage Courses|Content Library   |
-#          |Manage Courses |Assignment Library|
+          |Manage Courses |Assignment Library|
 
 
 

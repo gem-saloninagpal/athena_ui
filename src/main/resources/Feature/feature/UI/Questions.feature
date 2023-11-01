@@ -295,24 +295,26 @@ Feature: Questions functionality
       |module |submodule|
       |Tests  |Questions|
 
-#  Scenario Outline: Edit video based question and verify - inProgress
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Switch to "Video Based"
-#    And Expand the video field
-#    And Get comprehension based question statement
-#    And Edit comprehension based question
-#    Then Verify confirmation dialog box appears
-#    When Click the button "Yes"
-#    And Update comprehension based question
-#    And Enter options and select a correct option
-#    And Click the button "Save & Exit"
-#    And Expand the passage field
-#    Then Verify the updated comprehension question
-#    Examples:
-#      |module |submodule|
-#      |Tests  |Questions|
+    @inProgress
+  Scenario Outline: Edit video based question and verify - inProgress
+    Given Select "<module>", "<submodule>" from sidebar
+    When Switch to "Video Based"
+    And Expand the video field
+    And Get comprehension based question statement
+    And Edit comprehension based question
+    Then Verify confirmation dialog box appears
+    When Click the button "Yes"
+    And Update comprehension based question
+    And Enter options and select a correct option
+    And Click the button "Save & Exit"
+    And Expand the passage field
+    Then Verify the updated comprehension question
+    Examples:
+      |module |submodule|
+      |Tests  |Questions|
 
-#  Scenario Outline: Add a question in video - bug encountered
+#     @inProgress
+#  Scenario: Add a question in video - bug encountered
 #    Given Select "<module>", "<submodule>" from sidebar
 #    When Switch to "Video Based"
 #    And Click actions icon of recently created video

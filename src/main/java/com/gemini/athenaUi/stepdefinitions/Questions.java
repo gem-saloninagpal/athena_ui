@@ -15,19 +15,16 @@ import java.util.List;
 import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.*;
 
 public class Questions {
-    String question;
-    String passage;
-    String passageQues;
-    String existingQues;
-    String comprehensionSubjectiveQues1;
-    String comprehensionSubjectiveQues2;
-    String movieName;
-    String movieDescription;
-    String updatedPassage;
-    String videoQues;
-    String videoBasedQues1;
-    String videoBasedQues2;
-    String updateComprehensionQuestion;
+    String _question;
+    String _passage;
+    String _passageQues;
+    String _existingQues;
+    String _comprehensionSubjectiveQues1;
+    String _comprehensionSubjectiveQues2;
+    String _movieName;
+    String _movieDescription;
+    String _updatedPassage;
+    String _updateComprehensionQuestion;
 
     @And("^Select dropdown values in question fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void questionDropdownValues(String level, String type, String section, String difficulty, String skills) {
@@ -35,6 +32,7 @@ public class Questions {
             String[] fields = {level, type, section, difficulty, skills};
             String[] fieldName = {"level", "type", "section", "difficulty", "skills"};
             List<WebElement> dropdowns = DriverAction.getElements(QuestionsLocators.dropdownFields);
+            //select level, type, section etc. while creating a question
             for (int i = 0; i < dropdowns.size(); i++) {
                 DriverAction.click(dropdowns.get(i));
                 DriverAction.click(By.xpath(QuestionsLocators.dropdownValue.replace("input", fields[i])));
@@ -70,12 +68,9 @@ public class Questions {
     public void enterOptions() {
         try {
             String text = "";
-            String mail = "";
             for (int i = 0; i < 3; i++) {
                 //call generate unique mail function and remove @gmail.com
-                mail = generateUniqueEmail();
-                //generate unique string
-                text = mail.replace("@gmail.com", "a");
+                text = generateUniqueEmail();
                 //enter option and add
                 DriverAction.typeText(QuestionsLocators.optionsBox, text);
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
@@ -92,6 +87,7 @@ public class Questions {
     public void verifyQuestionIsCreated(String question1, String question2) {
         try {
             String[] ques = {question2, question1};
+            //verifying recently created 2 questions from the questions table
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.firstColumn);
             int c = 0;
             for (int i = 0; i <= 1; i++) {
@@ -124,9 +120,9 @@ public class Questions {
     @And("^Enter question description in subjective$")
     public void questionDescriptionSubjective() {
         try {
-            existingQues=question;
-            question = generateUniqueEmail();
-            DriverAction.typeText(QuestionsLocators.questionBox, question, "Successfully entered the question description.");
+            _existingQues = _question;
+            _question = generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.questionBox, _question, "Successfully entered the question description.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter question description in subjective", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -135,8 +131,9 @@ public class Questions {
     @And("^Enter the passage$")
     public void enterPassage() {
         try {
-            passage = generateUniqueEmail();
-            DriverAction.typeText(QuestionsLocators.passageBox, passage, "Successfully entered the passage.");
+            //here generateUniqueEmail function is generating a unique string
+            _passage = generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.passageBox, _passage, "Successfully entered the passage.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter the passage", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -145,13 +142,13 @@ public class Questions {
     @Then("^Verify the passage and edit$")
     public void verifyPassageAndEdit() {
         String text = DriverAction.getElementText(QuestionsLocators.passage);
-        if (text.contains(passage)) {
+        if (text.contains(_passage)) {
             GemTestReporter.addTestStep("Verify the passage", "Successfully verified the passage.", STATUS.PASS, DriverAction.takeSnapShot());
         } else {
             GemTestReporter.addTestStep("Verify the passage", "Could not verify the passage.", STATUS.FAIL, DriverAction.takeSnapShot());
         }
-        passage = "updated passage is- " + passage;
-        DriverAction.typeText(QuestionsLocators.passage, passage);
+        _passage = "updated passage is- " + _passage;
+        DriverAction.typeText(QuestionsLocators.passage, _passage);
         GemTestReporter.addTestStep("Edit the passage", "Successfully edited the passage.", STATUS.PASS);
     }
 
@@ -159,7 +156,7 @@ public class Questions {
     public void verifyPassageCreated() {
         try {
             String text = DriverAction.getElementText(QuestionsLocators.passageStatement);
-            if (text.contains(passage)) {
+            if (text.contains(_passage)) {
                 GemTestReporter.addTestStep("Verify the passage is created", "Successfully verified the passage.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify the passage is created", "Could not verify the passage.", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -172,8 +169,12 @@ public class Questions {
 
     @And("^Expand the passage field$")
     public void expandPassageField() {
-        DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
-        DriverAction.waitSec(2);
+        try {
+            DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
+            DriverAction.waitSec(2);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Expand the passage field","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @Then("^Verify the comprehension question is created \"([^\"]*)\", \"([^\"]*)\"$")
@@ -183,10 +184,11 @@ public class Questions {
             if(!question1.isEmpty() && !question2.isEmpty()) {
                  ques = new String[]{question2, question1};
             }else{
-                ques=new String[]{comprehensionSubjectiveQues1,comprehensionSubjectiveQues2};
+                ques=new String[]{_comprehensionSubjectiveQues1, _comprehensionSubjectiveQues2};
             }
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.expandPassageFirstColumn);
             int c = 0;
+            //verifying 2 latest created comprehension questions
             for (int i = 0; i <= 1; i++) {
                 String quesStatement = DriverAction.getElementText(questions.get(i));
                 if (quesStatement.contains(ques[i])) {
@@ -205,13 +207,22 @@ public class Questions {
 
     @And("^Click Add New in comprehensions tab$")
     public void AddNewComprehensionsTab() {
-        DriverAction.click(QuestionsLocators.addNewComprehension);
+        try {
+            DriverAction.click(QuestionsLocators.addNewComprehension);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click Add New in comprehensions tab","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @And("^Enter question description related passage \"([^\"]*)\"$")
     public void enterQuestionDescriptionRelatedPassage(String ques) {
-        passageQues=generateUniqueEmail();
-        DriverAction.typeText(QuestionsLocators.passageQuestionBox,ques);
+        try {
+            //here the function generates unique string
+            _passageQues = generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.passageQuestionBox, ques);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Enter question description related passage","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @Then("^Click the button \"([^\"]*)\" and verify the message \"([^\"]*)\"$")
@@ -225,6 +236,7 @@ public class Questions {
             DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.button.replace("input", buttonName)));
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
             String errorMessage = DriverAction.getElementText(MyLocators.popupMsg);
+            //verifying popup message after clicking the button
             if (errorMessage.contains(message)) {
                 GemTestReporter.addTestStep("Verify the popup message", "Successfully verified popup message " + errorMessage, STATUS.PASS, DriverAction.takeSnapShot());
             } else {
@@ -238,9 +250,10 @@ public class Questions {
     @Then("^Verify the subjective questions$")
     public void verifySubjectiveQuestions() {
         try {
-            String[] ques = {existingQues,question};
+            String[] ques = {_existingQues, _question};
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.firstColumn);
             int c = 0;
+            //verifying 2 latest created subjective questions
             for (int i = 0; i <= 1; i++) {
                 String quesStatement = DriverAction.getElementText(questions.get(i));
                 if (quesStatement.contains(ques[i])) {
@@ -261,10 +274,13 @@ public class Questions {
     @And("^Enter comprehension based subjective question$")
     public void enterComprehensionBasedSubjectiveQuestion() {
         try {
-            passageQues = generateUniqueEmail();
-            comprehensionSubjectiveQues1 = comprehensionSubjectiveQues2;
-            comprehensionSubjectiveQues2 = passageQues;
-            DriverAction.typeText(QuestionsLocators.passageQuestionBox, passageQues);
+            //generating unique string
+            _passageQues = generateUniqueEmail();
+            //assigning question2 to question1
+            _comprehensionSubjectiveQues1 = _comprehensionSubjectiveQues2;
+            //assigning new string to question1
+            _comprehensionSubjectiveQues2 = _passageQues;
+            DriverAction.typeText(QuestionsLocators.passageQuestionBox, _passageQues);
         }catch(Exception e){
             GemTestReporter.addTestStep("Enter comprehension based subjective question", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -292,10 +308,11 @@ public class Questions {
     @When("^Enter movie name and description$")
     public void enterMovieNameAndDescription() {
         try{
-            movieName=generateUniqueEmail();
-            movieDescription=generateUniqueEmail();
-            DriverAction.typeText(QuestionsLocators.movieNameInputBox,movieName,"Successfully entered the movie name- "+movieName);
-            DriverAction.typeText(QuestionsLocators.movieDescription,movieDescription,"Successfully entered the movie description- "+movieDescription);
+            //generating unique string
+            _movieName =generateUniqueEmail();
+            _movieDescription =generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.movieNameInputBox, _movieName,"Successfully entered the movie name- "+ _movieName);
+            DriverAction.typeText(QuestionsLocators.movieDescription, _movieDescription,"Successfully entered the movie description- "+ _movieDescription);
         }catch(Exception e){
             GemTestReporter.addTestStep("Enter movie name and description","Exception encountered- "+e,STATUS.ERR);
         }
@@ -303,7 +320,11 @@ public class Questions {
 
     @And("^Upload a video \"([^\"]*)\"$")
     public void uploadAVideo(String movieLocation) {
-        DriverAction.fileUpload(QuestionsLocators.chooseBtn,movieLocation);
+        try {
+            DriverAction.fileUpload(QuestionsLocators.chooseBtn, movieLocation);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Upload a video","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @And("^Click the upload button$")
@@ -330,7 +351,11 @@ public class Questions {
 
     @And("^Expand the video field$")
     public void expandVideoField() {
-        DriverAction.click(QuestionsLocators.expandVideo,"Expand the video field");
+        try {
+            DriverAction.click(QuestionsLocators.expandVideo, "Expand the video field");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @Then("^Verify the video based question is created \"([^\"]*)\",\"([^\"]*)\"$")
@@ -339,6 +364,7 @@ public class Questions {
             String[]ques=new String[]{videoQues1,videoQues2};
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.videoQuestions);
             int c = 0;
+            //verifying 2 latest created video based questions
             for (int i = 0; i <= 1; i++) {
                 String quesStatement = DriverAction.getElementText(questions.get(i));
                 if (quesStatement.contains(ques[i])) {
@@ -360,7 +386,7 @@ public class Questions {
         try {
             String videoName = DriverAction.getElementText(QuestionsLocators.videoName);
             String description = DriverAction.getElementText(QuestionsLocators.videoDescription);
-            if (videoName.contains(movieName) && description.contains(movieDescription)) {
+            if (videoName.contains(_movieName) && description.contains(_movieDescription)) {
                 GemTestReporter.addTestStep("Verify the video name and description", "Successfully verified the video name and description.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify the video name and description", "Could not verify the video name and description.", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -373,13 +399,21 @@ public class Questions {
 
     @When("^Click Actions icon of recently created question$")
     public void clickActionsIconOfRecentlyCreatedQuestion() throws InterruptedException {
-        Thread.sleep(5000);
-        DriverAction.click(MyLocators.contentActionsIcon);
+        try {
+            Thread.sleep(5000);
+            DriverAction.click(MyLocators.contentActionsIcon);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click Actions icon of recently created question","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @And("^Click the edit icon$")
     public void clickTheEditIcon() {
-        DriverAction.click(QuestionsLocators.editIcon,"Click the edit icon");
+        try {
+            DriverAction.click(QuestionsLocators.editIcon, "Click the edit icon");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click the edit icon","Exception encountered- "+e,STATUS.ERR);
+        }
     }
 
     @And("^Verify question dialog box opens$")
@@ -450,7 +484,7 @@ public class Questions {
     public void verifyPassageOnView() {
         try{
             String rcPassage=DriverAction.getElementText(QuestionsLocators.rcPassage);
-            if(rcPassage.contains(passage)){
+            if(rcPassage.contains(_passage)){
                 GemTestReporter.addTestStep("Verify passage on view","Successfully verified the passage on view.",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
                 GemTestReporter.addTestStep("Verify passage on view","Could not verify the passage on view.",STATUS.FAIL,DriverAction.takeSnapShot());
@@ -464,8 +498,9 @@ public class Questions {
     public void updatePassage() {
         try {
             DriverAction.clearText(QuestionsLocators.passageBox);
-            updatedPassage = generateUniqueEmail();
-            DriverAction.typeText(QuestionsLocators.passageBox, updatedPassage, "Update the passage");
+            //generating unique string
+            _updatedPassage = generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.passageBox, _updatedPassage, "Update the passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Update the passage","Exception encountered- "+e,STATUS.ERR);
         }
@@ -475,7 +510,7 @@ public class Questions {
     public void verifyPassageGetsUpdated() {
         try {
             String text = DriverAction.getElementText(QuestionsLocators.passageStatement);
-            if (text.contains(updatedPassage)) {
+            if (text.contains(_updatedPassage)) {
                 GemTestReporter.addTestStep("Verify the passage is updated", "Successfully verified the updated passage.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify the passage is updated", "Could not verify the updated passage.", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -485,10 +520,6 @@ public class Questions {
         }
     }
 
-    @Then("^Verify a question is added$")
-    public void verifyAQuestionIsAdded() {
-
-    }
 
     @And("^Click actions icon of recently created video$")
     public void clickActionsIconOfRecentlyCreatedVideo() {
@@ -517,7 +548,7 @@ public class Questions {
     public void verifyMovieNameAndDescriptionOnView() {
         try{
             String videoNameDescription=DriverAction.getElementText(QuestionsLocators.videoNameDescriptionOnView);
-            if(videoNameDescription.contains(movieName)&&videoNameDescription.contains(movieDescription)){
+            if(videoNameDescription.contains(_movieName)&&videoNameDescription.contains(_movieDescription)){
                 GemTestReporter.addTestStep("Verify movie name and description on view","Successfully verified movie name and description on view.",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
                 GemTestReporter.addTestStep("Verify movie name and description on view","Could not verify movie name and description on view.",STATUS.FAIL,DriverAction.takeSnapShot());
@@ -530,9 +561,10 @@ public class Questions {
     @Then("^Verify the state of video \"([^\"]*)\"$")
     public void verifyVideoState(String videoState) {
       try{
+          //verifying if video is deleted or not
           boolean isPresent=false;
           String video=DriverAction.getElementText(QuestionsLocators.videoName);
-          if(video.equals(movieName)){
+          if(video.equals(_movieName)){
               isPresent=true;
           }
           if(!isPresent && videoState.equals("not deleted")){
@@ -551,7 +583,7 @@ public class Questions {
     @When("^Search a video$")
     public void searchAVideo() {
         try {
-            DriverAction.typeText(QuestionsLocators.videoSearchbox, movieName,"Search movie name");
+            DriverAction.typeText(QuestionsLocators.videoSearchbox, _movieName,"Search movie name");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a video", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -560,7 +592,7 @@ public class Questions {
     @And("^Search a passage$")
     public void searchAPassage() {
         try {
-            DriverAction.typeText(QuestionsLocators.passageSearchbox, updatedPassage,"Search a passage");
+            DriverAction.typeText(QuestionsLocators.passageSearchbox, _updatedPassage,"Search a passage");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a passage", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -569,9 +601,11 @@ public class Questions {
     @Then("^Verify the passage state \"([^\"]*)\"$")
     public void verifyThePassageState(String state) {
         try{
+
+            //verifying if passage is deleted or not
             boolean isPresent=false;
             String passage=DriverAction.getElementText(QuestionsLocators.passageStatement);
-            if(passage.equals(updatedPassage)){
+            if(passage.equals(_updatedPassage)){
                 isPresent=true;
             }
             if(!isPresent && state.equals("not deleted")){
@@ -591,6 +625,7 @@ public class Questions {
     public void deleteAllTheQuestionsAssociated() {
         try{
             List<WebElement>deleteAssociatedQuestions= DriverAction.getElements(QuestionsLocators.deleteAssociatedQuestion);
+            //deleting all the questions associated to a passage
             for(WebElement e:deleteAssociatedQuestions){
                 DriverAction.click(e,"Delete all the questions associated","Successfully deleted all the associated questions.");
                 verifyConfirmationDialogBoxAppears();
@@ -637,9 +672,11 @@ public class Questions {
     @And("^Update comprehension based question$")
     public void updateComprehensionBasedQuestion() {
         try{
-            updateComprehensionQuestion=generateUniqueEmail();
+            //generating unique string
+            _updateComprehensionQuestion =generateUniqueEmail();
+            //deleting the previous question and entering a new question
             DriverAction.clearText(QuestionsLocators.comprehensionQuestionTextarea);
-            DriverAction.typeText(QuestionsLocators.comprehensionQuestionTextarea,updateComprehensionQuestion,"Update comprehension based question");
+            DriverAction.typeText(QuestionsLocators.comprehensionQuestionTextarea, _updateComprehensionQuestion,"Update comprehension based question");
         }catch(Exception e){
             GemTestReporter.addTestStep("Update comprehension based question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
@@ -648,8 +685,8 @@ public class Questions {
     @Then("^Verify the updated comprehension question$")
     public void verifyTheUpdatedComprehensionQuestion() {
         try{
-            String updatedQuestion=DriverAction.getElementText(QuestionsLocators.expandPassageFirstColumn);
-            if(updatedQuestion.equals(updateComprehensionQuestion)){
+            String updatedQuestion=DriverAction.getElementText(QuestionsLocators.expandPassageFirstColumn);//first column of expanded passage is the updated question
+            if(updatedQuestion.equals(_updateComprehensionQuestion)){
                 GemTestReporter.addTestStep("Verify the updated comprehension question","Successfully updated the comprehension question.",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
                 GemTestReporter.addTestStep("Verify the updated comprehension question","Could not update the comprehension question.",STATUS.FAIL,DriverAction.takeSnapShot());

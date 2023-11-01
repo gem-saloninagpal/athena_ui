@@ -9,14 +9,14 @@ import io.cucumber.java.en.When;
 
 public class CampusPerformance {
 
-    String performanceOnHover;
+    String _performanceOnHover;
 
     @When("^Hover over a campus and get performance$")
     public void hoverAndGetCampusPerformance(){
         try{
             DriverAction.hoverOver(CampusPerformanceLocators.graph,"Hover over a campus");
-            performanceOnHover=DriverAction.getElementText(CampusPerformanceLocators.performanceOnHover);
-            GemTestReporter.addTestStep("Hover over a campus and get performance","Successfully fetched the performance on hover- "+performanceOnHover, STATUS.PASS,DriverAction.takeSnapShot());
+            _performanceOnHover =DriverAction.getElementText(CampusPerformanceLocators.performanceOnHover);
+            GemTestReporter.addTestStep("Hover over a campus and get performance","Successfully fetched the performance on hover- "+ _performanceOnHover, STATUS.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
             GemTestReporter.addTestStep("Hover over a campus and get performance","Exception encountered- "+e,STATUS.ERR);
         }
@@ -26,7 +26,7 @@ public class CampusPerformance {
     public void validatePerformanceWithTable() {
         try{
             String performanceOnTable=DriverAction.getElementText(CampusPerformanceLocators.performanceOnTable);
-            if(performanceOnHover.contains(performanceOnTable)){
+            if(_performanceOnHover.contains(performanceOnTable)){
                 GemTestReporter.addTestStep("Validate the performance with table data","Successfully validated the performance with table data.",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
                 GemTestReporter.addTestStep("Validate the performance with table data","Could not validate the performance with table data.",STATUS.FAIL,DriverAction.takeSnapShot());
