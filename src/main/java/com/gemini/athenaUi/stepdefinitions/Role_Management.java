@@ -18,11 +18,12 @@ import java.util.Set;
 
 public class Role_Management {
 
-    String Role="TRAINEE";
+    String _Role="TRAINEE";
     @And("^Create Role and Validate Role is created \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
     public void enterDateInDateRangeField(String roleName,String roleDesc,String roleDisplay) {
         try {
-            Role=roleName;
+            //in this function we are creating role and validating weather new role is created or not
+            _Role=roleName;
             String arr[]={roleName,roleDesc,roleDisplay};
             for(int i=2;i<=4;i++)
             {
@@ -69,6 +70,7 @@ public class Role_Management {
     @When("Edit the Role \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
     public void editTheRole(String permissionType,String permissionSubType,String permission1,String permission2,String permission3) {
         try {
+            //in this function we are editing the role
             DriverAction.waitSec(4);
             DriverAction.click(By.xpath("//table[@role='grid']"));
             DriverAction.waitSec(4);
@@ -79,7 +81,7 @@ public class Role_Management {
             List<String> names = DriverAction.getElementsText(Role_Management_Locators.nameList);
             for (int i = 1; i < names.size(); i = i + 5) {
                 String reqName = DriverAction.getElementText(By.xpath(Role_Management_Locators.name.replace("itr", String.valueOf(i))));
-                if (reqName.equals(Role)) {
+                if (reqName.equals(_Role)) {
                     idx = idx + 1;
                     isTrue = true;
                     break;
@@ -155,6 +157,7 @@ public class Role_Management {
     @And("Switch the user to {string}")
     public void switchTheUserTo(String role) {
         try{
+            //in this function we are switching the required role
 if(DriverAction.isExist(Role_Management_Locators.roleDropdown,120))
 {
     DriverAction.click(Role_Management_Locators.roleDropdown);
@@ -177,12 +180,9 @@ else
     @Then("^Validate the Permission for test$")
     public void validateThePermission(DataTable data) {
         try{
-
+//we are validating the permission
             List<List<String>> dataList=data.asLists(String.class);
             String testType=dataList.get(0).get(0);
-//            String data1=dataList.get(0).get(0);
-//            String data2=dataList.get(0).get(1);
-//            String data3=dataList.get(0).get(2);
 
             DriverAction.waitSec(5);
             int c=0;
@@ -471,6 +471,7 @@ else
     @Then("^Validate permissions not granted should not be there on screen$")
     public void validatePermissionsNotGrantedShouldNotBeThereOnScreen(DataTable data) {
         try{
+            // in this function we are checking the permission that we not selected should not be there for the user
             List<List<String>> dataList = data.asLists(String.class);
 
             String button=dataList.get(0).get(0);
@@ -545,6 +546,7 @@ else
     @And("Delete the Created Role")
     public void deleteTheCreatedRole() {
         try{
+            // in this function we are deleting the role
             DriverAction.waitSec(4);
             DriverAction.click(By.xpath("//table[@role='grid']"));
             DriverAction.waitSec(4);
@@ -555,7 +557,7 @@ else
             List<String> names = DriverAction.getElementsText(Role_Management_Locators.nameList);
             for (int i = 1; i < names.size(); i = i + 5) {
                 String reqName = DriverAction.getElementText(By.xpath(Role_Management_Locators.name.replace("itr", String.valueOf(i))));
-                if (reqName.equals(Role)) {
+                if (reqName.equals(_Role)) {
                     idx = idx + 1;
                     isTrue = true;
                     break;
@@ -678,7 +680,7 @@ else
             List<String> names = DriverAction.getElementsText(Role_Management_Locators.nameList);
             for (int i = 1; i < names.size(); i = i + 5) {
                 String reqName = DriverAction.getElementText(By.xpath(Role_Management_Locators.name.replace("itr", String.valueOf(i))));
-                if (reqName.equals(Role)) {
+                if (reqName.equals(_Role)) {
                     idx = idx + 1;
                     isTrue = true;
                     break;
@@ -712,7 +714,7 @@ else
             List<String> namesAfterDeleting = DriverAction.getElementsText(Role_Management_Locators.nameList);
             for (int i = 1; i < namesAfterDeleting.size(); i = i + 5) {
                 String reqName = DriverAction.getElementText(By.xpath(Role_Management_Locators.name.replace("itr", String.valueOf(i))));
-                if (reqName.equals(Role)) {
+                if (reqName.equals(_Role)) {
                     idx = idx + 1;
                     isTrue = true;
                     break;

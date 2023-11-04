@@ -31,7 +31,7 @@ import java.util.List;
 public class LearnerModule {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
 
-    String courseName="";
+    String _courseName="";
 
     @When("^Expand user dropdown from navbar$")
     public void expandUserDropdown() {
@@ -618,8 +618,8 @@ public class LearnerModule {
    try{
        int c=2;
        List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
-       courseName= RandomStringUtils.randomAlphanumeric(10);
-       String inputValues[]={courseName,courseType,duration,courseTag,fileLocation,category};
+       _courseName= RandomStringUtils.randomAlphanumeric(10);
+       String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
        for(int i=0;i<=5;i++){
            String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
            String upload=inputFields.get(i).getAttribute("type");

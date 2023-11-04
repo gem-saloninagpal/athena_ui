@@ -20,7 +20,7 @@ import java.util.List;
 public class UserDashboard {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
 
-static String CourseName=" ";
+static String _CourseName=" ";
 
 @And("^Enter the \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" in Course fields$")
     public void enterCourseFields(String courseType,String duration,String fileLocation,String category)
@@ -30,9 +30,9 @@ static String CourseName=" ";
         int c=2;
         List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
 //        CourseName= RandomStringUtils.randomAlphanumeric(10);
-        CourseName = generateRandomCourseName(10);
-        String courseTag= CourseName+"12";
-        String inputValues[]={CourseName,courseType,duration,courseTag,fileLocation,category};
+        _CourseName = generateRandomCourseName(10);
+        String courseTag= _CourseName+"12";
+        String inputValues[]={_CourseName,courseType,duration,courseTag,fileLocation,category};
         for(int i=0;i<=5;i++){
             String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
             String upload=inputFields.get(i).getAttribute("type");
@@ -63,6 +63,7 @@ catch (Exception e) {
     public void publishCourse()
 {
 try{
+    //in this function we are publishing the course
     DriverAction.scrollToTop();
     if(DriverAction.isExist(Course_Locators.courseSummaryDiv,120))
     {
@@ -149,7 +150,7 @@ try{
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Published")));
             DriverAction.waitSec(5);
             String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
-            if(fetchedPublishedCourseName.equals(CourseName))
+            if(fetchedPublishedCourseName.equals(_CourseName))
             {
                 GemTestReporter.addTestStep("Course is published finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
             }
@@ -203,7 +204,7 @@ catch (Exception e) {
     public void validateAssignUserDashBoard()
     {
         try{
-
+//in this function we are weather assigned learner is visible on user dashboard
             if(DriverAction.isExist(UserDashboard_Locator.actionTakenDropdown,120))
             {
                 DriverAction.click(UserDashboard_Locator.actionTakenDropdown);
@@ -223,7 +224,7 @@ catch (Exception e) {
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInput,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInput,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -292,7 +293,7 @@ catch (Exception e) {
     public void validateUnAssignUserDashBoard()
     {
         try{
-
+// we are validating unassigned learner on user dashboard
             if(DriverAction.isExist(UserDashboard_Locator.actionTakenDropdown,120))
             {
                 DriverAction.click(UserDashboard_Locator.actionTakenDropdown);
@@ -312,7 +313,7 @@ catch (Exception e) {
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInput,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInput,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -352,10 +353,12 @@ catch (Exception e) {
     @And("^Manually completed course$")
     public void manuallyCompleted(){
     try{
+
+        //in this we are manually completing the course
         DriverAction.waitSec(3);
 if(DriverAction.isExist(UserDashboard_Locator.courseFilterInput,120))
 {
-    DriverAction.typeText(UserDashboard_Locator.courseFilterInput,CourseName);
+    DriverAction.typeText(UserDashboard_Locator.courseFilterInput,_CourseName);
 }
 else {
     GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -409,6 +412,7 @@ else {
     public void validateManuallyCompleted()
     {
         try{
+            //validating manually completed course
             DriverAction.waitSec(3);
             if(DriverAction.isExist(UserDashboard_Locator.actionTakenDropdown,120))
             {
@@ -429,7 +433,7 @@ else {
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInput,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInput,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -468,7 +472,8 @@ else {
     public void reattemptCourse()
     {
         try{
-DriverAction.waitSec(5);
+            // reattempt  the once completed course
+            DriverAction.waitSec(5);
             if(DriverAction.isExist(Course_Locators.editIcon,120))
             {
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
@@ -503,6 +508,7 @@ DriverAction.waitSec(5);
     public void validateReattempt()
     {
         try{
+            // validate reattempt course
             if(DriverAction.isExist(UserDashboard_Locator.actionTakenDropdown,120))
             {
                 DriverAction.click(UserDashboard_Locator.actionTakenDropdown);
@@ -522,7 +528,7 @@ DriverAction.waitSec(5);
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInput,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInput,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -560,6 +566,7 @@ DriverAction.waitSec(5);
     public void validateCourseDashboard()
     {
         try{
+            //in this function we are validating once we create a new course it is visible on user dashboard or not.
             JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
             DriverAction.scrollToBottom();
             js.executeScript("window.scrollTo(0, arguments[0]);",500);
@@ -583,7 +590,7 @@ DriverAction.waitSec(5);
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -592,7 +599,7 @@ DriverAction.waitSec(5);
             if(DriverAction.isExist(UserDashboard_Locator.courseName,120))
             {
                 String getCourse=DriverAction.getElementText(UserDashboard_Locator.courseName);
-                if(CourseName.equals(getCourse))
+                if(_CourseName.equals(getCourse))
                 {
                     GemTestReporter.addTestStep("Validate Course Created is present on User Dashboard", "Course is present on User Dashboard" , STATUS.PASS,
                             DriverAction.takeSnapShot());
@@ -618,9 +625,10 @@ DriverAction.waitSec(5);
     @And("^Update the course$")
     public void updateCourse(){
     try{
+        // in this function we are updating the course
         if(DriverAction.isExist(UserDashboard_Locator.courseFilterInput,120))
         {
-            DriverAction.typeText(UserDashboard_Locator.courseFilterInput,CourseName);
+            DriverAction.typeText(UserDashboard_Locator.courseFilterInput,_CourseName);
         }
         else {
             GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -637,7 +645,7 @@ DriverAction.waitSec(5);
         }
         DriverAction.waitSec(3);
         if (DriverAction.isExist(UserDashboard_Locator.courseNameInput, 120)) {
-            DriverAction.typeText(UserDashboard_Locator.courseNameInput,"Edit "+CourseName);
+            DriverAction.typeText(UserDashboard_Locator.courseNameInput,"Edit "+_CourseName);
         }
         DriverAction.scrollToBottom();
         if(DriverAction.isExist(UserDashboard_Locator.addContentBtn,120))
@@ -709,9 +717,10 @@ DriverAction.waitSec(5);
     @And("^Delete the course$")
     public void deleteCourse(){
         try{
+            //in this function we are deleting the course
             if(DriverAction.isExist(UserDashboard_Locator.courseFilterInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.courseFilterInput,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.courseFilterInput,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -741,6 +750,7 @@ DriverAction.waitSec(5);
     public void validateUpdateCourseDashboard()
     {
         try{
+            // we are validating updated course is visible on user dashboard
             JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
             DriverAction.scrollToBottom();
             js.executeScript("window.scrollTo(0, arguments[0]);",500);
@@ -764,7 +774,7 @@ DriverAction.waitSec(5);
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -773,7 +783,7 @@ DriverAction.waitSec(5);
             if(DriverAction.isExist(UserDashboard_Locator.courseName,120))
             {
                 String getCourse=DriverAction.getElementText(UserDashboard_Locator.courseName);
-                String courseName="Edit "+CourseName;
+                String courseName="Edit "+_CourseName;
                 if(courseName.equals(getCourse))
                 {
                     GemTestReporter.addTestStep("Validate Course Updated is present on User Dashboard", "Course is present on User Dashboard" , STATUS.PASS,
@@ -801,6 +811,7 @@ DriverAction.waitSec(5);
     public void validateDeleteCourseDashboard()
     {
         try{
+            // we are validating once the course is deleted it is visible on user dashboard
             JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
             DriverAction.scrollToBottom();
             js.executeScript("window.scrollTo(0, arguments[0]);",500);
@@ -824,7 +835,7 @@ DriverAction.waitSec(5);
 
             if(DriverAction.isExist(UserDashboard_Locator.searchInput,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInputCourse,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -834,7 +845,7 @@ DriverAction.waitSec(5);
             {
                 String getCourse=DriverAction.getElementText(UserDashboard_Locator.courseName);
 
-                if(CourseName.equals(getCourse))
+                if(_CourseName.equals(getCourse))
                 {
                     GemTestReporter.addTestStep("Validate Course Delete is present on User Dashboard", "Course is present on User Dashboard" , STATUS.PASS,
                             DriverAction.takeSnapShot());
@@ -861,11 +872,12 @@ DriverAction.waitSec(5);
     public void validateCourseDetailsUserDashboard(String courseOption)
     {
         try{
+            // we are validating course detail on user dashboard
             DriverAction.waitSec(5);
             DriverAction.scrollToBottom();
             if(DriverAction.isExist(UserDashboard_Locator.searchInputLibrary,120))
             {
-                DriverAction.typeText(UserDashboard_Locator.searchInputLibrary,CourseName);
+                DriverAction.typeText(UserDashboard_Locator.searchInputLibrary,_CourseName);
             }
             else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Search by Course Name filter input" , STATUS.FAIL,
@@ -887,7 +899,7 @@ DriverAction.waitSec(5);
                 System.out.println(fetchedHeading);
                 switch (courseOption) {
                     case "Course Summary":
-                        String heading="Course Summary: "+CourseName;
+                        String heading="Course Summary: "+_CourseName;
                        if(heading.equals(fetchedHeading))
                        {
                            GemTestReporter.addTestStep("Validate Course Summary page opened", "Course Summary page opened successfully" , STATUS.PASS,
@@ -899,7 +911,7 @@ DriverAction.waitSec(5);
                        }
                         break;
                     case "Assign Learners":
-                        String heading1="Assign Learners: "+CourseName;
+                        String heading1="Assign Learners: "+_CourseName;
                         if(heading1.equals(fetchedHeading))
                         {
                             GemTestReporter.addTestStep("Validate Learner Report page opened", "Learner Report page opened successfully" , STATUS.PASS,
@@ -911,7 +923,7 @@ DriverAction.waitSec(5);
                         }
                         break;
                     case "Learner Reports":
-                        String heading2="View Learner(s) Report: "+CourseName;
+                        String heading2="View Learner(s) Report: "+_CourseName;
                         if(heading2.contains(fetchedHeading))
                         {
                             GemTestReporter.addTestStep("Validate Learner Report page opened", "Learner Report page opened successfully" , STATUS.PASS,
@@ -946,25 +958,6 @@ DriverAction.waitSec(5);
             }
 
 
-
-
-//            if(DriverAction.isExist(UserDashboard_Locator.courseName,120))
-//            {
-//                String getCourse=DriverAction.getElementText(UserDashboard_Locator.courseName);
-//
-//                if(CourseName.equals(getCourse))
-//                {
-//                    GemTestReporter.addTestStep("Validate Course Delete is present on User Dashboard", "Course is present on User Dashboard" , STATUS.PASS,
-//                            DriverAction.takeSnapShot());
-//                }
-//                else
-//                {
-//                    GemTestReporter.addTestStep("Validate Course Delete is present on User Dashboard", "Course is present on User Dashboard" , STATUS.FAIL,
-//                            DriverAction.takeSnapShot());
-//                }
-//
-//            }
-
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
@@ -972,6 +965,7 @@ DriverAction.waitSec(5);
         }
     }
     public static String generateRandomCourseName(int length) {
+    //in this function we are generating a random name
         String courseName = RandomStringUtils.randomAlphabetic(1); // Ensure the first character is a letter
         courseName += RandomStringUtils.randomAlphanumeric(length - 1); // Generate the rest of the string
         return courseName;

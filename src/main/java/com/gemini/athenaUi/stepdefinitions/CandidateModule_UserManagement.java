@@ -23,9 +23,9 @@ import java.util.*;
 import java.util.List;
 
 public class CandidateModule_UserManagement {
-    String randomString = "";
-    String updatedStatus="";
-    String status="";
+    String _randomString = "";
+    String _updatedStatus="";
+    String _status="";
 
     @Given("^Login using \"([^\"]*)\" and \"([^\"]*)\"$")
     public void login(String username, String password) {
@@ -33,14 +33,14 @@ public class CandidateModule_UserManagement {
         try {
 
             DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
-            System.out.println(randomString);
+            System.out.println(_randomString);
 
             //if new role is registered through the email, login using same email
-            if(randomString.isEmpty()){
+            if(_randomString.isEmpty()){
                 DriverAction.typeText(MyLocators.usernameField, username);
                 //else login using email passed from example
             }else {
-                DriverAction.typeText(MyLocators.usernameField, randomString);
+                DriverAction.typeText(MyLocators.usernameField, _randomString);
             }
             DriverAction.typeText(MyLocators.passwordField, password);
             DriverAction.waitUntilElementClickable(MyLocators.loginBtn,90);
@@ -65,12 +65,12 @@ public class CandidateModule_UserManagement {
     @Given("^Select \"([^\"]*)\", \"([^\"]*)\" from sidebar$")
     public void selectFromSidebar(String module, String submodule) {
         try {
-//           DriverAction.waitUntilElementAppear(MyLocators.sidebar,120);
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(MyLocators.sidebar));
-//            element.click();
+
             //open sidebar
                 DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
+
             //select a module from sidebar
             DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", module)));
 
@@ -89,7 +89,7 @@ public class CandidateModule_UserManagement {
     @Then("^Click the button \"([^\"]*)\"$")
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
-
+       //click the input button
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
         }catch(Exception e){
             System.out.print("Exception encountered!");
@@ -162,7 +162,7 @@ public class CandidateModule_UserManagement {
 
                 //here randomString is system-generated email
                 if (placeholder.equalsIgnoreCase("email")) {
-                    inputFields.get(i).sendKeys(randomString);
+                    inputFields.get(i).sendKeys(_randomString);
                 } else {
                     inputFields.get(i).sendKeys(inputValues[i]);
                 }
@@ -251,9 +251,9 @@ public class CandidateModule_UserManagement {
                 sb.append(randomChar);
             }
 
-            randomString = sb.toString();
-            randomString = randomString.concat("@gmail.com");
-            System.out.println("Random String is: " + randomString);
+            _randomString = sb.toString();
+            _randomString = _randomString.concat("@gmail.com");
+            System.out.println("Random String is: " + _randomString);
         }catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+" Exception occured while generating unique email.");
         }
@@ -418,10 +418,10 @@ public class CandidateModule_UserManagement {
     @And("^Verify the status of user and click status button$")
     public void verifyStatusButton() {
         try{
-        status=DriverAction.getElementText(MyLocators.userStatus);
+        _status=DriverAction.getElementText(MyLocators.userStatus);
 
         //checks the current status
-       if(status.equalsIgnoreCase("Active")){
+       if(_status.equalsIgnoreCase("Active")){
            GemTestReporter.addTestStep("Verify the status of user","The current status is Active.",STATUS.PASS);
        }else{
            GemTestReporter.addTestStep("Verify the status of user","The current status is Inactive.",STATUS.PASS);
@@ -429,10 +429,10 @@ public class CandidateModule_UserManagement {
 
        //checks status after clicking the status button.
        DriverAction.click(MyLocators.statusButton,"Click on the status button.","Successfully clicked the status button");
-       if(status.equalsIgnoreCase("Active")){
-           updatedStatus="Inactive";
+       if(_status.equalsIgnoreCase("Active")){
+           _updatedStatus="Inactive";
        }else{
-           updatedStatus="Active";
+           _updatedStatus="Active";
        }}
         catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+" Exception occured while verifying the status.");
@@ -444,9 +444,9 @@ public class CandidateModule_UserManagement {
         try {
             //verify if the current status displays the expected tooltip on hovering
             String tooltip = DriverAction.getAttributeName(MyLocators.statusButton, "ng-reflect-text");
-            if (updatedStatus.equals("Inactive") && tooltip.equals("Click to Activate the user")) {
+            if (_updatedStatus.equals("Inactive") && tooltip.equals("Click to Activate the user")) {
                 GemTestReporter.addTestStep("Verify the updated status", "Updated status is Active.", STATUS.PASS, DriverAction.takeSnapShot());
-            } else if (updatedStatus.equals("Active") && tooltip.equals("Click to Inactivate the user")) {
+            } else if (_updatedStatus.equals("Active") && tooltip.equals("Click to Inactivate the user")) {
                 GemTestReporter.addTestStep("Verify the updated status", "Updated status is Inactive.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify the updated status", "Could not update the status.", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -893,8 +893,8 @@ try {
     @Then("Navigate to page {string}")
     public void pageNavigate(String page) throws InterruptedException {
         try {
+            //navigate to page
             DriverAction.waitSec(5);
-//            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)),120);
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
             GemTestReporter.addTestStep("Navigate to page-"+page, "Exception encountered- " + e, STATUS.ERR);

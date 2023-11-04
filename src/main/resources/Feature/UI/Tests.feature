@@ -547,3 +547,19 @@ Feature:Tests Module features
     Examples:
       | module        |submodule     |testType|
       | Tests         |Test Control  |Internal Tests|
+
+
+  Scenario Outline: Validate assign candidate from downloaded template
+    Given Select "<module>", "<submodule>" from sidebar
+    And Switch to assign candidate Screen for Internal Test
+    And Validate back button functionality "<testType>"
+    And Validate year filter functionality for Internal Test
+    And Validate side bar
+    And Validate paginator functionality of page
+    Then Validate Assign Multiple User Functionality
+
+    Examples:
+      | module        |submodule     |testType|
+      | Tests         |Test Control  |Internal Tests|
+
+

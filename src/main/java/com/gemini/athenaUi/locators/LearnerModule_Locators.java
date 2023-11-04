@@ -111,17 +111,6 @@ public class LearnerModule_Locators {
 
     public static By noCourseCourseCatalog=By.xpath("//h5[text()='No courses found!']");
 
-    //h5[text()='No Completed Courses!']
-
-
-    //input[@placeholder='Search Courses']
-
-
-    //span[text()='Completed']
-
-    //table//tbody//tr//td
-
-    //button//img
 
 }
 

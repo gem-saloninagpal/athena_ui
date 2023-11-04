@@ -95,10 +95,5 @@ public class Course_Locators {
 
 
     public static By inActiveOption=By.xpath("//span[text()='Inactive']");
-//span[text()='Inactive']
-
-
-    //div[contains(@class,'inactive ng-star-inserted')]
-//span[@class='p-inputswitch-slider']
 
 }

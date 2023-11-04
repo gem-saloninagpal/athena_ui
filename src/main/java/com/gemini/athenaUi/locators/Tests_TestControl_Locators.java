@@ -150,29 +150,4 @@ public class Tests_TestControl_Locators {
     public static By assignMultipleUserBtn=By.xpath("//i[contains(@class,'pi pi-forward')]");
 
 
-
-
-
-
-
-
-
-
-
-
-    //div[@class='ng-star-inserted']//div
-
-
-    //ul[@class='p-dropdown-items ng-tns-c114-259']//li
-
-
-    //span[text()='Year']
-
-
-
-
-
-
-
-
 }

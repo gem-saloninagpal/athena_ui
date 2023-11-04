@@ -20,12 +20,13 @@ import java.util.List;
 
 public class Tests_TestControl {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
-    String testName = " ";
-    String courseName= " ";
+    String _testName = " ";
+    String _courseName= " ";
 
     @And("^Add Test Info \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void addTestInfo(String duration, String campus, String level) {
         try {
+            //in this function we are adding test info
             int c = 2;
             int c1 = 1;
             LocalDate today = LocalDate.now();
@@ -41,9 +42,9 @@ public class Tests_TestControl {
             {
                  inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFieldsInternal);
             }
-            testName = RandomStringUtils.randomAlphanumeric(10);
-            String testTag =testName+"12";
-            String inputValues[] = {testName, testTag, duration, campus, level, startDate, endDate};
+            _testName = RandomStringUtils.randomAlphanumeric(10);
+            String testTag =_testName+"12";
+            String inputValues[] = {_testName, testTag, duration, campus, level, startDate, endDate};
             for (int i = 1; i <= 7; i++) {
                 String dropdown = inputFields.get(i).getAttribute("aria-haspopup");
                 String calendar = inputFields.get(i).getAttribute("id");
@@ -85,6 +86,7 @@ public class Tests_TestControl {
     @And("^Enter Test Description \"([^\"]*)\"$")
     public void courseDescription(String description) {
         try {
+            //enter the course description
 DriverAction.scrollToBottom();
             DriverAction.typeText(Course_Locators.courseDescription, description);
 
@@ -97,6 +99,7 @@ DriverAction.scrollToBottom();
     @And("^Add Section \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void addSection(String section, String percentage, String duration) {
         try {
+            //in this we are adding section to the test
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.dropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.dropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.option.replace("section", section)))) ;
@@ -173,14 +176,15 @@ DriverAction.scrollToBottom();
     @And("^Validate Test is Created$")
     public void validateTestCreated() {
         try {
+            //validate tst is created or  not
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
                 System.out.println(fetchedTestName);
-                if (testName.equals(fetchedTestName)) {
+                if (_testName.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Created ", "Test is Created Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 } else {
@@ -198,14 +202,15 @@ DriverAction.scrollToBottom();
     @And("^Validate Test is Created for Internal$")
     public void validateTestCreatedInternal() {
         try {
+            //validate internal test is created or not
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestTextInternal)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestTextInternal);
                 System.out.println(fetchedTestName);
-                if (testName.equals(fetchedTestName)) {
+                if (_testName.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Created ", "Test is Created Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 } else {
@@ -223,8 +228,9 @@ DriverAction.scrollToBottom();
     @Then("^Assign the test to Learner$")
     public void assignLearner() {
         try {
+            // assign the test to learner
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.threeDotIcon)) {
@@ -250,28 +256,6 @@ DriverAction.scrollToBottom();
     @Then("^Start with test$")
     public void startTest() {
         try {
-            //logout from the account
-//            if (DriverAction.isDisplayed(Course_Locators.navbarDropdown)) {
-//                DriverAction.click(Course_Locators.navbarDropdown, "Click on the Dropdown button", "successfully clicked Dropdown button.");
-//                if (DriverAction.isDisplayed(Tests_TestControl_Locators.logout)) {
-//                    DriverAction.click(Tests_TestControl_Locators.logout, "Click on Logout Option", "successfully select Logout option.");
-//                }
-//            }
-//            //login as candidate
-//            if (DriverAction.isDisplayed(MyLocators.usernameField)) {
-//                DriverAction.typeText(MyLocators.usernameField, "rahul22@gmail.com");
-//            }
-//            if (DriverAction.isDisplayed(MyLocators.passwordField)) {
-//                DriverAction.typeText(MyLocators.passwordField, "abc@123");
-//            }
-//            DriverAction.waitUntilElementClickable(MyLocators.loginBtn, 90);
-//            if (DriverAction.isDisplayed(MyLocators.loginBtn)) {
-//                DriverAction.click(MyLocators.loginBtn, "Clicked on Login Button", "Successfully Clicked on Login Button");
-//            }
-//
-//            //wait while the page loads.
-//            if (DriverAction.isExist(MyLocators.spinner)) ;
-//            DriverAction.waitUntilElementDisappear(MyLocators.spinner, 20);
 
             //verify dashboard is displayed on login
             if (DriverAction.isExist(MyLocators.dashboard)) {
@@ -281,7 +265,7 @@ DriverAction.scrollToBottom();
             for (int i = 0; i < activeTestHeadingList.size(); i++) {
                 String heading = DriverAction.getElementText(activeTestHeadingList.get(i));
                 System.out.println(heading);
-                if (heading.equals(testName)) {
+                if (heading.equals(_testName)) {
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.startBtn.replace("itr", String.valueOf(i + 1))));
                 }
             }
@@ -378,23 +362,14 @@ DriverAction.scrollToBottom();
     @Then("^Validate Test Reattempt$")
     public void tesReattemptValidation() {
         try {
-//            DriverAction.scrollToBottom();
-//            if (DriverAction.isExist(LearnerModule_Locators.proceedBtn, 10)) {
-//                DriverAction.click(LearnerModule_Locators.proceedBtn);
-//            }
-////Navigate to Dashboard
-//
-//            if (DriverAction.isExist(MyLocators.backToDashboard, 10)) {
-//                DriverAction.click(MyLocators.backToDashboard);
-//            }
-//            DriverAction.waitSec(5);
+
             //Switch the tab to completed
             if (DriverAction.isExist(Tests_TestControl_Locators.completedTab, 10)) {
                 DriverAction.click(Tests_TestControl_Locators.completedTab);
             }
             //validate the Reattempt button on the Required test
             String testNameHeading = DriverAction.getElementText(Tests_TestControl_Locators.testHeading);
-            if (testNameHeading.equals(testName)) {
+            if (testNameHeading.equals(_testName)) {
                 if (DriverAction.isDisplayed(Tests_TestControl_Locators.reattemptBtn)) {
                     GemTestReporter.addTestStep("Verify After Selecting Test Reattempt filter Learner able to  Reattempt the test ", "Yes Learner able to Reattempt the test", STATUS.PASS, DriverAction.takeSnapShot());
                 } else {
@@ -411,6 +386,7 @@ DriverAction.scrollToBottom();
     @And("^Check the Required Checkbox Filter \"([^\"]*)\"$")
     public void checkboxFilter(String option) {
         try {
+            //check the checkbox
             if (DriverAction.isExist(By.xpath(Tests_TestControl_Locators.checkbox.replace("itr", option)), 10)) {
                 DriverAction.click(By.xpath(Tests_TestControl_Locators.checkbox.replace("itr", option)));
             } else {
@@ -444,11 +420,11 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             else
             {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 20)) {
@@ -507,7 +483,7 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
@@ -519,7 +495,7 @@ DriverAction.scrollToBottom();
             }
             DriverAction.waitSec(5);
             String heading=DriverAction.getElementText(Tests_TestControl_Locators.summaryHeading);
-            if(heading.equals(testName))
+            if(heading.equals(_testName))
             {
                 GemTestReporter.addTestStep("Verify Test Name Match with Report", "Test Name Matched with Report", STATUS.PASS, DriverAction.takeSnapShot());
             }
@@ -552,7 +528,7 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
         if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
         }
 
         DriverAction.waitSec(5);
@@ -577,12 +553,12 @@ DriverAction.scrollToBottom();
         }
         //filter and validate the copy Test
         if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput,"Copy Of "+testName);
+            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput,"Copy Of "+_testName);
         }
         if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
             String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
             System.out.println(fetchedTestName);
-            String copyTest="Copy Of "+testName;
+            String copyTest="Copy Of "+_testName;
             System.out.println(copyTest);
             if (copyTest.equals(fetchedTestName)) {
                 GemTestReporter.addTestStep("Verify Test is Created ", "Test is Created Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -605,7 +581,7 @@ DriverAction.scrollToBottom();
             //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
@@ -623,7 +599,7 @@ DriverAction.scrollToBottom();
             //edit the Test Name
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+_testName);
             }
 //            DriverAction.scrollToBottom();
             if(DriverAction.isExist(By.xpath(MyLocators.button.replace("input","Next")),120))
@@ -635,12 +611,12 @@ DriverAction.scrollToBottom();
             }
             //filter and validate the copy Test
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput,"Edit "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput,"Edit "+_testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
                 System.out.println(fetchedTestName);
-                String editTest="Edit "+testName;
+                String editTest="Edit "+_testName;
                 System.out.println(editTest);
                 if (editTest.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Edited ", "Test is Edited Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -661,7 +637,7 @@ DriverAction.scrollToBottom();
     public void verifyAssignedCandidate(){
         try{
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
@@ -712,7 +688,7 @@ DriverAction.scrollToBottom();
             {
                 List<WebElement> list1=DriverAction.getElements(Tests_TestControl_Locators.activeTestHeadingList);
                 String testHeading=DriverAction.getElementText(list1.get(list1.size()-1));
-                if(testHeading.equals(testName))
+                if(testHeading.equals(_testName))
                 {
                     GemTestReporter.addTestStep("Verify Candidate is assigned", "Candidate is Assigned Successfully", STATUS.PASS, DriverAction.takeSnapShot());
                 }
@@ -795,9 +771,9 @@ DriverAction.scrollToBottom();
             {
                 inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFieldsInternal);
             }
-            testName = RandomStringUtils.randomAlphanumeric(10);
-            String testTag =testName+"12";
-            String inputValues[] = {testName, testTag, duration, level, startDate, endDate};
+            _testName = RandomStringUtils.randomAlphanumeric(10);
+            String testTag =_testName+"12";
+            String inputValues[] = {_testName, testTag, duration, level, startDate, endDate};
             for (int i = 1; i <= 6; i++) {
                 String dropdown = inputFields.get(i).getAttribute("aria-haspopup");
                 String calendar = inputFields.get(i).getAttribute("id");
@@ -839,7 +815,7 @@ DriverAction.scrollToBottom();
     public void assignTestLearner() {
         try {
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.threeDotInternal)) {
@@ -883,11 +859,11 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             else
             {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 20)) {
@@ -939,11 +915,11 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             else
             {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 20)) {
@@ -956,7 +932,7 @@ DriverAction.scrollToBottom();
 
             DriverAction.waitSec(5);
             String heading=DriverAction.getElementText(Tests_TestControl_Locators.summaryHeading);
-            if(heading.equals(testName))
+            if(heading.equals(_testName))
             {
                 GemTestReporter.addTestStep("Verify Test Name Match with Report", "Test Name Matched with Report", STATUS.PASS, DriverAction.takeSnapShot());
             }
@@ -989,7 +965,7 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
 
             DriverAction.waitSec(5);
@@ -1015,12 +991,12 @@ DriverAction.scrollToBottom();
             }
             //filter and validate the copy Test
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,"Copy Of "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,"Copy Of "+_testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestTextInternal)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestTextInternal);
                 System.out.println(fetchedTestName);
-                String copyTest="Copy Of "+testName;
+                String copyTest="Copy Of "+_testName;
                 System.out.println(copyTest);
                 if (copyTest.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Created ", "Test is Created Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -1043,7 +1019,7 @@ DriverAction.scrollToBottom();
             //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 120)) {
@@ -1061,7 +1037,7 @@ DriverAction.scrollToBottom();
             //edit the Test Name
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+_testName);
             }
             DriverAction.scrollToBottom();
             if(DriverAction.isExist(By.xpath(MyLocators.button.replace("input","Next")),120))
@@ -1073,12 +1049,12 @@ DriverAction.scrollToBottom();
             }
             //filter and validate the copy Test
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,"Edit "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,"Edit "+_testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestTextInternal)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestTextInternal);
                 System.out.println(fetchedTestName);
-                String editTest="Edit "+testName;
+                String editTest="Edit "+_testName;
                 System.out.println(editTest);
                 if (editTest.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Edited ", "Test is Edited Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -1170,7 +1146,7 @@ DriverAction.scrollToBottom();
 //Filter the Created Test in Test Control screen
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
@@ -1245,7 +1221,7 @@ DriverAction.scrollToBottom();
             DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
 //Filter the Created Test in Test Control screen
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal,_testName);
             }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 20)) {
@@ -1312,9 +1288,9 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
                 inputFields = DriverAction.getElements(Tests_TestControl_Locators.trainingTestInputFields);
             }
 
-            testName = RandomStringUtils.randomAlphanumeric(10);
-            String testTag =testName+"12";
-            String inputValues[] = {testName, testTag, duration, level};
+            _testName = RandomStringUtils.randomAlphanumeric(10);
+            String testTag =_testName+"12";
+            String inputValues[] = {_testName, testTag, duration, level};
             for (int i = 1; i <= 4; i++) {
                 String dropdown = inputFields.get(i).getAttribute("aria-haspopup");
                 //dropdown
@@ -1342,6 +1318,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
     public void addToCourse()
     {
         try{
+            //add the course
             DriverAction.waitSec(5);
             if(DriverAction.isExist(Tests_TestControl_Locators.addToCourse,120))
             {
@@ -1373,6 +1350,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
     @And("^Validate Training Test is Created$")
     public void validateTestCreatedTraining() {
         try {
+            //validate training test is created
             DriverAction.waitSec(5);
             if(DriverAction.isExist(MyLocators.sidebar,120))
             {
@@ -1397,12 +1375,12 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Training Tests")), "Switch to " + "Training Tests", "Successfully switched to tab " + "Training Tests");
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestTextTraining)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestTextTraining);
                 System.out.println(fetchedTestName);
-                if (testName.equals(fetchedTestName)) {
+                if (_testName.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Created ", "Test is Created Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 } else {
@@ -1420,10 +1398,11 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
     @And("^Assign a Learner to the Course$")
     public void assignLearnerToCourse(){
         try{
+            //assign a learner to the course
             DriverAction.waitSec(5);
 if(DriverAction.isExist(Tests_TestControl_Locators.searchInputCourse,120))
 {
-    DriverAction.typeText(Tests_TestControl_Locators.searchInputCourse,courseName);
+    DriverAction.typeText(Tests_TestControl_Locators.searchInputCourse,_courseName);
 }
 DriverAction.waitSec(3);
 if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
@@ -1453,10 +1432,11 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     @Then("^Enter respective values in course fields for Training \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void enterAssignment(String courseType, String duration,String courseTag, String fileLocation, String category) {
         try{
+            //enter the respective values in the course for training
             int c=2;
             List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
-            courseName= RandomStringUtils.randomAlphanumeric(10);
-            String inputValues[]={courseName,courseType,duration,courseTag,fileLocation,category};
+            _courseName= RandomStringUtils.randomAlphanumeric(10);
+            String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
             for(int i=0;i<=5;i++){
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("type");
@@ -1484,6 +1464,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     @And("^Complete the course$")
     public void completeCourse(){
         try{
+            //complete the course
             DriverAction.scrollToBottom();
             if (DriverAction.getElement(LearnerModule_Locators.viewCourseBtn).isDisplayed()) {
                 GemTestReporter.addTestStep("Verify View Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
@@ -1633,7 +1614,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Training Tests")), "Switch to " + "Training Tests", "Successfully switched to tab " + "Training Tests");
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
 //Filter the Created Test in Test Control screen
             DriverAction.waitSec(5);
@@ -1688,7 +1669,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Training Tests")), "Switch to " + "Training Tests", "Successfully switched to tab " + "Training Tests");
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
 //Filter the Created Test in Test Control screen
             DriverAction.waitSec(5);
@@ -1702,7 +1683,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
 
             DriverAction.waitSec(5);
             String heading=DriverAction.getElementText(Tests_TestControl_Locators.summaryHeading);
-            if(heading.equals(testName))
+            if(heading.equals(_testName))
             {
                 GemTestReporter.addTestStep("Verify Test Name Match with Report", "Test Name Matched with Report", STATUS.PASS, DriverAction.takeSnapShot());
             }
@@ -1745,7 +1726,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Training Tests")), "Switch to " + "Training Tests", "Successfully switched to tab " + "Training Tests");
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
 //Filter the Created Test in Test Control screen
             DriverAction.waitSec(5);
@@ -1760,7 +1741,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             //edit and Validate
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+_testName);
             }
             DriverAction.scrollToBottom();
             if(DriverAction.isExist(By.xpath(MyLocators.button.replace("input","Next")),120))
@@ -1774,12 +1755,12 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             }
             //filter and validate the copy Test
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestTextTraining)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestTextTraining);
                 System.out.println(fetchedTestName);
-                String editTest="Edit "+testName;
+                String editTest="Edit "+_testName;
                 System.out.println(editTest);
                 if (editTest.equals(fetchedTestName)) {
                     GemTestReporter.addTestStep("Verify Test is Edited ", "Test is Edited Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -1821,7 +1802,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Training Tests")), "Switch to " + "Training Tests", "Successfully switched to tab " + "Training Tests");
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputTraining, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputTraining, _testName);
             }
 //Filter the Created Test in Test Control screen
             DriverAction.waitSec(5);
@@ -1879,6 +1860,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void assignToCandidate()
 {
     try {
+        //assign to candidate
         if(DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),5000));
         DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),25000);
         DriverAction.click(By.xpath(MyLocators.testTab.replace("input","")), "Switch to Placement Drives", "Successfully switched to tab ");
@@ -1901,6 +1883,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void assignToCandidateInternal()
     {
         try {
+            //assign to candidate for internal
             if(DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input","Internal Tests")),5000));
             DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input","Internal Tests")),25000);
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input","Internal Tests")), "Switch to Placement Drives", "Successfully switched to tab ");
@@ -1923,6 +1906,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void validateBackButton(String testType)
 {
     try{
+        //validate back button
         if (DriverAction.isExist(Tests_TestControl_Locators.backBtn)) {
             DriverAction.click(Tests_TestControl_Locators.backBtn);
             if(DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input",testType)),5000))
@@ -1947,6 +1931,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void validateYearFilter()
     {
         try{
+            //validate year filter
             int candidateCount=0;
             DriverAction.waitSec(3);
             if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
@@ -2019,6 +2004,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void validateYearFilterInternal()
     {
         try{
+            //validate internal filter
             int candidateCount=0;
             DriverAction.waitSec(3);
             if(DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal,120))
@@ -2090,6 +2076,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void sideBar()
     {
         try{
+            //validate side bar
             DriverAction.waitSec(5);
             if(DriverAction.isExist(Tests_TestControl_Locators.eyeIcon,120))
             {
@@ -2114,10 +2101,13 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             GemTestReporter.addTestStep("Switch test tab",e+" Exception occured while switching test tab.",STATUS.ERR);
         }
     }
+
+    //critical functionality leads to flood of mail
     @Then("^Validate Assign Multiple User Functionality$")
     public void assignMultipleUserButton()
     {
         try{
+            //validate assign multiple user functionality
             String fetchedCount=DriverAction.getElementText(Tests_TestControl_Locators.totalCandidateCount);
             String[] count=fetchedCount.split(":");
             String actualCount=count[1].trim();
@@ -2163,6 +2153,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     public void paginatorValidation()
     {
         try{
+            //paginator validation
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
                 String fetchedCandidate = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);

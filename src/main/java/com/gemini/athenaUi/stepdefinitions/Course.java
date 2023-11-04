@@ -27,10 +27,10 @@ import java.util.Random;
 
 public class Course {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
-    String courseName=" ";
-    String assignedCourseName=" ";
-    int ActiveCourseCount=0;
-    int viewListActiveCount=0;
+    String _courseName=" ";
+    String _assignedCourseName=" ";
+    int _ActiveCourseCount=0;
+    int _viewListActiveCount=0;
     @Then("^Verify the Owner of the Created Course$")
     public void verifyOwner(){
         try{
@@ -83,7 +83,7 @@ public class Course {
     public void treeInfo(){
         try{
 //            List<WebElement> list1 = DriverAction.getElements(By.xpath(LearnerModule_Locators.courseArea.replace("itr", String.valueOf(i))));
-
+           //in this function we are checking the course info tree
            boolean isPresent=false;
            boolean isPresent1=false;
            DriverAction.waitUntilElementAppear(By.xpath("//span[text()='Add Course Info']"),120);
@@ -144,9 +144,9 @@ public class Course {
     try{
         int c=2;
         List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
-         courseName = generateRandomCourseName(10);
+         _courseName = generateRandomCourseName(10);
 //        courseName= RandomStringUtils.randomAlphanumeric(10);
-        String inputValues[]={courseName,courseType,duration,courseTag,fileLocation,category};
+        String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
         for(int i=0;i<=5;i++){
             String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
             String upload=inputFields.get(i).getAttribute("type");
@@ -174,6 +174,7 @@ public class Course {
     @And("^Enter course description \"([^\"]*)\"$")
     public void courseDescription(String description) {
         try{
+            //in this we are filling the description
             if (DriverAction.isExist(Course_Locators.courseDescription,120)) {
                 DriverAction.typeText(Course_Locators.courseDescription,description);
                 DriverAction.scrollToBottom();
@@ -360,6 +361,7 @@ else {
 @Then("^Edit the Created Course and Verify$")
 public void editAndVerify(){
         try{
+            //in this function we are editing and validating it is edit properly or not
             DriverAction.scrollToTop();
             if(DriverAction.isDisplayed(Course_Locators.courseSummaryDiv))
             {
@@ -422,10 +424,10 @@ public void editAndVerify(){
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
             DriverAction.waitSec(5);
             String fetchedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
-            System.out.println(courseName);
+            System.out.println(_courseName);
             System.out.println(fetchedCourseName);
-            System.out.println(courseName);
-            if(fetchedCourseName.equals(courseName))
+            System.out.println(_courseName);
+            if(fetchedCourseName.equals(_courseName))
             {
                 GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -578,13 +580,8 @@ public void editAndVerify(){
 
 
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-
-//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                     DriverAction.click(Course_Locators.addIcon);
-//                    DriverAction.waitSec(5);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-//                    DriverAction.waitSec(5);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
 
                     //here we are checking the Save as Draft button functionality
@@ -593,7 +590,6 @@ public void editAndVerify(){
                     DriverAction.click(Course_Locators.saveAsDraftButton,"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
 
                     DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-//                    DriverAction.waitSec(2);
 
                     if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Updated Successfully"))))
                     {
@@ -716,7 +712,7 @@ else
            DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
            DriverAction.waitSec(5);
            String fetchedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
-           if(fetchedCourseName.equals(courseName))
+           if(fetchedCourseName.equals(_courseName))
            {
                GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -771,7 +767,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 DriverAction.waitSec(5);
                 String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
 
-                if(fetchedPublishedCourseName.equals(courseName))
+                if(fetchedPublishedCourseName.equals(_courseName))
                 {
                     GemTestReporter.addTestStep("Course is published finally","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -801,7 +797,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.waitSec(5);
 //            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
          if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
-                assignedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
+                _assignedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if(DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input","Assign Learners"))));
                 {
@@ -829,6 +825,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void switchRole(String role)
 {
     try{
+        //in this we are switching the role
         DriverAction.waitSec(5);
         DriverAction.click(LearnerModule_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
         if(DriverAction.isDisplayed(By.xpath(Course_Locators.userOption.replace("input",role))))
@@ -846,16 +843,13 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 @And("^Filter the course and complete it$")
     public void filterCompleteCourse(){
         try{
+            //in this we are completing the course
             DriverAction.waitSec(5);
             if(DriverAction.isDisplayed(Course_Locators.courseFilterInput))
             {
-                DriverAction.typeText(Course_Locators.courseFilterInput,assignedCourseName);
+                DriverAction.typeText(Course_Locators.courseFilterInput,_assignedCourseName);
 
             }
-//            DriverAction.waitSec(5);
-//            DriverAction.click(LearnerModule_Locators.courseDropdown);
-//            DriverAction.waitSec(3);
-//            DriverAction.click(LearnerModule_Locators.courseFilterdiv);
             DriverAction.scrollToBottom();
             if(DriverAction.isDisplayed(LearnerModule_Locators.viewCourseBtn))
             {
@@ -864,11 +858,6 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 {
                     DriverAction.click(LearnerModule_Locators.startCourseBtn,"clicked on Start Course Button","Successfully clicked on Start course button");
                 }
-
-//                DriverAction.waitSec(3);
-//                if (DriverAction.getElement(LearnerModule_Locators.vedio).isDisplayed()) {
-//                    DriverAction.click(LearnerModule_Locators.vedio);
-//                }
                 DriverAction.scrollToBottom();
                 DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
                 if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
@@ -888,7 +877,6 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 {
                     DriverAction.click(By.xpath(Course_Locators.userOption.replace("input","Super Admin")));
                 }
-//                DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
 
             }
 
@@ -904,12 +892,12 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
              int c=0;
              if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
               {
-                       DriverAction.typeText(Course_Locators.courseFilterTagInput,assignedCourseName);
+                       DriverAction.typeText(Course_Locators.courseFilterTagInput,_assignedCourseName);
 
                  }
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
-                assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
+                _assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if (DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports"))))
                 {
@@ -984,8 +972,9 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 @When("^Reattempt the test to the user$")
     public void reattemptTest(){
         try{
+            //in this function we checking reattempt functionality
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
-                assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
+                _assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if (DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports"))))
                 {
@@ -1064,7 +1053,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 String fetchedCourse = element.getText();
                 if(fetchedCourse!=null) {
                    courseList.add(fetchedCourse);
-                    ActiveCourseCount++;
+                    _ActiveCourseCount++;
                 }
 
             }
@@ -1078,6 +1067,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 
     @And("Count the Course from List View Screen")
     public void countTheCourseFromListViewScreen() {
+        //in this we are counting the course from view screen
         DriverAction.scrollToTop();
         if(DriverAction.isExist(Course_Locators.listViewBtn,120))
         {
@@ -1109,7 +1099,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 String fetchedCourse = element.getText();
                 if(fetchedCourse!=null) {
                     viewList.add(fetchedCourse);
-                    viewListActiveCount++;
+                    _viewListActiveCount++;
                 }
 
             }
@@ -1123,8 +1113,9 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     @Then("Validate the count")
     public void validateTheCount() {
         try{
+            //we are validating the count
             DriverAction.waitSec(5);
-            if(ActiveCourseCount==viewListActiveCount)
+            if(_ActiveCourseCount==_viewListActiveCount)
             {
                 GemTestReporter.addTestStep("Validate count of Active Course in Course Library and View List","Count Matches", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -1145,6 +1136,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     @Then("Inactive the course and Validate")
     public void inactiveTheCourseAndValidate() {
         try{
+            //we are checking the inactive course
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if(DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input","Course Summary"))));

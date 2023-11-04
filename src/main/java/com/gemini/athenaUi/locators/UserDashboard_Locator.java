@@ -62,25 +62,4 @@ public class UserDashboard_Locator {
 
 
 
-    //h6
-
-    //button//span[text()='Update Course & Publish']
-
-//button//span[text()='Default Order']
-
-    //button//span[text()='Add To Course']
-
-    //div[contains(@class,'p-toast-message-text')]
-
-
-
-
-
-
-
-
-
-
-
-
 }
