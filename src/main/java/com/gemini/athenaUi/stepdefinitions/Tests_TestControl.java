@@ -6,6 +6,7 @@ import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,8 +15,11 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Tests_TestControl {
@@ -2170,6 +2174,238 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
                     GemTestReporter.addTestStep("Validate Paginator is working fine", "Paginator is not working fine" , STATUS.FAIL,
                             DriverAction.takeSnapShot());
                 }
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+
+    }
+
+
+    @When("we select candidate for Test {string}")
+    public void weSelectCandidateForTest(String testName) {
+        try{
+            DriverAction.waitSec(5);
+            // filter test name in test name search input
+            if(DriverAction.isExist(Tests_TestControl_Locators.testNameSearchInput,120))
+            {
+                DriverAction.typeText(Tests_TestControl_Locators.testNameSearchInput,testName);
+            }
+            DriverAction.waitSec(3);
+            //click the three dot icon
+            DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
+            if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Candidates Assigned")))) {
+                DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Candidates Assigned")));
+            }
+
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    //get the latest modified file
+    public static File getLatestFile(File directory) {
+        File[] files = directory.listFiles();
+
+        if (files == null || files.length == 0) {
+            return null;
+        }
+        Arrays.sort(files, Comparator.comparingLong(File::lastModified).reversed());
+        return files[0];
+    }
+
+    @And("Download Sample template for {string}")
+    public void downloadSampleTemplateFor(String assign) {
+        //download the demo template
+        DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
+        if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Download Candidate Template")))) {
+            DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Download Candidate Template")));
+        }
+        String directoryPath = "C:/Users/rahul.adhikari/Downloads/";
+        File directory = new File(directoryPath);
+        if (directory.exists() && directory.isDirectory()) {
+            File latestfile = getLatestFile(directory);
+            if (latestfile != null) {
+                System.out.println("Latest File : " + latestfile.getAbsolutePath());
+                GemTestReporter.addTestStep("Validate candidate assigned template is downloaded", "User successfully able to download the Template", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validate candidate assigned template is downloaded", "User not able to download the Template", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+        }
+    }
+
+    @And("Create question and add to section")
+    public void createQuestionAndAddToSection() {
+        try{
+            DriverAction.scrollToBottom();
+
+            //click on Add Question for the following test
+            if (DriverAction.isDisplayed(Tests_TestControl_Locators.addQuestion)) {
+                DriverAction.click(Tests_TestControl_Locators.addQuestion,"Validate click on Add question to the section","Successfully clicked on Add question to section button");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "Not able to click on Add question to section button",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            DriverAction.scrollToBottom();
+
+            //click on Create new question
+            if(DriverAction.isExist(Tests_TestControl_Locators.createNewQuestionBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.createNewQuestionBtn,"Validate click on Create new question  button","Successfully clicked on Create new question button");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "Not able to click on Create button",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+            DriverAction.scrollToTop();
+            //fill the required option to create question
+            List<WebElement> dropdown=DriverAction.getElements(Tests_TestControl_Locators.questionsInputDropdown);
+            String[] options={"Basic","Multiple choice question","","Hard","Java","Plain Text"};
+            for(int i=1;i<=dropdown.size();i++)
+            {
+                if(i==3)
+                {
+                    continue;
+                }
+                else
+                {
+                    WebElement element = dropdown.get(i-1);
+                    element.click();
+                    DriverAction.click(DriverAction.getElement(By.xpath(Tests_TestControl_Locators.questionOptions.replace("input",options[i-1]))));
+                }
+            }
+            DriverAction.typeText(Tests_TestControl_Locators.inputMarks,"5","Validate marks are input","successfully input the marks for test");
+            DriverAction.waitSec(5);
+            DriverAction.click(Tests_TestControl_Locators.comprehensiveCheckbox);
+            // click the next button
+            DriverAction.click(Tests_TestControl_Locators.nextBtn);
+
+            //type in passage
+            if(DriverAction.isExist(Tests_TestControl_Locators.rcPassage,120))
+            {
+                DriverAction.typeText(Tests_TestControl_Locators.rcPassage,"test");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to type into rc passage",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            DriverAction.click(Tests_TestControl_Locators.savePassageBtn);
+
+            DriverAction.waitSec(3);
+            //Validate Passage is saved properly and form for question type is fiiled
+            String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+            System.out.println(popupMessage);
+            String reqPopUpMessage="Comprehension saved successfully!";
+            if (reqPopUpMessage.equals(popupMessage)) {
+                GemTestReporter.addTestStep("Validate Comprehension and form for question saved properly", "Comprehension and form saved successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validate Comprehension and form for question saved properly", "Comprehension and form not saved successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+            DriverAction.scrollToBottom();
+
+           DriverAction.waitSec(5);
+            //fill the question statement
+            DriverAction.typeText(Tests_TestControl_Locators.questionStatementDiv,"what is java?","Validate Question statement is filled successfully","Successfully filled the question statement");
+
+            //fill the option
+
+            for(int i=0;i<4;i++)
+            {
+                DriverAction.typeText(Tests_TestControl_Locators.optionDiv,"demo"+i+1+2);
+                DriverAction.click(Tests_TestControl_Locators.addOptionBtn);
+            }
+            DriverAction.click(Tests_TestControl_Locators.answerOption,"Validate options are created successfully","Options for the question are saved successfully");
+
+            //click on save to create question
+            if(DriverAction.isExist(Tests_TestControl_Locators.saveAndMoreBtn,120)) {
+                DriverAction.click(Tests_TestControl_Locators.saveAndMoreBtn, "Validate Question is added successfully", "Question is added successfully");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to create question",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+            //Validate question is created successfully
+            DriverAction.waitSec(3);
+            String popupMessage1=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+            System.out.println(popupMessage1);
+            String reqPopUpMessage1="Question Added Successfully";
+            if (reqPopUpMessage1.equals(popupMessage1)) {
+                GemTestReporter.addTestStep("Validate Question is created successfully", "Question is created successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validate Question is created successfully", "Question is not created successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.click(Tests_TestControl_Locators.backBtn);
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Validate question added to the section")
+    public void validateQuestionAddedToTheSection() {
+        try{
+            //click on created question for validation
+        DriverAction.click(Tests_TestControl_Locators.firstMcqOption);
+        if(DriverAction.isExist(Tests_TestControl_Locators.questionStatement,120))
+        {
+            String questionStatement=DriverAction.getElementText(Tests_TestControl_Locators.questionStatement);
+            if("what is java?".equals(questionStatement))
+            {
+                GemTestReporter.addTestStep("Validate question is added successfully to the test info section", "Successfully added to test info screen",
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate question is added successfully to the test info section", "fail to add to test info screen",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+        }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to find question statement heading",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("edit the created question")
+    public void editTheCreatedQuestion() {
+        try{
+            //click on created question for validation
+            DriverAction.click(Tests_TestControl_Locators.firstMcqOption);
+            if(DriverAction.isExist(Tests_TestControl_Locators.editBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.editBtn,"Validate user able to click on edit button","User successfully able to click on edit button");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to click on edit button",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
             }
         }
         catch (Exception e) {

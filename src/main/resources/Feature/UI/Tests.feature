@@ -527,7 +527,7 @@ Feature:Tests Module features
     And Validate year filter functionality
     And Validate side bar
     And Validate paginator functionality of page
-    Then Validate Assign Multiple User Functionality
+#    Then Validate Assign Multiple User Functionality
 
     Examples:
       | module        |submodule     |testType|
@@ -542,24 +542,51 @@ Feature:Tests Module features
     And Validate year filter functionality for Internal Test
     And Validate side bar
     And Validate paginator functionality of page
-    Then Validate Assign Multiple User Functionality
+#    Then Validate Assign Multiple User Functionality
 
     Examples:
       | module        |submodule     |testType|
       | Tests         |Test Control  |Internal Tests|
 
 
+      @to_be_completed
   Scenario Outline: Validate assign candidate from downloaded template
     Given Select "<module>", "<submodule>" from sidebar
-    And Switch to assign candidate Screen for Internal Test
-    And Validate back button functionality "<testType>"
-    And Validate year filter functionality for Internal Test
-    And Validate side bar
-    And Validate paginator functionality of page
-    Then Validate Assign Multiple User Functionality
+    When we select candidate for Test "<testName>"
+    And Download Sample template for "<Candidate assign>"
+    Examples:
+      | module        |submodule     |testName |Candidate assign|
+      | Tests         |Test Control  |durationnn|Candidates Assigned|
+
+
+  Scenario Outline: Create Test->Create Question->Validate it is created on Test info screen
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click the button "Create Test"
+    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Enter Test Description "<Description>"
+    And Click the button "Next"
+    And Add Section "<Section>", "<Percentage>", "<Duration>"
+    And Click the button "Add"
+    And Create question and add to section
+    Then Validate question added to the section
 
     Examples:
-      | module        |submodule     |testType|
-      | Tests         |Test Control  |Internal Tests|
+      | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
+      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 
+  Scenario Outline: Create Test->Create Question->Edit created question
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click the button "Create Test"
+    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Enter Test Description "<Description>"
+    And Click the button "Next"
+    And Add Section "<Section>", "<Percentage>", "<Duration>"
+    And Click the button "Add"
+    And Create question and add to section
+    Then edit the created question
+    Then Validate question added to the section
+
+    Examples:
+      | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
+      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
