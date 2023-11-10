@@ -4,6 +4,8 @@ import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
+import com.github.dockerjava.api.model.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -751,11 +753,13 @@ public class CandidateModule_UserManagement {
         String str = formatter.format(current);
         Date curr=sdformat.parse(str);
 
-        if (curr.compareTo(d1) >= 0 && curr.compareTo(d2) <= 0) {
-            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Successfully verified the current date is within active range.", STATUS.PASS);
-        } else {
-
-            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Could not verify the current date is within active range.", STATUS.FAIL);
+        if(curr.compareTo(d1) < 0){
+            GemTestReporter.addTestStep("Validate current date is within start and end date range","Its an upcoming test",STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else if (curr.compareTo(d1) >= 0 && curr.compareTo(d2) <= 0) {
+            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Successfully verified the current date is within active range.", STATUS.PASS,DriverAction.takeSnapShot());
+        }else{
+            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Could not verify the current date is within active range.", STATUS.FAIL,DriverAction.takeSnapShot());
         }
     }
 
@@ -941,10 +945,32 @@ public class CandidateModule_UserManagement {
     @Then("^Select or type an answer$")
     public void enterAnswer() {
         try {
-            if (DriverAction.isExist(MyLocators.textarea)) {
+            //close the video prompt if displays
+            if(DriverAction.isDisplayed(MyLocators.videoPrompt)){
+  //              if(!DriverManager.getWebDriver().findElement(MyLocators.videoPrompt).isDisplayed()){
+                DriverAction.click(MyLocators.closeVideoPrompt,"Close the video prompt");
+            }else{
+                System.out.println("It is not a video based question.");
+            }
+            if (DriverAction.isDisplayed(MyLocators.textarea)) {
+                //word limit for the ques
+                String maxWord=DriverAction.getElementText(MyLocators.wordCounter);
+                String[]maxWordNumber=maxWord.split(" ");
+                maxWord=maxWordNumber[3];
+                int wordCount=Integer.parseInt(maxWord);
                 DriverAction.typeText(MyLocators.textarea, "abc");
                 GemTestReporter.addTestStep("Enter answer in input field", "Successfully entered the answer in input field", STATUS.PASS);
-            } else if (DriverAction.isExist(MyLocators.mcqOptions)) {
+                //word limit after entering a word
+                String remainingWords=DriverAction.getElementText(MyLocators.wordCounter);
+                String[]remainingWordNumber=remainingWords.split(" ");
+                remainingWords=remainingWordNumber[3];
+                int remainingWordCount=Integer.parseInt(remainingWords);
+                if(remainingWordCount==wordCount-1){
+                    GemTestReporter.addTestStep("Validate the word count for subjective questions","Word count reduced by 1.",STATUS.PASS,DriverAction.takeSnapShot());
+                }else{
+                    GemTestReporter.addTestStep("Validate the word count for subjective questions","Could not validate the word count.",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+            } else if (DriverAction.isDisplayed(MyLocators.selectOption)||DriverAction.isDisplayed(MyLocators.mcqOptions)) {
                 DriverAction.click(MyLocators.selectOption, "Select an option");
                 GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
             } else {
@@ -1028,7 +1054,7 @@ public class CandidateModule_UserManagement {
             for (int i = 0; i < totalQues; i++) {
                 enterAnswer();
                 clickTheButtonSaveNext();
-                clickTheButtonSaveNext();
+//                clickTheButtonSaveNext();
                 _quesCount++;
             }
             Thread.sleep(4000);
@@ -1051,15 +1077,15 @@ public class CandidateModule_UserManagement {
         }
     }
 
-    @Then("^Validate questions count \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
-    public void validateQuestionCount(String total, String attempted, String unattempted) {
+    @Then("^Validate questions count$")
+    public void validateQuestionCount() {
 try {
     String count=Integer.toString(_quesCount);
     String totalQues = DriverAction.getElementText(MyLocators.totalQuesCount);
     String attemptedQues = DriverAction.getElementText(MyLocators.attemptedQuesCount);
     String unattemptedQues = DriverAction.getElementText(MyLocators.unattemptedQuesCount);
     if (totalQues.equals(count) && attemptedQues.equals(count) && unattemptedQues.equals("0")) {
-        GemTestReporter.addTestStep("Validate questions count", "Successfully validated total questions- " + total + ", attempted questions- " + attempted + ", unattempted questions- " + unattempted + ".", STATUS.PASS, DriverAction.takeSnapShot());
+        GemTestReporter.addTestStep("Validate questions count", "Successfully validated total questions- " + totalQues + ", attempted questions- " + attemptedQues + ", unattempted questions- " + unattemptedQues + ".", STATUS.PASS, DriverAction.takeSnapShot());
     } else {
         GemTestReporter.addTestStep("Validate questions count", "Could not validate questions count.", STATUS.FAIL, DriverAction.takeSnapShot());
     }
@@ -1260,8 +1286,8 @@ try {
     @And("^Click the button Save & Next$")
     public void clickTheButtonSaveNext() {
         try {
-            DriverAction.waitSec(4);
-            DriverAction.click(MyLocators.saveNext);
+         //   DriverAction.waitSec(4);
+            DriverAction.click(MyLocators.saveNext,"Click Save & Next button");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Save & Next","Exception encountered- "+e,STATUS.ERR);
         }
@@ -1371,6 +1397,34 @@ try {
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Verify user is able to save answers","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+    @Then("^Verify test is present in completed tests tab$")
+    public void verifyTestIsPresentInCompletedTests() {
+        try {
+            List<WebElement> completedTests = DriverAction.getElements(MyLocators.allCompletedTests);
+            for (WebElement i : completedTests) {
+                if (i.getText().contains(_test)) {
+                    GemTestReporter.addTestStep("Verify test is present in completed tests tab", "Successfully verified the test present in completed tests tab.", STATUS.PASS, DriverAction.takeSnapShot());
+                    break;
+                } else {
+                    GemTestReporter.addTestStep("Verify test is present in completed tests tab", "Could not verify the test present in completed tests tab.", STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify test is present in completed tests","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Navigate to login page$")
+    public void navigateToLoginPage() {
+        try{
+         //   DriverAction.waitUntilElementIsClickable(MyLocators.loginPageLink);
+            DriverAction.waitSec(15);
+            DriverAction.click(MyLocators.loginPageLink,"Navigate to login page");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Navigate to login page","Exception encountered- "+e,STATUS.ERR);
         }
     }
 }

@@ -83,7 +83,7 @@ public class MyLocators {
     public static By textarea=By.xpath("//div//textarea");
     public static By selectOption=By.xpath("//p-radiobutton[@name='groupname']");
     public static By paletteBtn=By.xpath("//athena-question-palette//button");
-    public static By mcqOptions=By.xpath("//p-radiobutton//input[@type='radio']");
+    public static By mcqOptions=By.xpath("(//p-radiobutton//input[@type='radio'])[1]");
     public static By checkbox=By.xpath("//input[@type='checkbox']");
     public static By selectCheckbox=By.xpath("//input[@type='checkbox']");
     public static By totalQuestions=By.xpath("//athena-question-palette//button");
@@ -127,7 +127,7 @@ public class MyLocators {
     public static By getTestName=By.xpath("//div[@class='card hover-effect']//h6//div");
     public static By loginVia=By.xpath("//p-dropdown[@placeholder='Select Option']");
     public static By viewReport=By.xpath("//button[@label='View Report' and contains(@class,'instBtn')]");
-    public static By saveNext=By.xpath("//button[contains(text(),'Save & Next')]");
+    public static By saveNext=By.xpath("//button[@ng-reflect-label='Save & Next']");
     public static By invigilationAlert=By.xpath("//strong[contains(text(),'automatic submission')]");
     public static By batchActionsIcon=By.xpath("(//div[@class='p-card-body']//button[contains(@class,'p-button')])[1]");
     public static By addCourse=By.xpath("//i[@ptooltip='Add Course']");
@@ -142,6 +142,11 @@ public class MyLocators {
     public static By searchbox=By.xpath("//input[@type='search']");
     public static String dropdown="//p-dropdown[@placeholder='input']";
     public static By signInBtn=By.xpath("//button[@label='Sign in']");
+    public static By allCompletedTests=By.xpath("//p-tabpanel[@header='Completed Tests']//div[contains(@class,'name')]");
+    public static By loginPageLink=By.xpath("(//a[contains(text(),'Login')])[2]");
+    public static By videoPrompt=By.xpath("//span[text()='Movie Clip']");
+    public static By wordCounter=By.xpath("//b[contains(text(),'Word Limit')]");
+    public static By closeVideoPrompt=By.xpath("//span[contains(@class,'close')]//parent::button");
 
 
     // private static String input;

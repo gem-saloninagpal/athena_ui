@@ -1,8 +1,9 @@
 Feature: Campus performance report
 
   Background:Check login to candidate module
-    And Logout of portal
-    Then Login using "saloni02@gmail.com" and "abc@123"
+#    And Logout of portal
+    And Navigate to login page
+    Then Login using "saloni02@gmail.com" and "abc@1234"
 
   Scenario Outline: Verify campus statistics
     Given Select "<module>", "<submodule>" from sidebar

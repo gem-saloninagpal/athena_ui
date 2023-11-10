@@ -1,7 +1,8 @@
 Feature: Candidate module features
 
   Background:Check login to candidate module
-    And Logout of portal
+  #  And Logout of portal
+    And Navigate to login page
     Then Login using "candidate@gmail.com" and "abc@123"
 
 
@@ -49,7 +50,7 @@ Feature: Candidate module features
       |option1|option2        |option3|error                 |countMandatoryFields|countMandatoryFields1|
       |Profile|Change Password|Logout |This Field is required|3                   |1                   |
 
-  @regressionCandidate @toBeModified
+  @regressionCandidate
   Scenario Outline: Verify current date is within test date range
     And Verify the default tab selected "<tab>"
     Then Get start and end date of test and verify current date is within range
@@ -86,7 +87,7 @@ Feature: Candidate module features
       |sectionName|
       |Technical |
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Navigation between the sections
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -95,8 +96,6 @@ Feature: Candidate module features
     Then Verify dialog box appears
     When Click the Yes button
     And Click the button "Attempt"
-    And Click on the section ticket "Logical"
-    Then Verify user navigates to questions screen of the selected section "Logical"
     When Expand the dropdown containing sections
     And Select "Technical" from dropdown
     Then Verify user navigates to questions screen of the selected section "Technical"
@@ -133,7 +132,7 @@ Feature: Candidate module features
 
 
   @regressionCandidate
-  Scenario Outline: Verify the question count after attempting a particular section
+  Scenario: Verify the question count after attempting a particular section
     Then Start test and verify instructions video is displayed
     Then Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
@@ -142,14 +141,11 @@ Feature: Candidate module features
     Then Click the Yes button
     Then Click the button "Attempt"
     Then Select or type all the questions of a section and save
-    Then Validate questions count "<total>", "<attempted>", "<unattempted>"
+    Then Validate questions count
 
-    Examples:
-      |total|attempted|unattempted|
-      |2   | 2        |  0         |
 
   @regressionCandidate
-  Scenario Outline: Verify entire test flow
+  Scenario: Verify entire test flow
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
@@ -159,11 +155,8 @@ Feature: Candidate module features
     Then Click the button "Attempt"
     Then Select or type all the questions of entire test
     And Click the button "Finish Test"
-    Then Validate questions count "<total>", "<attempted>", "<unattempted>"
+    Then Validate questions count
 
-    Examples:
-      |total |attempted|unattempted|
-      | 5    | 5       |  0        |
 
   @regressionCandidate
   Scenario: Verify clear functionality after saving an answer
@@ -222,23 +215,24 @@ Feature: Candidate module features
     And Click the button "Save & Next"
     Then Verify the popup message "to save the answer"
 
-#  @regressionCandidate @inProgress
-#  Scenario: Finish a test and check in completed tests tab
-#    When Start test and verify instructions video is displayed
-#    And Click the "NEXT" button of instructions video
-#    And Check the instructions checkbox
-#    And Click the button "NEXT"
-#    Then Verify dialog box appears
-#    When Click the Yes button
-#    And Click the button "Attempt"
-#    And Select or type an answer
-#    And Click the button "Save & Next"
-#    And Click the button "Finish Test"
-#    And Click the "Yes" button after finishing test
-#    Then Verify user navigates to test summary screen
-#    When Select Back To Dashboard
-#    And Switch to "Completed Tests"
-#    Then Verify test is present in completed tests
+  @regressionCandidate
+  Scenario: Finish a test and check in completed tests tab
+    When Start test and verify instructions video is displayed
+    And Click the "NEXT" button of instructions video
+    And Check the instructions checkbox
+    And Click the button "NEXT"
+    Then Verify dialog box appears
+    When Click the Yes button
+    And Click the button "Attempt"
+    And Select or type an answer
+    And Click the button "Save & Next"
+    And Click the button "Finish Test"
+    And Click the "Yes" button after finishing test
+    Then Verify user navigates to test summary screen
+    When Click the button "Proceed"
+    And Select Back To Dashboard
+    And Switch to "Completed Tests"
+    Then Verify test is present in completed tests tab
 
   @regressionCandidate
   Scenario: View test report

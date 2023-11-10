@@ -1,8 +1,9 @@
 Feature: Create campus functionality
 
   Background:
-    And Logout of portal
-    And Login using "saloni02@gmail.com" and "abc@123"
+  #  And Logout of portal
+    And Navigate to login page
+    And Login using "saloni02@gmail.com" and "abc@1234"
 
 
   @regression

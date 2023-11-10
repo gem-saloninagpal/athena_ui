@@ -11,8 +11,7 @@
   "email_report": "n",
   "glue_code": "com.gemini.athena.stepdefinitions",
   "tags": "@batch",
-  "browser_options": "[--incognito]",
-  "event_firing": "y",
+  "event_firing": "N",
   "azure_integration": {
     "azure_project": "",
     "azure_pat_token": "",
@@ -23,7 +22,7 @@
     "azure_testcase_flag": "Y"
   },
   "dev": {
-    "browser_name": "edge",
+    "browser_name": "chrome",
     "launch_url": "https://athena-dev.geminisolutions.com/"
   }
 
