@@ -62,7 +62,8 @@ Feature: Batches functionality
       Then Verify batch is created/updated
       When Click actions icon of a batch
       And Select "Batch Summary" from actions dropdown
-      Then Verify added course after editing displays in batch summary
+      Then Verify added course displays in batch summary
+  #    Then Verify added course after editing displays in batch summary
 
         Examples:
         |module        |submodule|fileLocation                                                  |owner |

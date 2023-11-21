@@ -12,3 +12,4 @@ Feature: Campus performance report
     Examples:
     |module|submodule          |
     |Reports|Campus Performance|
+

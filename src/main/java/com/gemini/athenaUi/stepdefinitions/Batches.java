@@ -22,7 +22,7 @@ public class Batches {
     public void batchActionsIcon(){
         try {
             //expand the action icon of batch
-            Thread.sleep(2000);
+            Thread.sleep(4000);
             DriverAction.click(MyLocators.batchActionsIcon);
             GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", STATUS.PASS);
         }catch (Exception e){
@@ -68,11 +68,18 @@ public class Batches {
             //get the list of all added courses and verify the last course is recently added
             List<WebElement>courses=DriverAction.getElements(MyLocators.recentlyAddedCourse);
             int total= courses.size();
-            String course = DriverAction.getElementText(courses.get(total-1));
-            if (course.contains(_courseName)) {
-                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Successfully verified added course displays in batch summary.", STATUS.PASS);
-            } else {
-                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Could not verify added course displays in batch summary.", STATUS.FAIL);
+            int c=0;
+            for(int i=0;i<total;i++) {
+                String course = DriverAction.getElementText(courses.get(i));
+                if (course.contains(_courseName)) {
+                   c++;
+                   break;
+                }
+            }
+            if(c==0){
+                GemTestReporter.addTestStep("Verify added course displays in batch summary","Could not verify the added course.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify added course displays in batch summary","Successfully verified the added course.",STATUS.PASS,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
 

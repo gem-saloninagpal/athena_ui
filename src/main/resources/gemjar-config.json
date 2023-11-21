@@ -9,6 +9,7 @@
   "console_report": "n",
   "jewel_screen_shots": "y",
   "email_report": "n",
+  "browser_options": "[--incognito]",
   "glue_code": "com.gemini.athena.stepdefinitions",
   "tags": "@batch",
   "event_firing": "N",
@@ -22,7 +23,7 @@
     "azure_testcase_flag": "Y"
   },
   "dev": {
-    "browser_name": "chrome",
+    "browser_name": "edge",
     "launch_url": "https://athena-dev.geminisolutions.com/"
   }
 

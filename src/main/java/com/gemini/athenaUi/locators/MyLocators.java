@@ -147,6 +147,8 @@ public class MyLocators {
     public static By videoPrompt=By.xpath("//span[text()='Movie Clip']");
     public static By wordCounter=By.xpath("//b[contains(text(),'Word Limit')]");
     public static By closeVideoPrompt=By.xpath("//span[contains(@class,'close')]//parent::button");
+    public static By modules=By.xpath("//a[contains(@class,'header-link')]//span[contains(@class,'p-menuitem-text')]");
+    public static By submodules=By.xpath("//a[@role='treeitem']//span[contains(@class,'p-menuitem-text')]");
 
 
     // private static String input;

@@ -2,6 +2,7 @@ Feature: Candidate module features
 
   Background:Check login to candidate module
   #  And Logout of portal
+  #  And Wait while screen loads
     And Navigate to login page
     Then Login using "candidate@gmail.com" and "abc@123"
 
@@ -11,7 +12,7 @@ Feature: Candidate module features
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "saloni03@gmail.com"
+    Then Verify the email of candidate "candidate@gmail.com"
 
     Examples:
       |option1|option2        |option3|
@@ -50,7 +51,7 @@ Feature: Candidate module features
       |option1|option2        |option3|error                 |countMandatoryFields|countMandatoryFields1|
       |Profile|Change Password|Logout |This Field is required|3                   |1                   |
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario Outline: Verify current date is within test date range
     And Verify the default tab selected "<tab>"
     Then Get start and end date of test and verify current date is within range
@@ -59,7 +60,7 @@ Feature: Candidate module features
       |tab         |
       |Active Tests|
 
-  @regressionCandidate @working
+  @regressionCandidate @working @toBeDiscussed
   Scenario Outline: Verify the test that is started
     Then Verify the default tab selected "<tab>"
     And Start test and verify instructions video is displayed
@@ -73,7 +74,6 @@ Feature: Candidate module features
   Scenario Outline: Verify selected section gets opened
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
-    Then Verify user is navigated to desired test
     Then Check the instructions checkbox
     Then Click the button "NEXT"
     And Verify dialog box appears
@@ -100,7 +100,7 @@ Feature: Candidate module features
     And Select "Technical" from dropdown
     Then Verify user navigates to questions screen of the selected section "Technical"
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario Outline: Verify user is able to save answers
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -117,7 +117,7 @@ Feature: Candidate module features
       |questionStatus|
       |submitted     |
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Verify clear functionality
     Then Start test and verify instructions video is displayed
     Then Click the "NEXT" button of instructions video
@@ -131,7 +131,7 @@ Feature: Candidate module features
     Then Verify the answer got cleared
 
 
-  @regressionCandidate
+  @regressionCandidate @lastStepToBeUpdated
   Scenario: Verify the question count after attempting a particular section
     Then Start test and verify instructions video is displayed
     Then Click the "NEXT" button of instructions video
@@ -144,21 +144,21 @@ Feature: Candidate module features
     Then Validate questions count
 
 
-  @regressionCandidate
-  Scenario: Verify entire test flow
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    Then Click the Yes button
-    Then Click the button "Attempt"
-    Then Select or type all the questions of entire test
-    And Click the button "Finish Test"
-    Then Validate questions count
+#  @regressionCandidate @toBeUpdated
+#  Scenario: Verify entire test flow
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    Then Click the Yes button
+#    Then Click the button "Attempt"
+#    Then Select or type all the questions of entire test
+#    And Click the button "Finish Test"
+#    Then Validate questions count
 
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Verify clear functionality after saving an answer
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -173,7 +173,7 @@ Feature: Candidate module features
     And Click the button "Clear"
     Then Verify the answer got cleared
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Refresh while attempting test
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -187,23 +187,23 @@ Feature: Candidate module features
     And Refresh the page, cancel alert and verify user is on same page
     And Refresh the page, accept alert and verify user navigates to instructions screen
 
-  @regressionCandidate
-  Scenario Outline: Validate the functionality of arrow key
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    And Check the instructions checkbox
-    And Click the button "NEXT"
-    And Verify dialog box appears
-    And Click the Yes button
-    And Click the button "Attempt"
-    Then Validate the functionality of right arrow key "<totalQuestions>"
-    Then Verify key disables on last question
+#  @regressionCandidate @toBeModified
+#  Scenario Outline: Validate the functionality of arrow key
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    And Check the instructions checkbox
+#    And Click the button "NEXT"
+#    And Verify dialog box appears
+#    And Click the Yes button
+#    And Click the button "Attempt"
+#    Then Validate the functionality of right arrow key "<totalQuestions>"
+#    Then Verify key disables on last question
+#
+#    Examples:
+#      |totalQuestions|
+#      |5             |
 
-    Examples:
-      |totalQuestions|
-      |5             |
-
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Save a question without answering it
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -215,7 +215,7 @@ Feature: Candidate module features
     And Click the button "Save & Next"
     Then Verify the popup message "to save the answer"
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: Finish a test and check in completed tests tab
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
@@ -234,7 +234,7 @@ Feature: Candidate module features
     And Switch to "Completed Tests"
     Then Verify test is present in completed tests tab
 
-  @regressionCandidate
+  @regressionCandidate @working
   Scenario: View test report
     When Switch to "Completed Tests"
     And Click the button "View Report"

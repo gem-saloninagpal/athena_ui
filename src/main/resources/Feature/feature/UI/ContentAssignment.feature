@@ -1,8 +1,9 @@
 Feature:Content and Assignment features
 
   Background:Check login to candidate module
-    And Logout of portal
-    And Login using "saloni02@gmail.com" and "abc@123"
+   # And Logout of portal
+    And Navigate to login page
+    And Login using "saloni02@gmail.com" and "abc@1234"
 
   @regression
     Scenario Outline:Add content without adding course info
@@ -25,8 +26,8 @@ Feature:Content and Assignment features
       Then Verify content is created successfully "<contentTag>", "<duration>", "<fileType>"
 
       Examples:
-     | module        |submodule      |  contentTag|fileType|duration|fileLocation                                                   |description|
-     | Manage Courses|Content Library| Java      |Image   |01:00   |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|testAbc    |
+     | module        |submodule      |  contentTag|fileType                 |duration|fileLocation                                                   |description|
+     | Manage Courses|Content Library| Java      |Image (.jpg .jpeg .png)   |01:00   |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|testAbc    |
 
   @regression
      Scenario Outline:Reset content
@@ -39,8 +40,8 @@ Feature:Content and Assignment features
        Then Verify the error displayed in input fields "<error>" "<mandatoryFieldCount>"
 
        Examples:
-      | module        |submodule      |  contentTag|fileType|duration|fileLocation                                                   |description|error                 |mandatoryFieldCount|
-      | Manage Courses|Content Library| Java      |Image   |01:00   |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|testAbc    |This Field is required|6                  |
+      | module        |submodule      |  contentTag|fileType                 |duration|fileLocation                                                   |description|error                 |mandatoryFieldCount|
+      | Manage Courses|Content Library| Java      |Image (.jpg .jpeg .png)   |01:00   |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|testAbc    |This Field is required|6                  |
 
   @regression
      Scenario Outline:Create assignment- positive flow

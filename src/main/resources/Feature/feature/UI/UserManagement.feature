@@ -1,8 +1,9 @@
 Feature: User Management features
 
     Background:
-      And Logout of portal
-      And Login using "saloni02@gmail.com" and "abc@123"
+      And Navigate to login page
+    #  And Logout of portal
+      And Login using "saloni02@gmail.com" and "abc@1234"
 
 
       @regression
@@ -165,6 +166,12 @@ Feature: User Management features
             Examples:
               | module        | tab     | index |role1  |role2      |new role|string1                      |submodule|
               |User Management|Employees|1      |Learner|Super Admin|Admin   |User Management / Update User|         |
+
+  @regression
+          Scenario: Validate the modules and submodules in sidebar
+            Given Open the sidebar
+            Then Validate the modules present
+            Then Validate the submodules present
 
 
 
