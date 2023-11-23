@@ -20,7 +20,8 @@ Feature:UserDashboard Module features
     Then Validate Assigned on UserDash Board
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+
 
       @2
   Scenario Outline: Create Course->Assigned Learner->Validate UnAssigned Learner On User DashBoard.
@@ -39,7 +40,7 @@ Feature:UserDashboard Module features
     Then Validate Unassigned on UserDash Board
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
         @3
@@ -54,7 +55,7 @@ Feature:UserDashboard Module features
     And Validate "<assignment>" Add to Course "<assignmentMessage>"
     And publish the course
     And Assign a Learner to the course
-    And Click the button "Back"
+#    And Click the button "Back"
     And Manually completed course
     And Select "<module1>", "<submodule1>" from sidebar
     Then Validate Manually Completed on User Dashboard
@@ -62,7 +63,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
 @4
@@ -77,7 +78,7 @@ Feature:UserDashboard Module features
     And Validate "<assignment>" Add to Course "<assignmentMessage>"
     And publish the course
     And Assign a Learner to the course
-    And Click the button "Back"
+#    And Click the button "Back"
     And Manually completed course
     And Reattempt the course
     And Select "<module1>", "<submodule1>" from sidebar
@@ -86,7 +87,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
   @5
@@ -107,13 +108,13 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
 
 #    please correct the edit
   @6
-  Scenario Outline: Create Course->Publish course->Validate course Edited
+  Scenario Outline: Create Course->Publish course->Validate course Edited on User DashBoard
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
     And Enter the "<courseType>", "<duration>", "<fileLocation>", "<category>" in Course fields
@@ -131,7 +132,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
     @7
@@ -153,7 +154,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
       @8
@@ -172,7 +173,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|Course|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Course Summary|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Course Summary|Content|Assignment|
 
         @9
   Scenario Outline: Create Course->Publish course->Validate Learner Assigned on User Dashboard
@@ -190,7 +191,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|Course|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Assign Learners|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Assign Learners|Content|Assignment|
 
 
           @10
@@ -210,7 +211,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|Course|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Learner Reports|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Learner Reports|Content|Assignment|
 
 
             @11
@@ -229,4 +230,4 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|Course|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.jpg |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Edit|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Edit|Content|Assignment|

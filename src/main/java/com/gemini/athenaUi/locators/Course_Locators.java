@@ -7,6 +7,12 @@ public class Course_Locators {
     public static By navbarDropdown=By.xpath("//button[@icon='pi pi-caret-down']");
 
     public static By profile=By.xpath("//span[text()='Profile']");
+    public static By updatedDate=By.xpath("(//tbody[@class='p-datatable-tbody']//tr[1]//td)[7]");
+
+    public static By updateBtn=By.xpath("//button//span[text()='Update Date']");
+
+    public static By changeDateBtn=By.xpath("//button//span[text()='Change Date Selected']");
+
     public static By userName=By.xpath("//div[@class='upper-card-value']");
     public static By ownerName=By.xpath("//div[contains(@class,'p-multiselect-token')]//span");
     public static By treeList=By.xpath("//div[@class='p-steps p-component p-readonly']//ul//li");
@@ -39,6 +45,12 @@ public class Course_Locators {
 
     public static String dropdownValue="//span[text()='type']";
 
+
+
+    public static String heading="//h6[text()='input']";
+
+    //h6[text()='input']
+    public static By actionHeading=By.xpath("//h6");
     public static By draftedCourse=By.xpath("//div[@class='name-style control-overflow longer-name']");
 
     public static By editIcon=By.xpath("//span[contains(@class,'pi pi-ellipsis')]");
@@ -56,6 +68,10 @@ public class Course_Locators {
     public static String adminOption="//label[text()='input']//parent::div";
 
     public static String userOption="//span[text()='input']//parent::li";
+
+    public static String requiredOption="//li//span[text()='input']";
+
+    //li//span[text()='input']
 
     public static By nameFilterInput=By.xpath("//input[@placeholder='Name/Email']");
 
@@ -85,6 +101,10 @@ public class Course_Locators {
 
     //button[contains(@class,'p-paginator-first')]
     public static By listViewBtn=By.xpath("//button//i[@class='pi pi-list']");
+
+    public static By firstCourseName=By.xpath("//div[@class='mr-1']//div[@class='p-card-title ng-star-inserted']");
+
+    //div[@class='mr-1']//div[@class='p-card-title ng-star-inserted']
     public static By viewList=By.xpath("(//div[@class='list-container'])[1]//div[@class='title name-style control-overflow']");
 
     public static By inActiveBtn=By.xpath("//span[@class='p-inputswitch-slider']");
@@ -95,5 +115,54 @@ public class Course_Locators {
 
 
     public static By inActiveOption=By.xpath("//span[text()='Inactive']");
+    public static By viewAsLearnerBtn=By.xpath("//span[text()='View as learner']");
+
+    public static By courseSummaryAssignmentList=By.xpath("(//tbody[@class='p-datatable-tbody']//tr)[2]");
+
+    public static By courseStatusList=By.xpath("//tbody[@class='p-datatable-tbody']//tr[1]//td[7]//div[contains(@class,'text-style')]");
+
+    public static String courseContent="(//tbody[@class='p-datatable-tbody']//tr[1]//td[7]//div[contains(@class,'text-style')])[itr]";
+
+    public static By courseStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])//tr[1]//td[5]");
+
+    public static By contentsStatusUnattempted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[4]");
+
+    public static By contentsStatusCompleted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[5]");
+    public static By assignmentsStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[7]");
+
+
+    public static By emailInput=By.xpath(" //input[@placeholder='Name/Email']");
+
+    public static By backBtn=By.xpath("//div//button[text()=' Back ']");
+
+    public static By backBtn1=By.xpath("//div[text()='Back']");
+
+
+    //div[text()='Back']
+
+
+    //div//button[text()=' Back ']
+
+    public static By statusDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[4]");
+    public static By categoryDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[2]");
+
+    public static By selectedCategoryDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[3]");
+
+    public static By calendarIcon=By.xpath("//img[@class='calender-icon']");
+
+    public static String calendar="(//button[contains(@class,'p-datepicker-trigger')])[itr]";
+
+
+
+    //img[@class='calender-icon']
+
+    //input[@placeholder='Name/Email']
+
+
+    //tbody[@class='p-datatable-tbody']//tr[1]//td[7]//div[contains(@class,'text-style')]
+
+
+
+
 
 }

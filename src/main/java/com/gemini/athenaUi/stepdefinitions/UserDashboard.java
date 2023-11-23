@@ -353,7 +353,8 @@ catch (Exception e) {
     @And("^Manually completed course$")
     public void manuallyCompleted(){
     try{
-
+        DriverAction.click(By.xpath(MyLocators.backBtnIcon.replace("input", "Back")));
+   
         //in this we are manually completing the course
         DriverAction.waitSec(3);
 if(DriverAction.isExist(UserDashboard_Locator.courseFilterInput,120))

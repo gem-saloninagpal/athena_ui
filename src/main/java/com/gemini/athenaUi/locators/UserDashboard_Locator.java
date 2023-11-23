@@ -32,7 +32,7 @@ public class UserDashboard_Locator {
     public static By courseNameInput=By.xpath("//input[@id='courseName']");
 
 
-    public static By deleteIcon=By.xpath("//i[@class='add pi pi-trash']");
+    public static By deleteIcon=By.xpath("//i[contains(@class,'check-icon pi pi-times')]");
 
 
     public static By courseFilterInput=By.xpath("//input[@placeholder='Search by Name/Tags']");

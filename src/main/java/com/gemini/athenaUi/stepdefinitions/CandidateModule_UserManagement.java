@@ -54,8 +54,8 @@ public class CandidateModule_UserManagement {
 
 
             //verify dashboard is displayed on login
-            if (DriverAction.isExist(MyLocators.dashboard)) {
-                GemTestReporter.addTestStep("Verify dashboard is displayed", "Successfully displayed the dashboard.", STATUS.PASS, DriverAction.takeSnapShot());
+            if (DriverAction.isExist(MyLocators.userDashboard)) {
+                GemTestReporter.addTestStep("Verify dashboard is displayed", "Successfully displayed the user Dashboard.", STATUS.PASS, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             System.out.print("Could not login to Athena.");
@@ -90,7 +90,7 @@ public class CandidateModule_UserManagement {
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
        //click the input button
-            DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
+            DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)),"Verify User able to click on "+buttonName,"User clicked on "+buttonName+" successfully");
         }catch(Exception e){
             System.out.print("Exception encountered!");
         }

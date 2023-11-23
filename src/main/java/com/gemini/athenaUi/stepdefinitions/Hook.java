@@ -1,6 +1,6 @@
 package com.gemini.athenaUi.stepdefinitions;
 
-import com.gemini.AthenaUtilities.CommonUtils;
+
 import com.gemini.generic.exception.GemException;
 import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.Before;

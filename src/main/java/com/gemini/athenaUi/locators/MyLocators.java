@@ -5,14 +5,22 @@ import org.openqa.selenium.By;
 public class MyLocators {
     public static By usernameField=By.xpath("//input[@formcontrolname='username']");
     public static By passwordField=By.xpath("//input[@formcontrolname='password']");
-    public static By dashboard=By.xpath("//h6[text()=' User Dashboard ']");
+    public static By dashboard=By.xpath("//span[text()='Dashboard']");
+
+    public static By userDashboard=By.xpath("//h6[text()=' User Dashboard ']");
+
     public static By loginBtn=By.xpath("//button[@label='Sign in']");
     public static By sidebar=By.xpath("//p-toolbar//em");
     public static String selectModule="//span[text()='input']//parent::a";
     public static String button="//button[@label='input']";
+
+    public static String backBtnIcon="//div[text()='input']";
+
     public static String header="(//h6[contains(@class,'text')])[1]";
     public static By fieldsError=By.xpath("//input//following::small");
     public static By crossIcon=By.xpath("//button[contains(@class,'close')]");
+
+    public static By crossBtn=By.xpath("//span[text()='Close']");
 
     public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
     public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");

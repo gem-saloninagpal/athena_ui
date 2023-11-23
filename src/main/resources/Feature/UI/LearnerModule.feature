@@ -5,7 +5,7 @@ Feature: Learner module features
     Then Login using "rahul23@gmail.com" and "abc@123"
 
   @regression012 @1
-  Scenario Outline: Course Resume Validation
+  Scenario Outline: Create Course->Assign Learner->Start Course and navigate back->Course Resume text Validation
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
     Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
@@ -17,11 +17,11 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.jpg |Logical |abc        |              |                 |
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.png |Logical |abc        |              |                 |
 
 
-  @regression012 @2
-  Scenario Outline: Course completion and Download
+  @regression012 @2 @fail
+  Scenario Outline: Complete Resumed course->Download certificate->Validate certificate downloaded
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
     And Complete the Course and Download the certificate
@@ -31,7 +31,7 @@ Feature: Learner module features
       |Learner|
 
 
-  @regression012 @3
+  @regression012 @3 @fail
   Scenario Outline: Validate Ongoing and Completed Course Count
     When Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
@@ -45,7 +45,7 @@ Feature: Learner module features
 
 
     @4
-  Scenario Outline: Course catalog validate Enroll button functionality
+  Scenario Outline: Create Course-> switch to Course catalog->validate Enroll button functionality
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
     Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
@@ -57,11 +57,11 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.jpg |Logical |abc        |              |                 |
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\rahul.adhikari\Pictures\testImage.png |Logical |abc        |              |                 |
 
 
-@5
-  Scenario Outline: Course catalog->Validate course overview
+@5 @fail
+  Scenario Outline: Create Course->Switch to Course catalog->Validate course overview
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
     Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
@@ -72,10 +72,10 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.jpg |Logical |abc        |              |                 |
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.png |Logical |abc        |              |                 |
 
 
-
+@6
   Scenario Outline: Create Course->Start Course->Validate Upload assignment file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -88,9 +88,10 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|fileLocation1|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.jpg |Logical |abc        |              |                 |C:\Users\rahul.adhikari\Downloads\dwsample1-zip.zip|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.png |Logical |abc        |              |                 |C:\Users\rahul.adhikari\Downloads\dwsample1-zip.zip|
 
 
+    @7
   Scenario Outline: Create Course->Start Course->Validate View Upload file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -104,9 +105,10 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|fileLocation1|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.jpg |Logical |abc        |              |                 |C:\Users\rahul.adhikari\Downloads\dwsample1-zip.zip|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\rahul.adhikari\Pictures\testImage.png |Logical |abc        |              |                 |C:\Users\rahul.adhikari\Downloads\dwsample1-zip.zip|
 
 
+      @8
   Scenario Outline: Validate non existing course
     When Expand user dropdown from navbar
     And Verify the options present in dropdown and select it "<option1>"
@@ -116,7 +118,7 @@ Feature: Learner module features
       |option1|
       |Learner|
 
-
+  @9
   Scenario Outline: Validate non existing course in Course catalog
     When Expand user dropdown from navbar
     And Verify the options present in dropdown and select it "<option1>"

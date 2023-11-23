@@ -17,15 +17,15 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
 
 public class Tests_TestControl {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
     String _testName = " ";
     String _courseName= " ";
+
+    int _candidateCounter=0;
 
     @And("^Add Test Info \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void addTestInfo(String duration, String campus, String level) {
@@ -79,6 +79,8 @@ public class Tests_TestControl {
                     DriverAction.typeText(inputFields.get(i), inputValues[i - 1]);
                 }
             }
+            GemTestReporter.addTestStep("Verify user able to fill the test info", "User filled the test info Successfully",
+                    STATUS.PASS, DriverAction.takeSnapShot());
             DriverAction.scrollToBottom();
         } catch (Exception e) {
             logger.info("Exception occurred", e);
@@ -91,7 +93,7 @@ public class Tests_TestControl {
     public void courseDescription(String description) {
         try {
             //enter the course description
-DriverAction.scrollToBottom();
+            DriverAction.scrollToBottom();
             DriverAction.typeText(Course_Locators.courseDescription, description);
 
         } catch (Exception e) {
@@ -103,19 +105,34 @@ DriverAction.scrollToBottom();
     @And("^Add Section \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void addSection(String section, String percentage, String duration) {
         try {
+            int sectionCounter=0;
             //in this we are adding section to the test
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.dropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.dropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.option.replace("section", section)))) ;
                 {
+                    sectionCounter++;
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.option.replace("section", section)));
                 }
                 if (DriverAction.isDisplayed(Tests_TestControl_Locators.percentageInput)) {
+                    sectionCounter++;
                     DriverAction.typeText(Tests_TestControl_Locators.percentageInput, percentage);
                 }
                 if (DriverAction.isDisplayed(Tests_TestControl_Locators.timeInput)) {
+                    sectionCounter++;
                     DriverAction.typeText(Tests_TestControl_Locators.timeInput, duration);
                 }
+            }
+            //validate user able to fill the section successfully
+            if(sectionCounter==3)
+            {
+                GemTestReporter.addTestStep("Verify user able to fill section", "User filled the section Successfully",
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify user able to fill section", "User not able to fill the section",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
@@ -131,41 +148,41 @@ DriverAction.scrollToBottom();
 
             //click on Add Question for the following test
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.addQuestion)) {
-                DriverAction.click(Tests_TestControl_Locators.addQuestion);
+                DriverAction.click(Tests_TestControl_Locators.addQuestion,"Validate user able to click on add question button","User successfully able to click on question button");
             }
             DriverAction.scrollToBottom();
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.importRandomBtn)) {
-                DriverAction.click(Tests_TestControl_Locators.importRandomBtn);
+                DriverAction.click(Tests_TestControl_Locators.importRandomBtn,"Validate user able to click on import random button","user successfully able to click on import random button");
             }
             DriverAction.waitSec(3);
             //filling the Question Details
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.questionTypeDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.questionTypeDropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Multiple choice question")))) {
-                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Multiple choice question")));
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Multiple choice question")),"Validate user able to select the required option","User successfully select Multiple choice option");
                 }
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.noOfQuestionInput)) {
-                DriverAction.typeText(Tests_TestControl_Locators.noOfQuestionInput, "2");
+                DriverAction.typeText(Tests_TestControl_Locators.noOfQuestionInput, "2","Validate user able to type required text","User able to type no of question successfully");
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.difficultyDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.difficultyDropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Hard")))) {
-                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Hard")));
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Hard")),"Validate user able to select the required option","User successfully select Hard option");
                 }
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.levelDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.levelDropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Basic")))) {
-                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Basic")));
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Basic")),"Validate user able to select the required option","User successfully select Basic option");
                 }
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.submitButton)) {
-                DriverAction.click(Tests_TestControl_Locators.submitButton);
+                DriverAction.click(Tests_TestControl_Locators.submitButton,"Validate user able to click on submit button","User successfully submit the import random question form");
             }
             DriverAction.scrollToBottom();
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.saveButton)) {
-                DriverAction.click(Tests_TestControl_Locators.saveButton);
+                DriverAction.click(Tests_TestControl_Locators.saveButton,"Validate user able to click on save button","Test was saved successfully");
             }
             DriverAction.scrollToBottom();
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.continueButton)) {
@@ -183,7 +200,7 @@ DriverAction.scrollToBottom();
             //validate tst is created or  not
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName,"Validate user able to filter the created test","Test is filtered successfully");
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
                 String fetchedTestName = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
@@ -233,22 +250,28 @@ DriverAction.scrollToBottom();
     public void assignLearner() {
         try {
             // assign the test to learner
+
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName,"Validate user able to filter the created test","Test is filtered successfully");
             }
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.threeDotIcon)) {
                 DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
                 DriverAction.waitSec(5);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Candidates Assigned")))) {
-                    DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Candidates Assigned")));
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Candidates Assigned")),"Validate user able to select Candidate assigned option","User selected candidate assigned option successfully");
                 }
             }
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.filterInput)) {
-                DriverAction.typeText(Tests_TestControl_Locators.filterInput, "rahul22@gmail.com");
+                DriverAction.typeText(Tests_TestControl_Locators.filterInput, "rahul22@gmail.com","Validate user able to filter the candidate","User filtered the required candidate successfully");
                 DriverAction.waitSec(5);
                 if (DriverAction.isDisplayed(Course_Locators.addIcon)) {
                     DriverAction.click(Course_Locators.addIcon, "Clicked on add Content Icon", "Successfully clicked on Add Content Icon");
+                    GemTestReporter.addTestStep("Validate user able to assign required candidate to test", "Candidate assigned Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validate user able to assign required candidate to test ", "Not able to assign candidate to test", STATUS.FAIL, DriverAction.takeSnapShot());
+
                 }
             }
         } catch (Exception e) {
@@ -293,10 +316,10 @@ DriverAction.scrollToBottom();
             //click attempt button
             DriverAction.click(By.xpath(MyLocators.button.replace("input", "Attempt")));
 
-            if(DriverAction.isExist(Tests_TestControl_Locators.closeVideoIcon,120))
-            {
-                DriverAction.click(Tests_TestControl_Locators.closeVideoIcon);
-            }
+//            if(DriverAction.isExist(Tests_TestControl_Locators.closeVideoIcon,120))
+//            {
+//                DriverAction.click(Tests_TestControl_Locators.closeVideoIcon);
+//            }
             //expand section
             DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
             List<WebElement> sections = DriverAction.getElements(MyLocators.totalSections);
@@ -311,7 +334,7 @@ DriverAction.scrollToBottom();
                 int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
                 for (int i = 0; i < totalQues; i++) {
                     //  enterAnswer();
-                    if (DriverAction.isExist(MyLocators.textarea)) {
+                    if (DriverAction.isDisplayed(MyLocators.textarea)) {
                         DriverAction.typeText(MyLocators.textarea, "abc");
                         GemTestReporter.addTestStep("Enter answer in input field", "Successfully entered the answer in input field", STATUS.PASS);
                     } else if (DriverAction.isExist(MyLocators.mcqOptions)) {
@@ -330,8 +353,8 @@ DriverAction.scrollToBottom();
             }
 
             //Finish test
-            DriverAction.click(By.xpath(MyLocators.button.replace("input", "Finish Test")));
-            DriverAction.click(By.xpath(MyLocators.testSubmitButton.replace("input", "Yes")));
+            DriverAction.click(By.xpath(MyLocators.button.replace("input", "Finish Test")),"Validate test is finished successfully","Test finished successfully");
+            DriverAction.click(By.xpath(MyLocators.testSubmitButton.replace("input", "Yes")),"Validate test is submitted successfully","Test is submitted successfully");
             //validate the score board
             DriverAction.waitSec(5);
             if (DriverAction.isExist(MyLocators.testSummary, 2)) {
@@ -349,7 +372,7 @@ DriverAction.scrollToBottom();
         }
             DriverAction.scrollToBottom();
             if (DriverAction.isExist(LearnerModule_Locators.proceedBtn, 10)) {
-                DriverAction.click(LearnerModule_Locators.proceedBtn);
+                DriverAction.click(LearnerModule_Locators.proceedBtn,"Validate user able to proceed the completed test","User proceed the test successfully");
             }
 //Navigate to Dashboard
 
@@ -524,16 +547,21 @@ DriverAction.scrollToBottom();
         }
 
 }
-@Then("^Create and Validate Copy of Test \"([^\"]*)\"$")
-    public void validateCopyOfTest(String endDate)
+@Then("^Create and Validate Copy of Test$")
+    public void validateCopyOfTest()
 {
     try{
 
 //Filter the Created Test in Test Control screen
+        LocalDate today = LocalDate.now();
+        int day = today.getDayOfMonth();
+        int day2 =day+1;
+        String startDate = String.valueOf(day);
+        String endDate = String.valueOf(day2);
 
-        if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
-        }
+//        if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
+//            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
+//        }
 
         DriverAction.waitSec(5);
         if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
@@ -543,7 +571,7 @@ DriverAction.scrollToBottom();
                 DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Copy Test")));
             }
         }
-        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
         DriverAction.scrollToBottom();
         DriverAction.click(By.xpath(Tests_TestControl_Locators.calendar.replace("itr","2")));
         DriverAction.waitSec(3);
@@ -584,9 +612,9 @@ DriverAction.scrollToBottom();
         try{
             //Filter the Created Test in Test Control screen
 
-            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
-            }
+//            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
+//                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, _testName);
+//            }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 120)) {
                 DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
@@ -595,17 +623,13 @@ DriverAction.scrollToBottom();
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Edit Test")));
                 }
             }
-            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-            DriverAction.scrollToBottom();
-//            DriverAction.click(By.xpath(Tests_TestControl_Locators.calendar.replace("itr","2")));
-//            DriverAction.waitSec(3);
-//            DriverAction.click(By.xpath(Tests_TestControl_Locators.date.replace("date",endDate)));
+
             //edit the Test Name
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
                 DriverAction.typeText(Tests_TestControl_Locators.testNameInput,"Edit "+_testName);
             }
-//            DriverAction.scrollToBottom();
+            DriverAction.scrollToBottom();
             if(DriverAction.isExist(By.xpath(MyLocators.button.replace("input","Next")),120))
             {
                 DriverAction.click(By.xpath(MyLocators.button.replace("input", "Next")));
@@ -736,7 +760,7 @@ DriverAction.scrollToBottom();
             if (DriverAction.isExist(MyLocators.spinner)) ;
             DriverAction.waitUntilElementDisappear(MyLocators.spinner, 20);
 
-
+            GemTestReporter.addTestStep("Validate user is switched successfully", "user switched Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
@@ -768,13 +792,16 @@ DriverAction.scrollToBottom();
             String startDate = String.valueOf(day);
             String endDate = String.valueOf(day2);
             List<WebElement> inputFields=new ArrayList<>();
-            if(DriverAction.isExist(Tests_TestControl_Locators.testInputFields,120)) {
-                inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFields);
-            }
-            else
-            {
+            if(DriverAction.isExist(Tests_TestControl_Locators.testInputFieldsInternal,120)) {
                 inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFieldsInternal);
             }
+//            if(DriverAction.isExist(Tests_TestControl_Locators.testInputFields,120)) {
+//                inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFields);
+//            }
+//            else
+//            {
+//                inputFields = DriverAction.getElements(Tests_TestControl_Locators.testInputFieldsInternal);
+//            }
             _testName = RandomStringUtils.randomAlphanumeric(10);
             String testTag =_testName+"12";
             String inputValues[] = {_testName, testTag, duration, level, startDate, endDate};
@@ -961,16 +988,21 @@ DriverAction.scrollToBottom();
         }
 
     }
-    @Then("^Create and Validate Copy of Internal Test \"([^\"]*)\"$")
-    public void validateCopyOfInternalTest(String endDate)
+    @Then("^Create and Validate Copy of Internal Test$")
+    public void validateCopyOfInternalTest()
     {
         try{
 
 //Filter the Created Test in Test Control screen
 
-            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
-            }
+//            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
+//                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
+//            }
+            LocalDate today = LocalDate.now();
+            int day = today.getDayOfMonth();
+            int day2 =day+1;
+            String startDate = String.valueOf(day);
+            String endDate = String.valueOf(day2);
 
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 120)) {
@@ -1022,9 +1054,9 @@ DriverAction.scrollToBottom();
         try{
             //Filter the Created Test in Test Control screen
 
-            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
-            }
+//            if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal, 120)) {
+//                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, _testName);
+//            }
             DriverAction.waitSec(5);
             if (DriverAction.isExist(Tests_TestControl_Locators.threeDotInternal, 120)) {
                 DriverAction.click(Tests_TestControl_Locators.threeDotInternal);
@@ -1035,9 +1067,7 @@ DriverAction.scrollToBottom();
             }
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
             DriverAction.scrollToBottom();
-//            DriverAction.click(By.xpath(Tests_TestControl_Locators.calendar.replace("itr","2")));
-//            DriverAction.waitSec(3);
-//            DriverAction.click(By.xpath(Tests_TestControl_Locators.date.replace("date",endDate)));
+
             //edit the Test Name
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
@@ -1336,11 +1366,16 @@ if(DriverAction.isExist(Tests_TestControl_Locators.addNewTestBtn,120))
             }
             DriverAction.waitSec(3);
 
-            if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
-            {
-                DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save Course & Publish")),"clicked on Save Course and Publish button","Successfully clicked on Save Course and Publish button");
+if(DriverAction.isEnabled(Tests_TestControl_Locators.saveCourseAndPublish))
+{
+    DriverAction.click(Tests_TestControl_Locators.saveCourseAndPublish,"clicked on Save Course and Publish button","Successfully clicked on Save Course and Publish button");
 
-            }
+}
+//            if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
+//            {
+//                DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save Course & Publish")),"clicked on Save Course and Publish button","Successfully clicked on Save Course and Publish button");
+//
+//            }
             if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Yes")),120)) {
                 DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Yes")));
             }
@@ -1865,9 +1900,9 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
 {
     try {
         //assign to candidate
-        if(DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),5000));
-        DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),25000);
-        DriverAction.click(By.xpath(MyLocators.testTab.replace("input","")), "Switch to Placement Drives", "Successfully switched to tab ");
+//        if(DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),5000));
+//        DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input","Placement Drives")),25000);
+//        DriverAction.click(By.xpath(MyLocators.testTab.replace("input","")), "Switch to Placement Drives", "Successfully switched to tab ");
 
         if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
         {
@@ -1970,13 +2005,13 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
 
                 if(c<1) {
                     DriverAction.waitSec(2);
-                    String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
-                    String reqPopUpMessage="No records found for the selected search criteria!";
-                    if (reqPopUpMessage.equals(popupMessage)) {
-                        GemTestReporter.addTestStep("Validate when we select a year for which there is not data No Record pop appears", "popup appears successfully", STATUS.PASS,
+//                    String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+//                    String reqPopUpMessage="No records found for the selected search criteria!";
+                    if (DriverAction.isDisplayed(Tests_TestControl_Locators.noDataFound)) {
+                        GemTestReporter.addTestStep("Validate when we select a year for which there is not data No Data found div should appear", "Div appears successfully", STATUS.PASS,
                                 DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Validate when we select a year for which there is not data No Record pop appears", "No popup appears", STATUS.FAIL,
+                        GemTestReporter.addTestStep("Validate when we select a year for which there is not data No Data found div should appear", "No Div appears", STATUS.FAIL,
                                 DriverAction.takeSnapShot());
                     }
                     c++;
@@ -1988,6 +2023,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
                 candidateCount=candidateCount+Integer.parseInt(actualCount);
                 System.out.println(actualCount);
             }
+
             if(candidateCount==Integer.parseInt(initialCount))
             {
                 GemTestReporter.addTestStep("Validate Year filter is working properly", "Filter is working fine", STATUS.PASS,
@@ -2099,7 +2135,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
                 GemTestReporter.addTestStep("Validate side bar with user details open when we click on eye icon", "Fail to Open side bar ",
                         STATUS.FAIL, DriverAction.takeSnapShot());
             }
-            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
+            DriverAction.click(MyLocators.crossBtn, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
         }
         catch(Exception e){
             GemTestReporter.addTestStep("Switch test tab",e+" Exception occured while switching test tab.",STATUS.ERR);
@@ -2159,11 +2195,11 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
         try{
             //paginator validation
             DriverAction.waitSec(5);
-            if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText)) {
-                String fetchedCandidate = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
+            if (DriverAction.isDisplayed(Tests_TestControl_Locators.createdTestText1)) {
+                String fetchedCandidate = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText1);
                 DriverAction.click(Tests_TestControl_Locators.rightPaginatorIcon);
                 DriverAction.waitSec(5);
-                String fetchedCandidateAfterShiftingRight = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText);
+                String fetchedCandidateAfterShiftingRight = DriverAction.getElementText(Tests_TestControl_Locators.createdTestText1);
                 if(!fetchedCandidate.equals(fetchedCandidateAfterShiftingRight))
                 {
                     GemTestReporter.addTestStep("Validate Paginator is working fine", "Paginator is working fine" , STATUS.PASS,
@@ -2326,7 +2362,10 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
 
             for(int i=0;i<4;i++)
             {
-                DriverAction.typeText(Tests_TestControl_Locators.optionDiv,"demo"+i+1+2);
+                //create random string
+                String randomString = generateRandomString();
+                String concatenatedString = "demo" + randomString + 12;
+                DriverAction.typeText(Tests_TestControl_Locators.optionDiv,concatenatedString);
                 DriverAction.click(Tests_TestControl_Locators.addOptionBtn);
             }
             DriverAction.click(Tests_TestControl_Locators.answerOption,"Validate options are created successfully","Options for the question are saved successfully");
@@ -2353,18 +2392,31 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
                 GemTestReporter.addTestStep("Validate Question is created successfully", "Question is not created successfully", STATUS.FAIL,
                         DriverAction.takeSnapShot());
             }
-            DriverAction.click(Tests_TestControl_Locators.backBtn);
+            DriverAction.waitSec(3);
+            DriverAction.click(Tests_TestControl_Locators.backBtn1);
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
         }
     }
+    public static String generateRandomString() {
+        int length = 10; // Set the desired length of the random string
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder randomString = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            randomString.append(characters.charAt(index));
+        }
+        return randomString.toString();
+    }
 
     @Then("Validate question added to the section")
     public void validateQuestionAddedToTheSection() {
         try{
             //click on created question for validation
+            DriverAction.waitSec(3);
         DriverAction.click(Tests_TestControl_Locators.firstMcqOption);
         if(DriverAction.isExist(Tests_TestControl_Locators.questionStatement,120))
         {
@@ -2407,6 +2459,13 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
                 GemTestReporter.addTestStep("Error Occur", "fail to click on edit button",
                         STATUS.FAIL, DriverAction.takeSnapShot());
             }
+            DriverAction.waitSec(3);
+            DriverAction.scrollToBottom();
+            DriverAction.waitSec(3);
+            DriverAction.typeText(Tests_TestControl_Locators.questionStatementDiv,"what is java updated?","Validate Question statement is updated successfully","Successfully updated the question statement");
+            DriverAction.click(Tests_TestControl_Locators.upDateAndMoreBtn,"Validate update button is clicked","Update button is clicked successfully");
+
+
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
@@ -2414,4 +2473,452 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
         }
 
     }
+
+    @Then("Validate edit question added to the section")
+    public void validateEditQuestionAddedToTheSection() {
+        try{
+            //click on created question for validation
+            DriverAction.waitSec(3);
+            DriverAction.click(Tests_TestControl_Locators.firstMcqOption);
+            if(DriverAction.isExist(Tests_TestControl_Locators.questionStatement,120))
+            {
+                String questionStatement=DriverAction.getElementText(Tests_TestControl_Locators.questionStatement);
+                if("what is java updated?".equals(questionStatement))
+                {
+                    GemTestReporter.addTestStep("Validate question is added successfully to the test info section", "Successfully added to test info screen",
+                            STATUS.PASS, DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Validate question is added successfully to the test info section", "fail to add to test info screen",
+                            STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to find question statement heading",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("delete created question and validate it is deleted")
+    public void deleteCreatedQuestionAndValidateItIsDeleted() {
+        try{
+            //click on created question for validation
+            DriverAction.click(Tests_TestControl_Locators.firstMcqOption);
+            if(DriverAction.isExist(Tests_TestControl_Locators.deleteBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.deleteBtn,"Validate user able to click on delete button","User successfully able to click on delete button");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "fail to click on delete button",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on verify to delete popup","User successfully able to click on popup");
+       if(!DriverAction.isDisplayed(Tests_TestControl_Locators.firstMcqOption))
+       {
+           GemTestReporter.addTestStep("Validate Created question is deleted successfully", "Question is deleted successfully",
+                   STATUS.PASS, DriverAction.takeSnapShot());
+       }
+       else
+       {
+           GemTestReporter.addTestStep("Validate Created question is deleted successfully", "Question is not deleted successfully",
+                   STATUS.FAIL, DriverAction.takeSnapShot());
+       }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("choose specific question for test")
+    public void chooseSpecificQuestionForTest() {
+        try{
+            DriverAction.scrollToBottom();
+
+            //click on Add Question for the following test
+            if (DriverAction.isDisplayed(Tests_TestControl_Locators.addQuestion)) {
+                DriverAction.click(Tests_TestControl_Locators.addQuestion,"Validate click on Add question to the section","Successfully clicked on Add question to section button");
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Error Occur", "Not able to click on Add question to section button",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            //click the choose specific question
+            DriverAction.scrollToBottom();
+            DriverAction.click(Tests_TestControl_Locators.chooseSpecificBtn,"Validate user able to click on choose specific question button","User clicked on choose specific button");
+            DriverAction.scrollToTop();
+
+
+            //fill filter info for choosing question
+            DriverAction.typeText(Tests_TestControl_Locators.tagFilter,"Java");
+            String[] dropDownValues={"Basic","Multiple choice question","Hard"};
+            for(int i=1;i<=3;i++)
+            {
+                DriverAction.click(By.xpath(Tests_TestControl_Locators.chooseSpecificDropDowns.replace("itr",String.valueOf(i+1))));
+                DriverAction.click(DriverAction.getElement(By.xpath(Tests_TestControl_Locators.questionOptions.replace("input",dropDownValues[i-1]))));
+
+            }
+            DriverAction.click(Tests_TestControl_Locators.comprehensiveCheckbox);
+            DriverAction.click(Tests_TestControl_Locators.addIcon);
+            DriverAction.waitSec(5);
+
+            //Add test
+            DriverAction.click(Tests_TestControl_Locators.addTestBtn,"Validate user able to click on add test button","User successfully clicked on add test button");
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("upload assign candidate from excel and validate")
+    public void uploadAssignCandidateFromExcelAndValidate() {
+        try{
+            //upload template click
+            DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
+            if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Bulk Candidate Upload")))) {
+                DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Bulk Candidate Upload")));
+            }
+
+            //upload file
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile, "C:/Users/rahul.adhikari/Downloads/candidateAssign.xlsx");
+            if (DriverAction.isExist(LearnerModule_Locators.uploadBtn, 120)) {
+                DriverAction.click(LearnerModule_Locators.uploadBtn);
+            } else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @When("{string} to {string}")
+    public void to(String candidate, String test) {
+       try{
+           //assign a candidate to test
+           DriverAction.waitSec(5);
+           DriverAction.click(Tests_TestControl_Locators.threeDotIcon,"Validate user able to click on three dot icon to "+candidate,"User successfully able to click on icon");
+           if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", candidate)))) {
+               DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", candidate)),"Validate user able to select the "+candidate,"User successfully select "+candidate);
+           }
+
+       }
+       catch (Exception e) {
+           logger.info("Exception occurred", e);
+           GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+       }
+    }
+
+    @And("select unassigned User and assign the {string}")
+    public void selectUnassignedUserAndAssignThe(String test) {
+        try{
+            //select the unassigned user
+            DriverAction.waitSec(5);
+            List<WebElement> candidateList=DriverAction.getElements(Tests_TestControl_Locators.candidateList);
+            for(int i=0;i<candidateList.size();i++)
+            {
+                String getStatus=DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr",String.valueOf(i+1))));
+                if("Unassigned".equals(getStatus))
+                {
+                  //check the unassigned user
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(i+1))));
+                   _candidateCounter=i+1;
+                    //DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateAction.replace("itr",String.valueOf(i+1))));
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
+            DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
+            DriverAction.waitSec(5);
+        }
+
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Validate user is assigned successfully")
+    public void validateUserIsAssignedSuccessfully() {
+        try{
+            // get the status of active row
+            String getStatus=DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr",String.valueOf(_candidateCounter))));
+            if("Assigned".equals(getStatus))
+            {
+                GemTestReporter.addTestStep("Validate selected user is assigned successfully", "User is assigned successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate selected user is assigned successfully", "User is not assigned successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+
+    @And("select multiple {string} unassigned User and assign the {string}")
+    public void selectMultipleUnassignedUserAndAssignThe(String count, String test) {
+        try{
+            //select the multiple unassigned user
+            int c=0;
+            DriverAction.waitSec(5);
+            List<WebElement> candidateList=DriverAction.getElements(Tests_TestControl_Locators.candidateList);
+            for(int i=0;i<candidateList.size();i++)
+            {
+                String getStatus=" ";
+                if(test.equals("test")) {
+                     getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr", String.valueOf(i + 1))));
+                }
+                else
+                {
+                     getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.learnerStatus.replace("itr", String.valueOf(i + 1))));
+                }
+                if("Unassigned".equals(getStatus))
+                {
+                    //check the unassigned user
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(i+1))));
+                    _candidateCounter=i+1;
+                    c++;
+                    if(c==Integer.parseInt(count)) {
+                        //DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateAction.replace("itr",String.valueOf(i+1))));
+                        break;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
+            DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
+            DriverAction.waitSec(5);
+            //validate candidates are assigned successfully
+            String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+            System.out.println(popupMessage);
+            String reqPopUpMessage="";
+            if(test.equals("test")) {
+                reqPopUpMessage="All candidates added successfully to the test";
+                if (reqPopUpMessage.equals(popupMessage)) {
+                    GemTestReporter.addTestStep("Validate Candidates are assign properly", "Candidates are assign successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Candidates are assign properly", "Candidates are not assign successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+            else
+            {
+                reqPopUpMessage="All learners added successfully to the course";
+                if (reqPopUpMessage.equals(popupMessage)) {
+                    GemTestReporter.addTestStep("Validate Learners are assign properly", "Learners are assign successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Learners are assign properly", "Learners are not assign successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+
+    }
+
+
+    @Then("Validate {string} of candidate assigned")
+    public void validateOfCandidateAssigned(String count) {
+        try{
+           //get the count of assign candidate
+            String getText=DriverAction.getElementText(Tests_TestControl_Locators.candidateAssignCount);
+           String counts[]=getText.split(":");
+            String candidateCount=counts[1];
+            if(count.equals(candidateCount.trim()))
+            {
+                GemTestReporter.addTestStep("Validate Candidates assign count", "Candidate count matches with selected candidate", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidates assign count", "Candidate count not matches with selected candidate", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @And("Select multiple {string} assigned User and Unassign the {string}")
+    public void selectMultipleAssignedUserAndUnassignThe(String count, String test) {
+        try{
+            //select the multiple assigned user
+            int c=0;
+            DriverAction.waitSec(5);
+            List<WebElement> candidateList=DriverAction.getElements(Tests_TestControl_Locators.candidateList);
+            for(int i=0;i<candidateList.size();i++)
+            {
+                String getStatus=" ";
+                if(test.equals("test")) {
+                    getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr", String.valueOf(i + 1))));
+                    if("Assigned".equals(getStatus))
+                    {
+                        //check the unassigned user
+                        DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(i+1))));
+                        _candidateCounter=i+1;
+                        c++;
+                        if(c==Integer.parseInt(count)) {
+                            //DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateAction.replace("itr",String.valueOf(i+1))));
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.learnerStatus.replace("itr", String.valueOf(i + 1))));
+                    if("Unattempted".equals(getStatus))
+                    {
+                        //check the unassigned user
+                        DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(i+1))));
+                        _candidateCounter=i+1;
+                        c++;
+                        if(c==Integer.parseInt(count)) {
+                            //DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateAction.replace("itr",String.valueOf(i+1))));
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+            }
+            DriverAction.click(Tests_TestControl_Locators.unAssignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
+            DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
+            DriverAction.waitSec(3);
+            //validate candidates are assigned successfully
+            String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+            System.out.println("hello");
+            System.out.println(popupMessage);
+            System.out.println("hello");
+            String reqPopUpMessage="";
+            if(test.equals("test")) {
+                reqPopUpMessage = "All candidates who have not attempted the test removed successfully";
+                if (reqPopUpMessage.equals(popupMessage)) {
+                    GemTestReporter.addTestStep("Validate Candidates are Unassign properly", "Candidates are Unassign successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Candidates are Unassign properly", "Candidates are not Unassign successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+            else
+            {
+                reqPopUpMessage = "All learners who have not attempted the course were removed successfully";
+                if (reqPopUpMessage.equals(popupMessage)) {
+                    GemTestReporter.addTestStep("Validate Learners are Unassign properly", "Learners are Unassign successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Learners are Unassign properly", "Learners are not Unassign successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Validate {string} of candidate Unassigned")
+    public void validateOfCandidateUnassigned(String count) {
+        try{
+            //get the count of Unassign candidate
+            String getText=DriverAction.getElementText(Tests_TestControl_Locators.candidateAssignCount);
+            String counts[]=getText.split(":");
+            String candidateCount=counts[1];
+            if(count.equals(candidateCount.trim()))
+            {
+                GemTestReporter.addTestStep("Validate Candidates Unassign count", "Candidate count matches with selected candidate", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidates Unassign count", "Candidate count not matches with selected candidate", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Edit selected candidate profile and validate")
+    public void editSelectedCandidateProfileAndValidate() {
+        try{
+            //get the text of selected candidate
+            String beforeEditName=DriverAction.getElementText(Tests_TestControl_Locators.assignCandidate);
+            // then click on view profile
+            DriverAction.click(Tests_TestControl_Locators.assignCandidateEyeIcon,"Validate user successfully clicked on Profile icon","User sccessfully clicked on profile icon");
+            DriverAction.click(Tests_TestControl_Locators.editIcon,"Validate user successfully click on edit icon","User successfully clicked on edit icon");
+           DriverAction.waitSec(4);
+            //edit the name of candidate
+            DriverAction.typeText(Tests_TestControl_Locators.emailInput,beforeEditName+"edit");
+            DriverAction.click(Tests_TestControl_Locators.updateBtn,"Validate user successfully clicked on update button","User successfully clicked on update button");
+
+            //get the name after editing and validate it is edited or not
+            String afterEditName=DriverAction.getElementText(Tests_TestControl_Locators.assignCandidate);
+
+            if(beforeEditName.equals(afterEditName))
+            {
+                GemTestReporter.addTestStep("Validate candidate profile is edited properly", "Candidate profile is edited successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate candidate profile is edited properly", "Candidate profile is not edited successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+
 }
+

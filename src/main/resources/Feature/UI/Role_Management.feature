@@ -27,9 +27,6 @@ Feature:Role Management Module features
     Then Validate permissions not granted should not be there on screen
       |Create Test||
 
-
-
-
     Examples:
       | module        |submodule     |role|module1|submodule1|permissionType|permissionSubtype|permission1|permission2|permission3|TestType|reqBtn|
       | Role Management|             |Trainee| Tests |Test Control| Manage Tests | Placement Drives | View Reports | Assign Test | Evaluate Test |Placement Drives|Create Test|
@@ -45,9 +42,6 @@ Feature:Role Management Module features
       |Internal Tests|Candidate Report|Evaluate Candidate|Test Summary|
     Then Validate permissions not granted should not be there on screen
         |Create Test|Create|Copy Test|Edit Test|Candidates Assigned|
-
-
-
 
   Examples:
       | module        |submodule     |role|module1|submodule1|permissionType|permissionSubtype|permission1|permission2|permission3|TestType|reqBtn|
@@ -73,7 +67,7 @@ Feature:Role Management Module features
 
 
 
-  @5 @error
+  @5 @error @fail
   Scenario Outline: Edit Role->Manage Questions->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
@@ -88,7 +82,7 @@ Feature:Role Management Module features
       | module        |submodule     |role|module1|submodule1|permissionType|permissionSubtype|permission1|permission2|permission3|reqBtn|
       | Role Management|             |Trainee| Tests |Questions| Manage Questions |  |   View Question   |Delete Question|       |Add New|
 
-  @6
+  @6 @fail
   Scenario Outline: Edit Role->Manage Courses->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
@@ -104,7 +98,7 @@ Feature:Role Management Module features
       | Role Management|             |Trainee|Manage Courses|Course Library| Manage Courses || View Course |Delete Course| Evaluate Course | Create Course|
 
 
-  @7
+  @7 @fail
   Scenario Outline: Edit Role->Manage Courses-> Manage Content ->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
@@ -120,7 +114,7 @@ Feature:Role Management Module features
       | Role Management|             |Trainee|Manage Courses|Content Library| Manage Courses | Manage Content |  Create/Edit Content  || ||
 
 
-  @8
+  @8 @fail
   Scenario Outline: Edit Role->Manage Courses->Manage Assignment->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
@@ -136,7 +130,7 @@ Feature:Role Management Module features
       | Role Management|             |Trainee|Manage Courses|Assignment Library| Manage Courses | Manage Assignment |   Create/Edit Assignment   || ||
 
 
-  @9
+  @9 @fail
   Scenario Outline: Edit Role->Manage Courses->Manage Batch->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
@@ -152,7 +146,7 @@ Feature:Role Management Module features
       | Role Management|             |Trainee|Manage Courses|Batches| Manage Courses |  Manage Batch  |   View Batch   | Create/Edit Batch | Delete Batch  ||
 
 
-  @10
+  @10 @fail
   Scenario Outline: Edit Role->Other Permissions->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"
