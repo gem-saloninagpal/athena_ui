@@ -5,26 +5,27 @@ import org.openqa.selenium.By;
 public class MyLocators {
     public static By usernameField=By.xpath("//input[@formcontrolname='username']");
     public static By passwordField=By.xpath("//input[@formcontrolname='password']");
-    public static By dashboard=By.xpath("//span[text()='Dashboard']");
 
-    public static By userDashboard=By.xpath("//h6[text()=' User Dashboard ']");
-
-    public static By loginBtn=By.xpath("//button[@label='Sign in']");
+    public static By dashboard=By.xpath("//h6[contains(text(),'User Dashboard')]");
+    public static By loginBtn=By.xpath("//button[@label='LOGIN']");
     public static By sidebar=By.xpath("//p-toolbar//em");
     public static String selectModule="//span[text()='input']//parent::a";
     public static String button="//button[@label='input']";
+    public static By userDashboard=By.xpath("//h6[text()=' User Dashboard ']");
 
     public static String backBtnIcon="//div[text()='input']";
 
     public static String header="(//h6[contains(@class,'text')])[1]";
     public static By fieldsError=By.xpath("//input//following::small");
     public static By crossIcon=By.xpath("//button[contains(@class,'close')]");
+    public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
+    public static By fieldsDropdown=By.xpath("//div[@fxlayout='row wrap']//span[contains(@class,'chevron-down')]//parent::div");
+    public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
+    public static String option="//span[text()='input']//parent::li";
+    public static String option1="//span[contains(text(),'input')]//parent::li//parent::p-multiselectitem";
 
     public static By crossBtn=By.xpath("//span[text()='Close']");
 
-    public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
-    public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
-    public static String option="//li[@aria-label='input']//parent::p-multiselectitem";
     public static By inputFields=By.xpath("//input[contains(@class,'fieldsDesign')]");
 
     public static String switchTab="//span[text()='input']//parent::a";
@@ -81,7 +82,8 @@ public class MyLocators {
     public static By instructionsCheckbox=By.xpath("//div[@class='p-checkbox-box']");
     public static By startTestDialog=By.xpath("//span[contains(@class,'confirm-dialog')]");
     public static By questionsscreen=By.xpath("//div//athena-questions-screen");
-    public static String pageNavigate="(//a[contains(@href,'/login')])[2]";
+
+    public static String pageNavigate="//a[contains(@href,'input')]";
     public static String nextBtn="(//button[@label='input'])[2]";
     public static String sectionSelected="//p[contains(text(),'input')]";
     public static By sectionsDropdown=By.xpath("//p-dropdown[@placeholder='Select Category']");
@@ -89,7 +91,9 @@ public class MyLocators {
     public static By textarea=By.xpath("//div//textarea");
     public static By selectOption=By.xpath("//p-radiobutton[@name='groupname']");
     public static By paletteBtn=By.xpath("//athena-question-palette//button");
-    public static By mcqOptions=By.xpath("//p-radiobutton//input[@type='radio']");
+
+    public static By mcqOptions=By.xpath("(//p-radiobutton//input[@type='radio'])[1]");
+
     public static By checkbox=By.xpath("//input[@type='checkbox']");
     public static By selectCheckbox=By.xpath("//input[@type='checkbox']");
     public static By totalQuestions=By.xpath("//athena-question-palette//button");
@@ -120,9 +124,43 @@ public class MyLocators {
     public static By employeeLastName=By.xpath("(//tbody)[1]//td[2]");
     public static By contentActionsIcon=By.xpath("//tr//button[contains(@class,'p-button')]");
 
+    public static String editOptions="//label[text()='input']//parent::div";
+    public static By assignmentMarks=By.xpath("//input[@formcontrolname=\"assignmentMarks\"]");
+    public static By assignmentTagDisplayed=By.xpath("//tbody//tr[1]//td[3]");
+    public static By assignmentMarksDisplayed=By.xpath("//tbody//tr[1]//td[4]");
+    public static By contentTags=By.xpath("//p-multiselect[@formcontrolname=\"contentTag\"]");
+    public static By contentDuration=By.xpath("//p-inputmask[@formcontrolname='duration']//input");
+    public static By contentTagDisplayed=By.xpath("//tbody//tr//td[2]");
+    public static By contentDurationDisplayed=By.xpath("//tbody//tr//td[3]");
+    public static By switchStatus=By.xpath("//p-inputswitch[@ng-reflect-text='Active']");
+    public static By statusDropdown=By.xpath("//p-dropdown[@placeholder='Status']");
+    public static By inactiveStatusBar= By.xpath("//tbody//tr//p-inputswitch");
+    public static By getTestName=By.xpath("//div[@class='card hover-effect']//h6//div");
+    public static By loginVia=By.xpath("//p-dropdown[@placeholder='Select Option']");
+    public static By viewReport=By.xpath("//button[@label='View Report' and contains(@class,'instBtn')]");
+    public static By saveNext=By.xpath("//button[@ng-reflect-label='Save & Next']");
+    public static By invigilationAlert=By.xpath("//strong[contains(text(),'automatic submission')]");
+    public static By batchActionsIcon=By.xpath("(//div[@class='p-card-body']//button[contains(@class,'p-button')])[1]");
+    public static By addCourse=By.xpath("//i[@ptooltip='Add Course']");
+    public static By addedCourseName=By.xpath("(//thead)[2]//following::tbody//td[1]");
+    public static By recentlyAddedCourse=By.xpath("//div[@class='p-card-body']//div[contains(@class,'name')]");
+    public static By recentlyAddedCourseAfterEdit=By.xpath("(//div[@class='p-card-body']//div[contains(@class,'name')])[1]");
+    public static By owner=By.xpath("//div[contains(@class,'multiselect')]//span");
+    public static By userEmail=By.xpath("//div[@class='upper-card-details']//div[2]/div");
+    public static By batchInputFields=By.xpath("//form[contains(@class,'ng-invalid')]//input");
+    public static By batchCreated=By.xpath("//div[@class='p-card-body']//div[contains(@class,'name')]");
+    public static String createBatch="//button[contains(@ng-reflect-label,'input')]";
+    public static By searchbox=By.xpath("//input[@type='search']");
+    public static String dropdown="//p-dropdown[@placeholder='input']";
+    public static By signInBtn=By.xpath("//button[@label='Sign in']");
+    public static By allCompletedTests=By.xpath("//p-tabpanel[@header='Completed Tests']//div[contains(@class,'name')]");
+    public static By loginPageLink=By.xpath("(//a[contains(text(),'Login')])[2]");
+    public static By videoPrompt=By.xpath("//span[text()='Movie Clip']");
+    public static By wordCounter=By.xpath("//b[contains(text(),'Word Limit')]");
+    public static By closeVideoPrompt=By.xpath("//span[contains(@class,'close')]//parent::button");
+    public static By modules=By.xpath("//a[contains(@class,'header-link')]//span[contains(@class,'p-menuitem-text')]");
+    public static By submodules=By.xpath("//a[@role='treeitem']//span[contains(@class,'p-menuitem-text')]");
 
-    // private static String input;
- //   public static String selectTab="(//li[@role='presentation'])["+(input)+"]//parent::a";
     public static String selectTab(int i) {
 
         String path = "//li[@role='presentation']["+(i)+"]//parent::a";
