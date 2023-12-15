@@ -2289,4 +2289,5 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
         }
     }
+
 }

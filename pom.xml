@@ -19,8 +19,6 @@
             <groupId>com.gemecosystem.gemjar</groupId>
             <artifactId>gemjar-core</artifactId>
             <version>1.3.1</version>
-<<<<<<< HEAD
-=======
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -36,19 +34,7 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>2.6.0</version>
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools -->
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-devtools</artifactId>-->
-<!--            <version>4.0.0-rc-1</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.github.bonigarcia</groupId>-->
-<!--            <artifactId>webdrivermanager</artifactId>-->
-<!--            <version>5.4.1</version>-->
-<!--        </dependency>-->
 
     </dependencies>
     <build>
@@ -107,8 +93,5 @@
             </plugin>
         </plugins>
     </build>
-<<<<<<< HEAD
-=======
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
 </project>

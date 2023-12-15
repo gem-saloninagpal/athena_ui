@@ -1,27 +1,20 @@
 package com.gemini.athenaUi.stepdefinitions;
 
-<<<<<<< HEAD
+
 import com.gemini.athenaUi.locators.MyLocators;
-=======
-import com.gemini.athenaUi.locators.*;
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
-<<<<<<< HEAD
+
 import com.github.dockerjava.api.model.Driver;
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.*;
-<<<<<<< HEAD
-=======
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -34,29 +27,23 @@ import java.util.*;
 import java.util.List;
 
 public class CandidateModule_UserManagement {
-<<<<<<< HEAD
+
     public static String _randomString = "";
     int _quesCount =0;
     String _updatedStatus ="";
     String _status ="";
     String _test="";
     public static String _name ="";
-=======
-    String _randomString = "";
-    String _updatedStatus="";
-    String _status="";
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 
     @Given("^Login using \"([^\"]*)\" and \"([^\"]*)\"$")
     public void login(String username, String password) {
 
         try {
-
-<<<<<<< HEAD
             System.out.println(_randomString);
 
             //enter username and password then click the sign-in button
-                DriverAction.typeText(MyLocators.usernameField, username);
+            DriverAction.typeText(MyLocators.usernameField, username);
             DriverAction.typeText(MyLocators.passwordField, password);
             DriverAction.waitUntilElementClickable(MyLocators.signInBtn,90);
             DriverAction.click(MyLocators.signInBtn);
@@ -84,60 +71,24 @@ public class CandidateModule_UserManagement {
            GemTestReporter.addTestStep("Change resolution","Exception encountered- "+e,STATUS.ERR);
         }
 
-=======
-            DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
-            System.out.println(_randomString);
 
-            //if new role is registered through the email, login using same email
-            if(_randomString.isEmpty()){
-                DriverAction.typeText(MyLocators.usernameField, username);
-                //else login using email passed from example
-            }else {
-                DriverAction.typeText(MyLocators.usernameField, _randomString);
-            }
-            DriverAction.typeText(MyLocators.passwordField, password);
-            DriverAction.waitUntilElementClickable(MyLocators.loginBtn,90);
-            DriverAction.click(MyLocators.loginBtn);
-
-
-            //wait while the page loads.
-            if(DriverAction.isExist(MyLocators.spinner));
-//            DriverAction.waitSec(8);
-            DriverAction.waitUntilElementDisappear(MyLocators.spinner,20);
-
-
-            //verify dashboard is displayed on login
-            if (DriverAction.isExist(MyLocators.userDashboard)) {
-                GemTestReporter.addTestStep("Verify dashboard is displayed", "Successfully displayed the user Dashboard.", STATUS.PASS, DriverAction.takeSnapShot());
-            }
-        } catch (Exception e) {
-            System.out.print("Could not login to Athena.");
-        }
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
     }
 
     @Given("^Select \"([^\"]*)\", \"([^\"]*)\" from sidebar$")
     public void selectFromSidebar(String module, String submodule) {
         try {
-<<<<<<< HEAD
-            //open sidebar
-                DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
-=======
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
-            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(MyLocators.sidebar));
+
 
             //open sidebar
                 DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
             //select a module from sidebar
             DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", module)));
 
             //select submodule if required
-<<<<<<< HEAD
+
             Thread.sleep(3000);
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             if(!submodule.isEmpty()){
                 DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", submodule)));
             }
@@ -152,7 +103,7 @@ public class CandidateModule_UserManagement {
     @Then("^Click the button \"([^\"]*)\"$")
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
-<<<<<<< HEAD
+
             Thread.sleep(4000);
              if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More") || buttonName.equals("Finish Test")) {
                     DriverAction.scrollToBottom();
@@ -161,10 +112,6 @@ public class CandidateModule_UserManagement {
                 DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
                 Thread.sleep(2500);
 
-=======
-       //click the input button
-            DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)),"Verify User able to click on "+buttonName,"User clicked on "+buttonName+" successfully");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
         }catch(Exception e){
             System.out.print("Exception encountered!");
         }
@@ -262,11 +209,7 @@ public class CandidateModule_UserManagement {
         try {
             String firstName="";
             String lastName="";
-<<<<<<< HEAD
-            //verify the registered user by first name
-=======
-            //verify the registered user
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             if(role.equals("Learners")) {
                  firstName = DriverAction.getElementText(MyLocators.learnerFirstName);
                  lastName = DriverAction.getElementText(MyLocators.learnerLastName);
@@ -303,11 +246,8 @@ public class CandidateModule_UserManagement {
     }
 
     @Then("^Generate unique email$")
-<<<<<<< HEAD
     public static String generateUniqueEmail() {
-=======
-    public void generateUniqueEmail() {
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
         try {
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -334,7 +274,6 @@ public class CandidateModule_UserManagement {
             }
 
             _randomString = sb.toString();
-<<<<<<< HEAD
             _name = _randomString;
             _randomString = _randomString.concat("@gmail.com");
             System.out.println("Random String is: " + _randomString);
@@ -343,13 +282,7 @@ public class CandidateModule_UserManagement {
             GemTestReporter.addReasonOfFailure(e+" Exception occured while generating unique email.");
         }
         return null;
-=======
-            _randomString = _randomString.concat("@gmail.com");
-            System.out.println("Random String is: " + _randomString);
-        }catch(Exception e){
-            GemTestReporter.addReasonOfFailure(e+" Exception occured while generating unique email.");
-        }
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     }
 
     @Then("Enter password {string} and verify the required format {string}")
@@ -403,11 +336,8 @@ public class CandidateModule_UserManagement {
                     c++;
                 }
             }
-<<<<<<< HEAD
+
             if (c <= numRoles) {
-=======
-            if (c == numRoles) {
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
                 GemTestReporter.addTestStep("Verify the role of registered user.", "Successfully verified the role", STATUS.PASS, DriverAction.takeSnapShot());
 
             } else {
@@ -422,10 +352,9 @@ public class CandidateModule_UserManagement {
     @Then("^Logout of portal$")
     public void logout() {
         try {
-<<<<<<< HEAD
+
             Thread.sleep(16000);
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             DriverAction.waitUntilElementAppear(MyLocators.navbarDropdown,2);
             DriverAction.click(MyLocators.navbarDropdown, "Click dropdown icon of navbar.", "Successfully clicked the dropdown icon.");
             DriverAction.click(MyLocators.logoutOption, "Select logout from the options.", "Successfully selected Logout.");
@@ -437,15 +366,13 @@ public class CandidateModule_UserManagement {
 
     @Then("^Select roles dropdown icon of navigation bar$")
     public void selectRolesIcon() {
-<<<<<<< HEAD
+
         try {
             DriverAction.click(MyLocators.navbarRolesDropdown, "Click roles dropdown icon of navigation bar", "Roles dropdown is clicked successfully.");
         }catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+ "exception occured while logging out");
         }
-=======
-        DriverAction.click(MyLocators.navbarRolesDropdown,"Click roles dropdown icon of navigation bar","Roles dropdown is clicked successfully.");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     }
 
     @Then("Verify the roles through user's id {string}, {string}, {string}")
@@ -473,18 +400,14 @@ public class CandidateModule_UserManagement {
 
     @Then("^Select Actions icon of first candidate displayed$")
     public void selectActionsIcon() {
-<<<<<<< HEAD
+
         try {
             DriverAction.waitUntilElementClickable(MyLocators.actionsIcon, 40);
             DriverAction.click(MyLocators.actionsIcon, "Click the actions icon", "Successfully clicked the Actions icon.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Select actions icon of first candidate displayed","Exception encountered- "+e,STATUS.ERR);
         }
-=======
-        DriverAction.waitUntilElementClickable(MyLocators.actionsIcon,40);
-        DriverAction.click(MyLocators.actionsIcon,"Click the actions icon","Successfully clicked the Actions icon.");
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
     }
 
     @Then("^Select Actions icon of first record displayed in Employees$")
@@ -510,11 +433,9 @@ public class CandidateModule_UserManagement {
         try {
             DriverAction.scrollToBottom();
             DriverAction.click(MyLocators.enableEditing1, "Enable editing of Registered user", "Successfully clicked Enable Editing option.");
-<<<<<<< HEAD
+
             Thread.sleep(3000);
-=======
-            wait(4000);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
         }catch (Exception e) {
             GemTestReporter.addTestStep("Enable editing", "Exception encountered- " + e, STATUS.ERR);
         }
@@ -539,33 +460,26 @@ public class CandidateModule_UserManagement {
 
     @And("^Verify the status of user and click status button$")
     public void verifyStatusButton() {
-        try{
-<<<<<<< HEAD
-        _status =DriverAction.getElementText(MyLocators.userStatus);
-=======
-        _status=DriverAction.getElementText(MyLocators.userStatus);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+        try {
+            _status = DriverAction.getElementText(MyLocators.userStatus);
 
-        //checks the current status
-       if(_status.equalsIgnoreCase("Active")){
-           GemTestReporter.addTestStep("Verify the status of user","The current status is Active.",STATUS.PASS);
-       }else{
-           GemTestReporter.addTestStep("Verify the status of user","The current status is Inactive.",STATUS.PASS);
-       }
 
-       //checks status after clicking the status button.
-       DriverAction.click(MyLocators.statusButton,"Click on the status button.","Successfully clicked the status button");
-       if(_status.equalsIgnoreCase("Active")){
-<<<<<<< HEAD
-           _updatedStatus ="Inactive";
-       }else{
-           _updatedStatus ="Active";
-=======
-           _updatedStatus="Inactive";
-       }else{
-           _updatedStatus="Active";
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
-       }}
+            //checks the current status
+            if (_status.equalsIgnoreCase("Active")) {
+                GemTestReporter.addTestStep("Verify the status of user", "The current status is Active.", STATUS.PASS);
+            } else {
+                GemTestReporter.addTestStep("Verify the status of user", "The current status is Inactive.", STATUS.PASS);
+            }
+
+            //checks status after clicking the status button.
+            DriverAction.click(MyLocators.statusButton, "Click on the status button.", "Successfully clicked the status button");
+            if (_status.equalsIgnoreCase("Active")) {
+
+                _updatedStatus = "Inactive";
+            } else {
+                _updatedStatus = "Active";
+            }
+        }
         catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+" Exception occured while verifying the status.");
         }
@@ -591,16 +505,13 @@ public class CandidateModule_UserManagement {
 
     @Then("^Click the Yes button$")
     public void clickYesButton() {
-<<<<<<< HEAD
+
         try {
             DriverAction.click(MyLocators.yesBtn, "Click the yes button", "Successfully clicked Yes button.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click the yes button","Exception encountered- "+e,STATUS.ERR);
         }
-=======
-        DriverAction.click(MyLocators.yesBtn,"Click the yes button","Successfully clicked Yes button.");
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
     }
 
     @Then("^Verify the current role \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
@@ -628,15 +539,13 @@ public class CandidateModule_UserManagement {
 
     @And("^Expand Roles dropdown$")
     public void expandRolesDropdown() {
-<<<<<<< HEAD
+
         try{
         DriverAction.click(MyLocators.rolesDropdown,"Expand roles dropdown","Roles dropdown expands displaying list of options.");
       }catch(Exception e){
             GemTestReporter.addTestStep("Expand roles dropdown","Exception encountered- "+e,STATUS.ERR);
         }
-=======
-        DriverAction.click(MyLocators.rolesDropdown,"Expand roles dropdown","Roles dropdown expands displaying list of options.");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     }
 
 
@@ -658,15 +567,13 @@ public class CandidateModule_UserManagement {
 
     @Then("^Expand info dropdown from navbar$")
     public void expandInfoDropdown() {
-<<<<<<< HEAD
+
         try {
             DriverAction.click(MyLocators.infoDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand info dropdown from navbar","Exception encountered- "+e,STATUS.ERR);
         }
-=======
-        DriverAction.click(MyLocators.infoDropdown,"Click the dropdown icon on navbar","Successfully clicked the dropdown icon.");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     }
 
     @And("^Verify the options present in dropdown \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
@@ -786,16 +693,12 @@ public class CandidateModule_UserManagement {
     @Then("Select {string} from dropdown")
     public void selectFromDropdown(String option) {
         try{
-<<<<<<< HEAD
+
                 Thread.sleep(6000);
             if(DriverAction.isDisplayed(By.xpath(MyLocators.profile.replace("input",option)))) {
                 DriverAction.click(By.xpath(MyLocators.profile.replace("input", option)), "Select " + option + " from dropdown", "Successfully selected " + option + " from dropdown.");
             }else if(DriverAction.isDisplayed(By.xpath(MyLocators.sectionOptions.replace("input", option)))){
-=======
-            if(DriverAction.isExist(By.xpath(MyLocators.profile.replace("input",option)))) {
-                DriverAction.click(By.xpath(MyLocators.profile.replace("input", option)), "Select " + option + " from dropdown", "Successfully selected " + option + " from dropdown.");
-            }else if(DriverAction.isExist(By.xpath(MyLocators.sectionOptions.replace("input", option)))){
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
                 DriverAction.click(By.xpath(MyLocators.sectionOptions.replace("input", option)), "Select " + option + " from dropdown", "Successfully selected " + option + " from dropdown.");
             }else{
                 GemTestReporter.addReasonOfFailure("Option not selected from dropdown.");
@@ -885,7 +788,7 @@ public class CandidateModule_UserManagement {
         String str = formatter.format(current);
         Date curr=sdformat.parse(str);
 
-<<<<<<< HEAD
+
         if(curr.compareTo(d1) < 0){
             GemTestReporter.addTestStep("Validate current date is within start and end date range","Its an upcoming test",STATUS.PASS,DriverAction.takeSnapShot());
         }
@@ -893,13 +796,7 @@ public class CandidateModule_UserManagement {
             GemTestReporter.addTestStep("Validate current date is within start and end date range", "Successfully verified the current date is within active range.", STATUS.PASS,DriverAction.takeSnapShot());
         }else{
             GemTestReporter.addTestStep("Validate current date is within start and end date range", "Could not verify the current date is within active range.", STATUS.FAIL,DriverAction.takeSnapShot());
-=======
-        if (curr.compareTo(d1) >= 0 && curr.compareTo(d2) <= 0) {
-            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Successfully verified the current date is within active range.", STATUS.PASS);
-        } else {
 
-            GemTestReporter.addTestStep("Validate current date is within start and end date range", "Could not verify the current date is within active range.", STATUS.FAIL);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
         }
     }
 
@@ -911,7 +808,7 @@ public class CandidateModule_UserManagement {
         return temporalAccessor.get(ChronoField.MONTH_OF_YEAR);
     }
 
-<<<<<<< HEAD
+
     @Then("^Start test and verify instructions video is displayed$")
     public void startTestVerifyInstructionsVideo() {
         try {
@@ -919,13 +816,7 @@ public class CandidateModule_UserManagement {
             _test=DriverAction.getElementText(MyLocators.getTestName);
             DriverAction.click(MyLocators.startTest);
             GemTestReporter.addTestStep("Click the start test button of test", "Start test button is clicked successfully.", STATUS.PASS);
-=======
-    @Then("^Start test \"([^\"]*)\" and verify instructions video is displayed$")
-    public void startTestVerifyInstructionsVideo(String test) {
-        try {
-            DriverAction.click(By.xpath(MyLocators.testName.replace("name",test)));
-            GemTestReporter.addTestStep("Click the start test button of test-"+test, "Start test button of-"+test+" is clicked successfully.", STATUS.PASS);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 
             if (DriverAction.isExist(MyLocators.instructionsVideo)) {
                 GemTestReporter.addTestStep("Verify instructions video is displayed", "Successfully displayed the instructions video on clicking start test button.", STATUS.PASS);
@@ -941,22 +832,19 @@ public class CandidateModule_UserManagement {
 
     @And("^Wait while screen loads$")
     public void waitWhileScreenLoads() {
-<<<<<<< HEAD
+
         DriverAction.waitUntilElementClickable(MyLocators.infoDropdown, 30);
       //  DriverAction.waitUntilElementClickable(MyLocators.loginPageLink,30);
-=======
-        DriverAction.waitUntilElementClickable(MyLocators.infoDropdown, 60);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     }
 
 
     @And("^Verify the report screen$")
     public void verifyTheReportScreen() {
         try {
-<<<<<<< HEAD
+
             Thread.sleep(3000);
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             String[] columns = {"Section", "Marks", "Questions", "Attempted", "Secured Marks"};
 
             //verify the header
@@ -988,7 +876,7 @@ public class CandidateModule_UserManagement {
 
     @Then("Enter a password {string} in new password field")
     public void enterNewPassword(String password) {
-<<<<<<< HEAD
+
         try {
             DriverAction.typeText(MyLocators.passwordField, password);
         } catch (Exception e) {
@@ -1004,9 +892,7 @@ public class CandidateModule_UserManagement {
                 GemTestReporter.addTestStep("Verify user is navigated to desired test- " + _test, "Successfully verified user navigated to test- " + _test, STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify user is navigated to desired test- " + _test, "Could not verify user navigated to test- " + _test, STATUS.FAIL, DriverAction.takeSnapShot());
-=======
-try {
-    DriverAction.typeText(MyLocators.passwordField, password);
+            }
 }catch (Exception e) {
     GemTestReporter.addTestStep("Enter a new password", "Exception encountered- " + e, STATUS.ERR);
 }
@@ -1021,7 +907,7 @@ try {
                 GemTestReporter.addTestStep("Verify user is navigated to desired test- " + test, "Successfully verified user navigated to test- " + test, STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify user is navigated to desired test- " + test, "Could not verify user navigated to test- " + test, STATUS.FAIL, DriverAction.takeSnapShot());
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             }
         }catch (Exception e) {
             GemTestReporter.addTestStep("Verify user navigated to desired test", "Exception encountered- " + e, STATUS.ERR);
@@ -1055,11 +941,9 @@ try {
     @Then("^Check the instructions checkbox$")
     public void instructionsCheckbox() {
         try {
-<<<<<<< HEAD
-            DriverAction.scrollToBottom();
-=======
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+            DriverAction.scrollToBottom();
+
             DriverAction.click(MyLocators.instructionsCheckbox);
             GemTestReporter.addTestStep("Check the instructions checkbox", "Successfully checked the instructions checkbox.", STATUS.PASS);
         }catch (Exception e) {
@@ -1080,11 +964,9 @@ try {
         }
     }
 
-<<<<<<< HEAD
+
     @And("^Verify user navigates to questions screen of the selected section \"([^\"]*)\"$")
-=======
-    @And("Verify user navigates to questions screen of the selected section {string}")
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     public void QuestionsScreen(String section) {
         try {
             if (DriverAction.isExist(MyLocators.questionsscreen)&&DriverAction.isExist(By.xpath(MyLocators.sectionSelected.replace("input",section)))){
@@ -1102,29 +984,22 @@ try {
     @Then("^Expand the dropdown containing sections$")
     public void expandSections() {
         try {
-<<<<<<< HEAD
+
             DriverAction.waitUntilElementIsClickable(MyLocators.sectionsDropdown);
             DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown expands successfully.");
-=======
-            DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
         }catch (Exception e) {
             GemTestReporter.addTestStep("Expand sections dropdown", "Exception encountered- " + e, STATUS.ERR);
         }
     }
 
     @Then("Navigate to page {string}")
-<<<<<<< HEAD
+
     public void pageNavigate(String page) {
         try {
             Thread.sleep(15000);
         //    DriverAction.waitUntilElementClickable(By.xpath(MyLocators.pageNavigate.replace("input", page)),120);
-=======
-    public void pageNavigate(String page) throws InterruptedException {
-        try {
-            //navigate to page
-            DriverAction.waitSec(5);
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             DriverAction.click(By.xpath(MyLocators.pageNavigate.replace("input", page)), "Navigate to page " + page, "Successfully navigated to page " + page);
         }catch (Exception e) {
             GemTestReporter.addTestStep("Navigate to page-"+page, "Exception encountered- " + e, STATUS.ERR);
@@ -1140,7 +1015,7 @@ try {
     @Then("^Select or type an answer$")
     public void enterAnswer() {
         try {
-<<<<<<< HEAD
+
             //close the video prompt if displays
             if(DriverAction.isDisplayed(MyLocators.videoPrompt)){
   //              if(!DriverManager.getWebDriver().findElement(MyLocators.videoPrompt).isDisplayed()){
@@ -1175,12 +1050,7 @@ try {
 //                    GemTestReporter.addTestStep("Validate the word count for subjective questions","Could not validate the word count.",STATUS.FAIL,DriverAction.takeSnapShot());
 //                }
             } else if (DriverAction.isDisplayed(MyLocators.selectOption)||DriverAction.isDisplayed(MyLocators.mcqOptions)) {
-=======
-            if (DriverAction.isExist(MyLocators.textarea)) {
-                DriverAction.typeText(MyLocators.textarea, "abc");
-                GemTestReporter.addTestStep("Enter answer in input field", "Successfully entered the answer in input field", STATUS.PASS);
-            } else if (DriverAction.isExist(MyLocators.mcqOptions)) {
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
                 DriverAction.click(MyLocators.selectOption, "Select an option");
                 GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
             } else {
@@ -1197,10 +1067,9 @@ try {
         try {
             DriverAction.waitSec(4);
             String status = DriverAction.getAttributeName(MyLocators.paletteBtn, "class");
-<<<<<<< HEAD
+
             DriverAction.waitSec(3);
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
 
             //if answer selected is saved
             if (status.contains(questionStatus)) {
@@ -1219,7 +1088,7 @@ try {
     public void clearAnswer() {
         try {
             List<WebElement>options=new ArrayList<>();
-<<<<<<< HEAD
+
             int c=0;
 
             //MCQ type
@@ -1236,27 +1105,13 @@ try {
 
             //subjective type
             else if(DriverAction.isDisplayed(MyLocators.textarea)){
-=======
 
-            //MCQ type
-            if(DriverAction.isExist(MyLocators.mcqOptions)) {
-                options = DriverAction.getElements(MyLocators.mcqOptions);
-            }
-
-            //checkboxes type
-            else if(DriverAction.isExist(MyLocators.checkbox)){
-                options = DriverAction.getElements(MyLocators.checkbox);
-            }
-
-            //subjective type
-            else if(DriverAction.isExist(MyLocators.textarea)){
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
                 if(DriverAction.getAttributeName(MyLocators.textarea,"ng-reflect-model").isEmpty()){
                     GemTestReporter.addTestStep("Verify subjective answer got cleared","Successfully verified the subjective answer got cleared.",STATUS.PASS);
                 }else{
                     GemTestReporter.addTestStep("Verify subjective answer got cleared","Could not verify the subjective answer got cleared.",STATUS.FAIL);
                 }
-<<<<<<< HEAD
+
            //     System.exit(1);
             }
 
@@ -1278,25 +1133,7 @@ try {
                 }
             }
 
-=======
-                System.exit(0);
-            }
 
-            //verifying none of the options is selected
-            int numOptions = 0;
-            for (int i = 0; i < options.size(); i++) {
-                if (DriverAction.getAttributeName(options.get(i), "aria-checked").equals("true")) {
-                    GemTestReporter.addTestStep("Verify the answer got cleared", "Could not verify the answer got cleared.", STATUS.FAIL);
-                    break;
-                } else {
-                    numOptions++;
-                }
-            }
-
-            if (numOptions == options.size()) {
-                GemTestReporter.addTestStep("Verify the answer got cleared", "Successfully verified the answer got cleared.", STATUS.PASS);
-            }
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
         }catch(Exception e){
             GemTestReporter.addReasonOfFailure(e+" Exception occured while verifying the answer got cleared.");
         }
@@ -1305,7 +1142,7 @@ try {
     @Then("^Select or type all the questions of a section and save$")
     public void attemptAllQues() throws InterruptedException {
         try {
-<<<<<<< HEAD
+
 
             int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
             for (int i = 0; i < totalQues; i++) {
@@ -1315,13 +1152,7 @@ try {
                 _quesCount++;
             }
             Thread.sleep(4000);
-=======
-            int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
-            for (int i = 0; i < totalQues; i++) {
-                enterAnswer();
-                clickTheButton("Save & Next");
-            }
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             clickTheButton("Finish Test");
         }
     catch (Exception e) {
@@ -1341,7 +1172,7 @@ try {
         }
     }
 
-<<<<<<< HEAD
+
     @Then("^Validate questions count$")
     public void validateQuestionCount() {
 try {
@@ -1351,16 +1182,7 @@ try {
     String unattemptedQues = DriverAction.getElementText(MyLocators.unattemptedQuesCount);
     if (totalQues.equals(count) && attemptedQues.equals(count) && unattemptedQues.equals("0")) {
         GemTestReporter.addTestStep("Validate questions count", "Successfully validated total questions- " + totalQues + ", attempted questions- " + attemptedQues + ", unattempted questions- " + unattemptedQues + ".", STATUS.PASS, DriverAction.takeSnapShot());
-=======
-    @Then("^Validate questions count \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
-    public void validateQuestionCount(String total, String attempted, String unattempted) {
-try {
-    String totalQues = DriverAction.getElementText(MyLocators.totalQuesCount);
-    String attemptedQues = DriverAction.getElementText(MyLocators.attemptedQuesCount);
-    String unattemptedQues = DriverAction.getElementText(MyLocators.unattemptedQuesCount);
-    if (totalQues.equals(total) && attemptedQues.equals(attempted) && unattemptedQues.equals(unattempted)) {
-        GemTestReporter.addTestStep("Validate questions count", "Successfully validated total questions- " + total + ", attempted questions- " + attempted + ", unattempted questions- " + unattempted + ".", STATUS.PASS, DriverAction.takeSnapShot());
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     } else {
         GemTestReporter.addTestStep("Validate questions count", "Could not validate questions count.", STATUS.FAIL, DriverAction.takeSnapShot());
     }
@@ -1382,7 +1204,7 @@ try {
                 }
                 DriverAction.waitSec(2);
                 DriverAction.click(sections.get(k));
-<<<<<<< HEAD
+
                 System.out.println(k);
                 int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
                 for (int i = 0; i < totalQues; i++) {
@@ -1391,12 +1213,7 @@ try {
 //                        break;
 //                    }
                     clickTheButtonSaveNext();
-=======
-                int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
-                for (int i = 0; i < totalQues; i++) {
-                    enterAnswer();
-                    clickTheButton("Save & Next");
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
                 }
                 sections=DriverAction.getElements(MyLocators.totalSections);
             }
@@ -1408,11 +1225,10 @@ try {
     @Then("^Click the left arrow button$")
     public void leftArrowButton() {
         try {
-<<<<<<< HEAD
+
             DriverAction.scrollToBottom();
             DriverAction.waitUntilElementIsClickable(MyLocators.leftArrowBtn);
-=======
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             DriverAction.click(MyLocators.leftArrowBtn, "Click left arrow button", "Successfully clicked the left arrow button");
         }catch (Exception e) {
             GemTestReporter.addTestStep("Click the left arrow button", "Exception encountered- " + e, STATUS.ERR);
@@ -1486,7 +1302,7 @@ try {
     public void rightArrowKey(int totalQues) {
         try {
             int c = 0;
-<<<<<<< HEAD
+
             DriverAction.scrollToBottom();
             DriverAction.waitUntilElementIsClickable(MyLocators.rightKey);
             String value = DriverAction.getElement(MyLocators.rightKey).getAttribute("disabled");
@@ -1496,20 +1312,14 @@ try {
                 c++;
                 value = DriverAction.getElement(MyLocators.rightKey).getAttribute("disabled");
                 System.out.println(value);
-=======
-            while (DriverAction.getAttributeName(MyLocators.rightKey, "disabled").equals("false")) {
-                DriverAction.click(MyLocators.rightKey);
-                c++;
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             }
             if (c == totalQues - 1) {
                 GemTestReporter.addTestStep("Validate the functionality of right arrow key", "Successfully verified the functionality of right arrow key.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-<<<<<<< HEAD
+
                 GemTestReporter.addTestStep("Validate the functionality of right arrow key", "Total questions in test do not match the question count passed from examples.", STATUS.FAIL, DriverAction.takeSnapShot());
-=======
-                GemTestReporter.addTestStep("Validate the functionality of right arrow key", "Could not verify the functionality of right arrow key.", STATUS.FAIL, DriverAction.takeSnapShot());
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
             }
         }catch (Exception e) {
             GemTestReporter.addTestStep("Validate the functionality of right arrow key", "Exception encountered- " + e, STATUS.ERR);
@@ -1519,12 +1329,10 @@ try {
     @And("^Verify key disables on last question$")
     public void verifyKeyDisables() {
         try {
-<<<<<<< HEAD
+
             String value=DriverAction.getElement(MyLocators.rightKey).getAttribute("disabled");
             if (value!=null) {
-=======
-            if (DriverAction.getAttributeName(MyLocators.rightKey, "disabled").equals("true")) {
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
                 GemTestReporter.addTestStep("Verify key disables on last question", "Successfully verified disabled key on last question.", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Verify key disables on last question", "Could not verify disabled key on last question.", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -1535,11 +1343,9 @@ try {
     }
 
     @And("Click the {string} button after finishing test")
-<<<<<<< HEAD
+
     public static void clickButton(String button) {
-=======
-    public void clickButton(String button) {
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
         try {
             DriverAction.click(By.xpath(MyLocators.testSubmitButton.replace("input", button)));
         }catch (Exception e) {
@@ -1569,22 +1375,8 @@ try {
         }
     }
 
-<<<<<<< HEAD
-=======
-    @And("^Verify \"([^\"]*)\" is present in completed tests$")
-    public void verifyCompletedTests(String test) {
-        try {
-            if (DriverAction.isExist(By.xpath(MyLocators.completedTest.replace("input", test)))) {
-                GemTestReporter.addTestStep("Verify " + test + " is present in completed tests", "Successfully verified " + test + " is present in completed tests.", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Verify " + test + " is present in completed tests", "Could not verify " + test + " is present in completed tests.", STATUS.FAIL, DriverAction.takeSnapShot());
-            }
-        }catch (Exception e) {
-            GemTestReporter.addTestStep("Verify "+test+" is present in completed tests", "Exception encountered- " + e, STATUS.ERR);
-        }
-    }
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+
     @Then("Enter a password {string} in old password fields")
     public void enterOldPassword(String password) {
         try {
@@ -1593,7 +1385,7 @@ try {
             GemTestReporter.addTestStep("Enter a password in old password fields", "Exception encountered- " + e, STATUS.ERR);
         }
     }
-<<<<<<< HEAD
+
 
 
     @Given("^Expand the login via dropdown$")
@@ -1827,27 +1619,68 @@ try {
             GemTestReporter.addTestStep("Validate the submodules present","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
-=======
-    @Given("^Select \"([^\"]*)\" from sidebar$")
-    public void selectFromSidebarLearner(String module) {
-        try {
-//           DriverAction.waitUntilElementAppear(MyLocators.sidebar,120);
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
-            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(MyLocators.sidebar));
-//            element.click();
-            //open sidebar
-            DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
-            //select a module from sidebar
-            DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", module)));
 
-
-            //close sidebar
-            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
-        } catch (Exception e) {
-            GemTestReporter.addTestStep("Select module from sidebar", "Throws exception", STATUS.ERR, DriverAction.takeSnapShot());
+    @Then("^Verify the tabs present in candidate test summary$")
+    public void verifyTabsInCandidateSummary() {
+        try{
+            String[]tabs={"Active Tests","Attempted Tests"};
+            List<WebElement>getTabs=DriverAction.getElements(MyLocators.testSummaryTabs);
+            int c=0;
+            for(int i=0;i<getTabs.size();i++){
+                if(getTabs.get(i).getText().equals(tabs[i])){
+                    c++;
+                }
+            }
+            if(c==2){
+                GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Successfully verified the tabs present in candidate test summary",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Could not verify the tabs present in candidate test summary",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 
+    @Then("^Verify the tabs present in learner's summary$")
+    public void verifyTabsInLearnerSummary() {
+        try{
+            DriverAction.waitSec(3);
+            String[]tabs={"Active Tests","Attempted Tests","Ongoing Courses","Completed Courses","Expired Courses"};
+             List<WebElement>getTabs=DriverAction.getElements(MyLocators.testSummaryTabs);
+             int c=0;
+             for(int i=0;i<getTabs.size();i++){
+                 if(getTabs.get(i).getText().equals(tabs[i]))
+                 c++;
+             }
+             if(c==5){
+                 GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Successfully verified the tabs present in learner's summary.",STATUS.PASS,DriverAction.takeSnapShot());
+             }else{
+                 GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Could not verify the tabs present in learner's summary",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+        }catch(Exception e){
+             GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
 
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
+    }
+
+
+    @And("^Select actions icon of first learner displayed$")
+    public void firstLearnerActionIcon() {
+        try{
+            DriverAction.waitSec(3);
+            DriverAction.click(MyLocators.learnerActionsIcon,"Select actions icon of first learner displayed","Successfully selected the actions icon of first learner.");
+        }  catch(Exception e){
+             GemTestReporter.addTestStep("Select actions icon of first learner displayed","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+
+    }
+
+    @And("^Click View Report in attempted tests$")
+    public void clickViewReportInAttemptedTests() {
+        try{
+            DriverAction.click(MyLocators.viewReportInAttemptedTest,"Click View Report in attempted tests","Successfully clicked view report in attempted tests.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click View Report in attempted tests","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
 }

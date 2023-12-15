@@ -1,6 +1,8 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.AssignLearnerInBatchLocators;
+import java.util.List;
+
 import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -8,6 +10,7 @@ import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.WebElement;
 
 public class AssignLearnerToBatch {
     int _learnersCount=0;
@@ -69,7 +72,7 @@ public class AssignLearnerToBatch {
     @And("^Search a learner \"([^\"]*)\"$")
     public void searchALearner(String learner) {
         try{
-            DriverAction.typeText(AssignLearnerInBatchLocators.searchbox,learner,"Search a learner");
+            DriverAction.typeText(MyLocators.learnerSearchbox,learner,"Search a learner");
         }catch(Exception e){
             GemTestReporter.addTestStep("Search a learner","Exception encountered- "+e,STATUS.ERR);
         }
@@ -138,6 +141,59 @@ public class AssignLearnerToBatch {
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Validate the count after unassigning learners from different pages","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("^Validate records get filtered on the basis of status \"([^\"]*)\"$")
+    public void validateRecordsGetFilteredOnTheBasisOfStatus(String status) {
+        try {
+            DriverAction.waitSec(3);
+            List<WebElement> rows = DriverAction.getElements(AssignLearnerInBatchLocators.rows);
+            boolean isPassed = true;
+            for (WebElement row : rows) {
+                String getStatus = row.getText();
+                if (!getStatus.equals(status)) {
+                    isPassed = false;
+                    break;
+                }
+            }
+            if (isPassed) {
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of status", "Successfully validated the filtered records", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of status", "Could not validate the filtered records", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Validate records get filtered on the basis of status","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("Validate records get filtered on the basis of EC {string}")
+    public void validateRecordsFilteredOnEC(String ec) {
+        try{
+            List<WebElement>statusOfRecords=DriverAction.getElements(AssignLearnerInBatchLocators.status);
+            boolean isPassed=true;
+            for(int i=0;i<statusOfRecords.size();i++){
+                if(!statusOfRecords.get(i).getText().equals(ec)){
+                    isPassed=false;
+                    break;
+                }
+            }
+            if(isPassed){
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of EC","Successfully validated the records on the basis of EC.",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of EC","Could not validate the records on the basis of EC.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Validate records get filtered on the basis of EC","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Expand selected category dropdown$")
+    public void expandSelectedCategoryDropdown() {
+        try{
+            DriverAction.click(AssignLearnerInBatchLocators.expandSelectedCategory,"Expand selected category dropdown","Successfully expanded the selected category dropdown.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Expand selected category dropdown","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 }

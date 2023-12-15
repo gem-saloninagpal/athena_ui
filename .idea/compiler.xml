@@ -8,11 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="athena-ui" />
-<<<<<<< HEAD
-        <module name="athena-api" />
-=======
         <module name="athena_ui" />
->>>>>>> 161a9c45bf9ec7f6f65c2e429421f49e7d3443d9
       </profile>
     </annotationProcessing>
   </component>
