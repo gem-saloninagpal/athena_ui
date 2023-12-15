@@ -3,7 +3,7 @@ Feature: User Management features
     Background:
       And Navigate to login page
     #  And Logout of portal
-      And Login using "saloni02@gmail.com" and "abc@1234"
+      And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
 
       @regression
@@ -172,6 +172,36 @@ Feature: User Management features
             Given Open the sidebar
             Then Validate the modules present
             Then Validate the submodules present
+
+  @regression
+          Scenario Outline: View test report
+            Given Select "<module>", "<submodule>" from sidebar
+            When Switch to tab "<tab>", "<index>"
+            And Select Actions icon of first candidate displayed
+            And Select "View Test Reports" from actions dropdown
+            Then Verify the tabs present in candidate test summary
+
+            Examples:
+              | module        |submodule| tab       | index |
+              |User Management|         | Candidates|   2   |
+
+  @regression
+          Scenario Outline: View learner's report
+            Given Select "<module>", "<submodule>" from sidebar
+            When Switch to tab "<tab>", "<tabNumber>"
+            And Search a learner "saloni02@gmail.com"
+            And Select actions icon of first learner displayed
+            And Select "View Learner Reports" from actions dropdown
+            Then Verify the tabs present in learner's summary
+            And Switch to "Attempted Tests"
+            And Click View Report in attempted tests
+            And Click the button "Back"
+            Then Verify the tabs present in learner's summary
+
+            Examples:
+              | module        |submodule| tab     | tabNumber |
+              |User Management|         | Learners|   3       |
+
 
 
 

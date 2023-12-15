@@ -142,9 +142,9 @@ Feature:UserDashboard Module features
     And Enter the "<courseType>", "<duration>", "<fileLocation>", "<category>" in Course fields
     And Enter course description "<description>"
     And Click the button until it appear "Add Content"
-      And Validate "<content>" Add to Course "<contentMessage>"
-      And Validate Filter functionality "<assignmentName>"
-      And Validate "<assignment>" Add to Course "<assignmentMessage>"
+    And Validate "<content>" Add to Course "<contentMessage>"
+    And Validate Filter functionality "<assignmentName>"
+    And Validate "<assignment>" Add to Course "<assignmentMessage>"
     And publish the course
     And Delete the course
     And Select "<module1>", "<submodule1>" from sidebar
@@ -205,7 +205,7 @@ Feature:UserDashboard Module features
     And Validate Filter functionality "<assignmentName>"
     And Validate "<assignment>" Add to Course "<assignmentMessage>"
     And publish the course
-            And Assign a Learner to the course
+    And Assign a Learner to the course
     And Select "<module1>", "<submodule1>" from sidebar
     Then Validate "<Course>" on User Dashboard
 

@@ -8,6 +8,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -27,6 +28,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->verify show score after submission
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -49,6 +51,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->verify Test Reattempt
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -71,6 +74,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt->Validate Candidate Report
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -94,6 +98,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt->Validate Test Summary Report
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -117,6 +122,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Copy Test
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -134,6 +140,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Edit Test
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -152,6 +159,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Candidate Assigned
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -169,6 +177,7 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->Attempt Test->Evaluate Candidate
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
+    And Validate "Create Test" Screen open
     And Add Test Info "<Duration>", "<Campus>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
@@ -666,5 +675,122 @@ Feature:Tests Module features
     Examples:
       | module        |submodule     |Candidates Assigned|test|
       | Tests         |Test Control  |Candidates Assigned|test|
+
+
+    @35
+  Scenario Outline:  Select candidate  of different page->Validate candidate assign count and popup
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And select multiple "<count>" Unassigned user of different page and Assign the "<test>"
+    Then Validate "<count>" of candidate assigned
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|count|
+      | Tests         |Test Control   |Candidates Assigned|test|2    |
+
+  @36
+  Scenario Outline:  Select candidate of different page->Validate candidate Unassign count and popup
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And select multiple "<count>" Assigned User of different page and Unassign the "<test>"
+    Then Validate "<count>" of candidate assigned
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|count|
+      | Tests         |Test Control  |Candidates Assigned|test|0    |
+
+  @37
+  Scenario Outline:  Filter candidate using email->Validate candidate assign count and popup
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And search user by "<email>" and assign it "<test>"
+    Then Validate "<count>" of candidate assigned
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|count|email|
+      | Tests         |Test Control  |Candidates Assigned|test|1    |931@gmail.com	|
+
+
+  @38
+  Scenario Outline:  Filter candidate using email->Validate candidate Unassign count and popup
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And search user by "<email>" and Unassign it "<test>"
+    Then Validate "<count>" of candidate assigned
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|count|email|
+      | Tests         |Test Control  |Candidates Assigned|test|0    |931@gmail.com	|
+
+  @39 @bug
+  Scenario Outline:  Upload wrong Email Candidate
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then upload and validate Invalid User is not Uploaded "<filelocation>"
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_wrongEmail.xlsx|
+
+  @40
+  Scenario Outline:  Upload assigned Candidate
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then upload assigned user and validate "<filelocation>"
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_assignedUser.xlsx|
+
+
+  @41
+  Scenario Outline:  Upload Unassigned Candidate
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then upload Unassigned "<Candidate>" and validate "<filelocation>"
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|Candidate|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_unassignedUser.xlsx|rahul25@gmail.com|
+
+
+  @41
+  Scenario Outline:  Upload New Candidate
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then Upload New "<Candidate>" and Validate "<filelocation>"
+
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|Candidate|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_newUser.xlsx|rahulNew@gmail.com|
+
+
+  @42 @bug
+  Scenario Outline:  Upload New Candidate with invalid mobile number
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then upload New User with Invalid Mobile number "<filelocation>"
+
+    Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_invalidMobileNumber.xlsx|
+
+
+    @bug
+  Scenario Outline:  Upload Multiple Unassigned User
+    Given Select "<module>", "<submodule>" from sidebar
+    When "<Candidates Assigned>" to "<test>"
+    And switch to bulk upload screen "<User>"
+    Then Upload Multiple Unassigned "<Candidate>" and Validate "<filelocation>"
+
+      Examples:
+      | module        |submodule     |Candidates Assigned|test|User|filelocation|Candidate|
+      | Tests         |Test Control  |Candidates Assigned|test|Candidate|C:\Users\rahul.adhikari\Downloads\Sample_Candidate_Assignment_invalidMobileNumber.xlsx||
 
 

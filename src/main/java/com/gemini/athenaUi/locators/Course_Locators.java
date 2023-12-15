@@ -49,6 +49,18 @@ public class Course_Locators {
 
     public static String heading="//h6[text()='input']";
 
+    public static By test=By.xpath("//u[text()='Tests']");
+
+    public static By eyeIcon=By.xpath("//i[@class='pi pi-eye mr-3']");
+
+    public static By detailedReportBtn=By.xpath("//button//span[text()='Detailed Report']");
+
+    //button//span[text()='Detailed Report']
+
+    //i[@class='pi pi-eye mr-3']
+
+    //u[text()='Tests']
+
     //h6[text()='input']
     public static By actionHeading=By.xpath("//h6");
     public static By draftedCourse=By.xpath("//div[@class='name-style control-overflow longer-name']");
@@ -128,7 +140,7 @@ public class Course_Locators {
     public static By contentsStatusUnattempted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[4]");
 
     public static By contentsStatusCompleted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[5]");
-    public static By assignmentsStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[7]");
+    public static By assignmentsStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[6]");
 
 
     public static By emailInput=By.xpath(" //input[@placeholder='Name/Email']");

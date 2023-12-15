@@ -1620,4 +1620,67 @@ try {
         }
     }
 
+    @Then("^Verify the tabs present in candidate test summary$")
+    public void verifyTabsInCandidateSummary() {
+        try{
+            String[]tabs={"Active Tests","Attempted Tests"};
+            List<WebElement>getTabs=DriverAction.getElements(MyLocators.testSummaryTabs);
+            int c=0;
+            for(int i=0;i<getTabs.size();i++){
+                if(getTabs.get(i).getText().equals(tabs[i])){
+                    c++;
+                }
+            }
+            if(c==2){
+                GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Successfully verified the tabs present in candidate test summary",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Could not verify the tabs present in candidate test summary",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify the tabs present in candidate test summary","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("^Verify the tabs present in learner's summary$")
+    public void verifyTabsInLearnerSummary() {
+        try{
+            DriverAction.waitSec(3);
+            String[]tabs={"Active Tests","Attempted Tests","Ongoing Courses","Completed Courses","Expired Courses"};
+             List<WebElement>getTabs=DriverAction.getElements(MyLocators.testSummaryTabs);
+             int c=0;
+             for(int i=0;i<getTabs.size();i++){
+                 if(getTabs.get(i).getText().equals(tabs[i]))
+                 c++;
+             }
+             if(c==5){
+                 GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Successfully verified the tabs present in learner's summary.",STATUS.PASS,DriverAction.takeSnapShot());
+             }else{
+                 GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Could not verify the tabs present in learner's summary",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+        }catch(Exception e){
+             GemTestReporter.addTestStep("Verify the tabs present in learner's summary","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+
+    }
+
+
+    @And("^Select actions icon of first learner displayed$")
+    public void firstLearnerActionIcon() {
+        try{
+            DriverAction.waitSec(3);
+            DriverAction.click(MyLocators.learnerActionsIcon,"Select actions icon of first learner displayed","Successfully selected the actions icon of first learner.");
+        }  catch(Exception e){
+             GemTestReporter.addTestStep("Select actions icon of first learner displayed","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+
+    }
+
+    @And("^Click View Report in attempted tests$")
+    public void clickViewReportInAttemptedTests() {
+        try{
+            DriverAction.click(MyLocators.viewReportInAttemptedTest,"Click View Report in attempted tests","Successfully clicked view report in attempted tests.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click View Report in attempted tests","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
 }

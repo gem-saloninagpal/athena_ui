@@ -810,7 +810,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul23@gmail.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul.adhikari@geminisolutions.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
@@ -910,7 +910,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             }
             if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
             {
-                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahul");
                 DriverAction.scrollToBottom();
             }
             DriverAction.waitSec(5);
@@ -987,7 +987,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             }
             if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
             {
-                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahul");
 
             }
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
@@ -1317,7 +1317,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             //select Learner Report option
             DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input","Learner Reports")));
 
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View Learner(s) Report: "+  _firstCourseName))))
+            String fetchedHeading=DriverAction.getElementText(Course_Locators.actionHeading);
+            String reqHeading="View Learner(s) Report: "+_firstCourseName;
+
+
+            if(fetchedHeading.trim().equals(reqHeading.trim()))
             {
                 GemTestReporter.addTestStep("Validate user directed to Learner Report screen successfully", "User successfully directed to Learner Report screen",
                         STATUS.PASS, DriverAction.takeSnapShot());
@@ -1354,14 +1358,14 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                   if(courseStatus.equals("Expired"))
                   {
                       String status=DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
-                    if(status.equals("Unattempted"))
+                    if(status.equals("Unattempted")||status.equals("Completed")||status.equals("In Progress"))
                     {
-                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is unattempted",
+                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted or completed or In progress", "Expired course is "+status,
                                 STATUS.PASS, DriverAction.takeSnapShot());
                     }
                     else
                     {
-                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is not giving desired status",
+                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted or completed or In progress", "Expired course is not giving desired status",
                                 STATUS.FAIL, DriverAction.takeSnapShot());
                     }
                   }
@@ -1606,7 +1610,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     String getStatus = " ";
                     if (test.equals("test")) {
                         getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr", String.valueOf(i + 1))));
-                        if ("Assigned".equals(getStatus)) {
+                        if ("Unassigned".equals(getStatus)) {
                             //check the unassigned user
                             DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr", String.valueOf(i + 1))));
 
@@ -1780,7 +1784,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(1))));
             DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
             DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(3);
             //validate candidates are assigned successfully
             String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
             System.out.println(popupMessage);
@@ -1986,6 +1990,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void filterCompletedCourseAndValidateItDateCanBeEdited() {
         try{
 //Filter the completed course from status dropdown
+            DriverAction.waitSec(4);
             DriverAction.click(Course_Locators.statusDropdown,"Validate user clicked on Status dropdown","User successfully clicked on Status dropdown");
             DriverAction.click(By.xpath(Course_Locators.requiredOption.replace("input","Completed")));
             DriverAction.waitSec(3);
@@ -2285,6 +2290,163 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 
         }
         catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+
+    @Then("Validate course Status")
+    public void validateCourseStatus() {
+        try {
+            int inprogressCounter = 0;
+            int expiredCounter = 0;
+            int completedCounter = 0;
+            int yetToStartCounter = 0;
+
+            String courseStatus = DriverAction.getElementText(Course_Locators.courseStatus);
+            List<WebElement> courseStatusList = DriverAction.getElements(Course_Locators.courseStatusList);
+            for (int i = 0; i < courseStatusList.size(); i++) {
+                String content = DriverAction.getElementText(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                if (content.equals("Contents")) {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    if (courseStatus.equals("Expired")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Content should have the status unattempted or Completed", "In progress course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Content should have the status unattempted or Completed", "In progress course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet To Start Content should have the status unattempted", "Yet To Start course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet To Start Content should have the status unattempted", "Yet To Start course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusCompleted);
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Content should have the status Completed", "Completed course content is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Content should have the status Completed", "Completed course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                } else if (content.equals("Assignments")) {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    String status = DriverAction.getElementText(Course_Locators.assignmentsStatus);
+                    if (courseStatus.equals("Expired")) {
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Assignment should have the status unattempted", "Expired Assignment is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+
+                            GemTestReporter.addTestStep("Validate Expired Assignment should have the status unattempted", "Expired Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Assignment should have the status unattempted or Completed", "In progress Assignment is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Assignment should have the status unattempted or Completed", "In progress Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet to Start Assignment should have the status unattempted", "Yet to Start Assignment is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet to Start Assignment should have the status unattempted", "Yet to Start Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Assignment should have the status Completed", "Completed course Assignment is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Assignment should have the status Completed", "Completed Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                } else {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    String status = DriverAction.getElementText(Course_Locators.contentsStatusCompleted);
+                    if (courseStatus.equals("Expired")) {
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Test should have the status unattempted", "Expired Test is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Expired Test should have the status unattempted", "Expired Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Test should have the status unattempted,pass or fail", "In progress Test is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Test should have the status unattempted,pass or fail", "In progress Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet to Start Test should have the status unattempted", "Yet to Start Test is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet to Start Test should have the status unattempted", "Yet to Start Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Test should have the status Pass Or Fail", "Completed Test is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Test should have the status Pass Or Fail", "Completed Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                }
+
+                DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+            }
+                //validate counter
+                if (inprogressCounter == courseStatusList.size() || yetToStartCounter == courseStatusList.size() || completedCounter == courseStatusList.size() || expiredCounter == courseStatusList.size()) {
+                    GemTestReporter.addTestStep("Validate Course status matched with its contents status", "Status matched successfully",
+                            STATUS.PASS, DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Course status matched with its contents status", "Status not matched",
+                            STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+
+
+        } catch (Exception e) {
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
         }

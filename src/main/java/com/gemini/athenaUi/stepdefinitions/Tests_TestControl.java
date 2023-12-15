@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -16,9 +17,11 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
+import java.io.IOException;
 
 public class Tests_TestControl {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
@@ -30,6 +33,7 @@ public class Tests_TestControl {
     @And("^Add Test Info \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void addTestInfo(String duration, String campus, String level) {
         try {
+
             //in this function we are adding test info
             int c = 2;
             int c1 = 1;
@@ -521,6 +525,19 @@ public class Tests_TestControl {
                 }
             }
             DriverAction.waitSec(5);
+            // get the screen title
+            String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+            //validate required screen appears
+            if("Test Summary".equals(screenTitle.trim()))
+            {
+                GemTestReporter.addTestStep("Validate User successfully directed to Test Summary", "Candidate successfully directed to Test Summary", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidate successfully directed to Test Summary", "Candidate not able to directed to Test Summary", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
             String heading=DriverAction.getElementText(Tests_TestControl_Locators.summaryHeading);
             if(heading.equals(_testName))
             {
@@ -570,6 +587,22 @@ public class Tests_TestControl {
             if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Copy Test")))) {
                 DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Copy Test")));
             }
+        }
+
+        //validate copy page open successfully
+        // get the screen title
+        String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+        String requiredTitle="Copying Test: "+_testName;
+        //validate required screen appears
+        if(requiredTitle.trim().equals(screenTitle.trim()))
+        {
+            GemTestReporter.addTestStep("Validate User successfully directed to"+_testName, "Candidate successfully directed to "+_testName, STATUS.PASS,
+                    DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Validate Candidate successfully directed to"+_testName, "Candidate not able to directed to "+_testName, STATUS.FAIL,
+                    DriverAction.takeSnapShot());
         }
 //        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
         DriverAction.scrollToBottom();
@@ -624,6 +657,20 @@ public class Tests_TestControl {
                 }
             }
 
+            //validate edit screen open
+            // get the screen title
+            String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+            //validate required screen appears
+            if("Update Test".equals(screenTitle.trim()))
+            {
+                GemTestReporter.addTestStep("Validate User successfully directed to Update Test ", "Candidate successfully directed to Update Test ", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidate successfully directed to Update Test ", "Candidate not able to directed to Update Test ", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
             //edit the Test Name
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testNameInput, 120)) {
@@ -676,6 +723,22 @@ public class Tests_TestControl {
                 }
             }
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+
+            //validate assign candidate appear
+            String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+            String requiredTitle="Assign Candidates: "+_testName;
+
+            //validate required screen appears
+            if(requiredTitle.trim().equals(screenTitle.trim()))
+            {
+                GemTestReporter.addTestStep("Validate User successfully directed to Assign Candidates"+_testName, "Candidate successfully directed to Assign Candidates"+_testName, STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidate successfully directed to Assign Candidates"+_testName, "Candidate not able to directed to Assign Candidates"+_testName, STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
             DriverAction.scrollToBottom();
             //Assign the user
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.filterInput)) {
@@ -1190,6 +1253,23 @@ public class Tests_TestControl {
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Evaluate Candidate")));
                 }
             }
+
+            //validate evaluate candidate screen appear
+            //validate edit screen open
+            // get the screen title
+            String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+            //validate required screen appears
+            if("Candidates Evaluation".equals(screenTitle.trim()))
+            {
+                GemTestReporter.addTestStep("Validate User successfully directed to Candidates Evaluation ", "Candidate successfully directed to Candidates Evaluation ", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidate successfully directed to Candidates Evaluation ", "Candidate not able to directed to Candidates Evaluation ", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
                 DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, "rahul22@gmail.com");
             }
@@ -1453,7 +1533,7 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     }
 }
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInput, 120)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, "rahul44@gmail.com");
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, "rahul.adhikari@geminisolutions.com");
                 DriverAction.waitSec(5);
                 if (DriverAction.isDisplayed(Course_Locators.addIcon)) {
                     DriverAction.click(Course_Locators.addIcon, "Clicked on add Content Icon", "Successfully clicked on Add Content Icon");
@@ -2891,16 +2971,19 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
             String beforeEditName=DriverAction.getElementText(Tests_TestControl_Locators.assignCandidate);
             // then click on view profile
             DriverAction.click(Tests_TestControl_Locators.assignCandidateEyeIcon,"Validate user successfully clicked on Profile icon","User sccessfully clicked on profile icon");
+            DriverAction.waitSec(4);
             DriverAction.click(Tests_TestControl_Locators.editIcon,"Validate user successfully click on edit icon","User successfully clicked on edit icon");
-           DriverAction.waitSec(4);
+            DriverAction.waitSec(4);
             //edit the name of candidate
             DriverAction.typeText(Tests_TestControl_Locators.emailInput,beforeEditName+"edit");
+            DriverAction.waitSec(3);
             DriverAction.click(Tests_TestControl_Locators.updateBtn,"Validate user successfully clicked on update button","User successfully clicked on update button");
-
+            String emailAfterEdit=beforeEditName+"edit";
             //get the name after editing and validate it is edited or not
+            DriverAction.waitSec(3);
             String afterEditName=DriverAction.getElementText(Tests_TestControl_Locators.assignCandidate);
 
-            if(beforeEditName.equals(afterEditName))
+            if(emailAfterEdit.equals(afterEditName))
             {
                 GemTestReporter.addTestStep("Validate candidate profile is edited properly", "Candidate profile is edited successfully", STATUS.PASS,
                         DriverAction.takeSnapShot());
@@ -2920,5 +3003,329 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon,120))
     }
 
 
+    @And("Validate {string} Screen open")
+    public void validateScreenOpen(String screen) {
+        try{
+            DriverAction.waitSec(4);
+// get the screen title
+            String screenTitle=DriverAction.getElementText(Tests_TestControl_Locators.screenHeader);
+            //validate required screen appears
+            if(screen.trim().equals(screenTitle.trim()))
+            {
+                GemTestReporter.addTestStep("Validate User successfully directed to"+screen, "Candidate successfully directed to "+screen, STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Candidate successfully directed to"+screen, "Candidate not able to directed to "+screen, STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+
+    }
+    @Then("Validate Learners Report")
+    public void validateLearnersReport() {
+        try{
+            //navigate Test Control screen
+//            if (DriverAction.isExist(MyLocators.sidebar, 120)) {
+//                DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
+//            }
+//
+//            //select a module from sidebar
+//            if (DriverAction.isExist(By.xpath(MyLocators.selectModule.replace("input", "Tests")), 120)) {
+//                DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", "Tests")));
+//            }
+//            //select submodule if required
+//            if (DriverAction.isExist(By.xpath(MyLocators.selectModule.replace("input", "Test Control")), 120)) {
+//                DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", "Test Control")));
+//            }
+
+            //close sidebar
+//            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
+
+//Filter the Created Test in Test Control screen
+            DriverAction.waitSec(5);
+            if (DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon, 20)) {
+                DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
+                DriverAction.waitSec(5);
+                if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Learner Reports")))) {
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Learner Reports")));
+                }
+            }
+
+            DriverAction.waitSec(5);
+            //validate Learners Report
+
+            DriverAction.click(Course_Locators.test,"Validate User able to click on test description","User successfully clicked on Test description");
+            DriverAction.waitSec(3);
+            DriverAction.click(Course_Locators.eyeIcon,"Validate user able to click on View test report","User successfully clicked on test Report");
+            DriverAction.click(Course_Locators.detailedReportBtn,"Validate user able to click on detail report button","User successfully clicked detailed Report");
+            DriverAction.waitSec(3);
+            String heading=DriverAction.getElementText(Course_Locators.actionHeading);
+            if(heading.trim().equals("Learner Detailed Report"))
+            {
+                GemTestReporter.addTestStep("Validate Detailed Report of Learner", "User successfully on Detailed Report screen", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Detailed Report of Learner", "User is not able to direct on Detailed Report screen", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+
+
+    @And("switch to bulk upload screen {string}")
+    public void switchToBulkUploadScreen(String user) {
+        try{
+//select bulk upload option
+            DriverAction.click(Tests_TestControl_Locators.threeDotIcon);
+            DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input","Bulk "+user+" Upload")));
+            DriverAction.waitSec(3);
+            if(DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.actionOption.replace("input","Upload "+user+" List"))))
+            {
+                GemTestReporter.addTestStep("Validate user able to switch to bulk upload screen", "User successfully on Bulk Upload screen", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate user able to switch to bulk upload screen", "User not able to switch to Bulk Upload screen", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("upload and validate Invalid User is not Uploaded {string}")
+    public void uploadAndValidateInvalidUserIsNotUploaded(String fileLocation) {
+        try{
+            //upload file
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("upload assigned user and validate {string}")
+    public void uploadAssignedUserAndValidate(String fileLocation) {
+        try{
+            String filePath="";
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.waitSec(60);
+            //get the downloaed file
+            String directoryPath = "C:/Users/rahul.adhikari/Downloads/";
+            File directory = new File(directoryPath);
+            if (directory.exists() && directory.isDirectory()) {
+                File latestfile = getLatestFile(directory);
+                if (latestfile != null) {
+                    System.out.println("Latest File : " + latestfile.getAbsolutePath());
+                    filePath=latestfile.getAbsolutePath();
+                    GemTestReporter.addTestStep("Validate candidate assigned template is downloaded", "User successfully able to download the Template", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validate candidate assigned template is downloaded", "User not able to download the Template", STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+            }
+            //read the excel
+            FileInputStream fs = new FileInputStream(filePath);
+            //Creating a workbook
+//            XSSFWorkbook workbook = new XSSFWorkbook(fs);
+//            XSSFSheet sheet = workbook.getSheetAt(0);
+//            XSSFRow row = sheet.getRow(0);
+//            XSSFCell cell = row.getCell(0);
+//            System.out.println(sheet.getRow(0).getCell(0));
+//            XSSFRow row1 = sheet.getRow(1);
+//            XSSFCell cell1 = row1.getCell(1);
+//            String errorMessage=sheet.getRow(1).getCell(7).toString();
+//            System.out.println(sheet.getRow(1).getCell(7));
+            if("User already assigned to Course".equals("errorMessage"))
+            {
+                GemTestReporter.addTestStep("Validate error excel downloaded and required message is print in it", "Error message excel is downloaded and error message is present in it", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validate error excel downloaded and required message is print in it", "Error message excel is not downloaded", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+
+    }
+
+    @Then("upload Unassigned {string} and validate {string}")
+    public void uploadUnassignedUserAndValidate(String user,String fileLocation) {
+        try{
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.waitSec(90);
+            DriverAction.typeText(Course_Locators.emailInput,user,"Validate user successfully able to type into name/email input","User successfully able to type into name/email input");
+            DriverAction.waitSec(3);
+            String getStatus=DriverAction.getElementText(Tests_TestControl_Locators.assignedStatus);
+            if(getStatus.equals("Assigned"))
+            {
+                GemTestReporter.addTestStep("Validate User successfully assigned", "User assigned successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate User successfully assigned", "User not assigned successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Upload New {string} and Validate {string}")
+    public void uploadNewUserAndValidate(String user,String fileLocation) {
+        try{
+            //upload new candidate
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.waitSec(60);
+            //validate it is assigned
+            DriverAction.typeText(Course_Locators.emailInput,user,"Validate user successfully able to type into name/email input","User successfully able to type into name/email input");
+            DriverAction.waitSec(3);
+            String getStatus=DriverAction.getElementText(Tests_TestControl_Locators.assignedStatus);
+            if(getStatus.equals("Assigned"))
+            {
+                GemTestReporter.addTestStep("Validate New User successfully assigned", "New User assigned successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate New User successfully assigned", "New User not assigned successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("upload New User with Invalid Mobile number {string}")
+    public void uploadNewUserWithInvalidMobileNumber(String fileLocation) {
+        try{
+            //upload new candidate
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.waitSec(60);
+            //array of name of unassigned candidate
+            for(int i=0;i<=3;i++)
+            {
+                DriverAction.typeText(Course_Locators.emailInput,"rahulNew@gmail.com","Validate user successfully able to type into name/email input","User successfully able to type into name/email input");
+                DriverAction.waitSec(3);
+                String getStatus=DriverAction.getElementText(Tests_TestControl_Locators.assignedStatus);
+                if(getStatus.equals("Assigned"))
+                {
+                    GemTestReporter.addTestStep("Validate New User successfully assigned", "New User assigned successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Validate New User successfully assigned", "New User not assigned successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("Upload Multiple Unassigned {string} and Validate {string}")
+    public void uploadMultipleUnassignedUserAndValidate(String user,String fileLocation) {
+        try{
+            //upload multiple user
+            DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation);
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(Tests_TestControl_Locators.uploadBtn,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.uploadBtn);
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            DriverAction.waitSec(60);
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
 }
 

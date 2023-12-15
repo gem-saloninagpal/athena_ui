@@ -25,6 +25,8 @@ public class Tests_TestControl_Locators {
 
     public static String options="//li//span[text()='input']";
     public static By saveButton=By.xpath("//button//span[text()='Save']");
+
+    public static By screenHeader=By.xpath("//h6");
     public static By submitBtn=By.xpath("//button//span[text()='SUBMIT']");
     public static By continueButton=By.xpath("//button//span[text()='Continue']");
     public static By addNewTestBtn=By.xpath(" //button//span[text()='Add New Test']");
@@ -37,6 +39,10 @@ public class Tests_TestControl_Locators {
 
     public static By threeDotTrainingTest=By.xpath(" (//span[contains(@class,'pi pi-ellipsis')])[21]");
     public static String threeDotOption="//div//label[text()='input']";
+
+    public static By uploadBtn=By.xpath(" (//span[contains(@class,'pi pi-upload')])");
+    public static By assignedStatus=By.xpath("(//tbody[@class='p-datatable-tbody']//tr//td)[5]");
+
 
     public static By actionBtn=By.xpath("(//span[contains(@class,'pi pi-caret-down')])[2]");
 

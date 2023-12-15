@@ -64,8 +64,49 @@ Feature: Assign learner to batch
       |module        |submodule|message|
       |Manage Courses|Batches  |removed successfully|
 
-#  Scenario Outline: Filter by status
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Click actions icon of a batch
-#    And Select "Assign Learners" from actions dropdown
+  Scenario Outline: Filter by status
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click actions icon of a batch
+    And Select "Assign Learners" from actions dropdown
+    And Expand the dropdown "Status"
+    And Select "Assigned" from dropdown
+    Then Validate records get filtered on the basis of status "<status>"
+
+    Examples:
+    |module        |submodule|status  |
+    |Manage Courses|Batches  |Assigned|
+
+  Scenario Outline: Filter by category
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click actions icon of a batch
+    And Select "Assign Learners" from actions dropdown
+    And Expand the dropdown "Category"
+    And Select "EC" from dropdown
+    And Expand the dropdown "EC"
+    And Select "QA" from dropdown
+    Then Validate records get filtered on the basis of EC "<EC>"
+
+    Examples:
+      |module        |submodule|EC  |
+      |Manage Courses|Batches  |QA  |
+    
+  Scenario Outline: Filter and unassign a candidate
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click actions icon of a batch
+    And Select "Assign Learners" from actions dropdown
+    And Expand the dropdown "Category"
+    And Select "EC" from dropdown
+    And Expand selected category dropdown
+    And Select "QA" from dropdown
+    And Get assigned learners count
+    And Unassign a learner
+    Then Verify the popup message "Learner removed successfully"
+    Then Validate count after unassigning
+
+    Examples:
+      |module        |submodule|
+      |Manage Courses|Batches  |
+    
+    
+
 

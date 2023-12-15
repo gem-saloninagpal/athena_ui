@@ -47,6 +47,7 @@ public class MyLocators {
 
     public static By rolesOption=By.xpath("//div[contains(@class,'p-dropdown p-component')]//span[@class='ng-star-inserted']");
     public static By actionsIcon=By.xpath("(//tbody)[2]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
+    public static By learnerActionsIcon=By.xpath("(//tbody)[3]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
     public static By editProfile=By.xpath("//label[text()='Edit Profile']//parent::div");
     public static By enableEditing=By.xpath("//span[@class='p-inputswitch-slider']//parent::div");
     public static By enableEditing1=By.xpath("//p-inputswitch[@class='prime-switch']");
@@ -160,6 +161,9 @@ public class MyLocators {
     public static By closeVideoPrompt=By.xpath("//span[contains(@class,'close')]//parent::button");
     public static By modules=By.xpath("//a[contains(@class,'header-link')]//span[contains(@class,'p-menuitem-text')]");
     public static By submodules=By.xpath("//a[@role='treeitem']//span[contains(@class,'p-menuitem-text')]");
+    public static By testSummaryTabs=By.xpath("//li[@role='presentation']//span[1]");
+    public static By learnerSearchbox=By.xpath("(//input[@placeholder='Name/Email'])[3]");
+    public static By viewReportInAttemptedTest=By.xpath("(//button[contains(text(),'View Report')])[1]");
 
     public static String selectTab(int i) {
 
