@@ -1,0 +1,27 @@
+environment: dev
+project_name: ATHENA
+report_name: Athena UI Report
+glue_code: com.gemini.athenaUi.stepdefinitions
+jewel_user: radhikari
+feature: src/main/resources/features
+jewel_bridge_token: f092aa69-b769-4c16-8613-f6fe4aa6c6b31683869671673
+enter_point: https://apis.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
+email_report: n
+jewel_screen_shots: y
+tags: "@check"
+event_firing: N
+console_report: N
+dev:
+  browser_name: chrome
+  launch_url: https://athena-dev.geminisolutions.com
+  browser_timeout: 200
+  getUser: api/users
+prod:
+  browser_name: edge
+  launchUrl: https://groupdev.pramericalife.in/
+  browserTimeout: 200
+beta:
+  browserName: chrome
+  launchUrl: https://athenalndint-dev.geminisolutions.com
+  browserTimeout: 200
+  getUser: api/users

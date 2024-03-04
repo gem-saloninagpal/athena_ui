@@ -4,8 +4,9 @@ import org.openqa.selenium.By;
 
 public class LearnerModule_Locators {
 
-    public static By userDropdown=By.xpath("(//div[@class='ng-tns-c114-12 p-dropdown p-component']//span)[2]");
-
+//    public static By userDropdown=By.xpath("(//div[@class='ng-tns-c114-12 p-dropdown p-component']//span)[2]");
+    //span[contains(@class,'pi pi-chevron-down')]
+public static By userDropdown=By.xpath("//span[contains(@class,'pi pi-chevron-down')]");
     public static By courseDropdown=By.xpath("(//div[contains(@class, 'p-dropdown-trigger ng-tns')]//span)[2]");
     public static By requiredOption=By.xpath("//span[text()='Learner']");
     public static By catalogPaginator=By.xpath("//span[@class='paginator-text-style']");
@@ -84,7 +85,7 @@ public class LearnerModule_Locators {
     public static By iconListViewCourse=By.xpath("//div[contains(@class,'p-accordion-content')]//i");
 
     public static By uploadFileBtn=By.xpath("//span[contains(@class,'p-button-icon pi pi-upload')]");
-    public static By uploadBtn=By.xpath(" (//span[contains(@class,'pi pi-upload')])[2]");
+    public static By uploadBtn=By.xpath(" (//span[contains(@class,'pi pi-upload')])");
 
 
     public static By chooseFile=By.xpath("//input[@type='file']");

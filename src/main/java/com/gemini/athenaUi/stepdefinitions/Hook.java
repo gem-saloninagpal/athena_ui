@@ -6,6 +6,8 @@ import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 
+import static com.gemini.athenaApi.commonUtils.Utils.getAuthTocken;
+
 
 public class Hook {
  //   static WebDriver driver;
@@ -13,11 +15,12 @@ public class Hook {
     public static void hook() throws GemException {
         DriverManager.setUpBrowser();
 
+        //get auth tocken for api
+        getAuthTocken();
+
     }
-//    @BeforeAll(order = 2)
-//    public static void before_all() throws GemException {
-//        CommonUtils.before_Athena();
-//    }
+
+
 
 
 }

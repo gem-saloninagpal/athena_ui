@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 
 public class Course_Locators {
     public static By sidebar=By.xpath("//p-toolbar//em");
+    public static By yearFilter=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[3]");
+
+
+
     public static By navbarDropdown=By.xpath("//button[@icon='pi pi-caret-down']");
 
     public static By profile=By.xpath("//span[text()='Profile']");
@@ -12,16 +16,32 @@ public class Course_Locators {
     public static By updateBtn=By.xpath("//button//span[text()='Update Date']");
 
     public static By changeDateBtn=By.xpath("//button//span[text()='Change Date Selected']");
+    public static By saveCoursePublish=By.xpath("(//span[text()='Save Course & Publish']//parent::button)[2]");
+
+
 
     public static By userName=By.xpath("//div[@class='upper-card-value']");
     public static By ownerName=By.xpath("//div[contains(@class,'p-multiselect-token')]//span");
     public static By treeList=By.xpath("//div[@class='p-steps p-component p-readonly']//ul//li");
     public static String tree="(//div[@class='p-steps p-component p-readonly']//ul//li//span[@class='p-steps-title ng-star-inserted'])[itr]";
     public static By checkboxs=By.xpath("//div[@class='p-checkbox-box']");
+
+    public static By hasTestCheckbox=By.xpath("(//div[@class='p-checkbox-box'])[2]");
+    public static By generateCertificateCheckbox=By.xpath("(//span[text()='down Certificate if all tests are passed']/preceding-sibling::p-checkbox//div)[3]");
+    public static By allowRetakeTestCheckbox=By.xpath("(//span[text()='Allow Retake Test']/preceding-sibling::p-checkbox//div)[3]");
+
+    public static By checkedAllowRetakeTestCheckbox=By.xpath("(//span[@class='p-checkbox-icon pi pi-check'])[3]");
+
     public static By courseInputFields=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
 
     public static String option="//li[@aria-label='input']";
     public static String dropdownIcon="(//span[contains(@class,'chevron-down')]//parent::div)[itr]";
+    public static By noCompleteCourseMessage=By.xpath("//h5[text()='No Completed Courses!']");
+
+    public static By crossIconinFilter=By.xpath("//i[contains(@class,'p-dropdown-clear-icon')]");
+
+
+
     public static By courseDescription=By.xpath("//textarea");
     public static By addContentTagInput=By.xpath("//input[@type='search']");
     public static String addContentTableRow="(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[itr]//td[1]";
@@ -49,6 +69,18 @@ public class Course_Locators {
 
     public static String heading="//h6[text()='input']";
 
+    public static By test=By.xpath("//u[text()='Tests']");
+
+    public static By eyeIcon=By.xpath("//i[@class='pi pi-eye mr-3']");
+
+    public static By detailedReportBtn=By.xpath("//button//span[text()='Detailed Report']");
+
+    //button//span[text()='Detailed Report']
+
+    //i[@class='pi pi-eye mr-3']
+
+    //u[text()='Tests']
+
     //h6[text()='input']
     public static By actionHeading=By.xpath("//h6");
     public static By draftedCourse=By.xpath("//div[@class='name-style control-overflow longer-name']");
@@ -71,6 +103,8 @@ public class Course_Locators {
 
     public static String requiredOption="//li//span[text()='input']";
 
+    public static String assignmentInput="//span[text()='input']";
+
     //li//span[text()='input']
 
     public static By nameFilterInput=By.xpath("//input[@placeholder='Name/Email']");
@@ -87,9 +121,9 @@ public class Course_Locators {
 
     public static By assignmentReport=By.xpath("//u[text()='Assignments']");
 
-    public static By contentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[14]");
+    public static By contentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[16]");
 
-    public static By assignmentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[24]");
+    public static By assignmentStatus = By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//tr//td)[26]");
 
     public static By reattemptLabel=By.xpath("//label[text()='Reattempt Course']");
 
@@ -128,7 +162,7 @@ public class Course_Locators {
     public static By contentsStatusUnattempted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[4]");
 
     public static By contentsStatusCompleted=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[5]");
-    public static By assignmentsStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[7]");
+    public static By assignmentsStatus=By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//td[6]");
 
 
     public static By emailInput=By.xpath(" //input[@placeholder='Name/Email']");
@@ -150,16 +184,44 @@ public class Course_Locators {
 
     public static By calendarIcon=By.xpath("//img[@class='calender-icon']");
 
+    public static By courseTagInput=By.xpath("//label[text()='Course Tag*']");
+
+
+    //label[text()='Course Tag*']
+
     public static String calendar="(//button[contains(@class,'p-datepicker-trigger')])[itr]";
 
+    public static String inputLabel="//label[text()='input']";
+
+    public static By secondTest=By.xpath("(//div[@class='test-text'])[2]");
 
 
-    //img[@class='calender-icon']
+    public static By movieClip=By.xpath("//span[text()='Movie Clip']");
 
-    //input[@placeholder='Name/Email']
+    public static By crossIcon=By.xpath("//span[contains(@class,'p-dialog-header-close-icon')]");
+
+    public static By downloadCertificateButton=By.xpath("//button[@class='p-button p-component p-button-icon-only p-ripple']");
+
+    public static By testStatus=By.xpath("//div[@class='content-status ng-star-inserted']");
+
+    public static By retakeButton=By.xpath("//button[contains(@class,'retake-button')]");
+
+    public static By certificateLabel=By.xpath("//label[text()='This certification is awarded to']");
 
 
-    //tbody[@class='p-datatable-tbody']//tr[1]//td[7]//div[contains(@class,'text-style')]
+    //label[text()='This certification is awarded to']
+
+    //button[contains(@class,'retake-button')]
+
+
+    //div[@class='content-status ng-star-inserted']
+
+    //button[@class='p-button p-component p-button-icon-only p-ripple']
+
+
+    //span[contains(@class,'p-dialog-header-close-icon')]
+
+
 
 
 

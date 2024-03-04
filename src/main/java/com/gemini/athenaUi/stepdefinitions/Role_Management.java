@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class Role_Management {
 
-    String _Role="TRAINEE";
+    String _Role="  RAHUL";
     @And("^Create Role and Validate Role is created \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
     public void enterDateInDateRangeField(String roleName,String roleDesc,String roleDisplay) {
         try {
@@ -81,7 +81,7 @@ public class Role_Management {
             List<String> names = DriverAction.getElementsText(Role_Management_Locators.nameList);
             for (int i = 1; i < names.size(); i = i + 5) {
                 String reqName = DriverAction.getElementText(By.xpath(Role_Management_Locators.name.replace("itr", String.valueOf(i))));
-                if (reqName.equals(_Role)) {
+                if (reqName.trim().equals(_Role.trim())) {
                     idx = idx + 1;
                     isTrue = true;
                     break;
@@ -154,28 +154,28 @@ public class Role_Management {
         }
     }
 
-    @And("Switch the user to {string}")
-    public void switchTheUserTo(String role) {
-        try{
-            //in this function we are switching the required role
-if(DriverAction.isExist(Role_Management_Locators.roleDropdown,120))
-{
-    DriverAction.click(Role_Management_Locators.roleDropdown);
-    if(DriverAction.isExist(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)),120))
-    {
-        DriverAction.click(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)));
-    }
-}
-else
-{
-    GemTestReporter.addTestStep("Error Occur", "Fail to click on dropdown icon",
-            STATUS.FAIL, DriverAction.takeSnapShot());
-}
-        }
-        catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
-        }
-    }
+//    @And("Switch the user to {string}")
+//    public void switchTheUserTo(String role) {
+//        try{
+//            //in this function we are switching the required role
+//if(DriverAction.isExist(Role_Management_Locators.roleDropdown,120))
+//{
+//    DriverAction.click(Role_Management_Locators.roleDropdown);
+//    if(DriverAction.isExist(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)),120))
+//    {
+//        DriverAction.click(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)));
+//    }
+//}
+//else
+//{
+//    GemTestReporter.addTestStep("Error Occur", "Fail to click on dropdown icon",
+//            STATUS.FAIL, DriverAction.takeSnapShot());
+//}
+//        }
+//        catch (Exception e) {
+//            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+//        }
+//    }
 
     @Then("^Validate the Permission for test$")
     public void validateThePermission(DataTable data) {

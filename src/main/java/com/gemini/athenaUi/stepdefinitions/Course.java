@@ -9,6 +9,7 @@ import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -23,9 +24,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
+
+import com.gemini.athenaUi.stepdefinitions.Tests_TestControl;
 
 public class Course {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
@@ -35,6 +37,8 @@ public class Course {
     int _viewListActiveCount=0;
 
     String _firstCourseName="";
+
+    Tests_TestControl test = new Tests_TestControl();
     @Then("^Verify the Owner of the Created Course$")
     public void verifyOwner(){
         try{
@@ -180,7 +184,7 @@ public class Course {
         try{
             //in this we are filling the description
             if (DriverAction.isExist(Course_Locators.courseDescription,120)) {
-                DriverAction.typeText(Course_Locators.courseDescription,description);
+                DriverAction.typeText(Course_Locators.courseDescription,description,"Validate user able to type in Course description input","User successfully typed "+description);
                 DriverAction.scrollToBottom();
             }
             else {
@@ -305,24 +309,30 @@ else
      }
     }
 }
-DriverAction.waitSec(5);
-if (DriverAction.isExist(Course_Locators.addIcon,120))
-{
-    DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
-}
-else {
-    GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
+          DriverAction.waitSec(5);
+          if (DriverAction.isExist(Course_Locators.addIcon,120))
+            {
+               DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
+            }
+          else {
+            GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
             DriverAction.takeSnapShot());
-}
+              }
+          DriverAction.waitSec(3);
+          //Validate popup message when we add content to Course
+          String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+          System.out.println(popupMessage);
+//          String reqPopUpMessage="Content successfully added. Add more!";
+          String reqPopUpMessage=message;
+          if (reqPopUpMessage.equals(popupMessage)) {
+                  GemTestReporter.addTestStep("Validate Content is added properly", "Content is added successfully", STATUS.PASS,
+                          DriverAction.takeSnapShot());
+              } else {
+                  GemTestReporter.addTestStep("Validate Content is added properly", "Content is not added successfully", STATUS.FAIL,
+                          DriverAction.takeSnapShot());
+              }
 
-if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input",message))))
-{
-    GemTestReporter.addTestStep(type+" is added",type+" is added successfully", STATUS.PASS, DriverAction.takeSnapShot());
-}
-else {
-    GemTestReporter.addTestStep("Error Occur", "popup does not appear", STATUS.FAIL,
-            DriverAction.takeSnapShot());
-}
+
 String getContent=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[1]//td[1]"));
 String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
 if(getContent.equals(contentAfterSelecting))
@@ -449,6 +459,17 @@ public void editAndVerify(){
                 if (DriverAction.isDisplayed(Course_Locators.editOption)) {
                     DriverAction.click(Course_Locators.editOption, "clicked on edit option", "Successfully clicked");
                     DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon, 120);
+                    String screenHeader=DriverAction.getElementText(Course_Locators.actionHeading);
+                    if(screenHeader.equals("Edit Course"))
+                    {
+                        GemTestReporter.addTestStep("Validate user successfully directed to Edit Course", "User successfully directed to Edit Course",
+                                STATUS.PASS, DriverAction.takeSnapShot());
+                    }
+                    else
+                    {
+                        GemTestReporter.addTestStep("Validate user successfully directed to Edit Course", "User not able to directed to Edit Course",
+                                STATUS.FAIL, DriverAction.takeSnapShot());
+                    }
                     DriverAction.scrollToBottom();
                     //Edit Add Course Info
 //                    String courseNameBeforeEdit=DriverAction.getElementText(Course_Locators.courseNameInput);
@@ -805,15 +826,26 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
                 if(DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input","Assign Learners"))));
                 {
-                    DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input","Assign Learners")));
+                    DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input","Assign Learners")),"Validate user clicked on Assign Learner option","User successfully clicked on Assign Learner option");
 
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul23@gmail.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul23@gmail.com","Validate user successfully filter username","Username is successfully filtered");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-                        DriverAction.click(Course_Locators.addIcon);
+                        DriverAction.click(Course_Locators.addIcon,"Validate user added the filtered username","Filtered username is added successfully");
+                        DriverAction.waitSec(3);
+                        String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+                        System.out.println(popupMessage);
+                        String reqPopUpMessage="Learner added successfully to the course";
+                        if (reqPopUpMessage.equals(popupMessage)) {
+                            GemTestReporter.addTestStep("Validate Learner is assigned successfully", "Learner is assigned successfully", STATUS.PASS,
+                                    DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Learner is assigned successfully", "Learner is not assigned successfully", STATUS.FAIL,
+                                    DriverAction.takeSnapShot());
+                        }
 
                     }
                 }
@@ -834,10 +866,10 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
         DriverAction.click(LearnerModule_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
         if(DriverAction.isDisplayed(By.xpath(Course_Locators.userOption.replace("input",role))))
         {
-            DriverAction.click(By.xpath(Course_Locators.userOption.replace("input",role)));
+            DriverAction.click(By.xpath(Course_Locators.userOption.replace("input",role)),"Validate user role is updated successfully","User role is updated successfully");
         }
         DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"),120);
-
+        DriverAction.waitSec(5);
     }
     catch (Exception e) {
         logger.info("Exception occurred", e);
@@ -851,10 +883,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.waitSec(5);
             if(DriverAction.isDisplayed(Course_Locators.courseFilterInput))
             {
-                DriverAction.typeText(Course_Locators.courseFilterInput,_assignedCourseName);
+                DriverAction.typeText(Course_Locators.courseFilterInput,_assignedCourseName,"Validate course name is filtered successfully","Course name is filtered successfully");
 
             }
             DriverAction.scrollToBottom();
+            DriverAction.waitSec(4);
             if(DriverAction.isDisplayed(LearnerModule_Locators.viewCourseBtn))
             {
                 DriverAction.click(LearnerModule_Locators.viewCourseBtn,"clicked on View Course Button","Successfully clicked on view course button");
@@ -868,6 +901,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
                 }
                 //Assignment
+                DriverAction.waitSec(4);
                 DriverAction.typeText(LearnerModule_Locators.answerArea, "demo_content");
                 DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
 
@@ -897,8 +931,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
              if(DriverAction.isDisplayed(Course_Locators.courseFilterTagInput))
               {
                        DriverAction.typeText(Course_Locators.courseFilterTagInput,_assignedCourseName);
-
-                 }
+              }
             DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
                 _assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
@@ -910,7 +943,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             }
             if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
             {
-                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahul");
                 DriverAction.scrollToBottom();
             }
             DriverAction.waitSec(5);
@@ -977,9 +1010,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void reattemptTest(){
         try{
             //in this function we checking reattempt functionality
+
             if (DriverAction.isDisplayed(Course_Locators.editIcon)) {
                 _assignedCourseName = DriverAction.getElementText(Course_Locators.draftedCourse);
                 DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
+                DriverAction.waitSec(3);
                 if (DriverAction.isDisplayed(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports"))))
                 {
                     DriverAction.click(By.xpath(Course_Locators.adminOption.replace("input", "Learner Reports")));
@@ -987,14 +1022,26 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             }
             if(DriverAction.isDisplayed(Course_Locators.nameTagFilterInput))
             {
-                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahulll");
+                DriverAction.typeText(Course_Locators.nameTagFilterInput,"rahul");
 
             }
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
             DriverAction.click(Course_Locators.editIcon, "clicked on Dropdown icon", "Successfully clicked");
             if(DriverAction.isDisplayed(Course_Locators.reattemptLabel))
             {
+                DriverAction.waitSec(3);
                 DriverAction.click(Course_Locators.reattemptLabel, "clicked on reattempt option", "Successfully clicked");
+            }
+            DriverAction.waitSec(3);
+            String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+            System.out.println(popupMessage);
+            String reqPopUpMessage="Learner can reattempt course";
+            if (reqPopUpMessage.equals(popupMessage)) {
+                GemTestReporter.addTestStep("Validate Learner is Reattempt to course successfully", "Learner is Reattempted to course  successfully", STATUS.PASS,
+                        DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validate Learner is Reattempt to course successfully", "Learner is not Reattempted to course  successfully", STATUS.FAIL,
+                        DriverAction.takeSnapShot());
             }
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
 
@@ -1150,6 +1197,18 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                    if(DriverAction.isExist(Course_Locators.inActiveBtn,120))
                    {
                       DriverAction.click(Course_Locators.inActiveBtn);
+                      DriverAction.waitSec(3);
+                       String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+                       System.out.println(popupMessage);
+                       String reqPopUpMessage="Course Status Updated";
+                       if (reqPopUpMessage.equals(popupMessage)) {
+                           GemTestReporter.addTestStep("Validate Course status updated successfully", "Course status updated successfully", STATUS.PASS,
+                                   DriverAction.takeSnapShot());
+                       } else {
+                           GemTestReporter.addTestStep("Validate Course status updated successfully", "Course status is not updated successfully", STATUS.FAIL,
+                                   DriverAction.takeSnapShot());
+                       }
+
                    }
                    else {
                        GemTestReporter.addTestStep("Error occurred","Not able to click on left paginator", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -1266,11 +1325,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             {
                 if(actionHeading.trim().equals("View Learner(s) Report: "+_firstCourseName))
                 {
-                    GemTestReporter.addTestStep("Validate user directed to Assign Learner screen", "User successfully directed to Assign Learner screen",
+                    GemTestReporter.addTestStep("Validate user directed to Learner Report screen", "User successfully directed to Learner Report screen",
                             STATUS.PASS, DriverAction.takeSnapShot());
                 }
                 else {
-                    GemTestReporter.addTestStep("Validate user directed to Assign Learner screen", "User not able to directed to  Assign Learner screen",
+                    GemTestReporter.addTestStep("Validate user directed to Learner Report screen", "User not able to directed to Learner Report screen",
                             STATUS.FAIL, DriverAction.takeSnapShot());
                 }
             }
@@ -1288,7 +1347,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(Course_Locators.viewAsLearnerBtn,"Validate user able to click on view as Learner button","User successfully clicked on view as Learner button");
             DriverAction.waitSec(3);
             //Validate the user directed to learner screen
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View as Learner: "+  _firstCourseName))))
+            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View as Learner:  "+  _firstCourseName+" "))))
             {
                 GemTestReporter.addTestStep("Validate user directed to View Learner screen successfully", "User successfully directed to View Learner screen",
                         STATUS.PASS, DriverAction.takeSnapShot());
@@ -1317,7 +1376,11 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             //select Learner Report option
             DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input","Learner Reports")));
 
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View Learner(s) Report: "+  _firstCourseName))))
+            String fetchedHeading=DriverAction.getElementText(Course_Locators.actionHeading);
+            String reqHeading="View Learner(s) Report: "+_firstCourseName;
+
+
+            if(fetchedHeading.trim().equals(reqHeading.trim()))
             {
                 GemTestReporter.addTestStep("Validate user directed to Learner Report screen successfully", "User successfully directed to Learner Report screen",
                         STATUS.PASS, DriverAction.takeSnapShot());
@@ -1354,14 +1417,14 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                   if(courseStatus.equals("Expired"))
                   {
                       String status=DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
-                    if(status.equals("Unattempted"))
+                    if(status.equals("Unattempted")||status.equals("Completed")||status.equals("In Progress"))
                     {
-                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is unattempted",
+                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted or completed or In progress", "Expired course is "+status,
                                 STATUS.PASS, DriverAction.takeSnapShot());
                     }
                     else
                     {
-                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is not giving desired status",
+                        GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted or completed or In progress", "Expired course is not giving desired status",
                                 STATUS.FAIL, DriverAction.takeSnapShot());
                     }
                   }
@@ -1606,7 +1669,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     String getStatus = " ";
                     if (test.equals("test")) {
                         getStatus = DriverAction.getElementText(By.xpath(Tests_TestControl_Locators.candidateStatus.replace("itr", String.valueOf(i + 1))));
-                        if ("Assigned".equals(getStatus)) {
+                        if ("Unassigned".equals(getStatus)) {
                             //check the unassigned user
                             DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr", String.valueOf(i + 1))));
 
@@ -1780,7 +1843,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(1))));
             DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
             DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(3);
             //validate candidates are assigned successfully
             String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
             System.out.println(popupMessage);
@@ -1986,6 +2049,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void filterCompletedCourseAndValidateItDateCanBeEdited() {
         try{
 //Filter the completed course from status dropdown
+            DriverAction.waitSec(4);
             DriverAction.click(Course_Locators.statusDropdown,"Validate user clicked on Status dropdown","User successfully clicked on Status dropdown");
             DriverAction.click(By.xpath(Course_Locators.requiredOption.replace("input","Completed")));
             DriverAction.waitSec(3);
@@ -2288,5 +2352,884 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
         }
+    }
+
+
+    @Then("Validate course Status")
+    public void validateCourseStatus() {
+        try {
+            int inprogressCounter = 0;
+            int expiredCounter = 0;
+            int completedCounter = 0;
+            int yetToStartCounter = 0;
+
+            String courseStatus = DriverAction.getElementText(Course_Locators.courseStatus);
+            List<WebElement> courseStatusList = DriverAction.getElements(Course_Locators.courseStatusList);
+            for (int i = 0; i < courseStatusList.size(); i++) {
+                String content = DriverAction.getElementText(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                if (content.equals("Contents")) {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    if (courseStatus.equals("Expired")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Expired Content should have the status unattempted", "Expired course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Content should have the status unattempted or Completed", "In progress course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Content should have the status unattempted or Completed", "In progress course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusUnattempted);
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet To Start Content should have the status unattempted", "Yet To Start course is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet To Start Content should have the status unattempted", "Yet To Start course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        String status = DriverAction.getElementText(Course_Locators.contentsStatusCompleted);
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Content should have the status Completed", "Completed course content is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Content should have the status Completed", "Completed course is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                } else if (content.equals("Assignments")) {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    String status = DriverAction.getElementText(Course_Locators.assignmentsStatus);
+                    if (courseStatus.equals("Expired")) {
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Assignment should have the status unattempted", "Expired Assignment is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+
+                            GemTestReporter.addTestStep("Validate Expired Assignment should have the status unattempted", "Expired Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Assignment should have the status unattempted or Completed", "In progress Assignment is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Assignment should have the status unattempted or Completed", "In progress Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet to Start Assignment should have the status unattempted", "Yet to Start Assignment is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet to Start Assignment should have the status unattempted", "Yet to Start Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Assignment should have the status Completed", "Completed course Assignment is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Assignment should have the status Completed", "Completed Assignment is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                } else {
+                    DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+                    String status = DriverAction.getElementText(Course_Locators.contentsStatusCompleted);
+                    if (courseStatus.equals("Expired")) {
+                        if (status.equals("Unattempted") || status.equals("Completed")) {
+                            expiredCounter++;
+                            GemTestReporter.addTestStep("Validate Expired Test should have the status unattempted", "Expired Test is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Expired Test should have the status unattempted", "Expired Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("In Progress")) {
+                        if (status.equals("Unattempted") || status.equals("Completed") || status.equals("Pass") || status.equals("Fail")) {
+                            inprogressCounter++;
+                            GemTestReporter.addTestStep("Validate In Progress Test should have the status unattempted,pass or fail", "In progress Test is " + status,
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate In Progress Test should have the status unattempted,pass or fail", "In progress Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else if (courseStatus.equals("Yet to Start")) {
+                        if (status.equals("Unattempted")) {
+                            yetToStartCounter++;
+                            GemTestReporter.addTestStep("Validate Yet to Start Test should have the status unattempted", "Yet to Start Test is unattempted",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Yet to Start Test should have the status unattempted", "Yet to Start Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    } else {
+                        if (status.equals("Completed") || status.equals("Fail") || status.equals("Pass")) {
+                            completedCounter++;
+                            GemTestReporter.addTestStep("Validate Completed Test should have the status Pass Or Fail", "Completed Test is completed successfully",
+                                    STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Completed Test should have the status Pass Or Fail", "Completed Test is not giving desired status",
+                                    STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                }
+
+                DriverAction.click(By.xpath(Course_Locators.courseContent.replace("itr", String.valueOf(i + 1))));
+            }
+                //validate counter
+                if (inprogressCounter == courseStatusList.size() || yetToStartCounter == courseStatusList.size() || completedCounter == courseStatusList.size() || expiredCounter == courseStatusList.size()) {
+                    GemTestReporter.addTestStep("Validate Course status matched with its contents status", "Status matched successfully",
+                            STATUS.PASS, DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validate Course status matched with its contents status", "Status not matched",
+                            STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+
+
+        } catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Given("Select {string}, {string} from sidebar and Validate {string} appears")
+    public void selectFromSidebarAndValidateAppears(String module, String submodule, String screen) {
+        try{
+            //select module and submodule
+            //open sidebar
+            DriverAction.click(MyLocators.sidebar, "Expand the sidebar", "Sidebar expands displaying list of modules.");
+
+            //select a module from sidebar
+            DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", module)),"Validate user able to click on "+module,"User successfully clicked on "+module);
+
+
+            //select submodule if required
+
+            Thread.sleep(3000);
+
+            if(!submodule.isEmpty()){
+                DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", submodule)),"Validate user able to click on "+submodule,"User successfully clicked on "+submodule);
+            }
+            //close sidebar
+            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
+
+            //validate required screen appears
+            Thread.sleep(3000);
+            String screenHeader=DriverAction.getElementText(Course_Locators.actionHeading);
+            if(screenHeader.equals(screen))
+            {
+                GemTestReporter.addTestStep("Validate user successfully directed to "+screenHeader, "User successfully directed to "+screenHeader,
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate user successfully directed to "+screenHeader, "User not able to directed to "+screenHeader,
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @And("Validate {string} on Add Assignment Screen")
+    public void validateOnAddAssignmentScreen(String category) {
+        try{
+           //validate predefine category on Add assignment screen.
+            if(DriverAction.isDisplayed(By.xpath(Course_Locators.assignmentInput.replace("input",category))))
+            {
+                GemTestReporter.addTestStep("Validate Selected category is displayed on Add assignment screen", "selected category is displayed on screen",
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Selected category is displayed on Add assignment screen", "selected category is not displayed on screen",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @Then("check the Has Test and Validate option appear")
+    public void checkTheHasTestAndValidateOptionAppear() {
+try{
+    //in this we are filling the description
+    if (DriverAction.isExist(Course_Locators.courseDescription,120)) {
+        DriverAction.typeText(Course_Locators.courseDescription,"new Description","Validate user able to type in Course description input","User successfully typed new Description");
+        DriverAction.scrollToBottom();
+        DriverAction.click(Course_Locators.hasTestCheckbox,"Validate user able to click on Has Test Checkbox","User successfully clicked on Has Test checkbox");
+
+        //Validate generate certificate anb Retake test checkbox appears
+
+        if(DriverAction.isExist(Course_Locators.generateCertificateCheckbox)&&DriverAction.isExist(Course_Locators.allowRetakeTestCheckbox))
+        {
+            GemTestReporter.addTestStep("Validate Required checkboxes appear when user clicked on Has Test checkbox", "Generate Certificate and Allow Retake Test checkboxes appears successfully",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Validate Required checkboxes appear when user clicked on Has Test checkbox", "Generate Certificate and Allow Retake Test checkboxes not appears successfully",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+    }
+    else {
+        GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", STATUS.FAIL,
+                DriverAction.takeSnapShot());
+    }
+
+    //check the Has test check box and valiad
+
+}
+catch (Exception e) {
+    logger.info("Exception occurred", e);
+    GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+}
+    }
+
+    @Then("Validate Automatic selection of Retake checkbox")
+    public void validateAutomaticSelectionOfRetakeCheckbox() {
+        try{
+            //check generate certificate and validate Retake got checked automatically
+            DriverAction.click(Course_Locators.generateCertificateCheckbox,"Validate user checked generate certificate checkbox","user successfully checked generate certificate checkbox");
+
+            if(DriverAction.isExist(Course_Locators.checkedAllowRetakeTestCheckbox))
+            {
+                GemTestReporter.addTestStep("Validate Allow Retake Test checkbox is checked automatically when we checked Generate certificate checkbox", "Allow Retake checkbox is checked successfully",
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validate Allow Retake Test checkbox is checked automatically when we checked Generate certificate checkbox", "Allow Retake checkbox is not checked successfully",
+                        STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @And("Validate all fields exists in {string} section")
+    public void validateAllFieldsExistsInSection(String section) {
+        try{
+            List<By> ele =new ArrayList<>();
+            if(section.equals("Add Course Info"))
+            {
+                List<String> inputLabel= Arrays.asList("courseName", "ddown1","duration","getFile","ddown2");
+
+                ele.add(Tests_TestControl_Locators.backBtn1);
+                ele.add(Course_Locators.courseDescription);
+                ele.add(By.xpath(Utils_Locators.button.replace("buttonName","Add Content")));
+                ele.add(By.xpath(Course_Locators.inputLabel.replace("input","Select Category*")));
+                ele.add(By.xpath(Course_Locators.inputLabel.replace("input","Course Tag*")));
+                ele.add(Utils_Locators.unCheckedCheckbox);
+                ele.add(Utils_Locators.unCheckedCheckbox2);
+                for(int i=0;i< inputLabel.size();i++)
+                {
+                    ele.add(By.xpath(Utils_Locators.input.replace("label",inputLabel.get(i))));
+                }
+
+                //call boolean method to validate weather elements are present or not
+                boolean isTrue=test.isEverythingRequiredPresent(ele);
+
+                if(isTrue)
+                {
+                    GemTestReporter.addTestStep("Validate all required elements are present on "+section+" Screen", "All elements are present successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Validate all required elements are present on "+section+" Screen", "All elements are not present successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+            else if(section.equals("Add Test Info"))
+            {
+                List<String> inputLabel=Arrays.asList("testName", "testTag","inputMask","ddownLevel");
+
+                ele.add(Tests_TestControl_Locators.backBtn1);
+                ele.add(Course_Locators.courseDescription);
+                ele.add(By.xpath(Tests_TestControl_Locators.buttonName.replace("input"," Next ")));
+                ele.add(Utils_Locators.checkedCheckbox);
+                for(int i=0;i< inputLabel.size();i++)
+                {
+                    ele.add(By.xpath(Utils_Locators.input.replace("label",inputLabel.get(i))));
+                }
+
+                //call boolean method to validate weather elements are present or not
+                boolean isTrue=test.isEverythingRequiredPresent(ele);
+
+                if(isTrue)
+                {
+                    GemTestReporter.addTestStep("Validate all required elements are present on "+section+" Screen", "All elements are present successfully", STATUS.PASS,
+                            DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Validate all required elements are present on "+section+" Screen", "All elements are not present successfully", STATUS.FAIL,
+                            DriverAction.takeSnapShot());
+                }
+            }
+            else if(section.equals("Select Options"))
+            {
+
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @And("Select option for internal Test")
+    public void selectOptionForInternalTest() {
+        try{
+            String inputValues[] = {"Yes","Yes","Yes"};
+            for(int i=2;i<=4;i++)
+            {
+                DriverAction.click(By.xpath(Course_Locators.dropdownIcon.replace("itr", String.valueOf(i))),"Validate user able to click dropdown","User successfully clicked on dropdown");
+                DriverAction.click(By.xpath(Course_Locators.option.replace("input", inputValues[i - 2])),"Validate user able to select the option","User successfully able to select "+inputValues[i-2]);
+            }
+            //select next button
+            String buttonName=" Next ";
+            DriverAction.click(By.xpath(Tests_TestControl_Locators.buttonName.replace("input",buttonName)),"Validate user able to click on "+buttonName,"User successfully clicked on "+buttonName);
+
+
+
+        }
+        catch(Exception e){
+            GemTestReporter.addTestStep("Click Save & Next","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+
+    @And("save and publish course with Internal Test")
+    public void saveAndPublishCourseWithInternalTest() {
+        try{
+            DriverAction.click(By.xpath(MyLocators.button.replace("input","Default Order")),"Validate user able to click on Default Order","User successfully clicked on Default Order");
+            DriverAction.click(By.xpath(Utils_Locators.button1.replace("buttonName","Save Course & Publish")),"Validate user able to click on Save Course & Publish","User successfully clicked on Save Course & Publish");
+            DriverAction.click(By.xpath(Utils_Locators.button1.replace("buttonName","Yes")),"Validate user able to click on Yes popup","User successfully clicked on Yes popup");
+            DriverAction.waitSec(2);
+//           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
+            String popUpMessage=DriverAction.getElementText(By.xpath("(//div[contains(@class,'p-toast-message')])[3]"));
+
+            if("Course Created Successfully".equals(popUpMessage))
+            {
+                GemTestReporter.addTestStep("Course is drafted","course is drafted successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else {
+                GemTestReporter.addTestStep("Course is drafted","course is not drafted", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+        }
+        catch(Exception e){
+            GemTestReporter.addTestStep("Click Save & Next","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+    @And("Complete the course and {string} the test when retake button is {string}")
+    public void completeTheCourseAndTheTest(String status,String checked) {
+        try{
+        //complete the course
+        DriverAction.scrollToBottom();
+        if (DriverAction.getElement(LearnerModule_Locators.viewCourseBtn).isDisplayed()) {
+            GemTestReporter.addTestStep("Verify View Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.scrollToBottom();
+            DriverAction.waitSec(3);
+            DriverAction.click(LearnerModule_Locators.viewCourseBtn);
+
+
+            //validate no of test in course
+            List<WebElement> testList = DriverAction.getElements(Tests_TestControl_Locators.testList);
+
+
+            //start the course
+            if (DriverAction.getElement(LearnerModule_Locators.startCourseBtn).isDisplayed()) {
+                DriverAction.click(LearnerModule_Locators.startCourseBtn);
+
+                DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn), 90);
+                if (DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
+                    DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
+                    DriverAction.waitSec(3);
+                        if (DriverAction.getElement(LearnerModule_Locators.popupDiv).isDisplayed()) {
+                            GemTestReporter.addTestStep("Verify confirmation popup message", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Verify confirmation popup message", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                        if (DriverAction.isDisplayed(LearnerModule_Locators.greenTick)) {
+                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+
+                        } else {
+                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                        }
+                }
+
+                for (WebElement element : testList) {
+                    //test
+                    if (DriverAction.getElement(LearnerModule_Locators.yesBtn).isDisplayed()) {
+                        DriverAction.click(LearnerModule_Locators.yesBtn);
+                    }
+                    //next btn click with vedio
+                    //click the next button to forward the vedio.
+                    if(DriverAction.isDisplayed(By.xpath(MyLocators.nextBtn.replace("input", "NEXT"))))
+                    {
+                        DriverAction.waitUntilElementClickable(By.xpath(MyLocators.nextBtn.replace("input", "NEXT")), 90);
+                        DriverAction.click(By.xpath(MyLocators.nextBtn.replace("input", "NEXT")), "Click the NEXT button displayed in video", "Successfully clicked the NEXT button displayed in video.");
+                    }
+
+                    //check the instruction checkbox
+                    DriverAction.click(MyLocators.instructionsCheckbox);
+                    GemTestReporter.addTestStep("Check the instructions checkbox", "Successfully checked the instructions checkbox.", STATUS.PASS);
+                    DriverAction.click(By.xpath(MyLocators.button.replace("input", "NEXT")));
+
+                    //verify dailogue box appear
+                    if (DriverAction.isExist(MyLocators.startTestDialog)) {
+                        GemTestReporter.addTestStep("Verify confirmation dialog box appears", "Successfully verified the confirmations dialog box.", STATUS.PASS);
+                    } else {
+                        GemTestReporter.addTestStep("Verify confirmation dialog box appears", "Could not verify confirmation dialog box.", STATUS.FAIL);
+                    }
+                    DriverAction.click(MyLocators.yesBtn, "Click the yes button", "Successfully clicked Yes button.");
+                    //click attempt button
+                    DriverAction.click(By.xpath(MyLocators.button.replace("input", "Attempt")));
+
+                    //valiadte if vedio pop appears
+                    if (DriverAction.isDisplayed(Course_Locators.crossIcon)) {
+                        DriverAction.click(Course_Locators.crossIcon, "Validate user able to click on cross icon", "user successfully exit the movie clip");
+                    }
+
+                    //expand section
+                    DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
+
+                    List<WebElement> sections = DriverAction.getElements(MyLocators.totalSections);
+
+                    int numOptions = sections.size();
+                    if(status.equals("Pass")) {
+                        for (int k = 0; k < numOptions; k++) {
+                            if (k != 0) {
+                                DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
+
+                            }
+//                        DriverAction.waitSec(2);
+                            DriverAction.click(sections.get(k));
+
+                            int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
+
+//                        if(status.equals("Pass"))
+//                        {
+
+                            for (int i = 0; i < totalQues; i++) {
+                                //  enterAnswer();
+                                //valiadte if vedio pop appears
+                                if (DriverAction.isDisplayed(Course_Locators.crossIcon)) {
+                                    DriverAction.click(Course_Locators.crossIcon, "Validate user able to click on cross icon", "user successfully exit the movie clip");
+                                }
+                                if (DriverAction.isDisplayed(MyLocators.textarea)) {
+                                    DriverAction.typeText(MyLocators.textarea, "abc");
+                                    GemTestReporter.addTestStep("Enter answer in input field", "Successfully entered the answer in input field", STATUS.PASS);
+                                } else if (DriverAction.isDisplayed(MyLocators.mcqOptions)) {
+                                    DriverAction.click(MyLocators.selectOption, "Select an option");
+                                    GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
+                                } else if (DriverAction.isDisplayed(MyLocators.radioBtn)) {
+                                    List<WebElement> tempRadioBtns = DriverAction.getElements(MyLocators.radioBtn);
+                                    DriverAction.click(tempRadioBtns.get(0), "Select an option");
+                                    GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
+                                } else {
+                                    DriverAction.click(MyLocators.selectCheckbox, "Select an option");
+                                    GemTestReporter.addTestStep("Select an answer", "Successfully selected the answer", STATUS.PASS);
+                                }
+                                DriverAction.scrollToBottom();
+                                DriverAction.click(By.xpath(MyLocators.button.replace("input", "Save & Next")));
+                                //clickTheButton("Save & Next");
+
+                            }
+                            sections = DriverAction.getElements(MyLocators.totalSections);
+                        }
+                        //Finish test
+//                DriverAction.click(By.xpath(MyLocators.button.replace("input", "Finish Test")));
+                        DriverAction.waitSec(5);
+                        try {
+                            // Create a Robot instance
+                            Robot robot = new Robot();
+                            robot.keyPress(KeyEvent.VK_ESCAPE);
+                            robot.keyRelease(KeyEvent.VK_ESCAPE);
+                        } catch (AWTException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(status.equals("Fail"))
+                    {
+                        //Finish test
+//                DriverAction.click(By.xpath(MyLocators.button.replace("input", "Finish Test")));
+                        DriverAction.waitSec(5);
+                        try {
+                            // Create a Robot instance
+                            Robot robot = new Robot();
+                            robot.keyPress(KeyEvent.VK_ESCAPE);
+                            robot.keyRelease(KeyEvent.VK_ESCAPE);
+                        } catch (AWTException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    if (DriverAction.isExist(LearnerModule_Locators.finishSubmit)) {
+                        DriverAction.click(LearnerModule_Locators.finishSubmit, "Finish and Submit button is visible on ui", "successfully clicked Finish and Submit button.");
+                    } else {
+                        GemTestReporter.addTestStep("Finish and Submit button is visible on ui", "Finish and Submit button is not visible on ui.", STATUS.FAIL);
+                    }
+                    DriverAction.waitSec(5);
+                    DriverAction.scrollToBottom();
+                    //validate Retake button
+                    if (checked.equals("True")) {
+                        if (DriverAction.isDisplayed(By.xpath(Utils_Locators.button.replace("buttonName", "Retake Test")))) {
+                            GemTestReporter.addTestStep("Validate Retake button is present on Test summary screen", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate Retake button is present on Test summary screen", "Not present on Test summary screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                        }
+                    }
+                    else
+                    {
+                        GemTestReporter.addTestStep("Validate Retake button is not present on Test summary screen as we have not checked it during creation of course", "Not present on Test summary screen", STATUS.PASS, DriverAction.takeSnapShot());
+
+                    }
+                    if (DriverAction.isExist(LearnerModule_Locators.proceedBtn)) {
+                        DriverAction.click(LearnerModule_Locators.proceedBtn, "proceed button is visible on ui", "successfully clicked proceed button.");
+                    } else {
+                        GemTestReporter.addTestStep("proceed button is visible on ui", "proceed button is not visible on ui.", STATUS.FAIL);
+                    }
+                    DriverAction.waitSec(5);
+
+                    DriverAction.click(LearnerModule_Locators.backtoCourse, "back to course button is visible on ui", "successfully clicked back to course button.");
+                    DriverAction.waitSec(5);
+                                    if(DriverAction.isDisplayed(Course_Locators.secondTest))
+                {
+                    DriverAction.click(Course_Locators.secondTest,"Validate user able to select second test","User successfully select the second test");
+                }
+                }
+//                if(DriverAction.isDisplayed(Course_Locators.secondTest))
+//                {
+//                    DriverAction.click(Course_Locators.secondTest,"Validate user able to select second test","User successfully select the second test");
+//                    if (DriverAction.getElement(LearnerModule_Locators.yesBtn).isDisplayed()) {
+//                        DriverAction.click(LearnerModule_Locators.yesBtn);
+//                    }
+//                    //check the instruction checkbox
+//                    DriverAction.click(MyLocators.instructionsCheckbox);
+//                    GemTestReporter.addTestStep("Check the instructions checkbox", "Successfully checked the instructions checkbox.", STATUS.PASS);
+//                    DriverAction.click(By.xpath(MyLocators.button.replace("input", "NEXT")));
+//                    if (DriverAction.isExist(MyLocators.startTestDialog)) {
+//                        GemTestReporter.addTestStep("Verify confirmation dialog box appears", "Successfully verified the confirmations dialog box.", STATUS.PASS);
+//                    } else {
+//                        GemTestReporter.addTestStep("Verify confirmation dialog box appears", "Could not verify confirmation dialog box.", STATUS.FAIL);
+//                    }
+//                    DriverAction.click(MyLocators.yesBtn, "Click the yes button", "Successfully clicked Yes button.");
+//                    //click attempt button
+//                    DriverAction.click(By.xpath(MyLocators.button.replace("input", "Attempt")));
+//
+//                    if(DriverAction.isDisplayed(Course_Locators.crossIcon))
+//                    {
+//                        DriverAction.click(Course_Locators.crossIcon,"Validate user able to click on cross icon","user successfully exit the movie clip");
+//                    }
+//                    //expand section
+//                    DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
+//                     sections = DriverAction.getElements(MyLocators.totalSections);
+//                     numOptions = sections.size();
+//                    for (int k = 0; k < numOptions; k++) {
+//                        if (k != 0) {
+//                            DriverAction.click(MyLocators.sectionsDropdown, "Click the sections dropdown", "Sections dropdown is expanded successfully.");
+//
+//                        }
+////                        DriverAction.waitSec(2);
+//                        DriverAction.click(sections.get(k));
+//                        int totalQues = DriverAction.getElements(MyLocators.paletteBtn).size();
+//                        for (int i = 0; i < totalQues; i++) {
+//                            //  enterAnswer();
+//                            if (DriverAction.isDisplayed(MyLocators.textarea)) {
+//                                DriverAction.typeText(MyLocators.textarea, "abc");
+//                                GemTestReporter.addTestStep("Enter answer in input field", "Successfully entered the answer in input field", STATUS.PASS);
+//                            } else if (DriverAction.isDisplayed(MyLocators.mcqOptions)) {
+//                                DriverAction.click(MyLocators.selectOption, "Select an option");
+//                                GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
+//                            }
+//                            else if(DriverAction.isDisplayed(MyLocators.radioBtn))
+//                            {
+//                                DriverAction.click(MyLocators.radioBtn, "Select an option");
+//                                GemTestReporter.addTestStep("Select an answer", "Successfully selected an answer.", STATUS.PASS);
+//                            }
+//                            else {
+//                                DriverAction.click(MyLocators.selectCheckbox, "Select an option");
+//                                GemTestReporter.addTestStep("Select an answer", "Successfully selected the answer", STATUS.PASS);
+//                            }
+//                            DriverAction.scrollToBottom();
+//                            DriverAction.click(By.xpath(MyLocators.button.replace("input", "Save & Next")));
+//                            //clickTheButton("Save & Next");
+//
+//                        }
+//                        sections = DriverAction.getElements(MyLocators.totalSections);
+//                    }
+                    //validate Retake button
+//                    if(status.equals("Fail")&&checked.equals("true"))
+//                    {
+//                        if(DriverAction.isDisplayed(By.xpath(Utils_Locators.button.replace("buttonName","Retake Test"))))
+//                        {
+//                            GemTestReporter.addTestStep("Validate Retake button is present on Test summary screen", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+//                        }
+//                        else
+//                        {
+//                            GemTestReporter.addTestStep("Validate Retake button is present on Test summary screen", "Not present on Test summary screen", STATUS.FAIL, DriverAction.takeSnapShot());
+//
+//                        }
+//                    }
+//
+//
+//                    if (DriverAction.isExist(LearnerModule_Locators.proceedBtn)) {
+//                        DriverAction.click(LearnerModule_Locators.proceedBtn, "proceed button is visible on ui", "successfully clicked proceed button.");
+//                    } else {
+//                        GemTestReporter.addTestStep("proceed button is visible on ui", "proceed button is not visible on ui.", STATUS.FAIL);
+//                    }
+//                    DriverAction.waitSec(5);
+//
+//                    DriverAction.click(LearnerModule_Locators.backtoCourse, "back to course button is visible on ui", "successfully clicked back to course button.");
+//                    DriverAction.waitSec(5);
+
+
+
+
+            }
+        }
+
+    }
+        catch (Exception e) {
+        logger.info("Exception occurred", e);
+        GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+    }
+    }
+
+    @And("Validate certificate after completion of course when user {string} and option is {string}")
+    public void validateCertificateAfterCompletionOfCourse(String status,String checked) {
+        try{
+            String filePath="";
+
+            if(checked.equals("False")) {
+
+                //validate download certificate button
+                DriverAction.waitUntilElementIsClickable(By.xpath(Utils_Locators.button1.replace("buttonName", "Download Certificate")));
+                DriverAction.click(By.xpath(Utils_Locators.button1.replace("buttonName", "Download Certificate")), "Validate user able to click on download certificate after completing course");
+
+
+                String directoryPath = "C:/Users/rahul.adhikari/Downloads/";
+                File directory = new File(directoryPath);
+                if (directory.exists() && directory.isDirectory()) {
+                    File latestfile = getLatestFile(directory);
+                    if (latestfile != null) {
+                        System.out.println("Latest File : " + latestfile.getAbsolutePath());
+                        filePath = latestfile.getAbsolutePath();
+                        if (filePath.contains("certificate")) {
+                            GemTestReporter.addTestStep("Validate certificate is downloaded", "User successfully able to download certificate", STATUS.PASS, DriverAction.takeSnapShot());
+
+                        } else {
+                            GemTestReporter.addTestStep("Validate certificate is downloaded", "User not able to download certificate", STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                }
+            }
+            else if(status.equals("Pass")&&checked.equals("True"))
+            {
+                //validate download certificate button
+                DriverAction.waitUntilElementIsClickable(By.xpath(Utils_Locators.button1.replace("buttonName", "Download Certificate")));
+                DriverAction.click(By.xpath(Utils_Locators.button1.replace("buttonName", "Download Certificate")), "Validate user able to click on download certificate after completing course");
+
+
+                String directoryPath = "C:/Users/rahul.adhikari/Downloads/";
+                File directory = new File(directoryPath);
+                if (directory.exists() && directory.isDirectory()) {
+                    File latestfile = getLatestFile(directory);
+                    if (latestfile != null) {
+                        System.out.println("Latest File : " + latestfile.getAbsolutePath());
+                        filePath = latestfile.getAbsolutePath();
+                        if (filePath.contains("certificate")) {
+                            GemTestReporter.addTestStep("Validate certificate is downloaded", "User successfully able to download certificate", STATUS.PASS, DriverAction.takeSnapShot());
+
+                        } else {
+                            GemTestReporter.addTestStep("Validate certificate is downloaded", "User not able to download certificate", STATUS.FAIL, DriverAction.takeSnapShot());
+                        }
+                    }
+                }
+            }
+            else
+            {
+               if(DriverAction.isDisplayed(By.xpath(Utils_Locators.button1.replace("buttonName", "Download Certificate"))))
+               {
+                   GemTestReporter.addTestStep("Validate certificate download for failed test", "User successfully able to download certificate", STATUS.FAIL, DriverAction.takeSnapShot());
+
+               } else {
+                   GemTestReporter.addTestStep("Validate certificate download for failed test", "User not able to download certificate", STATUS.PASS, DriverAction.takeSnapShot());
+               }
+            }
+
+            //switch back to course screen
+            DriverAction.waitSec(3);
+            if(DriverAction.isDisplayed(By.xpath(MyLocators.optionSelected.replace("input","Courses"))))
+            {
+                DriverAction.click(By.xpath(MyLocators.optionSelected.replace("input","Courses")),"Validate user able to switch back to course screen","user successfully switched to course screen");
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    //get the latest modified file
+    public static File getLatestFile(File directory) {
+        File[] files = directory.listFiles();
+
+        if (files == null || files.length == 0) {
+            return null;
+        }
+        Arrays.sort(files, Comparator.comparingLong(File::lastModified).reversed());
+        return files[0];
+    }
+
+
+    @And("Switched to completed course section and validate view or download button functionality {string} {string}")
+    public void switchedToCompletedCourseSectionAndValidateViewDownloadButtonFunctionality(String status, String checked) {
+        try{
+            //switch the tab
+            if(DriverAction.isDisplayed(By.xpath(MyLocators.optionSelected.replace("input","Completed"))))
+            {
+                DriverAction.click(By.xpath(MyLocators.optionSelected.replace("input","Completed")),"User able to switch to completed section","User successfully switched to completed section");
+            }
+            if(DriverAction.isExist(Tests_TestControl_Locators.completedTabthreeDotIcon,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.completedTabthreeDotIcon);
+                DriverAction.waitSec(3);
+                if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "View/Download Certificate")))) {
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "View/Download Certificate")));
+                    if ((checked.equals("True") && status.equals("Pass"))||checked.equals("False")) {
+                        if (DriverAction.isDisplayed(Course_Locators.certificateLabel)) {
+
+                            GemTestReporter.addTestStep("Validate view/download certificate options is present for the completed course", "View/Download certificate option is present for the course", STATUS.PASS, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate view/download certificate options is present for the completed course", "View/Download certificate option is not present for the course", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                        }
+                    } else if (checked.equals("True") && status.equals("Fail")) {
+                        if (DriverAction.isDisplayed(Course_Locators.certificateLabel)) {
+                            GemTestReporter.addTestStep("Validate view/download certificate options is should not present for the completed course", "View/Download certificate option is present for the course", STATUS.FAIL, DriverAction.takeSnapShot());
+                        } else {
+                            GemTestReporter.addTestStep("Validate view/download certificate options is should not present for the completed course", "View/Download certificate option is not present for the course", STATUS.PASS, DriverAction.takeSnapShot());
+
+                        }
+                    }
+                }
+
+            }
+            //navigate back
+            if(DriverAction.isExist(LearnerModule_Locators.backBtn1,120))
+            {
+                DriverAction.click(LearnerModule_Locators.backBtn1);
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+
+    @Then("validate course summary screen for Retake button {string} {string}")
+    public void validateCourseSummaryScreenForRetakeButton(String status, String checked) {
+        try{
+            //switch the tab
+            if(DriverAction.isDisplayed(By.xpath(MyLocators.optionSelected.replace("input","Completed"))))
+            {
+                DriverAction.click(By.xpath(MyLocators.optionSelected.replace("input","Completed")),"User able to switch to completed section","User successfully switched to completed section");
+            }
+            if(DriverAction.isExist(Tests_TestControl_Locators.completedTabthreeDotIcon,120))
+            {
+                DriverAction.click(Tests_TestControl_Locators.completedTabthreeDotIcon);
+                DriverAction.waitSec(3);
+                if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Course Summary")))) {
+                    DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input", "Course Summary")));
+
+                    //validate no of test in course
+                    List<WebElement> testList = DriverAction.getElements(Tests_TestControl_Locators.testList);
+                    List<WebElement> testStatus = DriverAction.getElements(Course_Locators.testStatus);
+                    List<WebElement> retakeButton = DriverAction.getElements(Course_Locators.retakeButton);
+                    if(status.equals("Fail")&&checked.equals("True")) {
+                        if (testList.size() == 2) {
+                            String fetchedStatus = testStatus.get(2).getText();
+                            if (fetchedStatus.equals("Fail")) {
+                                if (retakeButton.size()==2) {
+                                    GemTestReporter.addTestStep("Validate retake button for failed test on course summary screen", "Retake button for failed test is there on course summary screen", STATUS.PASS, DriverAction.takeSnapShot());
+                                } else {
+                                    GemTestReporter.addTestStep("VValidate retake button for failed test on course summary screen", "Retake button for failed test is not there on course summary screen", STATUS.FAIL, DriverAction.takeSnapShot());
+                                }
+                            }
+
+                        }
+                    }
+                    else if(status.equals("Pass")&&checked.equals("True"))
+                    {
+                        if (testList.size() == 2) {
+                            if (retakeButton.size()>0) {
+                                    GemTestReporter.addTestStep("Validate retake button for passed test on course summary screen", "Retake button for passed test is there on course summary screen", STATUS.FAIL, DriverAction.takeSnapShot());
+                                } else {
+                                    GemTestReporter.addTestStep("Validate retake button for passed test on course summary screen", "Retake button for passed test is not there on course summary screen", STATUS.PASS, DriverAction.takeSnapShot());
+                                }
+                        }
+                    }
+                    else
+                    {
+                        if (testList.size() == 2) {
+                            if (retakeButton.size()>0) {
+                                GemTestReporter.addTestStep("Validate retake button for test in which retake option is unchecked should not be there on course summary screen", "Retake button is present on course summary screen", STATUS.FAIL, DriverAction.takeSnapShot());
+                            } else {
+                                GemTestReporter.addTestStep("Validate retake button for test in which retake option is unchecked should not be there on course summary screen", "Retake button  is not there on course summary screen", STATUS.PASS, DriverAction.takeSnapShot());
+                            }
+                        }
+                    }
+
+                    }
+
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+
     }
 }

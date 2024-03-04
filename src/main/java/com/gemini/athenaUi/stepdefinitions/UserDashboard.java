@@ -134,7 +134,7 @@ try{
 
     if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
     {
-        DriverAction.scrollToBottom();
+//        DriverAction.scrollToBottom();
         DriverAction.click(UserDashboard_Locator.publishBtn,"clicked on Save Course and Publish button","Successfully clicked on Save Course and Publish button");
         DriverAction.waitSec(3);
         if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes"))))
@@ -184,7 +184,7 @@ catch (Exception e) {
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul44@gmail.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"learner1@gmail.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
@@ -233,7 +233,7 @@ catch (Exception e) {
             if(DriverAction.isExist(UserDashboard_Locator.learnerId,120))
             {
                String getLearnerId=DriverAction.getElementText(UserDashboard_Locator.learnerId);
-               String actualId="rahul44@gmail.com";
+               String actualId="learner1@gmail.com";
                if(actualId.equals(getLearnerId))
                {
                    GemTestReporter.addTestStep("Validate Learner is assigned properly", "Learner is assigned successfully" , STATUS.PASS,
@@ -322,7 +322,7 @@ catch (Exception e) {
             if(DriverAction.isExist(UserDashboard_Locator.learnerId,120))
             {
                 String getLearnerId=DriverAction.getElementText(UserDashboard_Locator.learnerId);
-                String actualId="rahul44@gmail.com";
+                String actualId="learner1@gmail.com";
                 if(actualId.equals(getLearnerId))
                 {
                     GemTestReporter.addTestStep("Validate Learner is Unassigned properly", "Learner is Unassigned successfully" , STATUS.PASS,
@@ -443,7 +443,7 @@ else {
             if(DriverAction.isExist(UserDashboard_Locator.learnerId,120))
             {
                 String getLearnerId=DriverAction.getElementText(UserDashboard_Locator.learnerId);
-                String actualId="rahul44@gmail.com";
+                String actualId="learner1@gmail.com";
                 if(actualId.equals(getLearnerId))
                 {
                     GemTestReporter.addTestStep("Validate Learner is assigned properly", "Learner successfully Completed Course Manually" , STATUS.PASS,
@@ -538,7 +538,7 @@ else {
             if(DriverAction.isExist(UserDashboard_Locator.learnerId,120))
             {
                 String getLearnerId=DriverAction.getElementText(UserDashboard_Locator.learnerId);
-                String actualId="rahul44@gmail.com";
+                String actualId="learner1@gmail.com";
                 if(actualId.equals(getLearnerId))
                 {
                     GemTestReporter.addTestStep("Validate Learner is Reattempt properly", "Learner is Reattempt successfully" , STATUS.PASS,
@@ -937,7 +937,7 @@ else {
 
                         break;
                     case "Edit":
-                        String heading3="Create Course";
+                        String heading3="Edit Course";
                         if(heading3.trim().equals(fetchedHeading.trim()))
                         {
                             GemTestReporter.addTestStep("Validate Create Course page opened", "Create Course page opened successfully" , STATUS.PASS,

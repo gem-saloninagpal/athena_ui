@@ -3,19 +3,40 @@ package com.gemini.athenaUi.locators;
 import org.openqa.selenium.By;
 
 public class Tests_TestControl_Locators {
-    public static String date="//span[text()='date']";
+    public static String date="(//span[text()='date'])";
+    public static String secondDate="(//span[text()='date'])[2]";
+
+    public static String buttonName="//button[text()='input']";
+
+    //small[contains(text(),' Test')]
+    public static By testList=By.xpath("//small[contains(text(),' Test')]");
+
+    //button[text()='Next']
     public static By testInputFields=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
     public static By trainingTestInputFields=By.xpath("//form[@class='ng-pristine ng-invalid ng-touched']//input");
-    public static By testInputFieldsInternal=By.xpath("//form[@class='ng-invalid ng-touched ng-dirty']//input");
+    public static By testInputFieldsInternal=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
+
+    public static By testInputFieldsInternalTraining=By.xpath("//form[@class='ng-pristine ng-invalid ng-touched']//input");
     public static By saveCourseAndPublish=By.xpath("(//span[text()='Save Course & Publish']//parent::button)[2]");
     public static String calendar="(//input[contains(@id,'calendar')])[itr]";
 
     public static By dropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[2]");
 
     public static String option="//span[text()='section']";
-    public static By percentageInput=By.xpath("(//form[@class='p-ml-5 p-mr-5 ng-invalid ng-dirty ng-touched']//input)[2]");
-    public static By timeInput=By.xpath("(//form[@class='p-ml-5 p-mr-5 ng-invalid ng-dirty ng-touched']//input)[3]");
+//    public static By percentageInput=By.xpath("(//form[@class='p-ml-5 p-mr-5 ng-invalid ng-dirty ng-touched']//input)[2]");
+    public static By percentageInput=By.xpath("//input[@id='cutOffPercentage']");
+
+    //input[@id='cutOffPercentage']
+//    public static By timeInput=By.xpath("(//form[@class='p-ml-5 p-mr-5 ng-invalid ng-dirty ng-touched']//input)[3]");
+    public static By timeInput=By.xpath("//input[@id='inputmask']");
+
+
+    //input[@id='inputmask']
     public static By addQuestion=By.xpath("//button//span[text()='Add Questions']");
+
+    public static String clickButton="//button//span[text()='input']";
+
+    //button//span[text()='Add Questions']
     public static By importRandomBtn=By.xpath("//button//span[text()='Import Random']");
     public static By questionTypeDropdown=By.xpath("//div//span[text()='Question Type']");
     public static By difficultyDropdown=By.xpath("//div//span[text()='Difficulty']");
@@ -25,6 +46,8 @@ public class Tests_TestControl_Locators {
 
     public static String options="//li//span[text()='input']";
     public static By saveButton=By.xpath("//button//span[text()='Save']");
+
+    public static By screenHeader=By.xpath("//h6");
     public static By submitBtn=By.xpath("//button//span[text()='SUBMIT']");
     public static By continueButton=By.xpath("//button//span[text()='Continue']");
     public static By addNewTestBtn=By.xpath(" //button//span[text()='Add New Test']");
@@ -33,10 +56,18 @@ public class Tests_TestControl_Locators {
     public static By createdTestTextInternal=By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr//td[1]");
     public static By createdTestTextTraining=By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[3]//tr//td[1]");
     public static By threeDotIcon=By.xpath("(//span[contains(@class,'pi pi-ellipsis')])[1]");
+
+    public static By completedTabthreeDotIcon=By.xpath("//p-tabpanel[@header='Completed']//span[contains(@class,'pi pi-ellipsis')]");
+
+    //p-tabpanel[@header='Completed']//span[contains(@class,'pi pi-ellipsis')]
     public static By threeDotInternal=By.xpath("(//span[contains(@class,'pi pi-ellipsis')])[11]");
 
     public static By threeDotTrainingTest=By.xpath(" (//span[contains(@class,'pi pi-ellipsis')])[21]");
     public static String threeDotOption="//div//label[text()='input']";
+
+    public static By uploadBtn=By.xpath(" (//span[contains(@class,'pi pi-upload')])");
+    public static By assignedStatus=By.xpath("(//tbody[@class='p-datatable-tbody']//tr//td)[5]");
+
 
     public static By actionBtn=By.xpath("(//span[contains(@class,'pi pi-caret-down')])[2]");
 
@@ -148,11 +179,29 @@ public class Tests_TestControl_Locators {
     public static By addOptionBtn=By.xpath("//button//span[text()='Add']");
     public static By answerOption=By.xpath("(//div[@class='p-checkbox-box'])[2]");
     public static By saveAndMoreBtn=By.xpath("//button//span[text()='Save & Add More']");
+    public static By saveAndExitBtn=By.xpath("//button//span[text()='Save & Exit']");
+    public static By calendarInput1=By.xpath("//input[@id='calendar1']");
+
+    public static By calendarInput2=By.xpath("//input[@id='calendar2']");
+
+
+
+
+
+    //input[@id='calendar1']
+
+
     public static String chooseSpecificDropDowns="(//span[contains(@class,'pi pi-chevron-down')])[itr]";
     public static By tagFilter=By.xpath("//input[@placeholder='Search by Statement/Tag']");
 
     public static By addIcon=By.xpath(" //i[@class='add-btn-plus pi pi-plus']");
 
     public static By addTestBtn=By.xpath("//span[text()='Add To Test']");
+
+    public static String testButton="//p-tabpanel[@header='Internal Tests']//button[@label='input']";
+
+    //p-tabpanel[@header="Internal Tests"]//button[@label='Create Test']
+
+    public static By clearBtn=By.xpath("//button//span[text()='Clear']");
 
 }
