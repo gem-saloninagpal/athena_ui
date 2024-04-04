@@ -3,7 +3,7 @@ Feature:Content and Assignment features
   Background:Check login to candidate module
    # And Logout of portal
     And Navigate to login page
-    And Login using "saloni02@gmail.com" and "abc@1234"
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
   @regression
     Scenario Outline:Add content without adding course info

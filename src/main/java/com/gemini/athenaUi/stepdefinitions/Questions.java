@@ -8,12 +8,19 @@ import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.List;
 
-import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.*;
-
+import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.clickButton;
+import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.generateUniqueEmail;
 public class Questions {
     String _question;
     String _passage;
@@ -25,12 +32,14 @@ public class Questions {
     String _movieDescription;
     String _updatedPassage;
     String _updateComprehensionQuestion;
+    String _getLanguage1;
+    String _getLanguage2;
 
-    @And("^Select dropdown values in question fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
-    public void questionDropdownValues(String level, String type, String section, String difficulty, String skills) {
+    @And("^Select dropdown values in question fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
+    public void questionDropdownValues(String level, String type, String section, String difficulty, String skills, String text) {
         try {
-            String[] fields = {level, type, section, difficulty, skills};
-            String[] fieldName = {"level", "type", "section", "difficulty", "skills"};
+            String[] fields = {level, type, section, difficulty, skills, text};
+            String[] fieldName = {"level", "type", "section", "difficulty", "skills", "text"};
             List<WebElement> dropdowns = DriverAction.getElements(QuestionsLocators.dropdownFields);
             //select level, type, section etc. while creating a question
             for (int i = 0; i < dropdowns.size(); i++) {
@@ -57,7 +66,10 @@ public class Questions {
     public void enterQuestionDescription(String questionStatement) {
         try {
             DriverAction.waitSec(4);
-            DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
+            if(DriverAction.isDisplayed(QuestionsLocators.questionBox1)) {
+                DriverAction.typeText(QuestionsLocators.questionBox1, questionStatement);
+            }
+      //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
             GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, STATUS.PASS);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, STATUS.ERR);
@@ -72,11 +84,15 @@ public class Questions {
                 //call generate unique mail function and remove @gmail.com
                 text = generateUniqueEmail();
                 //enter option and add
-                DriverAction.typeText(QuestionsLocators.optionsBox, text);
+             //   DriverAction.typeText(QuestionsLocators.optionsBox, text);
+                DriverAction.waitUntilElementAppear(QuestionsLocators.enterOption,5);
+                DriverAction.typeText(QuestionsLocators.enterOption, text);
+                DriverAction.waitUntilElementClickable(QuestionsLocators.addButton,5);
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
                 GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, STATUS.PASS);
             }
-            Thread.sleep(4000);
+         //   Thread.sleep(6000);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.selectOption,3);
             DriverAction.click(QuestionsLocators.selectOption, "Successfully selected the option");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter options", "Exception encountered- " + e, STATUS.ERR);
@@ -86,8 +102,10 @@ public class Questions {
     @Then("^Verify the question is created \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyQuestionIsCreated(String question1, String question2) {
         try {
+            DriverAction.waitSec(4);
             String[] ques = {question2, question1};
             //verifying recently created 2 questions from the questions table
+            DriverAction.waitUntilElementAppear(QuestionsLocators.firstColumn,5);
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.firstColumn);
             int c = 0;
             for (int i = 0; i <= 1; i++) {
@@ -109,6 +127,7 @@ public class Questions {
     @And("^Enter word limit \"([^\"]*)\"$")
     public void enterWordLimit(String words) {
         try {
+            DriverAction.waitUntilElementAppear(QuestionsLocators.wordLimitTextbox,5);
             DriverAction.typeText(QuestionsLocators.wordLimitTextbox, words);
             GemTestReporter.addTestStep("Enter word limit", "Successfully entered the limit", STATUS.PASS, DriverAction.takeSnapShot());
         } catch (Exception e) {
@@ -121,10 +140,23 @@ public class Questions {
     public void questionDescriptionSubjective() {
         try {
             _existingQues = _question;
+        //    _existingQues = generateUniqueEmail();
             _question = generateUniqueEmail();
-            DriverAction.typeText(QuestionsLocators.questionBox, _question, "Successfully entered the question description.");
+            DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox1,4);
+            DriverAction.typeText(QuestionsLocators.questionBox1, _question, "Successfully entered the question description.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter question description in subjective", "Exception encountered- " + e, STATUS.ERR);
+        }
+    }
+
+    @And("^Enter subjective question description for coding$")
+    public void questionDescriptionCoding() {
+        try {
+            _existingQues = _question;
+            _question = generateUniqueEmail();
+            DriverAction.typeText(QuestionsLocators.codingQuestionBox, _question, "Successfully entered the question description.");
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Enter coding question description", "Exception encountered- " + e, STATUS.ERR);
         }
     }
 
@@ -170,6 +202,7 @@ public class Questions {
     @And("^Expand the passage field$")
     public void expandPassageField() {
         try {
+            DriverAction.waitUntilElementIsClickable(QuestionsLocators.expandPassage);
             DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
             DriverAction.waitSec(2);
         }catch(Exception e){
@@ -250,7 +283,8 @@ public class Questions {
     @Then("^Verify the subjective questions$")
     public void verifySubjectiveQuestions() {
         try {
-            String[] ques = {_existingQues, _question};
+            String[] ques = { _question,_existingQues};
+            DriverAction.waitUntilElementAppear(QuestionsLocators.firstColumn,5);
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.firstColumn);
             int c = 0;
             //verifying 2 latest created subjective questions
@@ -429,7 +463,7 @@ public class Questions {
         }
     }
 
-    @Then("Verify question on view \"([^\"]*)\"")
+    @Then("^Verify question on view \"([^\"]*)\"$")
     public void verifyQuestion(String question) {
         try {
             String getQuestion = DriverAction.getElementText(QuestionsLocators.questionInDialogBox);
@@ -695,6 +729,206 @@ public class Questions {
             GemTestReporter.addTestStep("Verify the updated question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
+
+    @And("^Upload an excel \"([^\"]*)\"$")
+    public void uploadExcel(String fileLocation) {
+        try {
+            DriverAction.fileUpload(QuestionsLocators.chooseQuestionBtn,fileLocation);
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Upload an excel","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+    @Then("^Verify status \"([^\"]*)\" and message \"([^\"]*)\" in uploaded excel$")
+    public void verifyQuestionsGetUploaded(String expectedStatus, String expectedMessage) {
+        try{
+            DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
+            String message=DriverAction.getElementText(MyLocators.popupMsg);
+            if(message.contains("upload is in progress")){
+                Thread.sleep(120000);//wait until tick displays
+                if(DriverAction.isDisplayed(QuestionsLocators.uploadingIcon)){//if file keeps on uploading after 90 sec
+                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",STATUS.FAIL,DriverAction.takeSnapShot());
+                }else{
+
+                    //fetch recent excel file
+                    File dir = new File("C:\\Users\\saloni.nagpal\\Downloads");
+                    File[] files = dir.listFiles((d, name) -> name.endsWith(".xlsx"));
+                    File recentFile = Arrays.stream(files).max((f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified())).orElse(null);
+
+                    //fetch values from excel
+                    assert recentFile != null;
+                    FileInputStream fis = new FileInputStream(recentFile);
+                    Workbook workbook = new XSSFWorkbook(fis);
+                    Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+                    String excelStatus = sheet.getRow(1).getCell(16).getStringCellValue();
+                    String excelMessage=sheet.getRow(1).getCell(17).getStringCellValue();
+                    if(excelStatus.equals(expectedStatus)&&excelMessage.equalsIgnoreCase(expectedMessage)){
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",STATUS.PASS,DriverAction.takeSnapShot());
+                    }else{
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",STATUS.FAIL,DriverAction.takeSnapShot());
+                    }
+                }
+            }else {
+                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,STATUS.ERR,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify status and message after uploading excel","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Upload recently downloaded file$")
+    public void uploadRecentlyDownloadedFile() {
+        // Get the path of the most recently downloaded file in the default Downloads directory
+   //     DriverAction.click(QuestionsLocators.chooseQuestionBtn);
+        String downloadPath = "C:\\Users\\saloni.nagpal\\Downloads";
+        File mostRecentFile = getLastModifiedFile(downloadPath);
+
+        // Send the file path to the file input element
+        DriverAction.fileUpload(QuestionsLocators.chooseQuestionBtn, String.valueOf(mostRecentFile));
+    }
+
+                private static File getLastModifiedFile(String directoryPath)
+
+                {
+                    File directory = new File(directoryPath);
+                    File[] files = directory.listFiles();
+                    if (files == null || files.length == 0) {
+                        return
+
+                                null; // Handle the case where no files are found
+                    }
+
+                    File mostRecentFile = files[0];
+                    for (File file : files) {
+                        if (file.lastModified() > mostRecentFile.lastModified()) {
+                            mostRecentFile = file;
+                        }
+                    }
+                    return mostRecentFile;
+                }
+
+    @Then("^Verify statuses \"([^\"]*)\", \"([^\"]*)\" and messages \"([^\"]*)\", \"([^\"]*)\" in uploaded excel$")
+    public void verifyStatusesAndMessagesInUploadedExcel(String status1, String status2, String message1, String message2) {
+        try{
+            DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
+            String message=DriverAction.getElementText(MyLocators.popupMsg);
+            if(message.contains("upload is in progress")){
+                Thread.sleep(120000);//wait until tick displays
+                if(DriverAction.isDisplayed(QuestionsLocators.uploadingIcon)){//if file keeps on uploading after 90 sec
+                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",STATUS.FAIL,DriverAction.takeSnapShot());
+                }else{
+
+                    //fetch recent excel file
+                    File dir = new File("C:\\Users\\saloni.nagpal\\Downloads");
+                    File[] files = dir.listFiles((d, name) -> name.endsWith(".xlsx"));
+                    File recentFile = Arrays.stream(files).max((f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified())).orElse(null);
+
+                    //fetch values from excel
+                    assert recentFile != null;
+                    FileInputStream fis = new FileInputStream(recentFile);
+                    Workbook workbook = new XSSFWorkbook(fis);
+                    Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+                    String excelStatus1 = sheet.getRow(1).getCell(16).getStringCellValue();
+                    String excelMessage1=sheet.getRow(1).getCell(17).getStringCellValue();
+                    String excelStatus2 = sheet.getRow(2).getCell(16).getStringCellValue();
+                    String excelMessage2=sheet.getRow(2).getCell(17).getStringCellValue();
+                    if(excelStatus1.equals(status1)&&excelMessage1.equalsIgnoreCase(message1)&&excelStatus2.equals(status2)&&excelMessage2.equalsIgnoreCase(message2)){
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",STATUS.PASS,DriverAction.takeSnapShot());
+                    }else{
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",STATUS.FAIL,DriverAction.takeSnapShot());
+                    }
+                }
+            }else {
+                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,STATUS.ERR,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+                GemTestReporter.addTestStep("Verify statuses and messages after uploading excel","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("^Get the selected languages \"([^\"]*)\", \"([^\"]*)\"$")
+    public void getSelectedLanguages(String language1, String language2) {
+        try{
+            List<WebElement>languages=DriverAction.getElements(QuestionsLocators.selectedLanguage);
+            if(language2.equals("null")) {
+                _getLanguage1 = languages.get(0).getText();
+                if (_getLanguage1.equals(language1)) {
+                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the first language.", STATUS.PASS, DriverAction.takeSnapShot());
+                }else{
+                    GemTestReporter.addTestStep("Get the selected languages", "First language fetched is not correct.", STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+            }
+            else if(language1.equals("existing language")){
+                _getLanguage2=languages.get(1).getText();
+                if(_getLanguage1.equals(language1)&&_getLanguage2.equals(language2)){
+                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", STATUS.PASS, DriverAction.takeSnapShot());
+                }else{
+                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+            }
+//            else{
+//                _getLanguage1=languages.get(0).getText();
+//                _getLanguage2=languages.get(1).getText();
+//                if(_getLanguage1.equals(language1)&&_getLanguage2.equals(language2)){
+//                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", STATUS.PASS, DriverAction.takeSnapShot());
+//                }else{
+//                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",STATUS.FAIL,DriverAction.takeSnapShot());
+//                }
+//            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Get the selected languages","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Preview question$")
+    public void previewQuestion() {
+        try{
+            clickButton("Preview");
+
+        }catch(Exception e){
+          GemTestReporter.addTestStep("Preview question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("^Verify the question in dialog box \"([^\"]*)\"$")
+    public void verifyQuestionInDialogBox(String question) {
+        try{
+            if(DriverAction.getElementText(QuestionsLocators.questionOnPreview).contains(question)){
+                GemTestReporter.addTestStep("Verify the question in dialog box","Successfully verified the question in dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify the question in dialog box","Could not verify the question in dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify the question in dialog box","Exception encountered- "+e,STATUS.ERR, DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Close the dialog box$")
+    public void closeDialogBox() {
+        try{
+            DriverAction.waitUntilElementClickable(QuestionsLocators.closeDialogBox,4);
+            DriverAction.click(QuestionsLocators.closeDialogBox,"Close the preview dialog box.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Close the dialog box","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @Then("^Verify languages on view \"([^\"]*)\", \"([^\"]*)\"$")
+    public void verifyLanguagesOnView(String language1, String language2) {
+        try{
+            String languagesOnView=DriverAction.getElementText(QuestionsLocators.languageOnView);
+            if(languagesOnView.contains(language1)&&languagesOnView.contains(language2)){
+                GemTestReporter.addTestStep("Verify languages on view.","Successfully verified the languages on view.",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify languages on view.","Could not verify the languages on view.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify languages on view.","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
 }
+
+
+
 
 

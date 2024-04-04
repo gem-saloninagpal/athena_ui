@@ -25,6 +25,7 @@ public class TestAnalytics {
     @And("^Get active test statistics$")
     public void getActiveStatistics(){
         try{
+            DriverAction.waitUntilElementAppear(TestAnalyticsLocators.activeStats,5);
             _activeStatistics = DriverAction.getElements(TestAnalyticsLocators.activeStats).size();
             GemTestReporter.addTestStep("Get active test statistics","The active statistics are- "+ _activeStatistics, STATUS.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){

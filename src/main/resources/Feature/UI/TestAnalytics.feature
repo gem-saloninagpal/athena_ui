@@ -3,8 +3,9 @@ Feature:  Test Analytics module
   Background:
   #  And Logout of portal
     And Navigate to login page
-    And Login using "saloni02@gmail.com" and "abc@1234"
-    
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
+
+    #active test stats not correct
     Scenario Outline: Compare active tests statistics with ongoing and upcoming events
       Given Select "<module>", "<submodule>" from sidebar
       And Get active test statistics

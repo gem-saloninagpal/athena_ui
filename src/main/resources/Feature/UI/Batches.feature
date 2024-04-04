@@ -3,7 +3,7 @@ Feature: Batches functionality
   Background:
     #  And Logout of portal
     And Navigate to login page
-    And Login using "saloni02@gmail.com" and "abc@1234"
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
   @regression @batch
   Scenario Outline: Create a batch and verify

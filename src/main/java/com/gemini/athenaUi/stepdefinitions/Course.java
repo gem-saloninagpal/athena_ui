@@ -1,9 +1,6 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.*;
-//import com.gemini.athenaUi.locators.LearnerModule_Locators;
-//import com.gemini.athenaUi.locators.MyLocators;
-import com.gemini.athenaUi.locators.Tests_TestControl_Locators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
@@ -21,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

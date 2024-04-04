@@ -1,19 +1,23 @@
 Feature: Questions functionality
 
   Background:
-    Given Navigate to page "login"
-    And Login using "saloni02@gmail.com" and "abc@123"
+    Given Navigate to login page
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
 
     @regression @questionModule
-    Scenario Outline: Create a question
+    Scenario Outline: Create and preview question
       Given Select "<module>", "<submodule>" from sidebar
       When Click the button "Add New"
-      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
+      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
       And Enter marks "<marks>"
       And Click the button "Next"
       And Enter question description "<question1>"
       And Enter options and select a correct option
+      And Click the button "Preview"
+      Then Verify question dialog box opens
+      Then Verify the question in dialog box "<question1>"
+      And Close the dialog box
       And Click the button "Save & Add More"
       And Enter question description "<question2>"
       And Enter options and select a correct option
@@ -21,9 +25,9 @@ Feature: Questions functionality
       Then Verify the question is created "<question1>", "<question2>"
 
       Examples:
-      |module |submodule|level|type                    |section|difficulty|skills|marks|question1|question2|
-      |Tests  |Questions|Basic|Multiple choice question|Logical|Hard      |Java  |10   |ques-1?  |ques-2?  |
-      |Tests  |Questions|Basic|Checkbox question       |Logical|Hard      |Java  |10   |ques-1!  |ques-2!  |
+      |module |submodule|level|type                    |section|difficulty|skills|marks|question1|question2|text      |
+      |Tests  |Questions|Basic|Multiple choice question|Logical|Hard      |Java  |10   |ques-1?  |ques-2?  |Plain Text|
+      |Tests  |Questions|Basic|Checkbox question       |Logical|Hard      |Java  |10   |ques-1!  |ques-2!  |Rich Text |
 
 
   @questionModule
@@ -32,20 +36,22 @@ Feature: Questions functionality
     When Click Actions icon of recently created question
     And Select "Edit" from actions dropdown
     And Click the edit icon
-    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
-    And Enter marks "<marks>"
+    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
     And Click the button "Next"
     When Enter question description "<question1>"
     And Enter options and select a correct option
+    And Click the button "Preview"
+    Then Verify question dialog box opens
+    And Close the dialog box
     And Click the button "Update & Add More"
     And Enter question description "<question2>"
     And Enter options and select a correct option
     And Click the button "Update & Exit"
     Then Verify the question is created "<question1>", "<question2>"
     Examples:
-      |module |submodule|level       |type                    |section  |difficulty|skills|marks|question1 |question2 |
-      |Tests  |Questions|Intermediate|Multiple choice question|Logical  |Easy      |Java  |10   |Question-1|Question-2|
-      |Tests  |Questions|Intermediate|Checkbox question       |Technical|Hard      |Java  |10   |question-1|question-2|
+      |module |submodule|level       |type                    |section  |difficulty|skills|marks|question1 |question2 |text|
+      |Tests  |Questions|Intermediate|Multiple choice question|Logical  |Easy      |Java  |10   |Question-1|Question-2|Rich Text|
+      |Tests  |Questions|Intermediate|Checkbox question       |Technical|Hard      |Java  |10   |question-1|question-2|Plain Text|
 
   @questionModule
     Scenario Outline: View question
@@ -74,26 +80,29 @@ Feature: Questions functionality
     Scenario Outline:Create subjective question
       Given Select "<module>", "<submodule>" from sidebar
       When Click the button "Add New"
-      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
+      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
       And Enter marks "<marks>"
       And Click the button "Next"
       And Enter question description in subjective
+      And Expand the dropdown "Has Word Limit?"
+      And Select "Yes" from dropdown
       And Enter word limit "10"
       And Click the button "Save & Add More"
       And Enter question description in subjective
       And Expand the dropdown "Has Word Limit?"
+      And Select "No" from dropdown
       And Click the button "Save & Exit"
       Then Verify the subjective questions
       Examples:
-        |module |submodule|level|type                       |section|difficulty|skills|marks|
-        |Tests  |Questions|Basic|Subjective answer questions|Logical|Hard      |Java  |10   |
+        |module |submodule|level|type                       |section|difficulty|skills|marks|text|
+        |Tests  |Questions|Basic|Subjective answer questions|Logical|Hard      |Java  |10   |Plain Text|
 
   @questionModule
     Scenario Outline:Create comprehension question(both positive and negative flow)-MCQ and Checkbox
       Given Select "<module>", "<submodule>" from sidebar
       When Switch to "Comprehensions"
       And Click Add New in comprehensions tab
-      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
+      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
       And Enter marks "<marks>"
       And Click the button "Next"
       Then Click the button "Save Passage & Continue" and verify the message "Passage cannot be empty"
@@ -112,16 +121,16 @@ Feature: Questions functionality
       And Expand the passage field
       Then Verify the comprehension question is created "<question1>", "<question2>"
       Examples:
-        |module |submodule|level  |type                    |section  |difficulty|skills|marks|question1  |question2|
-        |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |quess-1?   |quess-2? |
-        |Tests  |Questions|Advance|Checkbox question       |Technical|Easy      |Java  |10   |quess-1!!  |quess-2!!|
+        |module |submodule|level  |type                    |section  |difficulty|skills|marks|question1  |question2|text|
+        |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |quess-1?   |quess-2? |Rich Text|
+   #     |Tests  |Questions|Advance|Checkbox question       |Technical|Easy      |Java  |10   |quess-1!!  |quess-2!!|Plain Text|
 
-  @questionModule
-  Scenario Outline:Create comprehension based subjective question and verify
+  @questionModule @inProgress
+  Scenario Outline:Create comprehension based subjective question and verify view comprehension
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Comprehensions"
     And Click Add New in comprehensions tab
-    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
+    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
     And Enter marks "<marks>"
     And Click the button "Next"
     Then Click the button "Save Passage & Continue" and verify the message "Passage cannot be empty"
@@ -143,9 +152,13 @@ Feature: Questions functionality
     Then Verify the passage is created
     And Expand the passage field
     Then Verify the comprehension question is created "<question1>", "<question2>"
+    And Click actions icon of recently created passage
+    And Select "View Comprehensions" from actions dropdown
+    And Verify comprehension dialog box displays
+    Then Verify passage on view
     Examples:
-      |module |submodule|level  |type                       |section  |difficulty|skills|marks|question1  |question2|
-      |Tests  |Questions|Basic  |Subjective answer questions|Logical  |Hard      |Java  |10   |           |         |
+      |module |submodule|level  |type                       |section  |difficulty|skills|marks|question1  |question2|text|
+      |Tests  |Questions|Basic  |Subjective answer questions|Logical  |Hard      |Java  |10   |           |         |Rich Text|
 
   @questionModule
   Scenario Outline: View Comprehensions
@@ -172,6 +185,7 @@ Feature: Questions functionality
       |module |submodule|
       |Tests  |Questions|
 
+  @questionModule
     Scenario Outline: Edit comprehension based question and verify
       Given Select "<module>", "<submodule>" from sidebar
       When Switch to "Comprehensions"
@@ -188,25 +202,6 @@ Feature: Questions functionality
       Examples:
         |module |submodule|
         |Tests  |Questions|
-
-#  Scenario Outline: Add Question in passage  - bug encountered
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Switch to "Comprehensions"
-#    And Click actions icon of recently created passage
-#    And Select "Add Question" from actions dropdown
-#    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
-#    And Enter marks "<marks>"
-#    And Click the button "Next"
-#    And Enter comprehension based subjective question
-#    And Expand the dropdown "Has Word Limit?"
-#    And Select "Yes" from dropdown
-#    And Enter word limit "10"
-#    And Click the button "Save & Exit"
-#    And Expand the passage field
-#    Then Verify a question is added
-#    Examples:
-#      |module |submodule|
-#      |Tests  |Questions|
 
   @questionModule
   Scenario Outline: Delete passage
@@ -246,7 +241,7 @@ Feature: Questions functionality
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
     And Click Add New in video tab
-    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>"
+    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
     And Enter marks "<marks>"
     And Click the button "Next"
     Then Verify upload movie clip dialog box displays
@@ -264,9 +259,9 @@ Feature: Questions functionality
     Then Verify the video name and description
     Then Verify the video based question is created "<question1>","<question2>"
     Examples:
-      |module |submodule|level  |type                    |section  |difficulty|skills|marks|movieLocation                                  |question1|question2|
-      |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |
-      |Tests  |Questions|Basic  |Checkbox question       |Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |
+      |module |submodule|level  |type                    |section  |difficulty|skills|marks|movieLocation                                  |question1|question2|text|
+      |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Plain Text|
+      |Tests  |Questions|Basic  |Checkbox question       |Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Rich Text |
 
   @questionModule
   Scenario Outline: Edit video
@@ -313,12 +308,6 @@ Feature: Questions functionality
       |module |submodule|
       |Tests  |Questions|
 
-#     @inProgress
-#  Scenario: Add a question in video - bug encountered
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Switch to "Video Based"
-#    And Click actions icon of recently created video
-#    And Select "Add" from actions dropdown
 
   @questionModule
   Scenario Outline: Delete Video
@@ -352,20 +341,83 @@ Feature: Questions functionality
       |module |submodule|message             |state  |
       |Tests  |Questions|deleted successfully|deleted|
 
+    @questionModule @upload @requireCreatedExcel
+    Scenario Outline: Upload an excel(containing- 1.new question 2.same excel 3.invalid column) and validate
+      Given Select "<module>", "<submodule>" from sidebar
+      And Click the button "Import Questions"
+      And Upload an excel "<fileLocation>"
+      And Click the upload button
+      Then Verify status "<status>" and message "<message>" in uploaded excel
 
+      Examples:
+      |module|submodule|fileLocation                                                                 |status |message                     |
+      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1).xlsx|Success|Question added successfully |
+      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1).xlsx|Failed |already exists              |
+      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\invalidColumn.xlsx                          |Failed |invalid              |
 
+  @questionModule @upload @bug
+    Scenario Outline: Upload an empty excel twice and validate
+      Given Select "<module>", "<submodule>" from sidebar
+      And Click the button "Download Question Template"
+      And Click the button "Import Questions"
+      And Upload recently downloaded file
+      And Click the upload button
+      Then Verify status "<status>" and message "<message>" in uploaded excel
 
+      Examples:
+      |module|submodule|status|message|
+      |Tests |Questions|Failed| empty |
+      |Tests |Questions|Failed| empty |
 
+  @questionModule @upload @requireCreatedExcel @bug(3)
+    Scenario Outline: Upload an excel(1.both new and existing question 2.upload same excel again 3.upload excel containing less than 4 options)
+      Given Select "<module>", "<submodule>" from sidebar
+      And Click the button "Import Questions"
+      And Upload an excel "<fileLocation>"
+      And Click the upload button
+      Then Verify statuses "<status1>", "<status2>" and messages "<message1>", "<message2>" in uploaded excel
 
+      Examples:
+        |module|submodule|fileLocation                                                                          |status1 |status2|message1                    |message2|
+        |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
+        |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
+        |Tests |Questions|C:\Users\saloni.nagpal\Downloads\2 options.xlsx                                       |Success |Failed |failed                      |             |
 
+  @questionModule
+    Scenario Outline:Create coding question
+      Given Select "<module>", "<submodule>" from sidebar
+      When Click the button "Add New"
+      And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
+      And Enter marks "<marks>"
+      And Click the button "Next"
+      And Enter subjective question description for coding
+      And Expand the dropdown "Select Coding Languages"
+      And Select "<language1>" from dropdown
+      And Click the button "Save & Add More"
+      And Enter subjective question description for coding
+      And Expand the dropdown "Select Coding Languages"
+      And Select "<language>" from dropdown
+      Then Get the selected languages "<language1>", "<language2>"
+      And Click the button "Save & Exit"
+      Then Verify the subjective questions
+      Examples:
+        |module |submodule|level|type                      |section|difficulty|skills|marks|text      |language1|language2|
+        |Tests  |Questions|Basic|Coding Subjective question|Logical|Hard      |Java  |10   |Plain Text|Java     |Null     |
 
-
-
-
-
-    
-
-
+    Scenario Outline: Edit coding language and verify
+      Given Select "<module>", "<submodule>" from sidebar
+      When Click Actions icon of recently created question
+      And Select "Edit" from actions dropdown
+      And Expand the dropdown "Select Coding Languages"
+      And Select "<language2>" from dropdown
+      Then Get the selected languages "<language1>", "<language2>"
+      And Click the button "Save & Exit"
+      And Click Actions icon of recently created question
+      And Select "View" from actions dropdown
+      Then Verify languages on view "<language1>", "<language2>"
+      Examples:
+      |module |submodule|language1|language2|
+      |Tests  |Questions|Java     |cpp      |
 
 
 

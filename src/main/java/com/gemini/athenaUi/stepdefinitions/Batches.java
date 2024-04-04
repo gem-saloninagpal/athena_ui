@@ -22,7 +22,7 @@ public class Batches {
     public void batchActionsIcon(){
         try {
             //expand the action icon of batch
-            Thread.sleep(4000);
+            DriverAction.waitSec(5);
             DriverAction.click(MyLocators.batchActionsIcon);
             GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", STATUS.PASS);
         }catch (Exception e){
@@ -33,10 +33,11 @@ public class Batches {
     @And("^Select \"([^\"]*)\" from actions dropdown$")
     public void selectFromActionsDropdown(String option) throws InterruptedException {
         try {
-            Thread.sleep(5000);
+            DriverAction.waitSec(4);
             _courseState = option;
             //select option from dropdown
-            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)));
+            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.editOptions.replace("input", option)),4);
+            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,STATUS.ERR);
         }
@@ -100,6 +101,7 @@ public class Batches {
     @Then("^Verify owner of a batch is selected by default$")
     public void verifyOwnerOfBatchSelected() {
         try {
+            Thread.sleep(4000);
             String owner = DriverAction.getElementText(MyLocators.owner);
             if (_email.contains(owner)) {
                 GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Successfully verified the owner of batch is selected by default.", STATUS.PASS);
@@ -164,7 +166,7 @@ public class Batches {
     public void verifyBatchCreatedUpdated() {
 
         try {
-            Thread.sleep(15000);
+            Thread.sleep(8000);
             String batch = DriverAction.getElementText(MyLocators.batchCreated);
             if (batch.contains(_batchName)) {
                 GemTestReporter.addTestStep("Verify batch is created/updated", "Successfully verified the batch is created/updated.", STATUS.PASS);
@@ -178,7 +180,7 @@ public class Batches {
 
     @And("^Click the button in batch \"([^\"]*)\"$")
     public void clickCreateBatch(String button) throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         DriverAction.click(By.xpath(MyLocators.createBatch.replace("input",button)));
     }
 

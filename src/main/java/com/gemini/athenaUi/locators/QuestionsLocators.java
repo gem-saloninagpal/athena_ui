@@ -10,6 +10,7 @@ public class QuestionsLocators {
 
     public static By questionBox=By.xpath("//div[@data-gramm='false']");
     public static By optionsBox=By.xpath("//div[@class='editorDiv']//div[@data-gramm='false']");
+    public static By enterOption=By.xpath("//textarea[contains(@class,'textarea-option')]");
     public static By selectOption=By.xpath("//div[@class='p-scrollpanel-wrapper']//div[@class='p-checkbox-box']");
     public static By firstColumn=By.xpath("//tbody/tr/td[1]");
     public static By addButton=By.xpath("//button[@ng-reflect-label='Add']");
@@ -51,4 +52,12 @@ public class QuestionsLocators {
     public static By deleteAssociatedVideoQuestions=By.xpath("//i[@ptooltip=\"Remove associated question\"]");
     public static By editComprehensionBasedQuestion=By.xpath("//i[@ptooltip='Edit']");
     public static By comprehensionQuestionTextarea=By.xpath("(//div[@data-gramm=\"false\"]/p)[2]");
+    public static By uploadingIcon=By.xpath("//i[contains(@class,'pi pi-arrow')]");
+    public static By chooseQuestionBtn=By.xpath("//span[contains(@class,'p-fileupload')]//input");
+    public static By codingQuestionBox=By.xpath("//textarea[@formcontrolname='statement']");
+    public static By selectedLanguage=By.xpath("//span[contains(@class,'multiselect-token-label')]");
+    public static By questionOnPreview=By.xpath("//div[contains(@class,'unselectable')]//p");
+    public static By closeDialogBox=By.xpath("//span[contains(@class,'close')]//parent::button");
+    public static By questionBox1=By.xpath("//textarea[@formcontrolname='statement']");
+    public static By languageOnView=By.xpath("//b[contains(text(),'Accepted Languages')]//parent::div");
 }

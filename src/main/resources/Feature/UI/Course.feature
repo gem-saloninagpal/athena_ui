@@ -323,8 +323,3 @@ Feature:Course module features
     And select multiple "<count>" Unassigned user of different page and Assign the "<course>"
     And Select the assign "<count>" Learner of different page change date of "<course>" and validate
     Then Validate date is updated successfully in Paginating
-
-
-    Examples:
-      | module        |submodule     |Learners Assigned|course|count|
-      | Manage Courses       |Course Library  |Assign Learners|course|2    |

@@ -3,7 +3,7 @@ Feature: Create campus functionality
   Background:
   #  And Logout of portal
     And Navigate to login page
-    And Login using "saloni02@gmail.com" and "abc@1234"
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
 
   @regression
@@ -17,7 +17,7 @@ Feature: Create campus functionality
 
       Examples:
       |module|submodule|location|university|tpoName|tpoEmail     |tpoContact|description|
-      |Campus|         |  loc   |uni       |nameee |abc@gmail.com|9876545670|abc        |
+      |Campus|         |  loc   |uni       |namee  |abc@gmail.com|9876545670|abc        |
 
   @regression
     Scenario Outline: Verify mandatory fields

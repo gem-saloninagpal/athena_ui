@@ -191,7 +191,7 @@ public class ContentAssignment {
     public void contentActionIcon() throws InterruptedException {
         try {
             Thread.sleep(5000);
-            DriverAction.click(MyLocators.contentActionsIcon,"Click Actions icon of recently created content/assignment");
+            DriverAction.click(MyLocators.contentActionsIcon,"Click Actions icon of recently created content/assignment","Successfully clicked actions icon of recently created content/assignment.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created content/assignment","Exception encountered- "+e,STATUS.ERR);
         }
@@ -204,14 +204,14 @@ public class ContentAssignment {
             //expand dropdown
             List<WebElement> dropdownFields = DriverAction.getElements(MyLocators.dropdownIcon);
 
-            DriverAction.click(dropdownFields.get(0));
+            DriverAction.click(dropdownFields.get(0),"Expand dropdown","Successfully expanded the dropdown.");
             //select an option from dropdown
-            DriverAction.click(By.xpath(MyLocators.option.replace("input", tag)));
+            DriverAction.click(By.xpath(MyLocators.option.replace("input", tag)),"Select "+tag+" from dropdown","Successfully selected "+tag+" from dropdown");
             if (DriverAction.isExist(MyLocators.crossIcon)) {
                 DriverAction.click(MyLocators.crossIcon);
             }
             //enter marks
-            DriverAction.typeText(MyLocators.assignmentMarks, marks);
+            DriverAction.typeText(MyLocators.assignmentMarks, marks,"Update marks in assignment","Successfully updated assignment marks.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Update values in assignment fields","Exception encountered- "+e,STATUS.ERR);
         }
