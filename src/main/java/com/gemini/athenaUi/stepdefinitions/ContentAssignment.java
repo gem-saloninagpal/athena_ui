@@ -90,6 +90,7 @@ public class ContentAssignment {
                         break;
                     }
                 }
+                DriverAction.waitSec(1);
             }
             if (c == contentData.length) {
                 GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", STATUS.PASS, DriverAction.takeSnapShot());
@@ -149,7 +150,6 @@ public class ContentAssignment {
                 }
                 //if textbox is present
                 else{
-
                     DriverAction.typeText(inputFields.get(i),inputValues[i]);
                 }
 
@@ -176,6 +176,7 @@ public class ContentAssignment {
                         break;
                     }
                 }
+                DriverAction.waitSec(1);
             }
             if (c == contentData.length) {
                 GemTestReporter.addTestStep("Verify assignment is created successfully", "Verified the successful creation of assignment.", STATUS.PASS, DriverAction.takeSnapShot());
@@ -202,9 +203,10 @@ public class ContentAssignment {
 
         try {
             //expand dropdown
-            List<WebElement> dropdownFields = DriverAction.getElements(MyLocators.dropdownIcon);
+        //    List<WebElement> dropdownFields = DriverAction.getElements(MyLocators.dropdownIcon);
 
-            DriverAction.click(dropdownFields.get(0),"Expand dropdown","Successfully expanded the dropdown.");
+            DriverAction.click(MyLocators.dropdownIcon,"Expand dropdown","Successfully expanded the dropdown.");
+            DriverAction.waitSec(2);
             //select an option from dropdown
             DriverAction.click(By.xpath(MyLocators.option.replace("input", tag)),"Select "+tag+" from dropdown","Successfully selected "+tag+" from dropdown");
             if (DriverAction.isExist(MyLocators.crossIcon)) {
@@ -240,6 +242,7 @@ public class ContentAssignment {
         try {
             //Update content tag and duration
             DriverAction.click(MyLocators.contentTags);
+            DriverAction.waitSec(2);
             DriverAction.click(By.xpath(MyLocators.option.replace("input", tags)));
             DriverAction.typeText(MyLocators.contentDuration, duration);
         }catch(Exception e){

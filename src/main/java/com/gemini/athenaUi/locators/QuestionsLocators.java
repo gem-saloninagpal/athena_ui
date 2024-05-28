@@ -11,14 +11,14 @@ public class QuestionsLocators {
     public static By questionBox=By.xpath("//div[@data-gramm='false']");
     public static By optionsBox=By.xpath("//div[@class='editorDiv']//div[@data-gramm='false']");
     public static By enterOption=By.xpath("//textarea[contains(@class,'textarea-option')]");
-    public static By selectOption=By.xpath("//div[@class='p-scrollpanel-wrapper']//div[@class='p-checkbox-box']");
+    public static By selectOption=By.xpath("(//div[@class='p-scrollpanel-wrapper']//div[@class='p-checkbox-box'])[1]");
     public static By firstColumn=By.xpath("//tbody/tr/td[1]");
     public static By addButton=By.xpath("//button[@ng-reflect-label='Add']");
     public static By wordLimitTextbox=By.xpath("//input[@placeholder='Word Limit']");
     public static By passageBox=By.xpath("//div[@contenteditable=\"true\"]");
     public static By passage=By.xpath("//div[@contenteditable=\"true\"]//p");
-    public static By passageStatement=By.xpath("(//tbody)[2]/tr/td[2]");
-    public static By expandPassage=By.xpath("(//tbody)[2]/tr/td[1]");
+    public static By passageStatement=By.xpath("((//tbody)[2]/tr/td[2])[1]");
+    public static By expandPassage=By.xpath("((//tbody)[2]/tr/td[1]//button)[1]");
     public static By expandPassageFirstColumn=By.xpath("(//table[@role='grid'])[3]//tbody//td[1]");
     public static By addNewComprehension=By.xpath("(//button[@label='Add New'])[2]");
     public static By passageQuestionBox=By.xpath("(//div[@data-gramm=\"false\"])[2]");
@@ -38,15 +38,16 @@ public class QuestionsLocators {
     public static By questionDialog=By.xpath("//div[contains(@class,'p-dialog-header')]");
     public static By questionInDialogBox=By.xpath("//div[contains(@class,'question-description')]//p");
     public static By confirmationDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Confirmation']");
-    public static By passageActionsIcon=By.xpath("//p-tabpanel[@header=\"Comprehensions\"]//p-button[@icon='pi pi-ellipsis-v']//button");
+    public static By passageActionsIcon=By.xpath("(//p-tabpanel[@header=\"Comprehensions\"]//p-button[@icon='pi pi-ellipsis-v']//button)[1]");
+    public static By passageActionsIcon2=By.xpath("(//p-button[@ng-reflect-icon='pi pi-ellipsis-v'])[1]");
     public static By comprehensionDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Comprehension']");
     public static By rcPassage=By.xpath("//div[contains(@class,'p-dialog')]//athena-comprehension-info//p");
-    public static By videoActionsIcon=By.xpath("(//p-tabpanel[@header=\"Video Based\"]//p-button[@icon='pi pi-ellipsis-v']//button)[1]");
-    public static By videoDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Video Based']");
+    public static By videoActionsIcon=By.xpath("(//tr[1]//button[contains(@class,'button-icon')])[3]");
+    public static By videoDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[contains(text(),'Video Based')]");
 
     public static By videoNameDescriptionOnView=By.xpath("//p-dynamicdialog//h4[@class='test-info']");
 
-    public static By videoSearchbox=By.xpath("//input[@placeholder='Video Name']");
+    public static By videoSearchbox=By.xpath("//input[@type='search' and @placeholder='Video Name']");
     public static By passageSearchbox=By.xpath("//input[@placeholder='Passage Statement']");
     public static By deleteAssociatedQuestion=By.xpath("//i[@ptooltip=\"Remove Associated question\"]");
     public static By deleteAssociatedVideoQuestions=By.xpath("//i[@ptooltip=\"Remove associated question\"]");
@@ -60,4 +61,8 @@ public class QuestionsLocators {
     public static By closeDialogBox=By.xpath("//span[contains(@class,'close')]//parent::button");
     public static By questionBox1=By.xpath("//textarea[@formcontrolname='statement']");
     public static By languageOnView=By.xpath("//b[contains(text(),'Accepted Languages')]//parent::div");
+    public static By enterPassageOption=By.xpath("//div[@class=\"editorDiv\"]//p");
+    public static By questionBox2=By.xpath("(//div[@data-gramm=\"false\"]//p)[1]");
+    public static By expandLanguageDropdown=By.xpath("//p-multiselect[@formcontrolname=\"acceptedLanguages\"]");
+    public static String codingLanguageOptions="//p-multiselectitem[@ng-reflect-label='input']";
 }

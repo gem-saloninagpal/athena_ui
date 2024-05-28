@@ -1,5 +1,6 @@
 package com.gemini.athenaUi.stepdefinitions;
 
+import com.gemini.athenaUi.locators.Course_Locators;
 import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -22,7 +23,7 @@ public class Batches {
     public void batchActionsIcon(){
         try {
             //expand the action icon of batch
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(7);
             DriverAction.click(MyLocators.batchActionsIcon);
             GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", STATUS.PASS);
         }catch (Exception e){
@@ -247,6 +248,20 @@ public class Batches {
         }catch(Exception e){
 
             GemTestReporter.addTestStep("Verify added course displays in batch summary","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+    @And("Search a batch {string}")
+    public void searchABatch(String batch) {
+        try{
+            DriverAction.waitUntilElementAppear(Course_Locators.searchbox,5);
+            if(batch.equals("null")){
+                DriverAction.typeText(Course_Locators.searchbox,_batchName);
+            }else{
+                DriverAction.typeText(Course_Locators.searchbox,batch);
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Search a batch","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 }

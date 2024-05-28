@@ -1,7 +1,6 @@
 Feature: Campus performance report
 
   Background:Check login to candidate module
-#    And Logout of portal
     And Navigate to login page
     Then Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 

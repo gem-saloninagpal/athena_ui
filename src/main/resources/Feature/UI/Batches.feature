@@ -14,11 +14,12 @@ Feature: Batches functionality
     And Click the button "Add courses"
     And Add a course in batch
     And Click the button in batch "Create Batch"
+    And Search a batch "<batchName>"
     Then Verify batch is created/updated
 
     Examples:
-      |module        |submodule|fileLocation                                                  |owner |
-      |Manage Courses|Batches  |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|rahul|
+      |module        |submodule|fileLocation                                                  |owner |batchName|
+      |Manage Courses|Batches  |C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|rahul|null     |
 
     @regression @batch
     Scenario Outline: Add a course in batch and verify from batch summary

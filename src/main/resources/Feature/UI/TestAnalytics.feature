@@ -2,7 +2,7 @@ Feature:  Test Analytics module
 
   Background:
   #  And Logout of portal
-    And Navigate to login page
+  #  And Navigate to login page
     And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
     #active test stats not correct

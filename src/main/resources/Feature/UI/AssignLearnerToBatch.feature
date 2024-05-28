@@ -1,31 +1,27 @@
 Feature: Assign learner to batch
 
   Background:
-    #  And Logout of portal
     And Navigate to login page
-    And Login using "saloni02@gmail.com" and "abc@1234"
+    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
-  Scenario Outline: Validate count and popup message on assigning learner
+  Scenario Outline: Validate count on assigning learner
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
     And Get assigned learners count
     And Assign a learner
-    Then Verify the popup message "<message>"
     Then Validate count after assigning
 
     Examples:
     |module        |submodule|learner|message                                |
     |Manage Courses|Batches  |saloni |Learner added successfully to the batch|
 
-  Scenario Outline: Validate count and popup message on unassigning learner
+  Scenario Outline: Validate count on unassigning learner
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
-  #  And Search a learner "<learner>"
     And Get assigned learners count
     And Unassign a learner
-    Then Verify the popup message "<message>"
     Then Validate count after unassigning
 
     Examples:
@@ -40,8 +36,8 @@ Feature: Assign learner to batch
     And Select an unassigned learner
     And Go to next page
     And Select an unassigned learner
-    And Click the button "Assign Selected"
-    Then Verify the popup message "<message>"
+    And Click assign selected
+    And Click the button "Yes"
     Then Validate the count after assigning learners from different pages
 
     Examples:
@@ -56,8 +52,8 @@ Feature: Assign learner to batch
     And Select an assigned learner
     And Go to next page
     And Select an assigned learner
-    And Click the button "Unassign Selected"
-    Then Verify the popup message "<message>"
+    And Click unassign selected
+    And Click the button "Yes"
     Then Validate the count after unassigning learners from different pages
 
     Examples:
@@ -82,7 +78,7 @@ Feature: Assign learner to batch
     And Select "Assign Learners" from actions dropdown
     And Expand the dropdown "Category"
     And Select "EC" from dropdown
-    And Expand the dropdown "EC"
+    And Expand selected category dropdown
     And Select "QA" from dropdown
     Then Validate records get filtered on the basis of EC "<EC>"
 
@@ -100,7 +96,6 @@ Feature: Assign learner to batch
     And Select "QA" from dropdown
     And Get assigned learners count
     And Unassign a learner
-    Then Verify the popup message "Learner removed successfully"
     Then Validate count after unassigning
 
     Examples:

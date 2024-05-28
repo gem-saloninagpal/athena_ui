@@ -1,8 +1,8 @@
 Feature:Tests Module features
 
   Background:Check login to candidate module
-    Given Navigate to page "login"
-    Then Login using "rahul23@gmail.com" and "abc@123"
+    Given Navigate to login page
+    Then Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
     @1 @pass
   Scenario Outline: Create Test Placement Drive

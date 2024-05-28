@@ -26,7 +26,7 @@ public class Fortis {
     public void signIn(String username, String password) {
         try {
 
-            DriverAction.waitUntilElementClickable(MyLocators.usernameField,120);
+            DriverAction.waitUntilElementClickable(MyLocators.usernameField,50);
 
             DriverAction.typeText(MyLocators.usernameField, username);
 
@@ -34,7 +34,7 @@ public class Fortis {
             DriverAction.waitUntilElementClickable(FortisLocators.signInBtn,90);
             DriverAction.click(FortisLocators.signInBtn);
 
-            Thread.sleep(25000);
+        //    Thread.sleep(25000);
 
             //verify dashboard is displayed on login
             if (DriverAction.isExist(MyLocators.dashboard)) {

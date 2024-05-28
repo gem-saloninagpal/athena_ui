@@ -41,7 +41,7 @@ public class Campus {
     @And("^Search a campus$")
     public void searchCampus() {
         try {
-            DriverAction.waitUntilElementAppear(MyLocators.searchbox,5);
+            DriverAction.waitUntilElementAppear(MyLocators.searchbox,7);
             DriverAction.typeText(MyLocators.searchbox, _name);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, STATUS.ERR);
@@ -75,6 +75,7 @@ public class Campus {
     @Then("^Verify campus is updated \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyCampusUpdated(String tpoName, String tpoContact, String location, String university) {
         try {
+            DriverAction.waitSec(4);
             String[] campusValues = {_name, "", tpoName, tpoContact, _tpoEmail, location, university};
             List<WebElement> row = DriverAction.getElements(CampusLocators.rowLength);
             int c = 0;

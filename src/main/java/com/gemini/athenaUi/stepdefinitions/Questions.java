@@ -28,8 +28,8 @@ public class Questions {
     String _existingQues;
     String _comprehensionSubjectiveQues1;
     String _comprehensionSubjectiveQues2;
-    String _movieName;
-    String _movieDescription;
+    static String _movieName;
+    static String _movieDescription;
     String _updatedPassage;
     String _updateComprehensionQuestion;
     String _getLanguage1;
@@ -43,9 +43,13 @@ public class Questions {
             List<WebElement> dropdowns = DriverAction.getElements(QuestionsLocators.dropdownFields);
             //select level, type, section etc. while creating a question
             for (int i = 0; i < dropdowns.size(); i++) {
+                if(i==2&&section.equals("null")){
+                    continue;
+                }
+                DriverAction.waitSec(3);
                 DriverAction.click(dropdowns.get(i));
                 DriverAction.click(By.xpath(QuestionsLocators.dropdownValue.replace("input", fields[i])));
-                GemTestReporter.addTestStep("Select " + fields[0] + " in " + fieldName[i], "Successfully selected " + fields[0], STATUS.PASS);
+                GemTestReporter.addTestStep("Select " + fields[0] + " in " + fieldName[i], "Successfully selected " + fields[i], STATUS.PASS);
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Select dropdown values in question fields", "Exception encountered- " + e, STATUS.ERR);
@@ -65,11 +69,29 @@ public class Questions {
     @And("Enter question description {string}")
     public void enterQuestionDescription(String questionStatement) {
         try {
-            DriverAction.waitSec(4);
+            DriverAction.waitSec(6);
             if(DriverAction.isDisplayed(QuestionsLocators.questionBox1)) {
                 DriverAction.typeText(QuestionsLocators.questionBox1, questionStatement);
+            }else if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)){
+                DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
+            }else{
+                GemTestReporter.addTestStep("Enter question description","Could not enter question description.",STATUS.FAIL,DriverAction.takeSnapShot());
             }
       //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
+            GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, STATUS.PASS);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, STATUS.ERR);
+        }
+    }
+
+    @And("Enter second question description {string}")
+    public void enterSecondQuestion(String questionStatement) {
+        try {
+            DriverAction.waitSec(4);
+            if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)) {
+                DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
+            }
+            //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
             GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, STATUS.PASS);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, STATUS.ERR);
@@ -84,10 +106,16 @@ public class Questions {
                 //call generate unique mail function and remove @gmail.com
                 text = generateUniqueEmail();
                 //enter option and add
-             //   DriverAction.typeText(QuestionsLocators.optionsBox, text);
-                DriverAction.waitUntilElementAppear(QuestionsLocators.enterOption,5);
-                DriverAction.typeText(QuestionsLocators.enterOption, text);
-                DriverAction.waitUntilElementClickable(QuestionsLocators.addButton,5);
+                //   DriverAction.typeText(QuestionsLocators.optionsBox, text);
+                if (DriverAction.isDisplayed(QuestionsLocators.enterOption)){
+                    DriverAction.typeText(QuestionsLocators.enterOption, text);
+                }
+                else if (DriverAction.isDisplayed(QuestionsLocators.enterPassageOption)) {
+                    DriverAction.typeText(QuestionsLocators.enterPassageOption, text);
+                }else{
+
+                }
+                DriverAction.waitUntilElementClickable(QuestionsLocators.addButton, 5);
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
                 GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, STATUS.PASS);
             }
@@ -152,6 +180,7 @@ public class Questions {
     @And("^Enter subjective question description for coding$")
     public void questionDescriptionCoding() {
         try {
+            DriverAction.waitSec(3);
             _existingQues = _question;
             _question = generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.codingQuestionBox, _question, "Successfully entered the question description.");
@@ -202,7 +231,7 @@ public class Questions {
     @And("^Expand the passage field$")
     public void expandPassageField() {
         try {
-            DriverAction.waitUntilElementIsClickable(QuestionsLocators.expandPassage);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.expandPassage,6);
             DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
             DriverAction.waitSec(2);
         }catch(Exception e){
@@ -252,6 +281,7 @@ public class Questions {
         try {
             //here the function generates unique string
             _passageQues = generateUniqueEmail();
+            DriverAction.waitUntilElementClickable(QuestionsLocators.passageQuestionBox,6);
             DriverAction.typeText(QuestionsLocators.passageQuestionBox, ques);
         }catch(Exception e){
             GemTestReporter.addTestStep("Enter question description related passage","Exception encountered- "+e,STATUS.ERR);
@@ -373,6 +403,7 @@ public class Questions {
     @Then("^Verify video is uploaded$")
     public void verifyVideoIsUploaded() {
         try{
+            DriverAction.waitUntilElementAppear(MyLocators.popupMsg,20);
             if(DriverAction.isDisplayed(QuestionsLocators.video)){
                 GemTestReporter.addTestStep("Verify video is uploaded","Successfully verified the uploaded video",STATUS.PASS,DriverAction.takeSnapShot());
             }else{
@@ -386,6 +417,8 @@ public class Questions {
     @And("^Expand the video field$")
     public void expandVideoField() {
         try {
+            DriverAction.waitSec(2);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.expandVideo,6);
             DriverAction.click(QuestionsLocators.expandVideo, "Expand the video field");
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,STATUS.ERR);
@@ -418,6 +451,7 @@ public class Questions {
     @Then("^Verify the video name and description$")
     public void verifyTheVideoNameAndDescription() {
         try {
+            DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon,20);
             String videoName = DriverAction.getElementText(QuestionsLocators.videoName);
             String description = DriverAction.getElementText(QuestionsLocators.videoDescription);
             if (videoName.contains(_movieName) && description.contains(_movieDescription)) {
@@ -493,7 +527,9 @@ public class Questions {
     @And("^Click actions icon of recently created passage$")
     public void clickActionsIconOfRecentlyCreatedPassage() {
         try{
-            DriverAction.click(QuestionsLocators.passageActionsIcon,"Click Actions icon of recently created passage");
+            DriverAction.waitSec(2);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.passageActionsIcon2,6);
+            DriverAction.click(QuestionsLocators.passageActionsIcon2,"Click Actions icon of recently created passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,STATUS.ERR);
         }
@@ -558,6 +594,7 @@ public class Questions {
     @And("^Click actions icon of recently created video$")
     public void clickActionsIconOfRecentlyCreatedVideo() {
         try{
+            DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon,20);
             DriverAction.click(QuestionsLocators.videoActionsIcon,"Click Actions icon of recently created passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,STATUS.ERR);
@@ -624,7 +661,7 @@ public class Questions {
     }
 
     @And("^Search a passage$")
-    public void searchAPassage() {
+    public void  searchAPassage() {
         try {
             DriverAction.typeText(QuestionsLocators.passageSearchbox, _updatedPassage,"Search a passage");
         } catch (Exception e) {
@@ -924,6 +961,15 @@ public class Questions {
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Verify languages on view.","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Expand select coding languages dropdown$")
+    public void expandSelectCodingLanguages() {
+        try{
+            DriverAction.click(QuestionsLocators.expandLanguageDropdown,"Expand select coding languages dropdown","Successfully expands select coding language dropdown.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Expand select coding languages dropdown","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 }

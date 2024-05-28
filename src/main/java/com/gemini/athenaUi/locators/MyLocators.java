@@ -47,7 +47,7 @@ public class MyLocators {
 
     public static By rolesOption=By.xpath("//div[contains(@class,'p-dropdown p-component')]//span[@class='ng-star-inserted']");
     public static By actionsIcon=By.xpath("(//tbody)[2]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
-    public static By learnerActionsIcon=By.xpath("(//tbody)[3]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
+    public static By learnerActionsIcon=By.xpath("(//tbody)[1]//span[contains(@class,'pi pi-ellipsis')]//parent::button");
     public static By editProfile=By.xpath("//label[text()='Edit Profile']//parent::div");
     public static By enableEditing=By.xpath("//span[@class='p-inputswitch-slider']//parent::div");
     public static By enableEditing1=By.xpath("//p-inputswitch[@class='prime-switch']");
@@ -55,7 +55,7 @@ public class MyLocators {
     public static By rolesField1=By.xpath("//p-multiselect[@formcontrolname='roleDetails']");
     public static By userStatus=By.xpath("//p-togglebutton//span[@class='p-button-label']");
     public static By statusButton=By.xpath("//p-togglebutton");
-    public static By employeeActionsIcon=By.xpath("(//span[contains(@class,'pi pi-ellipsis')]//parent::button)");
+    public static By employeeActionsIcon=By.xpath("(//div[@class='p-tabview-panels']//button)[1]");
     public static By yesBtn=By.xpath("//span[contains(text(),'Yes')]//parent::button");
     public static By currentRole=By.xpath("//div[contains(@class,'multiselect-label')]//div");
     public static By rolesDropdown=By.xpath("//p-multiselect[@formcontrolname=\"roleDetails\"]//div");
@@ -75,7 +75,7 @@ public class MyLocators {
     public static By testDate=By.xpath("//b[text()='Date']//parent::p");
     public static By startTest=By.xpath("//button[contains(text(),'Start Test')]");
     public static By instructionsVideo=By.xpath("//span[text()='Instructions Video']");
-    public static By testSummary=By.xpath("//h4[text()='Summary']");
+    public static By testSummary=By.xpath("//h4[text()='Test Summary']");
     public static By reportColumns=By.xpath("//tr[@class=\"ng-star-inserted\"]//th");
     public static String testName="//h6[@title='name']//following::button[contains(text(),'Start Test')][1]";
     public static String sections="//h6[contains(text(),'input')]//parent::div";
@@ -86,12 +86,12 @@ public class MyLocators {
 
     public static String pageNavigate="//a[contains(@href,'input')]";
     public static String nextBtn="(//button[@label='input'])[2]";
-    public static String sectionSelected="//p[contains(text(),'input')]";
+    public static String sectionSelected="//p-dropdown//span[contains(text(),'input')]";
     public static By sectionsDropdown=By.xpath("//p-dropdown[@placeholder='Select Category']");
     public static String sectionOptions="//span[text()='input']//parent::li//parent::p-dropdownitem";
     public static By textarea=By.xpath("//div//textarea");
     public static By selectOption=By.xpath("//p-radiobutton[@name='groupname']");
-    public static By paletteBtn=By.xpath("//athena-question-palette//button");
+    public static By paletteBtn=By.xpath("(//athena-question-palette//button)[2]");
 
     public static By mcqOptions=By.xpath("(//p-radiobutton//input[@type='radio'])[1]");
 
@@ -162,8 +162,11 @@ public class MyLocators {
     public static By modules=By.xpath("//a[contains(@class,'header-link')]//span[contains(@class,'p-menuitem-text')]");
     public static By submodules=By.xpath("//a[@role='treeitem']//span[contains(@class,'p-menuitem-text')]");
     public static By testSummaryTabs=By.xpath("//li[@role='presentation']//span[1]");
-    public static By learnerSearchbox=By.xpath("(//input[@placeholder='Name/Email'])[3]");
+    public static By learnerSearchbox=By.xpath("(//input[@placeholder='Name/Email'])[1]");
     public static By viewReportInAttemptedTest=By.xpath("(//button[contains(text(),'View Report')])[1]");
+    public static String button1="//button[@ng-reflect-label='input']";
+    public static String button2="//button[contains(text(),'input')]";
+    public static By userSearchbox=By.xpath("(//input[contains(@placeholder,'Name')])[1]");
 
     public static String selectTab(int i) {
 

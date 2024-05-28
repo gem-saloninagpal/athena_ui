@@ -184,10 +184,11 @@ catch (Exception e) {
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul44@gmail.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"saloni.nagpal@geminisolutions.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
+                        System.out.print("check");
 
                     }
                 }
@@ -233,7 +234,7 @@ catch (Exception e) {
             if(DriverAction.isExist(UserDashboard_Locator.learnerId,120))
             {
                String getLearnerId=DriverAction.getElementText(UserDashboard_Locator.learnerId);
-               String actualId="rahul44@gmail.com";
+               String actualId="saloni.nagpal@geminisolutions.com";
                if(actualId.equals(getLearnerId))
                {
                    GemTestReporter.addTestStep("Validate Learner is assigned properly", "Learner is assigned successfully" , STATUS.PASS,

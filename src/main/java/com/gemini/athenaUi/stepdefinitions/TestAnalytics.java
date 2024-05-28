@@ -75,7 +75,7 @@ public class TestAnalytics {
                 String[] num = candidates.get(i).getText().split(" ");
                 String passed=num[0];
                 //adding the passed count of all the tests from a particular campus
-                _passedCandidates +=Integer.parseInt(passed);
+                    _passedCandidates += Integer.parseInt(passed);
             }
             if(_passedCandidates == _passCount){
                 GemTestReporter.addTestStep("Verify the passed candidates","Successfully verified the passed candidates",STATUS.PASS,DriverAction.takeSnapShot());

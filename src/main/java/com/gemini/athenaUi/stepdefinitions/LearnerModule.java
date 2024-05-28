@@ -618,7 +618,7 @@ public class LearnerModule {
    try{
        int c=2;
        List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
-       _courseName= RandomStringUtils.randomAlphanumeric(10);
+       _courseName= "a"+RandomStringUtils.randomAlphanumeric(10);
        String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
        for(int i=0;i<=5;i++){
            String dropdown=inputFields.get(i).getAttribute("aria-haspopup");

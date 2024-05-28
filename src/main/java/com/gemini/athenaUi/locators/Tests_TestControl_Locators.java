@@ -1,5 +1,6 @@
 package com.gemini.athenaUi.locators;
 
+import org.apache.logging.log4j.core.lookup.StrSubstitutor;
 import org.openqa.selenium.By;
 
 public class Tests_TestControl_Locators {
@@ -46,7 +47,7 @@ public class Tests_TestControl_Locators {
 
     public static By candidateList=By.xpath("(//tbody[@class='p-datatable-tbody']//tr)");
     public static String candidateStatus="(//tbody[@class='p-datatable-tbody']//tr[itr]//td)[5]";
-    public static String learnerStatus="(//tbody[@class='p-datatable-tbody']//tr[itr]//td)[8]";
+    public static String learnerStatus="(//tbody[@class='p-datatable-tbody']//tr[itr]//td)[9]";
     public static String candidateCheckbox="((//tbody[@class='p-datatable-tbody']//tr[itr]//td)[1]//div)[3]";
 
     public static By assignCandidate=By.xpath("(//tbody[@class='p-datatable-tbody']//tr[1]//td)[3]");
@@ -69,7 +70,7 @@ public class Tests_TestControl_Locators {
     //span/parent::div[text()=' Candidates assigned to this test: ']
     public static By learnerAssignCount=By.xpath("//span/parent::div[text()=' Learners assigned to this course: ']");
     public static By candidateAssignCount=By.xpath("//span/parent::div[text()=' Candidates assigned to this test: ']");
-    public static By assignCandidateBtn=By.xpath("//span[text()='Assign Selected']");
+    public static By assignCandidateBtn=By.xpath("//button[@ng-reflect-label=\"Assign Selected\"]");
 
     public static By updateBtn=By.xpath("//span[text()='Update']");
     public static By unAssignCandidateBtn=By.xpath("//span[text()='Unassign Selected']");
@@ -155,4 +156,6 @@ public class Tests_TestControl_Locators {
 
     public static By addTestBtn=By.xpath("//span[text()='Add To Test']");
 
+    public static By candidateAssignCheckbox=By.xpath("(//div[@aria-checked=\"false\"])[2]");
+    public static By candidateCheckbox2=By.xpath("(//span[text()='Unassigned']//parent::td//parent::tr//p-tablecheckbox)[1]");
 }

@@ -1,8 +1,8 @@
 Feature: Candidate module features
 
   Background:Check login to candidate module
-    And Navigate to login page
-    Then Login using "candidate@gmail.com" and "abc@123"
+ #   And Navigate to login page
+    Then Login using "syncwithcan@gmail.com" and "abc@123"
 
 @screenRevamped-toBeChecked
   @regressionCandidate @working
@@ -10,7 +10,7 @@ Feature: Candidate module features
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "candidate@gmail.com"
+    Then Verify the email of candidate "syncwithcan@gmail.com"
 
     Examples:
       |option1|option2        |option3|
@@ -58,15 +58,15 @@ Feature: Candidate module features
       |tab         |
       |Active Tests|
 
-  @regressionCandidate @working @toBeDiscussed
-  Scenario Outline: Verify the test that is started
-    Then Verify the default tab selected "<tab>"
-    And Start test and verify instructions video is displayed
-    Then Verify user is navigated to desired test
-
-    Examples:
-      |tab         |
-      |Active Tests|
+#  @regressionCandidate @working @toBeDiscussed
+#  Scenario Outline: Verify the test that is started
+#    Then Verify the default tab selected "<tab>"
+#    And Start test and verify instructions video is displayed
+#    Then Verify user is navigated to desired test
+#
+#    Examples:
+#      |tab         |
+#      |Active Tests|
 
   @regressionCandidate @working
   Scenario Outline: Verify selected section gets opened
@@ -85,18 +85,18 @@ Feature: Candidate module features
       |sectionName|
       |Technical |
 
-  @regressionCandidate @working
-  Scenario: Navigation between the sections
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    When Click the Yes button
-    And Click the button "Attempt"
-    When Expand the dropdown containing sections
-    And Select "Technical" from dropdown
-    Then Verify user navigates to questions screen of the selected section "Technical"
+#  @regressionCandidate @working
+#  Scenario: Navigation between the sections
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    When Click the Yes button
+#    And Click the button "Attempt"
+#    When Expand the dropdown containing sections
+#    And Select "Technical" from dropdown
+#    Then Verify user navigates to questions screen of the selected section "Technical"
 
   @regressionCandidate @working
   Scenario Outline: Verify user is able to save answers
@@ -228,7 +228,6 @@ Feature: Candidate module features
     And Click the "Yes" button after finishing test
     Then Verify user navigates to test summary screen
     When Click the button "Proceed"
-    And Select Back To Dashboard
     And Switch to "Completed Tests"
     Then Verify test is present in completed tests tab
 

@@ -1,13 +1,16 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.CampusPerformanceLocators;
+import com.gemini.athenaUi.locators.CompletedCourseReportLocator;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -184,5 +187,88 @@ public class CompletedCourseReport {
         }catch(Exception e){
             GemTestReporter.addTestStep("Validate records get unfiltered","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
+    }
+
+    @Then("^Verify the file gets downloaded \"([^\"]*)\"$")
+    public void verifyTheFileGetsDownloaded(String file) {
+        try{
+       //     File downloadedFile = getLatestDownloadedFile(file);
+            File downloadedFile=verifyTheDownloadedFile(file);
+
+            if (downloadedFile != null && downloadedFile.exists()) {
+                if(downloadedFile.getName().contains(file)){
+                    GemTestReporter.addTestStep("Verify the file gets downloaded","Successfully verified the downloaded file.",STATUS.PASS,DriverAction.takeSnapShot());
+                }
+            }else {
+                GemTestReporter.addTestStep("Verify the file gets downloaded","Could not verify the downloaded file.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify the file gets downloaded","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+    private static File getLatestDownloadedFile(String downloadDir) {
+        File[] files = new File("C:\\Users\\saloni.nagpal\\Downloads").listFiles();
+        if (files != null && files.length > 0) {
+            File latestFile = files[0];
+            for (File file : files) {
+                if (file.lastModified() > latestFile.lastModified()) {
+                    latestFile = file;
+                }
+            }
+            return latestFile;
+        }
+        return null;
+}
+
+    @And("^Expand selected category dropdown \"([^\"]*)\"$")
+    public void expandSelectedCategoryDropdown(String selectedCategory) {
+        try{
+            DriverAction.click(By.xpath(CompletedCourseReportLocator.selectedCategoryDropdown.replace("input",selectedCategory)),"Expand selected category dropdown- "+selectedCategory,"Successfully expanded the selected category dropdown.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Expand selected category dropdown- "+selectedCategory,"Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Remove category selected from dropdown$")
+    public void removeCategorySelectedFromDropdown() {
+        try{
+            DriverAction.click(CompletedCourseReportLocator.selectedCategoryCheckbox,"Remove category selected from dropdown","Successfully removed selected category.");
+        }catch(Exception e){
+
+        }
+    }
+
+    @Then("Verify the downloaded file {string}")
+    public File verifyTheDownloadedFile(String file1) {
+        try{
+            // Specify the directory to search for downloaded files
+            String directoryPath = "C:\\Users\\saloni.nagpal\\Downloads";
+
+            File latestFile = null;
+            long latestModifiedTime = Long.MIN_VALUE;
+
+            File directory = new File(directoryPath);
+            if (directory.isDirectory()) {
+                for (File file : directory.listFiles()) {
+                    if (file.isFile()) {
+                        long modifiedTime = file.lastModified();
+                        if (modifiedTime > latestModifiedTime) {
+                            latestModifiedTime = modifiedTime;
+                            latestFile = file;
+                        }
+                    }
+                }
+            }
+
+            if (latestFile != null) {
+                System.out.println("Most recently downloaded file: " + latestFile.getName());
+                return latestFile;
+            } else {
+                System.out.println("No files found in the directory.");
+            }
+        }catch(Exception e){
+
+        }
+        return null;
     }
 }

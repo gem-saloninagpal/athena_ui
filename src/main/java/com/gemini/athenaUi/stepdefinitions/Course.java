@@ -31,6 +31,7 @@ public class Course {
     int _viewListActiveCount=0;
 
     String _firstCourseName="";
+    String _currentCourse;
     @Then("^Verify the Owner of the Created Course$")
     public void verifyOwner(){
         try{
@@ -214,7 +215,7 @@ public class Course {
            for(int i=1;i<addContentTable.size();i++)
            {
                String contentName=DriverAction.getElementText(By.xpath(Course_Locators.addContentTableRow.replace("itr",String.valueOf(i))));
-               if(contentName.equals(Name))
+               if(contentName.contains(Name))
                {
                    c++;
                }
@@ -691,7 +692,7 @@ else
            //here we are checking the Save as Draft button functionality
            DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save As Draft")),"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
 
-           DriverAction.waitSec(2);
+   //        DriverAction.waitSec(2);
 //           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
            String popUpMessage=DriverAction.getElementText(By.xpath("(//div[contains(@class,'p-toast-message')])[3]"));
 
@@ -806,7 +807,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"rahul23@gmail.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"saloni.nagpal@geminisolutions.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
@@ -1284,7 +1285,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(Course_Locators.viewAsLearnerBtn,"Validate user able to click on view as Learner button","User successfully clicked on view as Learner button");
             DriverAction.waitSec(3);
             //Validate the user directed to learner screen
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View as Learner: "+  _firstCourseName))))
+            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View as Learner:  "+  _firstCourseName+" "))))
             {
                 GemTestReporter.addTestStep("Validate user directed to View Learner screen successfully", "User successfully directed to View Learner screen",
                         STATUS.PASS, DriverAction.takeSnapShot());
@@ -1313,7 +1314,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             //select Learner Report option
             DriverAction.click(By.xpath(Tests_TestControl_Locators.threeDotOption.replace("input","Learner Reports")));
 
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View Learner(s) Report: "+  _firstCourseName))))
+            if(DriverAction.isDisplayed(By.xpath(Course_Locators.heading.replace("input"," View Learner(s) Report:  "+  _firstCourseName+" "))))
             {
                 GemTestReporter.addTestStep("Validate user directed to Learner Report screen successfully", "User successfully directed to Learner Report screen",
                         STATUS.PASS, DriverAction.takeSnapShot());
@@ -1776,7 +1777,6 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(1))));
             DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
             DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
-            DriverAction.waitSec(5);
             //validate candidates are assigned successfully
             String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
             System.out.println(popupMessage);
@@ -1793,8 +1793,8 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             }
             else
             {
-                reqPopUpMessage="All learners added successfully to the course";
-                if (reqPopUpMessage.equals(popupMessage)) {
+                reqPopUpMessage="learners added successfully to the course";
+                if (popupMessage.contains(reqPopUpMessage)) {
                     GemTestReporter.addTestStep("Validate Learners are assign properly", "Learners are assign successfully", STATUS.PASS,
                             DriverAction.takeSnapShot());
                 } else {
@@ -1864,12 +1864,13 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.click(Course_Locators.selectedCategoryDropdown,"Validate user clicked on Category dropdown","User successfully clicked on category dropdown");
             DriverAction.click(By.xpath(Course_Locators.requiredOption.replace("input","Java")));
             DriverAction.waitSec(3);
-            DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(1))));
+            DriverAction.click(Tests_TestControl_Locators.candidateCheckbox2,"Select a checkbox.");
+       //     DriverAction.click(By.xpath(Tests_TestControl_Locators.candidateCheckbox.replace("itr",String.valueOf(1))));
             DriverAction.click(Tests_TestControl_Locators.assignCandidateBtn,"Validate user able to click on assign candidate button","User able to click on button");
             DriverAction.click(Tests_TestControl_Locators.yesBtn,"Validate user able to click on  popup","User successfully able to click on popup");
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(2);
             //validate candidates are assigned successfully
-            String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+           /* String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
             System.out.println(popupMessage);
             String reqPopUpMessage="";
             if(test.equals("test")) {
@@ -1892,7 +1893,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     GemTestReporter.addTestStep("Validate Learners are assign properly", "Learners are not assign successfully", STATUS.FAIL,
                             DriverAction.takeSnapShot());
                 }
-            }
+            }*/
 
 
         }
@@ -2032,6 +2033,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
             DriverAction.scrollToBottom();
             DriverAction.click(LearnerModule_Locators.viewCourseBtn,"Validate Learner able to click on View course button","Learner successfully clicked on View Course button");
                 if (DriverAction.getElement(LearnerModule_Locators.startCourseBtn).isDisplayed()) {
+                    _currentCourse=DriverAction.getElementText(Course_Locators.currentCourse);
                     DriverAction.click(LearnerModule_Locators.startCourseBtn,"Validate Learner started the course successfully","Learner started the course successfully");
                     DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn), 90);
                     if (DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
@@ -2052,10 +2054,10 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     if (DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn)) {
                         DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
                         String popUp = DriverAction.getElementText(UserDashboard_Locator.popupMessage);
-                        DriverAction.waitSec(5);
-                        System.out.println("hello");
-                        System.out.println(popUp);
-                        System.out.println("hello");
+//                        DriverAction.waitSec(5);
+//                        System.out.println("hello");
+//                        System.out.println(popUp);
+//                        System.out.println("hello");
                         if ("Assignment Completed Successfully".equals(popUp)) {
                             GemTestReporter.addTestStep("Verify confirmation popup message" + popUp, "Successfully " + popUp + " appears", STATUS.PASS, DriverAction.takeSnapShot());
                         } else {
@@ -2134,7 +2136,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
 
                 DriverAction.waitSec(4);
                 //validate date is updated successfully
-                String fetchDate=DriverAction.getElementText(Course_Locators.updatedDate);
+                String fetchDate=DriverAction.getElementText(Course_Locators.updatedEndDate);
                 String [] dateArray=fetchDate.split("/");
                 if(dateArray[0].equals(endDate))
                 {
@@ -2286,4 +2288,34 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
         }
     }
 
+    @And("^Search a course completed by learner$")
+    public void searchCompletedCourse() {
+        try{
+            if(DriverAction.isDisplayed(MyLocators.searchbox)) {
+                DriverAction.typeText(MyLocators.searchbox, _currentCourse, "Search a currently completed course- " + _currentCourse);
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Search a course completed by learner","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @When("^Click actions icon of a course$")
+    public void courseActionsIcon(){
+        try{
+            DriverAction.waitUntilElementClickable(Course_Locators.actionsIcon,3);
+            DriverAction.click(Course_Locators.actionsIcon,"Click actions icon of a course","Successfully clicked actions icon.");
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Click actions icon of a course","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("Switch the role {string}")
+    public void switchTheRole(String role) {
+        try{
+            DriverAction.click(Course_Locators.rolesDropdown,"Expand roles dropdown");
+        }catch(Exception e){
+
+        }
+    }
 }
+

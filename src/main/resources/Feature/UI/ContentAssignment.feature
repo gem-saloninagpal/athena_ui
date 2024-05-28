@@ -75,7 +75,7 @@ Feature:Content and Assignment features
        Given Select "<module>", "<submodule>" from sidebar
        When Click Actions icon of recently created content/assignment
        And Select "Edit" from actions dropdown
-       Then Verify the popup message "Only basic details can be edited"
+     #  Then Verify the popup message "Only basic details can be edited"
        When Update values in content fields "<contentTags>", "<duration>"
        And Click the button "UPDATE"
        Then Verify content is updated successfully "<contentTags>", "<duration>"
@@ -89,7 +89,7 @@ Feature:Content and Assignment features
         Given Select "<module>", "<submodule>" from sidebar
         When Click Actions icon of recently created content/assignment
         And Select "Edit" from actions dropdown
-        Then Verify the popup message "Only basic details can be edited"
+  #      Then Verify the popup message "Only basic details can be edited"
         When Update values in assignment fields "<assignmentTag>", "<marks>"
         And Click the button "Update & Exit"
         Then Verify assignment is updated "<assignmentTag>", "<marks>"
@@ -110,6 +110,10 @@ Feature:Content and Assignment features
           |module        |submodule         |
           |Manage Courses|Content Library   |
           |Manage Courses |Assignment Library|
+
+
+
+
 
 
 

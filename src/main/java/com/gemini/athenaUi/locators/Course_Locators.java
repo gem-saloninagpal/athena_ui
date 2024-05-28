@@ -102,7 +102,7 @@ public class Course_Locators {
     //button[contains(@class,'p-paginator-first')]
     public static By listViewBtn=By.xpath("//button//i[@class='pi pi-list']");
 
-    public static By firstCourseName=By.xpath("//div[@class='mr-1']//div[@class='p-card-title ng-star-inserted']");
+    public static By firstCourseName=By.xpath("(//div[@class='mr-1']//div[@class='p-card-title ng-star-inserted'])[1]");
 
     //div[@class='mr-1']//div[@class='p-card-title ng-star-inserted']
     public static By viewList=By.xpath("(//div[@class='list-container'])[1]//div[@class='title name-style control-overflow']");
@@ -115,7 +115,7 @@ public class Course_Locators {
 
 
     public static By inActiveOption=By.xpath("//span[text()='Inactive']");
-    public static By viewAsLearnerBtn=By.xpath("//span[text()='View as learner']");
+    public static By viewAsLearnerBtn=By.xpath("//button[@label='View as learner']");
 
     public static By courseSummaryAssignmentList=By.xpath("(//tbody[@class='p-datatable-tbody']//tr)[2]");
 
@@ -151,7 +151,14 @@ public class Course_Locators {
     public static By calendarIcon=By.xpath("//img[@class='calender-icon']");
 
     public static String calendar="(//button[contains(@class,'p-datepicker-trigger')])[itr]";
-
+    public static String heading2="//h6[contains(text(),'input')]";
+    public static String selectFileType="//li[contains(@aria-label,'input')]";
+    public static By updatedEndDate=By.xpath("//span[text()='End Date']//parent::td");
+    public static By currentCourse=By.xpath("//div[contains(@class,'course-title')]");
+    public static By assignLearners=By.xpath("//label[text()='Assign Learners']");
+    public static By searchbox=By.xpath("//input[contains(@class,'search')]");
+    public static By actionsIcon=By.xpath("(//button[contains(@class,'p-ripple')])[1]");
+    public static By rolesDropdown=By.xpath("");
 
 
     //img[@class='calender-icon']

@@ -1,7 +1,7 @@
 Feature:Completed-Course Report features
 
   Background:Check login to candidate module
-    And Navigate to login page
+ #   And Navigate to login page
     Then Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
     Scenario Outline: Verify search and reset functionality
@@ -24,11 +24,11 @@ Feature:Completed-Course Report features
     Then Validate completed courses records get filtered on the basis of location "<location>"
     And Expand dropdown in user management "Category"
     And Select "<category>" from dropdown
-    And Expand selected category dropdown in user management "<category>"
+    And Expand selected category dropdown "<category>"
     And Select "<selected category>" from dropdown
     And Click the button "Filter"
     Then Validate completed courses records get filtered on the basis of selected category "<selected category>"
-    And Expand selected category dropdown in user management "<selected category>"
+    And Expand selected category dropdown "<selected category>"
     And Remove category selected from dropdown
     And Click the button "Filter"
     Then Validate completed courses records get filtered on the basis of location "<location>"
@@ -40,6 +40,7 @@ Feature:Completed-Course Report features
   Scenario Outline: Export records
     Given Select "<module>", "<submodule>" from sidebar
     And Click the button "Export"
+ #   Then Verify the downloaded file "<file>"
     Then Verify the file gets downloaded "<file>"
 
     Examples:
