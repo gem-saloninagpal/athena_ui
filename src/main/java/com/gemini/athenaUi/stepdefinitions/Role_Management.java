@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.generateUniqueEmail;
+
 public class Role_Management {
 
     String _Role="TRAINEE";
@@ -23,6 +25,7 @@ public class Role_Management {
     public void enterDateInDateRangeField(String roleName,String roleDesc,String roleDisplay) {
         try {
             //in this function we are creating role and validating weather new role is created or not
+            roleDisplay+=generateUniqueEmail();
             _Role=roleName;
             String arr[]={roleName,roleDesc,roleDisplay};
             for(int i=2;i<=4;i++)

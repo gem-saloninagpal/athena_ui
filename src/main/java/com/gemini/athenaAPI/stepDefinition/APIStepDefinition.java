@@ -1,6 +1,9 @@
 package com.gemini.athenaAPI.stepDefinition;
 
 import com.gemini.athenaAPI.utils.CommonUtils;
+import com.gemini.generic.reporting.GemTestReporter;
+import com.gemini.generic.reporting.STATUS;
+import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.RestAssured;
@@ -13,6 +16,7 @@ import java.util.Random;
 
 public class APIStepDefinition {
     int statusCode;
+    String responseBody;
 
     @Given("Set endpoint {string} and Method {string}")
     public void setEndpointAndMethod(String endpoint, String method) {
@@ -64,12 +68,26 @@ public class APIStepDefinition {
                 .post("/endpoint"); // Hit POST request to specific endpoint
 
         // Get response body
-        String responseBody = response.getBody().asString();
+        responseBody = response.getBody().asString();
         System.out.println("Response Body: " + responseBody);
 
         // Get status code
         int statusCode = response.getStatusCode();
         System.out.println("Status Code: " + statusCode);
+    }
+
+    @Then("Verify response message {string}")
+    public void verifyResponseMessage(String message) {
+        try{
+          String getMessage= CommonUtils.response.getResponseBodyJson().getAsJsonObject().get("message").getAsString();
+          if(getMessage.contains(message)){
+              GemTestReporter.addTestStep("Verify response message","Successfully verified response message- "+message, STATUS.PASS,DriverAction.takeSnapShot());
+          }else{
+              GemTestReporter.addTestStep("Verify response message","Could not verify response message- "+message, STATUS.FAIL,DriverAction.takeSnapShot());
+          }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify response message","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
     }
 }
 

@@ -23,8 +23,8 @@ import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement
 import static com.gemini.athenaUi.stepdefinitions.CandidateModule_UserManagement.generateUniqueEmail;
 public class Questions {
     String _question;
-    String _passage;
-    String _passageQues;
+    static String _passage;
+    static String _passageQues;
     String _existingQues;
     String _comprehensionSubjectiveQues1;
     String _comprehensionSubjectiveQues2;
@@ -69,7 +69,7 @@ public class Questions {
     @And("Enter question description {string}")
     public void enterQuestionDescription(String questionStatement) {
         try {
-            DriverAction.waitSec(6);
+            DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox1,10);
             if(DriverAction.isDisplayed(QuestionsLocators.questionBox1)) {
                 DriverAction.typeText(QuestionsLocators.questionBox1, questionStatement);
             }else if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)){
@@ -216,6 +216,7 @@ public class Questions {
     @Then("^Verify the passage is created$")
     public void verifyPassageCreated() {
         try {
+            DriverAction.waitUntilElementAppear(QuestionsLocators.passageStatement,5);
             String text = DriverAction.getElementText(QuestionsLocators.passageStatement);
             if (text.contains(_passage)) {
                 GemTestReporter.addTestStep("Verify the passage is created", "Successfully verified the passage.", STATUS.PASS, DriverAction.takeSnapShot());
@@ -231,7 +232,7 @@ public class Questions {
     @And("^Expand the passage field$")
     public void expandPassageField() {
         try {
-            DriverAction.waitUntilElementClickable(QuestionsLocators.expandPassage,6);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.expandPassage,8);
             DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
             DriverAction.waitSec(2);
         }catch(Exception e){
@@ -418,7 +419,7 @@ public class Questions {
     public void expandVideoField() {
         try {
             DriverAction.waitSec(2);
-            DriverAction.waitUntilElementClickable(QuestionsLocators.expandVideo,6);
+            DriverAction.waitUntilElementClickable(QuestionsLocators.expandVideo,10);
             DriverAction.click(QuestionsLocators.expandVideo, "Expand the video field");
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,STATUS.ERR);
@@ -428,7 +429,7 @@ public class Questions {
     @Then("^Verify the video based question is created \"([^\"]*)\",\"([^\"]*)\"$")
     public void verifyVideoBasedQuestionCreated(String videoQues1,String videoQues2) {
         try {
-            String[]ques=new String[]{videoQues1,videoQues2};
+            String[]ques=new String[]{videoQues2,videoQues1};
             List<WebElement> questions = DriverAction.getElements(QuestionsLocators.videoQuestions);
             int c = 0;
             //verifying 2 latest created video based questions
@@ -970,6 +971,15 @@ public class Questions {
             DriverAction.click(QuestionsLocators.expandLanguageDropdown,"Expand select coding languages dropdown","Successfully expands select coding language dropdown.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand select coding languages dropdown","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+        }
+    }
+
+    @And("^Click the plus icon$")
+    public void clickThePlusIcon() {
+        try {
+            DriverAction.click(QuestionsLocators.plusIcon,"Click the plus icon while creating subjective question");
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Click the plus icon","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 }

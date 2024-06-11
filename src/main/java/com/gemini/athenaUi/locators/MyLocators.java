@@ -1,5 +1,6 @@
 package com.gemini.athenaUi.locators;
 
+import org.apache.logging.log4j.core.lookup.StrSubstitutor;
 import org.openqa.selenium.By;
 
 public class MyLocators {
@@ -167,6 +168,7 @@ public class MyLocators {
     public static String button1="//button[@ng-reflect-label='input']";
     public static String button2="//button[contains(text(),'input')]";
     public static By userSearchbox=By.xpath("(//input[contains(@placeholder,'Name')])[1]");
+    public static String selectCodingLanguage="//p-multiselect[@placeholder='input']";
 
     public static String selectTab(int i) {
 

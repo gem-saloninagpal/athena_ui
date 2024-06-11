@@ -29,8 +29,8 @@ public class QuestionsLocators {
     public static By uploadBtn=By.xpath("//p-button[@ng-reflect-label=\"Upload\"]");
     public static By chooseBtn=By.xpath("//input[contains(@accept,'video')]");
     public static By video=By.xpath("//source[contains(@src,'questions')]//parent::video");
-    public static By expandVideo=By.xpath("//athena-video-questions//tbody//td");
-    public static By videoQuestions= By.xpath("((//table[@role='grid'])[5]//tr)[2]/td[1]");
+    public static By expandVideo=By.xpath("(//athena-video-questions//button[contains(@class,'p-button-rounded')])[1]");
+    public static By videoQuestions= By.xpath("(//athena-video-questions//p-table//tbody[contains(@class,'datatable')])[2]//td[1]");
     public static By videoName=By.xpath("//athena-video-questions//tr[1]/td[3]");
 
     public static By videoDescription=By.xpath("//athena-video-questions//tr[1]/td[4]");
@@ -39,10 +39,11 @@ public class QuestionsLocators {
     public static By questionInDialogBox=By.xpath("//div[contains(@class,'question-description')]//p");
     public static By confirmationDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Confirmation']");
     public static By passageActionsIcon=By.xpath("(//p-tabpanel[@header=\"Comprehensions\"]//p-button[@icon='pi pi-ellipsis-v']//button)[1]");
-    public static By passageActionsIcon2=By.xpath("(//p-button[@ng-reflect-icon='pi pi-ellipsis-v'])[1]");
+ //   public static By passageActionsIcon2=By.xpath("(//p-button[@ng-reflect-icon='pi pi-ellipsis-v'])[1]");
+    public static By passageActionsIcon2=By.xpath("((//tbody)[2]//tr//td[3]//button)[1]");
     public static By comprehensionDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Comprehension']");
     public static By rcPassage=By.xpath("//div[contains(@class,'p-dialog')]//athena-comprehension-info//p");
-    public static By videoActionsIcon=By.xpath("(//tr[1]//button[contains(@class,'button-icon')])[3]");
+    public static By videoActionsIcon=By.xpath("((//tbody[@class='p-datatable-tbody'])[3]//tr//td[5]//button)[1]");
     public static By videoDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[contains(text(),'Video Based')]");
 
     public static By videoNameDescriptionOnView=By.xpath("//p-dynamicdialog//h4[@class='test-info']");
@@ -65,4 +66,5 @@ public class QuestionsLocators {
     public static By questionBox2=By.xpath("(//div[@data-gramm=\"false\"]//p)[1]");
     public static By expandLanguageDropdown=By.xpath("//p-multiselect[@formcontrolname=\"acceptedLanguages\"]");
     public static String codingLanguageOptions="//p-multiselectitem[@ng-reflect-label='input']";
+    public static By plusIcon=By.xpath("//span[contains(@class,'plus')]//parent::button");
 }

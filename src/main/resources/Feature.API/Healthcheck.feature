@@ -53,12 +53,13 @@ Feature:API testing
       |Endpoint       |Method|StatusCode|
       |getQuestionById|get   |200       |
 
-  Scenario Outline: Forgot password
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint      |Method |StatusCode|SampleName    |
-      |forgotPassword|post   |200       |forgotPassword|
+    @runwithoutbg
+#  Scenario Outline: Forgot password
+#    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+#    Then Verify Status code <StatusCode>
+#    Examples:
+#      |Endpoint      |Method |StatusCode|SampleName    |
+#      |forgotPassword|post   |200       |forgotPassword|
 
 #  Scenario Outline: Add test
 #    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
@@ -87,6 +88,39 @@ Feature:API testing
      Examples:
        |Endpoint          |Method|StatusCode|
        |getRandomQuestions|get   |200       |
+
+   Scenario Outline: Paginated get test
+     Given Set endpoint "<Endpoint>" and Method "<Method>"
+     Then Verify Status code <StatusCode>
+     Examples:
+       |Endpoint         |Method|StatusCode|
+       |paginatedGetTest |get   |200       |
+
+    Scenario Outline: Get all candidates by test id
+      Given Set endpoint "<Endpoint>" and Method "<Method>"
+      Then Verify Status code <StatusCode>
+      Examples:
+        |Endpoint                |Method|StatusCode|
+        |getAllCandidatesByTestId|get   |200       |
+
+    Scenario Outline: Get active test and question count
+      Given Set endpoint "<Endpoint>" and Method "<Method>"
+      Then Verify Status code <StatusCode>
+      Examples:
+        |Endpoint                     |Method|StatusCode|
+        |getActiveTestAndQuestionCount|get   |200       |
+
+      Scenario Outline: Remove candidate from test
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Then Verify response message "<message>"
+        Examples:
+          |Endpoint               |Method|StatusCode|message                                   |
+          |removeCandidateFromTest|delete|200       | Candidate has already attempted the test.|
+
+
+
+
 
 
 

@@ -29,3 +29,10 @@ beta:
   getTestById : https://devapi.geminisolutions.com/gemassessment/api/getTest/17
   addCandidateTest : https://devapi.geminisolutions.com/gemassessment/api/addCandidateTest
   getRandomQuestions : https://devapi.geminisolutions.com/gemassessment/api/getRandomQuestions?questionCount=5&sectionTypeId=1&difficulty=Medium&questionTypeId=2&tags=test
+  paginatedGetTest : https://devapi.geminisolutions.com/gemassessment/api/getAllPaginatedTests?testTag=mat&pageNumber=0&pageSize=9
+  getAllCandidatesByTestId : https://devapi.geminisolutions.com/gemassessment/api/getAllCandidates/1
+  getAllActiveCandidate : https://devapi.geminisolutions.com/gemassessment/api/getAllActiveCandidateUsers?pageIndex=0&pageSize=2
+  getActiveTestAndQuestionCount : https://devapi.geminisolutions.com/gemassessment/api/getActiveTestQuestionCountAndSectionTypeCount
+  removeCandidateFromTest : https://devapi.geminisolutions.com/gemassessment/api/removeCandidateFromTest/12/1
+  getCandidateAnswer : https://devapi.geminisolutions.com/gemassessment/api/getAllAnswer/20
+

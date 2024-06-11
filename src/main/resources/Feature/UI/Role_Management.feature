@@ -1,8 +1,8 @@
 Feature:Role Management Module features
 
   Background:Check login to candidate module
-    Given Navigate to page "login"
-    Then Login using "rahul23@gmail.com" and "abc@123"
+    Given Navigate to login page
+    Then Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
   @1
   Scenario Outline: Create a role->Validate the role created
@@ -13,8 +13,8 @@ Feature:Role Management Module features
     Then Assign the "<role>" to the "<User>"
 
     Examples:
-      | module        |submodule     |roleName|roleDesc|roleDisplay|module1        |submodule1|role   |User             |
-      | Role Management|             | Trainee|Trainee |Trainee    |User Management|          |Trainee|rahul23@gmail.com|
+      | module        |submodule     |roleName|roleDesc|roleDisplay|module1        |submodule1|role   |User                              |
+      | Role Management|             | Trainee|Trainee |Trainee    |User Management|          |Trainee|rahul.adhikari@geminisolutions.com|
 
 @2
   Scenario Outline: Edit Role->Manage Test->Placement Drives->Validate Permissions

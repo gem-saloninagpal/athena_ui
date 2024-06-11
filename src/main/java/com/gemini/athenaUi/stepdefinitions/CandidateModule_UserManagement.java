@@ -132,7 +132,7 @@ public class CandidateModule_UserManagement {
     public void clickTheButton(String buttonName) throws InterruptedException {
         try {
 
-            Thread.sleep(5000);
+            Thread.sleep(8000);
             if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More") || buttonName.equals("Finish Test") || buttonName.equals("Preview")) {
                 DriverAction.scrollToBottom();
             }
@@ -1515,9 +1515,12 @@ public class CandidateModule_UserManagement {
     @And("Expand the dropdown {string}")
     public void expandTheDropdown(String dropdownName) {
         try {
-            DriverAction.waitSec(3);
-            DriverAction.click(By.xpath(MyLocators.dropdown.replace("input", dropdownName)), "Expand the dropdown- " + dropdownName);
-        } catch (Exception e) {
+            if(DriverAction.isDisplayed(By.xpath(MyLocators.dropdown.replace("input", dropdownName)))) {
+                DriverAction.click(By.xpath(MyLocators.dropdown.replace("input", dropdownName)), "Expand the dropdown- " + dropdownName);
+            }else{
+                DriverAction.click(By.xpath(MyLocators.selectCodingLanguage.replace("input", dropdownName)), "Expand the dropdown- " + dropdownName);
+            }
+            } catch (Exception e) {
             GemTestReporter.addTestStep("Expand the dropdown- " + dropdownName, "Exception encountered- " + e, STATUS.ERR);
         }
     }

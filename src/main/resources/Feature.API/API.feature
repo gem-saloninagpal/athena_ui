@@ -87,6 +87,28 @@ Feature:API testing
       |Endpoint        |Method |StatusCode|SampleName      |
       |addCandidateTest|post   |200       |addCandidateTest|
 
+  Scenario Outline: Get all active candidate user
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint             |Method|StatusCode|
+      |getAllActiveCandidate|get   |200       |
+
+   Scenario Outline: Get candidate answer
+     Given Set endpoint "<Endpoint>" and Method "<Method>"
+     Then Verify Status code <StatusCode>
+     Examples:
+       |Endpoint          |Method|StatusCode|
+       |getCandidateAnswer|get   |200       |
+
+
+
+
+
+
+
+
+
 
 
 

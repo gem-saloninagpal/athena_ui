@@ -21,9 +21,10 @@ import java.util.Map;
 public class CommonUtils {
 
     public static String tokenForAuth;
+    public static Response response;
 
     public static Response HitAPI(String UrlNameFromConfig, String method, String step, String sampleName) {
-        Response response = new Response();
+        response = new Response();
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
@@ -94,7 +95,7 @@ public class CommonUtils {
     }
 
     public static Response HitApiToGetToken(String UrlNameFromConfig, String method, String step, String sampleName) {
-        Response response = new Response();
+        response = new Response();
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);

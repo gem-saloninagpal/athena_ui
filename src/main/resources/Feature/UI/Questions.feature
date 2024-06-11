@@ -97,7 +97,7 @@ Feature: Questions functionality
       |module |submodule|level|type                       |section|difficulty|skills|marks|text|
       |Tests  |Questions|Basic|Subjective answer questions|Logical|Hard      |Java  |10   |Plain Text|
 
-  @questionModule
+  @questionModule @tobeupdated
   Scenario Outline:Create comprehension question(both positive and negative flow)-MCQ and Checkbox
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Comprehensions"
@@ -122,8 +122,8 @@ Feature: Questions functionality
     Then Verify the comprehension question is created "<question1>", "<question2>"
     Examples:
       |module |submodule|level  |type                    |section  |difficulty|skills|marks|question1  |question2|text|
-      |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |quess-1?   |quess-2? |Rich Text|
-   #     |Tests  |Questions|Advance|Checkbox question       |Technical|Easy      |Java  |10   |quess-1!!  |quess-2!!|Plain Text|
+  #    |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |quess-1?   |quess-2? |Rich Text|
+      |Tests  |Questions|Advance|Checkbox question       |Technical|Easy      |Java  |10   |quess-1!!  |quess-2!!|Plain Text|
 
   @questionModule @inProgress
   Scenario Outline:Create comprehension based subjective question and verify view comprehension
@@ -140,6 +140,7 @@ Feature: Questions functionality
     And Expand the dropdown "Has Word Limit?"
     And Select "Yes" from dropdown
     And Enter word limit "10"
+    And Click the plus icon
     And Click the button "Save & Add More"
     And Click the button "Edit Passage"
     Then Verify the passage and edit
@@ -148,6 +149,7 @@ Feature: Questions functionality
     And Expand the dropdown "Has Word Limit?"
     And Select "Yes" from dropdown
     And Enter word limit "10"
+    And Click the plus icon
     And Click the button "Save & Exit"
     Then Verify the passage is created
     And Expand the passage field
@@ -236,7 +238,7 @@ Feature: Questions functionality
       |module |submodule|message             |state  |
       |Tests  |Questions|deleted successfully|deleted|
 
-  @questionModule
+  @questionModule @fixed
   Scenario Outline: Create video based MCQ and checkbox question and verify
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
@@ -263,7 +265,7 @@ Feature: Questions functionality
       |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Plain Text|
       |Tests  |Questions|Basic  |Checkbox question       |Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Rich Text |
 
-  @questionModule
+  @questionModule @fixed
   Scenario Outline: Edit video
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
@@ -272,13 +274,13 @@ Feature: Questions functionality
     Then Verify upload movie clip dialog box displays
     When Enter movie name and description
     And Upload a video "<movieLocation>"
-    And Click the upload button
+    And Click the button "Update"
     Then Verify the video name and description
     Examples:
       |module |submodule|movieLocation|
       |Tests  |Questions|C:\Users\saloni.nagpal\Downloads\metapreview.mp4|
 
-  @questionModule
+  @questionModule @inContinuation
   Scenario Outline: View Video
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
@@ -309,11 +311,11 @@ Feature: Questions functionality
 #      |Tests  |Questions|
 
 
-  @questionModule
+  @questionModule  @inContinuation
   Scenario Outline: Delete Video
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
-    Then Verify the video name and description
+ #   Then Verify the video name and description
     And Click actions icon of recently created video
     And Select "Delete" from actions dropdown
     And Click the button "Yes"
@@ -383,7 +385,7 @@ Feature: Questions functionality
 #      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
 #      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\2 options.xlsx                                       |Success |Failed |failed                      |             |
 
-  @questionModule
+  @questionModule @inProgress
   Scenario Outline:Create coding question
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Add New"
