@@ -41,7 +41,8 @@ public class Campus {
     @And("^Search a campus$")
     public void searchCampus() {
         try {
-            DriverAction.waitUntilElementAppear(MyLocators.searchbox,7);
+            Thread.sleep(3000);
+            DriverAction.isExist(MyLocators.searchbox,7);
             DriverAction.typeText(MyLocators.searchbox, _name);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, STATUS.ERR);

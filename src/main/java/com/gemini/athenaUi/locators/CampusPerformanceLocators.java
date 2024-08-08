@@ -12,7 +12,9 @@ public class CampusPerformanceLocators {
     public static By nameEmailSearchbox=By.xpath("//input[@placeholder='Name/Email']");
     public static By locationDisplayedOnTable=By.xpath("//p-tabpanel[@header=\"Completed-Course\"]//tbody[@class='p-datatable-tbody']/tr/td[7]");
     public static By selectedCategoryDisplayedOnTable=By.xpath("//p-tabpanel[@header=\"Completed-Course\"]//tbody[@class='p-datatable-tbody']/tr/td[4]");
-    public static By expandStartDateCalendar=By.xpath("//p-calendar[@placeholder='Start Date']//button");
+//    public static By expandStartDateCalendar=By.xpath("//p-calendar[@placeholder='Start Date']//button");
+    public static By expandStartDateCalendar=By.xpath("//input[@placeholder='Start Date']");
+
     public static By selectDate=By.xpath("(//div[contains(@class,'p-datepicker')]//td[contains(@class,'ng-star-inserted')])[10]");
     public static By expandEndDateCalendar=By.xpath("//p-calendar[@placeholder='End Date']//button");
     public static By selectedStartDate=By.xpath("//p-calendar[@placeholder='Start Date']");

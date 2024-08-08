@@ -1,0 +1,16 @@
+{
+  "roleName": "API_TEST",
+  "description": "Developer",
+  "permissions": [
+    {
+      "permissionId": 2,
+      "permissionCode": "VIEW_TEST",
+      "permissionName": "View Test"
+    },
+    {
+      "permissionId": 4,
+      "permissionCode": "CREATE_EDIT_TEST",
+      "permissionName": "Create/Edit Test"
+    }
+  ]
+}

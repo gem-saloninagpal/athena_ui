@@ -15,6 +15,7 @@ import com.github.dockerjava.api.model.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
 
 
@@ -271,6 +272,7 @@ public class CandidateModule_UserManagement {
     @Then("^Verify the popup message \"([^\"]*)\"$")
     public void verifyTheErrorPopup(String error) {
         try {
+            Thread.sleep(4000);
             String errorMessage = DriverAction.getElementText(MyLocators.popupMsg);
             if (errorMessage.contains(error)) {
                 GemTestReporter.addTestStep("Verify the popup message", "Successfully verified popup message " + errorMessage, STATUS.PASS, DriverAction.takeSnapShot());
@@ -716,6 +718,7 @@ public class CandidateModule_UserManagement {
     @Then("Switch to {string}")
     public void switchTo(String tab) {
         try {
+            Thread.sleep(3000);
             if (DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input", tab)), 5000)) ;
             DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input", tab)), 25000);
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input", tab)), "Switch to " + tab, "Successfully switched to tab " + tab);
@@ -921,6 +924,7 @@ public class CandidateModule_UserManagement {
     public void verifyTest() {
         try {
             String url = DriverAction.getCurrentURL();
+            Thread.sleep(3000);
             if (url.contains(_test)) {
                 GemTestReporter.addTestStep("Verify user is navigated to desired test- " + _test, "Successfully verified user navigated to test- " + _test, STATUS.PASS, DriverAction.takeSnapShot());
             } else {
@@ -1098,11 +1102,12 @@ public class CandidateModule_UserManagement {
     @Then("^Verify user is able to save answers \"([^\"]*)\"$")
     public void verifyAnswers(String questionStatus) {
         try {
+            Thread.sleep(4000);
             DriverAction.waitSec(4);
             String status = DriverAction.getAttributeName(MyLocators.paletteBtn, "class");
 
             DriverAction.waitSec(3);
-
+            Thread.sleep(5000);
 
             //if answer selected is saved
             if (status.contains(questionStatus)) {
@@ -1225,7 +1230,6 @@ public class CandidateModule_UserManagement {
     @Then("^Select or type all the questions of entire test$")
     public void attemptCompleteTest() {
         try {
-
             expandSections();
             List<WebElement> sections = DriverAction.getElements(MyLocators.totalSections);
             int numOptions = sections.size();
@@ -1256,7 +1260,7 @@ public class CandidateModule_UserManagement {
     @Then("^Click the left arrow button$")
     public void leftArrowButton() {
         try {
-
+            Thread.sleep(2000);
             DriverAction.scrollToBottom();
             DriverAction.waitUntilElementIsClickable(MyLocators.leftArrowBtn);
 
@@ -1386,7 +1390,8 @@ public class CandidateModule_UserManagement {
     @Then("^Verify user navigates to test summary screen$")
     public void testSummaryScreen() {
         try {
-            if (DriverAction.isExist(MyLocators.testSummary, 2)) {
+            Thread.sleep(4000);
+            if (DriverAction.isDisplayed(MyLocators.testSummary)) {
                 GemTestReporter.addTestStep("Verify candidate is navigates to test summary screen", "Successfully verified the test summary screen.", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify candidate is navigates to test summary screen", "Could not verify the test summary screen.", STATUS.FAIL);
@@ -1576,8 +1581,8 @@ public class CandidateModule_UserManagement {
         }
     }
 
-    @And("^Navigate to login page$")
-    public void navigateToLoginPage() {
+    @And("Navigate to login page")
+    public void onavigateToLoginPage() {
         try {
             DriverAction.waitUntilElementClickable(MyLocators.loginPageLink, 130);
             DriverAction.click(MyLocators.loginPageLink, "Navigate to login page");
@@ -1743,6 +1748,26 @@ public class CandidateModule_UserManagement {
             DriverAction.typeText(MyLocators.userSearchbox, user, "Search a user");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Search a user", "Exception encountered- " + e, STATUS.ERR);
+        }
+    }
+
+    @When("Click on Back To Dashboard button")
+    public void clickOnBackToDashboardButton() {
+        try {
+            DriverAction.waitSec(3);
+            DriverAction.click(MyLocators.backToDashboardBtn);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("button not found", "Exception encountered- " + e, STATUS.ERR);
+        }
+    }
+
+    @And("Click the View Report button")
+    public void clickTheViewReportButton() {
+        try {
+            DriverAction.waitSec(3);
+            DriverAction.click(MyLocators.viewReportBtn);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("button not found", "Exception encountered- " + e, STATUS.ERR);
         }
     }
 }

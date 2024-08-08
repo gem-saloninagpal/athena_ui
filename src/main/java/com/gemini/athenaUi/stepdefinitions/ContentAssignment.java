@@ -76,7 +76,7 @@ public class ContentAssignment {
     public void verifyContent(String contentTag, String duration, String fileType) {
 
         try {
-            Thread.sleep(7000);
+            Thread.sleep(8000);
 
             //checking if the created fields match the field values passed by us
             String[] contentData = {_contentName, contentTag, duration, fileType};
@@ -223,7 +223,7 @@ public class ContentAssignment {
     public void verifyAssignmentUpdated(String tag, String marks) {
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
             //verifying the updated tag and marks
             String tagDisplayed = DriverAction.getElementText(MyLocators.assignmentTagDisplayed);
             String marksDisplayed = DriverAction.getElementText(MyLocators.assignmentMarksDisplayed);
@@ -254,7 +254,7 @@ public class ContentAssignment {
     @Then("^Verify content is updated successfully \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyContentUpdated(String tag, String duration) {
         try {
-            Thread.sleep(7000);
+            Thread.sleep(8000);
             String tagDisplayed = DriverAction.getElementText(MyLocators.contentTagDisplayed);
             String durationDisplayed = DriverAction.getElementText(MyLocators.contentDurationDisplayed);
             if (tagDisplayed.contains(tag) && durationDisplayed.equals(duration)) {
@@ -298,6 +298,16 @@ public class ContentAssignment {
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Verify deactivated content","Exception encountered- "+e,STATUS.ERR);
+        }
+    }
+
+    @When("Click Add New  button")
+    public void clickAddNewButton() throws InterruptedException {
+        Thread.sleep(5000);
+        try {
+            DriverAction.click(MyLocators.addNewAssignment);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Button not found", "Exception encountered : " + e,STATUS.ERR);
         }
     }
 }

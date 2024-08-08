@@ -76,7 +76,7 @@ public class MyLocators {
     public static By testDate=By.xpath("//b[text()='Date']//parent::p");
     public static By startTest=By.xpath("//button[contains(text(),'Start Test')]");
     public static By instructionsVideo=By.xpath("//span[text()='Instructions Video']");
-    public static By testSummary=By.xpath("//h4[text()='Test Summary']");
+    public static By testSummary=By.xpath("//*[contains(text(),'summary')]");
     public static By reportColumns=By.xpath("//tr[@class=\"ng-star-inserted\"]//th");
     public static String testName="//h6[@title='name']//following::button[contains(text(),'Start Test')][1]";
     public static String sections="//h6[contains(text(),'input')]//parent::div";
@@ -169,6 +169,9 @@ public class MyLocators {
     public static String button2="//button[contains(text(),'input')]";
     public static By userSearchbox=By.xpath("(//input[contains(@placeholder,'Name')])[1]");
     public static String selectCodingLanguage="//p-multiselect[@placeholder='input']";
+    public static By backToDashboardBtn = By.xpath("//*[@label='Back To Dashboard']");
+    public static By viewReportBtn = By.xpath("(//button[@label='View Report'])[2]");
+    public static By addNewAssignment = By.xpath("//button[@label='Add New']");
 
     public static String selectTab(int i) {
 

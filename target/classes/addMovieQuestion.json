@@ -1,0 +1,33 @@
+{
+  "questionDescription": "apitestnew",
+  "marks": "15",
+  "tags": "movie q2",
+  "isSubjective": false,
+  "hasMultipleAnswers": false,
+  "sectionTypeId": 2,
+  "hasWordLimit": false,
+  "isComprehensive": false,
+  "hasMovie": true,
+  "movieQuestionDetails": {
+    "movieId": 1
+  },
+  "questionType": {
+    "questionTypeId": 1,
+    "questionType": "Multiple choice question",
+    "description": "Ex: MCQ, true/false etc."
+  },
+  "options": [
+    {
+      "optionDescription": "MCQ 3 option 1",
+      "isCorrect": false
+    },
+    {
+      "optionDescription": "MCQ 3 option 2",
+      "isCorrect": true
+    },
+    {
+      "optionDescription": "MCQ 3 option 3",
+      "isCorrect": false
+    }
+  ]
+}

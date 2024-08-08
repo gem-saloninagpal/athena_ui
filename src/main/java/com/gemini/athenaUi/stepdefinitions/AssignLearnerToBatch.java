@@ -45,7 +45,7 @@ public class AssignLearnerToBatch {
     @Then("^Validate count after assigning$")
     public void validateCountAfterAssigning() {
         try {
-            DriverAction.waitSec(3);
+            Thread.sleep(5000);
             String learnersAssigned = DriverAction.getElementText(AssignLearnerInBatchLocators.assignedLearnerCount);
             _learnersCountOnAssign = Integer.parseInt(learnersAssigned);
             if (_learnersCountOnAssign == _learnersCount + 1) {
@@ -61,7 +61,7 @@ public class AssignLearnerToBatch {
     @And("^Validate count after unassigning$")
     public void validateCountAfterUnassigning() {
         try {
-            DriverAction.waitSec(4);
+            Thread.sleep(5000);
             String learnersAssigned = DriverAction.getElementText(AssignLearnerInBatchLocators.assignedLearnerCount);
             _learnersCountOnUnassign = Integer.parseInt(learnersAssigned);
             if (_learnersCountOnUnassign == _learnersCount - 1) {
@@ -87,7 +87,8 @@ public class AssignLearnerToBatch {
     @And("^Unassign a learner$")
     public void unassignALearner() {
         try {
-            DriverAction.waitUntilElementClickable(AssignLearnerInBatchLocators.unassignLearner,5);
+            Thread.sleep(5000);
+            DriverAction.isExist(AssignLearnerInBatchLocators.unassignLearner,5);
             DriverAction.click(AssignLearnerInBatchLocators.unassignLearner, "Unassign a learner", "Successfully unassigned learner to a batch.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Unassign a learner", "Exception encountered- " + e, STATUS.ERR, DriverAction.takeSnapShot());
@@ -116,7 +117,7 @@ public class AssignLearnerToBatch {
     @Then("^Validate the count after assigning learners from different pages$")
     public void countOnAssigningFromDifferentPages() {
         try {
-            DriverAction.waitSec(3);
+            Thread.sleep(5000);
             String learnersAssigned = DriverAction.getElementText(AssignLearnerInBatchLocators.assignedLearnerCount);
             _learnersCountOnMultipleAssign = Integer.parseInt(learnersAssigned);
             if (_learnersCountOnMultipleAssign == _learnersCount + 2) {
@@ -142,6 +143,7 @@ public class AssignLearnerToBatch {
     @Then("^Validate the count after unassigning learners from different pages$")
     public void countOnUnassigningFromDifferentPages() {
         try {
+            Thread.sleep(4000);
             String learnersAssigned = DriverAction.getElementText(AssignLearnerInBatchLocators.assignedLearnerCount);
             _learnersCountOnMultipleUnassign = Integer.parseInt(learnersAssigned);
             if (_learnersCountOnMultipleUnassign == _learnersCount - 2) {

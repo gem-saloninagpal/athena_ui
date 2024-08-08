@@ -1,0 +1,34 @@
+{
+  "questionDescription": "add new question",
+  "marks": "15",
+  "tags": "comprehension 1 q4",
+  "isSubjective": false,
+  "hasMultipleAnswers": false,
+  "sectionTypeId": 3,
+  "hasWordLimit": false,
+  "isComprehensive": true,
+  "hasImage": true,
+  "imageUrl": "",
+  "comprehensionQuestionDetails": {
+    "comprehensionId": 1
+  },
+  "questionType": {
+    "questionTypeId": 1,
+    "questionType": "Multiple choice question",
+    "description": "Ex: MCQ, true/false etc."
+  },
+  "options": [
+    {
+      "optionDescription": "MCQ 3 option 1",
+      "isCorrect": false
+    },
+    {
+      "optionDescription": "MCQ 3 option 2",
+      "isCorrect": true
+    },
+    {
+      "optionDescription": "MCQ 3 option 3",
+      "isCorrect": false
+    }
+  ]
+}

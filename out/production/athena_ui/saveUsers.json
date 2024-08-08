@@ -1,0 +1,31 @@
+{
+  "login": {
+    "username" : "saloni.nagpal@geminisolutions.com",
+    "password" : "YWJjQDEyMw=="
+  },
+  "userDetails" :{
+    "firstName": "Saloni",
+    "lastName" : "Nagpal",
+    "email" : "saloni.nagpal1@geminisolutions.com",
+    "contact" : "8947239920",
+    "college" : "Chitkara",
+    "university" : "CUIET",
+    "location" : "Chd",
+    "isVerified" : "true",
+    "experienceLevel" : "Experienced",
+    "experience" : "6",
+    "campusMaster": {
+      "campusMasterId": 2
+    }
+  },
+  "roleDetails" : [
+    {
+      "roleId": 1,
+      "roleName": "ROLE_USER"
+    },
+    {
+      "roleId": 2,
+      "roleName": "ROLE_ADMIN"
+    }
+  ]
+}

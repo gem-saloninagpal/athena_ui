@@ -1,0 +1,11 @@
+{
+  "collegeName": "testingCOllege",
+  "university": "TestUni",
+  "location": "chd",
+  "collegeEmail": "test@test.in",
+  "tpoContactNumber": 9876474644,
+  "tpoContactName": "Sunny",
+  "tpoEmail": "testUni@test.in",
+  "description": "test new new new",
+  "isActive": true
+}

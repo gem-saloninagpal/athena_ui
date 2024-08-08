@@ -22,6 +22,7 @@ public class TestFlows {
             int totalFields=selectTestOptions.size();
 
             for(int i=0;i<totalFields;i++){
+                Thread.sleep(3000);
                 DriverAction.waitSec(2);
                 DriverAction.click(selectTestOptions.get(i),"Click "+fields[i],"Successfully expanded "+fields[i]);
                 DriverAction.click(By.xpath(TestFlowLocators.selectOption.replace("option",option[i])),"Select option- "+option[i]+" from "+fields[i]);

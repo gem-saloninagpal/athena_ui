@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 
 public class LearnerModule_Locators {
 
-    public static By userDropdown=By.xpath("(//div[@class='ng-tns-c114-12 p-dropdown p-component']//span)[2]");
+//    public static By userDropdown=By.xpath("//*[@optionlabel='roleDisplayName']");
+    public static By userDropdown=By.xpath("//div[@class='ng-tns-c113-40 p-dropdown p-component']");
 
     public static By courseDropdown=By.xpath("(//div[contains(@class, 'p-dropdown-trigger ng-tns')]//span)[2]");
     public static By requiredOption=By.xpath("//span[text()='Learner']");

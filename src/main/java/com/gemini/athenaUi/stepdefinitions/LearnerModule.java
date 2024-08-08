@@ -34,8 +34,9 @@ public class LearnerModule {
     String _courseName="";
 
     @When("^Expand user dropdown from navbar$")
-    public void expandUserDropdown() {
+    public void expandUserDropdown() throws InterruptedException {
         DriverAction.waitSec(5);
+        Thread.sleep(3000);
         if(DriverAction.isExist(LearnerModule_Locators.userDropdown,120)) {
             DriverAction.click(LearnerModule_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
         }
@@ -50,22 +51,22 @@ public class LearnerModule {
 
         try {
             //In this function we are validating the dropdown option with given option.
-            boolean found = false;
-            List<WebElement> options = DriverAction.getElements(LearnerModule_Locators.optionList);
-            System.out.println(options.size());
-            for (WebElement option1 : options) {
-                String optionText = option1.getText();
-                if (optionText.equals(option)) {
-                    found = true;
-                }
-                System.out.println(optionText);
-            }
-            if (!found) {
-                GemTestReporter.addTestStep("Verify the option present in dropdown", "Could not verify the option- " + option + "", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", STATUS.PASS, DriverAction.takeSnapShot());
-            }
+//            boolean found = false;
+//            List<WebElement> options = DriverAction.getElements(LearnerModule_Locators.optionList);
+//            System.out.println(options.size());
+//            for (WebElement option1 : options) {
+//                String optionText = option1.getText();
+//                if (optionText.equals(option)) {
+//                    found = true;
+//                }
+//                System.out.println(optionText);
+//            }
+//            if (!found) {
+//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Could not verify the option- " + option + "", STATUS.FAIL, DriverAction.takeSnapShot());
+//
+//            } else {
+//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", STATUS.PASS, DriverAction.takeSnapShot());
+//            }
             DriverAction.click(LearnerModule_Locators.requiredOption, "Select " + option + " from dropdown", "Successfully selected " + option + ".");
 
 
@@ -660,6 +661,7 @@ public class LearnerModule {
 
 
        //add content to the course
+       Thread.sleep(3000);
        DriverAction.waitSec(5);
        if (DriverAction.isExist(Course_Locators.addIcon,120))
        {

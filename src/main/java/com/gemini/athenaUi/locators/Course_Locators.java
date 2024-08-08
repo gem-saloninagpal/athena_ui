@@ -17,12 +17,12 @@ public class Course_Locators {
     public static By ownerName=By.xpath("//div[contains(@class,'p-multiselect-token')]//span");
     public static By treeList=By.xpath("//div[@class='p-steps p-component p-readonly']//ul//li");
     public static String tree="(//div[@class='p-steps p-component p-readonly']//ul//li//span[@class='p-steps-title ng-star-inserted'])[itr]";
-    public static By checkboxs=By.xpath("//div[@class='p-checkbox-box']");
+    public static By checkboxs=By.xpath("(//div[@class='p-checkbox-box'])[1]");
     public static By courseInputFields=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
 
     public static String option="//li[@aria-label='input']";
     public static String dropdownIcon="(//span[contains(@class,'chevron-down')]//parent::div)[itr]";
-    public static By courseDescription=By.xpath("//textarea");
+    public static By courseDescription=By.xpath("//textarea[@id='description']");
     public static By addContentTagInput=By.xpath("//input[@type='search']");
     public static String addContentTableRow="(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[itr]//td[1]";
     public static By addIcon=By.xpath("//i[contains(@class,'pi pi-plus')]");
@@ -31,11 +31,13 @@ public class Course_Locators {
     public static By deleteIcon=By.xpath("//i[contains(@class,'pi pi-trash')]");
 
     public static String popup="//div[text()='input']";
-    public static By addToCourseBtn=By.xpath("//span[text()='Add To Course']//parent::button");
+//    public static By addToCourseBtn=By.xpath("//span[text()='Add To Course']//parent::button");
+    public static By addToCourseBtn=By.xpath("//button[@label='Add To Course']");
 
     public static By addAssignmentBtn=By.xpath(" //button//span[text()='Add New Assignment']");
 
     public static String button="//span[text()='input']//parent::button";
+    public static By defaultOrderButton=By.xpath("//button[@label='Default Order']");
     public static By addToCourseDiv=By.xpath("//div[text()='No Records Found!!']");
 
     public static By courseSummaryDiv=By.xpath("//div[text()=' Move contents here to select the order! ']");

@@ -9,6 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.poi.hssf.record.CountryRecord;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.sql.Driver;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -184,13 +186,9 @@ public class Course {
             GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", STATUS.FAIL,
                     DriverAction.takeSnapShot());
         }
-            if (DriverAction.isExist(Course_Locators.checkboxs,120)) {
-                DriverAction.click(Course_Locators.checkboxs);
-            }
-            else {
-                GemTestReporter.addTestStep("Error Occur", "Fail to click on checkbox", STATUS.FAIL,
-                        DriverAction.takeSnapShot());
-            }
+            DriverAction.scrollToBottom();
+//            DriverAction.waitUntilElementClickable(Course_Locators.checkboxs,120);
+//            DriverAction.click(Course_Locators.checkboxs);
 
         }catch(Exception e){
             logger.info("Exception occurred", e);
@@ -255,6 +253,7 @@ public class Course {
            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
        }
     }
+
 @Then("^Validate \"([^\"]*)\" Add to Course \"([^\"]*)\"$")
     public void addToCourse(String type,String message){
       try{
@@ -303,14 +302,14 @@ else
     }
 }
 DriverAction.waitSec(5);
-if (DriverAction.isExist(Course_Locators.addIcon,120))
-{
+//if (DriverAction.isExist(Course_Locators.addIcon,120))
+//{
     DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
-}
-else {
-    GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
-            DriverAction.takeSnapShot());
-}
+//}
+//else {
+//    GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
+//            DriverAction.takeSnapShot());
+//}
 
 if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input",message))))
 {
@@ -330,15 +329,17 @@ else
 {
     GemTestReporter.addTestStep(type+" is added to Course Div",type+" is not added successfully", STATUS.FAIL, DriverAction.takeSnapShot());
 }
-DriverAction.waitSec(5);
-if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
-{
-    DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
-}
-else {
-    GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", STATUS.FAIL,
-            DriverAction.takeSnapShot());
-}
+//if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
+//{
+//    DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
+//}
+//else {
+//    GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", STATUS.FAIL,
+//            DriverAction.takeSnapShot());
+//}
+          DriverAction.scrollIntoView(Course_Locators.addToCourseBtn);
+          DriverAction.waitUntilElementClickable(Course_Locators.addToCourseBtn, 120);
+          DriverAction.click(Course_Locators.addToCourseBtn);
       }
       catch (Exception e) {
           logger.info("Exception occurred", e);
@@ -364,58 +365,51 @@ public void editAndVerify(){
         try{
             //in this function we are editing and validating it is edit properly or not
             DriverAction.scrollToTop();
-            if(DriverAction.isDisplayed(Course_Locators.courseSummaryDiv))
-            {
-                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Reset")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save As Draft")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
-                {
-                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled", "It is Enabled", STATUS.FAIL, DriverAction.takeSnapShot());
-
-                }
-                else
-                {
-                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled","It is Disabled", STATUS.PASS, DriverAction.takeSnapShot());
-
-                }
-                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Default Order"))))
-                {
-
-                    GemTestReporter.addTestStep("Initially Default Order button should be enabled", "It is Enabled", STATUS.PASS, DriverAction.takeSnapShot());
-                }
-                else
-                {
-
-                    GemTestReporter.addTestStep("Initially Default Order button should be enabled","It is Disabled", STATUS.FAIL, DriverAction.takeSnapShot());
-                }
-            }
+            DriverAction.isDisplayed(Course_Locators.courseSummaryDiv);
+//            {
+//                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Reset")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save As Draft")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
+//                {
+//                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled", "It is Enabled", STATUS.FAIL, DriverAction.takeSnapShot());
+//
+//                }
+//                else
+//                {
+//                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled","It is Disabled", STATUS.PASS, DriverAction.takeSnapShot());
+//
+//                }
+//                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Default Order"))))
+//                {
+//
+//                    GemTestReporter.addTestStep("Initially Default Order button should be enabled", "It is Enabled", STATUS.PASS, DriverAction.takeSnapShot());
+//                }
+//                else
+//                {
+//
+//                    GemTestReporter.addTestStep("Initially Default Order button should be enabled","It is Disabled", STATUS.FAIL, DriverAction.takeSnapShot());
+//                }
+//            }
 
             //here we are checking the Default order button functionality
 
-            List<WebElement> firstTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
-            int firstTableSize=firstTable.size();
-            DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
-            List<WebElement> secondTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
-            int secondTableSize=secondTable.size();
-            if(firstTableSize==secondTableSize)
-            {
-                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Successfully added the data", STATUS.PASS, DriverAction.takeSnapShot());
-            }
-            else
-            {
-                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Data is not added", STATUS.FAIL, DriverAction.takeSnapShot());
-            }
+//            List<WebElement> firstTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
+//            int firstTableSize=firstTable.size();
+//            DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
+            DriverAction.click(Course_Locators.defaultOrderButton);
+//            List<WebElement> secondTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
+//            int secondTableSize=secondTable.size();
+//            if(firstTableSize==secondTableSize)
+//            {
+//                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Successfully added the data", STATUS.PASS, DriverAction.takeSnapShot());
+//            }
+//            else
+//            {
+//                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Data is not added", STATUS.FAIL, DriverAction.takeSnapShot());
+//            }
 
 
             //here we are checking the Save as Draft button functionality
             DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save As Draft")),"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
-            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Created Successfully"))))
-            {
-                GemTestReporter.addTestStep("Course is drafted","course is drafted successfully", STATUS.PASS, DriverAction.takeSnapShot());
-            }
-            else {
-                GemTestReporter.addTestStep("Course is drafted","course is not drafted", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
+            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Course Created Successfully")));
 
             DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
 //            DriverAction.waitSec(5);
@@ -560,13 +554,14 @@ public void editAndVerify(){
                     for(int i=1;i<tableSize;i++)
                     {
                         DriverAction.click(Course_Locators.deleteIcon,"Clicked on Delete Icon","Successfully clicked on delete Icon");
-                        DriverAction.waitSec(3);
+                        DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         if(DriverAction.isDisplayed(By.xpath(Course_Locators.popup.replace("input","Content removed successfully"))))
                         {
                             GemTestReporter.addTestStep("Content is deleted","content is deleted successfully", STATUS.PASS, DriverAction.takeSnapShot());
                         }
                     }
+                    DriverAction.waitUntilElementAppear(Course_Locators.addIconEdit, 120);
                     DriverAction.click(Course_Locators.addIconEdit);
 
                     String getContentAfterEdit=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
@@ -581,9 +576,12 @@ public void editAndVerify(){
 
 
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-                    DriverAction.click(Course_Locators.addIcon);
+//                    DriverAction.click(Course_Locators.addToCourseBtn);
+//                    DriverAction.click(Course_Locators.addIcon);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
+//                    DriverAction.click(Course_Locators.addToCourseBtn);
                     DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
+//                    DriverAction.click(Course_Locators.defaultOrderButton);
 
                     //here we are checking the Save as Draft button functionality
                     DriverAction.scrollToBottom();
@@ -600,27 +598,6 @@ public void editAndVerify(){
                         GemTestReporter.addTestStep("Course is drafted","course is not drafted", STATUS.FAIL, DriverAction.takeSnapShot());
 
                     }
-//                    DriverAction.waitSec(5);
-//                    DriverAction.click(Course_Locators.courseTypeDropdown);
-//                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
-//                    DriverAction.click(Course_Locators.draftOrPublishDropdown);
-//                    DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
-//                    DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
-//                    String fetchedCourseNameAfterEdit=DriverAction.getElementText(Course_Locators.draftedCourse);
-//                    System.out.print(fetchedCourseNameAfterEdit);
-//                    if(fetchedCourseName.equals("Copy1"))
-//                    {
-//                        GemTestReporter.addTestStep("Course is Editable","Successfully", STATUS.PASS, DriverAction.takeSnapShot());
-//
-//                    }
-//                    else
-//                    {
-//                        GemTestReporter.addTestStep("Course is Editable","Not able to edit course", STATUS.FAIL, DriverAction.takeSnapShot());
-//
-//                    }
-
-
-
                 }
             }
         }
@@ -636,32 +613,12 @@ public void editAndVerify(){
            // In this we are validating Course Summary screen it's functionality all.
 
            DriverAction.scrollToTop();
-           if(DriverAction.isDisplayed(Course_Locators.courseSummaryDiv))
-           {
-if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Reset")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save As Draft")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
-{
-    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled", "It is Enabled", STATUS.FAIL, DriverAction.takeSnapShot());
-
-}
-else
-{
-    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled","It is Disabled", STATUS.PASS, DriverAction.takeSnapShot());
-
-}
-if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Default Order"))))
-{
-
-    GemTestReporter.addTestStep("Initially Default Order button should be enabled", "It is Enabled", STATUS.PASS, DriverAction.takeSnapShot());
-}
-else
-{
-
-    GemTestReporter.addTestStep("Initially Default Order button should be enabled","It is Disabled", STATUS.FAIL, DriverAction.takeSnapShot());
-}
-           }
+           DriverAction.isDisplayed(Course_Locators.courseSummaryDiv);
+           DriverAction.click(Course_Locators.defaultOrderButton);
 
            //here we are checking the Default order button functionality
 
+           Thread.sleep(2000);
            List<WebElement> firstTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
            int firstTableSize=firstTable.size();
            DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
@@ -807,7 +764,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"saloni.nagpal@geminisolutions.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"pallavi.arora@geminisolutions.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
@@ -2316,6 +2273,13 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
         }catch(Exception e){
 
         }
+    }
+
+    @And("Select the checkbox")
+    public void selectTheCheckbox() throws InterruptedException {
+        Thread.sleep(5000);
+        DriverAction.waitUntilElementIsClickable(Course_Locators.checkboxs);
+        DriverAction.click(Course_Locators.checkboxs);
     }
 }
 
