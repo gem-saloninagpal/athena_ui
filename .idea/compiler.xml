@@ -8,10 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="athena-ui" />
+        <module name="athena_ui" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="athena_ui" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

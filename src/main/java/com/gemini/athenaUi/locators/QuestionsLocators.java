@@ -44,6 +44,7 @@ public class QuestionsLocators {
     public static By comprehensionDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Comprehension']");
     public static By rcPassage=By.xpath("//div[contains(@class,'p-dialog')]//athena-comprehension-info//p");
     public static By videoActionsIcon=By.xpath("((//tbody[@class='p-datatable-tbody'])[3]//tr//td[5]//button)[1]");
+    public static By videoActionsIcon1=By.xpath("(//p-table[contains(@datakey,'movie')]//p-button)[1]");
     public static By videoDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[contains(text(),'Video Based')]");
 
     public static By videoNameDescriptionOnView=By.xpath("//p-dynamicdialog//h4[@class='test-info']");

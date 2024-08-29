@@ -595,8 +595,8 @@ public class Questions {
     @And("^Click actions icon of recently created video$")
     public void clickActionsIconOfRecentlyCreatedVideo() {
         try{
-            DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon,20);
-            DriverAction.click(QuestionsLocators.videoActionsIcon,"Click Actions icon of recently created passage");
+            DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon1,20);
+            DriverAction.click(QuestionsLocators.videoActionsIcon1,"Click Actions icon of recently created passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,STATUS.ERR);
         }

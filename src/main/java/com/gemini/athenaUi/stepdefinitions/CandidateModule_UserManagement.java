@@ -130,7 +130,7 @@ public class CandidateModule_UserManagement {
 
 
     @Then("^Click the button \"([^\"]*)\"$")
-    public void clickTheButton(String buttonName) throws InterruptedException {
+    public static void clickTheButton(String buttonName) throws InterruptedException {
         try {
 
             Thread.sleep(8000);
@@ -541,7 +541,7 @@ public class CandidateModule_UserManagement {
 
 
     @Then("^Click the Yes button$")
-    public void clickYesButton() {
+    public static void clickYesButton() {
 
         try {
             DriverAction.click(MyLocators.yesBtn, "Click the yes button", "Successfully clicked Yes button.");
@@ -977,7 +977,7 @@ public class CandidateModule_UserManagement {
     }
 
     @Then("^Check the instructions checkbox$")
-    public void instructionsCheckbox() {
+    public static void instructionsCheckbox() {
         try {
 
             DriverAction.scrollToBottom();
@@ -1044,7 +1044,7 @@ public class CandidateModule_UserManagement {
     }
 
     @Then("Click the {string} button of instructions video")
-    public void nextButton(String button) {
+    public static void nextButton(String button) {
         DriverAction.waitUntilElementClickable(By.xpath(MyLocators.nextBtn.replace("input", button)), 90);
         DriverAction.click(By.xpath(MyLocators.nextBtn.replace("input", button)), "Click the NEXT button displayed in video", "Successfully clicked the NEXT button displayed in video.");
     }
@@ -1752,7 +1752,7 @@ public class CandidateModule_UserManagement {
     }
 
     @When("Click on Back To Dashboard button")
-    public void clickOnBackToDashboardButton() {
+    public static void clickOnBackToDashboardButton() {
         try {
             DriverAction.waitSec(3);
             DriverAction.click(MyLocators.backToDashboardBtn);

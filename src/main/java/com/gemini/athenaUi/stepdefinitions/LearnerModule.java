@@ -67,7 +67,7 @@ public class LearnerModule {
 //            } else {
 //                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", STATUS.PASS, DriverAction.takeSnapShot());
 //            }
-            DriverAction.click(LearnerModule_Locators.requiredOption, "Select " + option + " from dropdown", "Successfully selected " + option + ".");
+            DriverAction.click(By.xpath(LearnerModule_Locators.requiredOption.replace("input",option)), "Select " + option + " from dropdown", "Successfully selected " + option + ".");
 
 
         } catch (Exception e) {
@@ -140,11 +140,28 @@ public class LearnerModule {
 
             DriverAction.waitSec(7);
             DriverAction.scrollToBottom();
+            //if test is remaining
             if (DriverAction.getElement(LearnerModule_Locators.resumeBtn2).isDisplayed()) {
                 GemTestReporter.addTestStep("Verify Resume button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.resumeBtn2);
                 if (DriverAction.getElement(LearnerModule_Locators.resumeBtn).isDisplayed()) {
                     DriverAction.click(LearnerModule_Locators.resumeBtn);
+
+                    if(DriverAction.isDisplayed(LearnerModule_Locators.gettingStartedList)){
+                        List<WebElement>remainingTests=DriverAction.getElements(LearnerModule_Locators.remainingTest);
+                        for(int i=0;i< remainingTests.size();i++){
+                            DriverAction.click(remainingTests.get(i));
+                            DriverAction.click(MyLocators.yesBtn);
+                            CandidateModule_UserManagement.nextButton("NEXT");
+                            CandidateModule_UserManagement.instructionsCheckbox();
+                            CandidateModule_UserManagement.clickTheButton("NEXT");
+                            CandidateModule_UserManagement.clickYesButton();
+                            CandidateModule_UserManagement.clickTheButton("Attempt");
+                            CandidateModule_UserManagement.clickTheButton("Finish Test");
+                            CandidateModule_UserManagement.clickButton("Yes");
+                            CandidateModule_UserManagement.clickTheButton("Proceed");
+                        }
+                    }
 
                     DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
                     if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn))
@@ -417,6 +434,16 @@ public class LearnerModule {
 //                DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                 String CourseType = DriverAction.getElement(By.xpath(LearnerModule_Locators.courseType.replace("itr", String.valueOf(i)))).getText();
                 DriverAction.click(By.xpath(LearnerModule_Locators.courseType.replace("itr", String.valueOf(i))));
+                DriverAction.waitSec(5);
+                DriverAction.scrollToBottom();
+                while(DriverAction.isDisplayed(Course_Locators.loadingIcon)) {
+                    DriverAction.scrollToBottom();
+                    if(!DriverAction.isDisplayed(Course_Locators.loadingIcon)){
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
                 List<WebElement> list1 = DriverAction.getElements(By.xpath(LearnerModule_Locators.courseArea.replace("itr", String.valueOf(i))));
                 if (CourseType.equals("Ongoing")) {
                     if (Integer.parseInt(activeCount) == list1.size()) {
@@ -482,16 +509,18 @@ public class LearnerModule {
                     if (DriverAction.isExist(LearnerModule_Locators.downloadBtn,120)) {
                         GemTestReporter.addTestStep("Verify Download button on ui", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
                         DriverAction.click(LearnerModule_Locators.downloadBtn);
-                        String directoryPath = "C:/Users/rahul.adhikari/Downloads/";
+                        String directoryPath = "C:/Users/saloni.nagpal/Downloads/";
                         File directory = new File(directoryPath);
                         if (directory.exists() && directory.isDirectory()) {
                             File latestfile = getLatestFile(directory);
+
+                            //verify if latest file is pdf(modify)
                             if (latestfile != null) {
                                 System.out.println("Latest File : " + latestfile.getAbsolutePath());
-                                GemTestReporter.addTestStep("Validating weather User able to download certificate", "User successfully able to download the certificate", STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User successfully able to download the certificate", STATUS.PASS, DriverAction.takeSnapShot());
 
                             } else {
-                                GemTestReporter.addTestStep("Validating weather User able to download certificate", "User not able to download the certificate", STATUS.FAIL, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User not able to download the certificate", STATUS.FAIL, DriverAction.takeSnapShot());
                             }
                         } else {
                             GemTestReporter.addTestStep("Verify Download button on ui", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());

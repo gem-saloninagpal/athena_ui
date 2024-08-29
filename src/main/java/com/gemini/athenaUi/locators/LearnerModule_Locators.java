@@ -1,14 +1,17 @@
 package com.gemini.athenaUi.locators;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class LearnerModule_Locators {
 
 //    public static By userDropdown=By.xpath("//*[@optionlabel='roleDisplayName']");
-    public static By userDropdown=By.xpath("//div[@class='ng-tns-c113-40 p-dropdown p-component']");
+    public static By userDropdown=By.xpath("//p-dropdown[@optionlabel=\"roleDisplayName\"]");
 
     public static By courseDropdown=By.xpath("(//div[contains(@class, 'p-dropdown-trigger ng-tns')]//span)[2]");
-    public static By requiredOption=By.xpath("//span[text()='Learner']");
+    public static String requiredOption="//p-dropdownitem[@ng-reflect-label='input']";
     public static By catalogPaginator=By.xpath("//span[@class='paginator-text-style']");
     public static By optionList=By.xpath("//ul[@class='p-dropdown-items ng-tns-c114-12']//span");
     public static By viewCourseBtn=By.xpath("//button//span[text()='View Course']");
@@ -113,5 +116,7 @@ public class LearnerModule_Locators {
     public static By noCourseCourseCatalog=By.xpath("//h5[text()='No courses found!']");
 
 
+    public static By gettingStartedList=By.xpath("//p-accordion//div[@role='tablist']");
+    public static By remainingTest=By.xpath("//div[contains(@class,'test-display')]//i[contains(@class,'question')]");
 }
 

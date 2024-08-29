@@ -2,7 +2,7 @@ Feature: Learner module features
 
   Background:Check login to Learner module
     Given Navigate to login page
-    Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+    Then Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
 
   @regression012 @1
   Scenario Outline: Create Course->Assign Learner->Start Course and navigate back->Course Resume text Validation
@@ -21,28 +21,28 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png |Logical |abc        |              |                 |
 
 
-#  @regression012 @2 @fail
-#  Scenario Outline: Complete Resumed course->Download certificate->Validate certificate downloaded
-#    When Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Complete the Course and Download the certificate
-#
-#    Examples:
-#      |option1|
-#      |Learner|
+  @regression012 @2 @fixed
+  Scenario Outline: Complete Resumed course->Download certificate->Validate certificate downloaded
+    When Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Complete the Course and Download the certificate
+
+    Examples:
+      |option1|
+      |Learner|
 
 
-#  @regression012 @3 @fail
-#  Scenario Outline: Validate Ongoing and Completed Course Count
-#    When Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Validate the count of Ongoing and Completed Course
-#    And Switch to Completed Tab and validate it functionality
-#    And Validate Course Summary
-#
-#    Examples:
-#      |option1|
-#      |Learner|
+  @regression012 @3 @fixed
+  Scenario Outline: Validate Ongoing and Completed Course Count
+    When Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Validate the count of Ongoing and Completed Course
+    And Switch to Completed Tab and validate it functionality
+    And Validate Course Summary
+
+    Examples:
+      |option1|
+      |Learner|
 
 
     @4
@@ -61,19 +61,19 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |
 
 
-#@5 @fail
-#  Scenario Outline: Create Course->Switch to Course catalog->Validate course overview
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Click the button until it appear "Create Course"
-#    Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
-#    And Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Switch to Course Catalog Screen
-#    Then Validate course overview
-#
-#    Examples:
-#      |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|
-#      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |
+@5 @fixed
+  Scenario Outline: Create Course->Switch to Course catalog->Validate course overview
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click the button until it appear "Create Course"
+    Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
+    And Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Switch to Course Catalog Screen
+    Then Validate course overview
+
+    Examples:
+      |submodule|module|option1|courseType|duration|courseTag|fileLocation                                                                 |category|description|contentMessage|assignmentMessage|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|Logical |abc        |              |                 |
 
 
 @6
