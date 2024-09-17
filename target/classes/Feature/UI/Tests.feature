@@ -2,15 +2,18 @@ Feature:Tests Module features
 
   Background:Check login to candidate module
     Given Navigate to login page
-    Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+#    Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+    Then Login using "testing.user123@gmail.com" and "test@123"
 
-    @1 @pass
+  @1 @pass
   Scenario Outline: Create Test Placement Drive
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+    And Add Select Options details
+      And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -20,16 +23,18 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 
       @2 @pass
   Scenario Outline: Create Test Placement Drive->verify show score after submission
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+        And Add Select Options details
+        And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -41,7 +46,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5   |new1234@gmail.com|abc@123|
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5   |script@gmail.com|check@123|
 
 
 
@@ -49,9 +54,11 @@ Feature:Tests Module features
   Scenario Outline: Create Test Placement Drive->verify Test Reattempt
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+          And Add Select Options details
+          And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -64,38 +71,42 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|checkboxOption|Username|Password|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |2       |new1234@gmail.com|abc@123|
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |2       |script@gmail.com|check@123|
 
 
 @4 @pass
   Scenario Outline: Create Test Placement Drive->Attempt->Validate Candidate Report
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
+    And Click the button "Next"
+    And Add Select Options details
     And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
     And Validate Test is Created
     And Assign the test to Learner
-    And Switch the User "<Username1>", "<Password1>"
-    Then Start with test
     And Switch the User "<Username>", "<Password>"
+    Then Start with test
+    And Switch the User "<Username1>", "<Password1>"
     Then Validate Candidate Report
 
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5|rahul23@gmail.com|abc@123|new1234@gmail.com|abc@123|
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5|script@gmail.com|check@123|pallavi.arora@geminisolutions.com|abcd@123|
 
 
   @5
   Scenario Outline: Create Test Placement Drive->Attempt->Validate Test Summary Report
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
+    And Click the button "Next"
+    And Add Select Options details
     And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
@@ -110,16 +121,18 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5   |rahul23@gmail.com|abc@123|new1234@gmail.com|abc@123|
+      | Tests         |Test Control  |0100    |Load Testing, Gemini|Beginner|abc        |Logical|5   |pallavi.arora@geminisolutions.com|abcd@123|script@gmail.com|check@123|
 
 
     @6
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Copy Test
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+      And Add Select Options details
+      And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -128,15 +141,17 @@ Feature:Tests Module features
 
       Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner |abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner |abc        |Logical|5         |
 
       @7
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Edit Test
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+        And Add Select Options details
+        And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -145,16 +160,18 @@ Feature:Tests Module features
 
         Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |Load Testing, Gemini|Beginner|abc        |Logical|5         |
 
 
         @8
   Scenario Outline: Create Test Placement Drive->Attempt Test->Validate Candidate Assigned
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+          And Add Select Options details
+          And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -163,15 +180,17 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
           @9
   Scenario Outline: Create Test Placement Drive->Attempt Test->Evaluate Candidate
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
+            And Add Select Options details
+            And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Subjective Question to the section
@@ -182,13 +201,18 @@ Feature:Tests Module features
     And Switch the User "<Username>", "<Password>"
     Then Evaluate the Candidate
 
-    Examples:
-      | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |rahul23@gmail.com|abc@123|new1234@gmail.com|abc@123|
+#    Examples:
+#      | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|
+#      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |pallavi.arora@geminisolutions.com|abcd@123|script@gmail.com|check@123|
+
+            Examples:
+              | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|
+              | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |testing.user123@gmail.com|test@123|test.user234@gmail.com|test@234|
 
 
 
-            @10
+
+  @10
   Scenario Outline: Create Internal Tests
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "<TestType>"
@@ -197,6 +221,8 @@ Feature:Tests Module features
     And Add Test Info for Internal Test  "<Duration>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
+              And Add Select Options details
+              And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -206,7 +232,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030  |Beginner|abc        |Logical|5         |Internal Tests|Internal Test|
+      | Tests         |Test Control  |0100  |Beginner|abc        |Logical|5         |Internal Tests|Internal Test|
 
 
               @11
@@ -218,6 +244,8 @@ Feature:Tests Module features
     And Add Test Info for Internal Test  "<Duration>", "<Level>"
     And Enter Test Description "<Description>"
     And Click the button "Next"
+                And Add Select Options details
+                And Click the button "Next"
     And Add Section "<Section>", "<Percentage>", "<Duration>"
     And Click the button "Add"
     And Add Question to the section
@@ -230,7 +258,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|Username|Password|checkboxLabel|TestType|learnerModule|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5   |rahul44@gmail.com|abc@123|Internal Test|Internal Tests|Tests|
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5   |pallavi.arora@geminisolutions.com|abcd@123|Internal Test|Internal Tests|Tests|
 
 
                 @12
@@ -255,7 +283,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|checkboxOption|Username|Password|learnerModule|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5         |2       |rahul44@gmail.com|abc@123|Tests|Internal Tests|Internal Test|
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5         |2       |pallavi.arora@geminisolutions.com|abcd@123|Tests|Internal Tests|Internal Test|
 
 
                   @13
@@ -281,7 +309,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|Username|Password|Username1|Password1|learnerModule|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5|rahul23@gmail.com|abc@123|rahul44@gmail.com|abc@123|Tests|Internal Tests|Internal Test|
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5|pallavi.arora@geminisolutions.com|abcd@123|pallavi.arora@geminisolutions.com|abcd@123|Tests|Internal Tests|Internal Test|
 
 
                     @14
@@ -307,7 +335,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|Username|Password|Username1|Password1|TestType|learnerModule|checkboxLabel|
-      | Tests         |Test Control  |0030    |Other, Other|Beginner|abc        |Logical|5   |rahul23@gmail.com|abc@123|rahul44@gmail.com|abc@123|    Internal Tests   | Tests       | Internal Test     |
+      | Tests         |Test Control  |0100    |Other, Other|Beginner|abc        |Logical|5   |pallavi.arora@geminisolutions.com|abcd@123|rahul44@gmail.com|abcd@123|    Internal Tests   | Tests       | Internal Test     |
 
 
             @15
@@ -327,7 +355,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5      |Internal Tests |Internal Test |
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5      |Internal Tests |Internal Test |
 
 
 
@@ -348,7 +376,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5         |Internal Tests |Internal Test |
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5         |Internal Tests |Internal Test |
 
 
   @17 @tobefixed
@@ -374,7 +402,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Level   |Description|Section|Percentage|Username|Password|Username1|Password1|learnerModule|TestType|checkboxLabel|
-      | Tests         |Test Control  |0030    |Beginner|abc        |Logical|5         |rahul23@gmail.com|abc@123|rahul44@gmail.com|abc@123|Tests | Internal Tests |Internal Test|
+      | Tests         |Test Control  |0100    |Beginner|abc        |Logical|5         |rahul23@gmail.com|abcd@123|rahul44@gmail.com|abcd@123|Tests | Internal Tests |Internal Test|
 
 
   @18
@@ -423,7 +451,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|contentName|contentMessage|Level|Section|Percentage|Username1|Password1|Username|Password|content|
-      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abc@123|rahul23@gmail.com|abc@123|Content|
+      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abcd@123|rahul23@gmail.com|abcd@123|Content|
 
 
   @20
@@ -450,7 +478,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|contentName|contentMessage|Level|Section|Percentage|Username1|Password1|Username|Password|content|
-      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abc@123|rahul23@gmail.com|abc@123|Content|
+      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abcd@123|rahul23@gmail.com|abcd@123|Content|
 
 
   @21
@@ -476,7 +504,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|contentName|contentMessage|Level|Section|Percentage|Username1|Password1|Username|Password|content|
-      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abc@123|rahul23@gmail.com|abc@123|Content|
+      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abcd@123|rahul23@gmail.com|abcd@123|Content|
 
 
 
@@ -503,7 +531,7 @@ Feature:Tests Module features
     
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|contentName|contentMessage|Level|Section|Percentage|Username1|Password1|Username|Password|content|
-      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abc@123|rahul23@gmail.com|abc@123|Content|
+      | Manage Courses|Course Library|Public    |  00:30 |  Java   | Logical| C:\Users\rahul.adhikari\Pictures\testImage.png |abc|content -01|Content successfully added. Add more!|Beginner|Logical|5 |rahul44@gmail.com|abcd@123|rahul23@gmail.com|abcd@123|Content|
 
 
   @23 @Leftforfixing
@@ -570,7 +598,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 
 @28
@@ -588,7 +616,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 
   @29
@@ -605,7 +633,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 @30
   Scenario Outline: Create Test->Choose Specific Question
@@ -620,7 +648,7 @@ Feature:Tests Module features
 
     Examples:
       | module        |submodule     |Duration|Campus    |Level   |Description|Section|Percentage|
-      | Tests         |Test Control  |0030    |DELL, DELL|Beginner|abc        |Logical|5         |
+      | Tests         |Test Control  |0100    |DELL, DELL|Beginner|abc        |Logical|5         |
 
 @31
   Scenario Outline: Assign Candidate->Validate candidate is assigned

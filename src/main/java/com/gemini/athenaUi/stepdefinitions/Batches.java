@@ -2,9 +2,9 @@ package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.Course_Locators;
 import com.gemini.athenaUi.locators.MyLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -25,9 +25,9 @@ public class Batches {
             //expand the action icon of batch
             DriverAction.waitSec(7);
             DriverAction.click(MyLocators.batchActionsIcon);
-            GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", STATUS.PASS);
+            GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", Status.PASS);
         }catch (Exception e){
-            GemTestReporter.addTestStep("Click actions icon of batch","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click actions icon of batch","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -40,7 +40,7 @@ public class Batches {
             DriverAction.waitUntilElementClickable(By.xpath(MyLocators.editOptions.replace("input", option)),4);
             DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -56,9 +56,9 @@ public class Batches {
             //store added course in a string
             _courseName =DriverAction.getElementText(addedCourses.get(total-1));
             System.out.print(_courseName);
-            GemTestReporter.addTestStep("Add course in a batch","Successfully added the course- "+ _courseName +" in batch.",STATUS.PASS);
+            GemTestReporter.addTestStep("Add course in a batch","Successfully added the course- "+ _courseName +" in batch.",Status.PASS);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Add course in a batch","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Add course in a batch","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -79,13 +79,13 @@ public class Batches {
                 }
             }
             if(c==0){
-                GemTestReporter.addTestStep("Verify added course displays in batch summary","Could not verify the added course.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify added course displays in batch summary","Could not verify the added course.",Status.FAIL,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify added course displays in batch summary","Successfully verified the added course.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify added course displays in batch summary","Successfully verified the added course.",Status.PASS,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
 
-            GemTestReporter.addTestStep("Verify added course displays in batch summary","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify added course displays in batch summary","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -93,9 +93,9 @@ public class Batches {
     public void getEmail() {
         try {
             _email = DriverAction.getElementText(MyLocators.userEmail);
-            GemTestReporter.addTestStep("Get email of user", "Successfully fetched the email- " + _email, STATUS.PASS);
+            GemTestReporter.addTestStep("Get email of user", "Successfully fetched the email- " + _email, Status.PASS);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Get email of user","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Get email of user","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -105,12 +105,12 @@ public class Batches {
             Thread.sleep(4000);
             String owner = DriverAction.getElementText(MyLocators.owner);
             if (_email.contains(owner)) {
-                GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Successfully verified the owner of batch is selected by default.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Successfully verified the owner of batch is selected by default.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Could not verify owner of batch is selected by default.", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Could not verify owner of batch is selected by default.", Status.FAIL);
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify owner of a batch is selected by default","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify owner of a batch is selected by default","Exception encountered- "+e,Status.ERR);
         }
 
     }
@@ -158,7 +158,7 @@ public class Batches {
 
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in batch input fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter respective values in batch input fields", "Exception encountered- " + e, Status.ERR);
         }
 
     }
@@ -170,12 +170,12 @@ public class Batches {
             Thread.sleep(8000);
             String batch = DriverAction.getElementText(MyLocators.batchCreated);
             if (batch.contains(_batchName)) {
-                GemTestReporter.addTestStep("Verify batch is created/updated", "Successfully verified the batch is created/updated.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify batch is created/updated", "Successfully verified the batch is created/updated.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify batch is created/updated", "Could not verify the created/updated batch", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify batch is created/updated", "Could not verify the created/updated batch", Status.FAIL);
             }
         }catch(Exception e){
-                GemTestReporter.addTestStep("Verify batch is created/updated","Exception encountered- "+e,STATUS.ERR);
+                GemTestReporter.addTestStep("Verify batch is created/updated","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -229,7 +229,7 @@ public class Batches {
 
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in batch input fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter respective values in batch input fields", "Exception encountered- " + e, Status.ERR);
         }
 
     }
@@ -241,13 +241,13 @@ public class Batches {
             DriverAction.scrollToBottom();
             String course=DriverAction.getElementText(MyLocators.recentlyAddedCourseAfterEdit);
             if (course.contains(_courseName)) {
-                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Successfully verified added course displays in batch summary.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Successfully verified added course displays in batch summary.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Could not verify added course displays in batch summary.", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify added course displays in batch summary", "Could not verify added course displays in batch summary.", Status.FAIL);
             }
         }catch(Exception e){
 
-            GemTestReporter.addTestStep("Verify added course displays in batch summary","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify added course displays in batch summary","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -261,7 +261,7 @@ public class Batches {
                 DriverAction.typeText(Course_Locators.searchbox,batch);
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Search a batch","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Search a batch","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

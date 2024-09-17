@@ -16,7 +16,7 @@ Feature: Create campus functionality
 
       Examples:
       |module|submodule|location|university|tpoName|tpoEmail     |tpoContact|description|
-      |Campus|         |  loc   |uni       |namee  |abc@gmail.com|9876545670|abc        |
+      |Campus|         |  loc   |univ      |nameeeeee  |abc@gmail.com|9876435670|abc        |
 
   @regression
     Scenario Outline: Verify mandatory fields

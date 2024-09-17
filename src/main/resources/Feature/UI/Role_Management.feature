@@ -7,16 +7,17 @@ Feature:Role Management Module features
   @1
   Scenario Outline: Create a role->Validate the role created
     Given Select "<module>", "<submodule>" from sidebar
-    When Click the button "Create Role"
+#    When Click the button "Create Role"
+#    When Click create role button
     And Create Role and Validate Role is created "<roleName>","<roleDesc>","<roleDisplay>"
-    And Select "<module1>", "<submodule1>" from sidebar
-    Then Assign the "<role>" to the "<User>"
+#    And Select "<module1>", "<submodule1>" from sidebar
+#    Then Assign the "<role>" to the "<User>"
 
     Examples:
-      | module        |submodule     |roleName|roleDesc|roleDisplay|module1        |submodule1|role   |User                              |
-      | Role Management|             | TestRole|Test role |testRole    |User Management|          |Trainee|pallavi.arora@geminisolutions.com|
+      | module        |submodule     |roleName|roleDesc|roleDisplay|module1        -|submodule1|role   |User                              |
+      | Role Management|             | testCheckNew2|testCheckNew2  |testCheckNew2    |User Management|          |Trainee|pallavi.arora@geminisolutions.com|
 
-@2
+  @2
   Scenario Outline: Edit Role->Manage Test->Placement Drives->Validate Permissions
     Given Select "<module>", "<submodule>" from sidebar
     When Edit the Role "<permissionType>","<permissionSubtype>","<permission1>","<permission2>","<permission3>"

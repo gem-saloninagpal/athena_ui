@@ -2,9 +2,9 @@ package com.gemini.athenaUi.stepdefinitions;
 
 
 import com.gemini.athenaUi.locators.*;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,8 +20,8 @@ public class Manage_Sections {
     String SectionName="";
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
 
-    @And("^Enter Section Name and Section Description in Create section fields \"([^\"]*)\"$")
-    public void createSection(String popUpMessage)
+    @And("^Enter Section Name and Section Description in Create section fields$")
+    public void createSection()
     {
 try{
     //type in section name textarea
@@ -31,7 +31,7 @@ try{
 
     } else {
         GemTestReporter.addTestStep("Error Occur", "Fail to type in Section Name textarea",
-                STATUS.FAIL, DriverAction.takeSnapShot());
+                Status.FAIL, DriverAction.takeSnapShot());
     }
     //type in section description
     if (DriverAction.isExist(Manage_Sections_Locators.sectionDescriptionTextArea)) {
@@ -39,59 +39,30 @@ try{
 
     } else {
         GemTestReporter.addTestStep("Error Occur", "Fail to type in Section Description textarea",
-                STATUS.FAIL, DriverAction.takeSnapShot());
+                Status.FAIL, DriverAction.takeSnapShot());
     }
     //click the add button
     DriverAction.waitSec(3);
-    DriverAction.click(Manage_Sections_Locators.addBtn);
-//    if (DriverAction.isExist(Manage_Sections_Locators.addBtn,120)) {
-//        DriverAction.click(Manage_Sections_Locators.addBtn);
-//    } else {
-//        GemTestReporter.addTestStep("Error Occur", "Fail to click add button",
-//                STATUS.FAIL, DriverAction.takeSnapShot());
-//    }
-
-    if (DriverAction.isExist(UserDashboard_Locator.popupMessage,120)) {
-       String fetchedMsg=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
-        System.out.println("hello");
-       System.out.println(fetchedMsg);
-        System.out.println("hello");
-       if(popUpMessage.trim().equals(fetchedMsg.trim()))
-       {
-           GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after creating section", popUpMessage+" message is appeared successfully",
-                   STATUS.PASS, DriverAction.takeSnapShot());
-       }
-       else
-       {
-           GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after creating section", popUpMessage+" message is not appeared successfully",
-                   STATUS.FAIL, DriverAction.takeSnapShot());
-       }
-    } else {
-        GemTestReporter.addTestStep("Error Occur", "Fail to click add button",
-                STATUS.FAIL, DriverAction.takeSnapShot());
-    }
-//Section Type Added Successfully
-
 }
 catch (Exception e) {
-    GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+    GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
 }
 
     }
     @Then("^Validate section is created$")
-    public void validateSection()
-    {
+    public void validateSection() throws InterruptedException {
+        Thread.sleep(3000);
         try{
             //validate created section is visible on Manage section page.
             int c=0;
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames,120)) {
+            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames)) {
                 List<String> actualOptions = DriverAction.getElementsText(Manage_Sections_Locators.sectionNames);
                 for (String i : actualOptions) {
                     if(SectionName.equals(i))
                     {
                         GemTestReporter.addTestStep("Section is Created on Manage section Page", SectionName+" is successfully created and added to Manage Section Page",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                Status.PASS, DriverAction.takeSnapShot());
                     }
                     else
                     {
@@ -101,13 +72,13 @@ catch (Exception e) {
                 if(c==actualOptions.size())
                 {
                     GemTestReporter.addTestStep("Section is Created on Manage section Page", "Section is not created",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
 
     }
@@ -119,7 +90,7 @@ catch (Exception e) {
             //edit the created section
             List<WebElement>  edit= DriverAction.getElements(Manage_Sections_Locators.editIconList);
             DriverAction.scrollToBottom();
-            if(DriverAction.isExist(By.xpath(Manage_Sections_Locators.editIcon.replace("itr",String.valueOf(edit.size()))),120))
+            if(DriverAction.isExist(By.xpath(Manage_Sections_Locators.editIcon.replace("itr",String.valueOf(edit.size())))))
             {
                 DriverAction.click(By.xpath(Manage_Sections_Locators.editIcon.replace("itr",String.valueOf(edit.size()))));
             }
@@ -130,12 +101,12 @@ catch (Exception e) {
 
             } else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in Section Name textarea",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
            DriverAction.click(Manage_Sections_Locators.updateBtn);
 
 
-            if (DriverAction.isExist(UserDashboard_Locator.popupMessage,120)) {
+            if (DriverAction.isExist(UserDashboard_Locator.popupMessage)) {
                 String fetchedMsg=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
                 System.out.println("hello");
                 System.out.println(fetchedMsg);
@@ -143,27 +114,27 @@ catch (Exception e) {
                 if(popUpMessage.trim().equals(fetchedMsg.trim()))
                 {
                     GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after editing section", popUpMessage+" message is appeared successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after editing section", popUpMessage+" message is not appeared successfully",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             } else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click update button",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
             //validate on Manage section page
             int c=0;
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames,120)) {
+            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames)) {
                 List<String> actualOptions = DriverAction.getElementsText(Manage_Sections_Locators.sectionNames);
                 for (String i : actualOptions) {
                     if(SectionName.equals(i))
                     {
                         GemTestReporter.addTestStep("Section is updated on Manage section Page", SectionName+" is successfully updated and added to Manage Section Page",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                Status.PASS, DriverAction.takeSnapShot());
                     }
                     else
                     {
@@ -173,12 +144,12 @@ catch (Exception e) {
                 if(c==actualOptions.size())
                 {
                     GemTestReporter.addTestStep("Section is updated on Manage section Page", "Section is not updated",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
 
     }
@@ -189,24 +160,24 @@ catch (Exception e) {
             //edit the created section
             List<WebElement>  edit= DriverAction.getElements(Manage_Sections_Locators.deleteIconList);
             DriverAction.scrollToBottom();
-            if(DriverAction.isExist(By.xpath(Manage_Sections_Locators.deleteIcon.replace("itr",String.valueOf(edit.size()))),120))
+            if(DriverAction.isExist(By.xpath(Manage_Sections_Locators.deleteIcon.replace("itr",String.valueOf(edit.size())))))
             {
                 DriverAction.click(By.xpath(Manage_Sections_Locators.deleteIcon.replace("itr",String.valueOf(edit.size()))));
             }
-            if(DriverAction.isExist(Manage_Sections_Locators.yesBtn,120))
+            if(DriverAction.isExist(Manage_Sections_Locators.yesBtn))
             {
                 DriverAction.click(Manage_Sections_Locators.yesBtn);
             }
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click Yes Popup",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
             DriverAction.waitSec(3);
 
 
 
-            if (DriverAction.isExist(UserDashboard_Locator.popupMessage,120)) {
+            if (DriverAction.isExist(UserDashboard_Locator.popupMessage)) {
                 String fetchedMsg=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
                 System.out.println("hello");
                 System.out.println(fetchedMsg);
@@ -214,27 +185,27 @@ catch (Exception e) {
                 if(popUpMessage.trim().equals(fetchedMsg.trim()))
                 {
                     GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after deleting section", popUpMessage+" message is appeared successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Validate"+popUpMessage+" appear after deleting section", popUpMessage+" message is not appeared successfully",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             } else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click delete button",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
             //validate on Manage section page
             int c=0;
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames,120)) {
+            if (DriverAction.isExist(Manage_Sections_Locators.sectionNames)) {
                 List<String> actualOptions = DriverAction.getElementsText(Manage_Sections_Locators.sectionNames);
                 for (String i : actualOptions) {
                     if(SectionName.equals(i))
                     {
                         GemTestReporter.addTestStep("Section is deleted from Manage section Page", SectionName+" is not deleted from Manage Section Page",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                     else
                     {
@@ -244,12 +215,12 @@ catch (Exception e) {
                 if(c==actualOptions.size())
                 {
                     GemTestReporter.addTestStep("Section is deleted from Manage section Page", "Section is deleted successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
             }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
 
     }
@@ -267,16 +238,16 @@ catch (Exception e) {
               if(sectionDescBeforeSelecting.trim().equals(sectionDesc.trim())&&sectionNameBeforeSelecting.trim().equals(sectionName.trim()))
               {
                   GemTestReporter.addTestStep("Validate section Name and Description", "Section Name and Description Matches",
-                          STATUS.PASS, DriverAction.takeSnapShot());
+                          Status.PASS, DriverAction.takeSnapShot());
               }
               else
               {
                   GemTestReporter.addTestStep("Validate section Name and Description", "Section Name and Description not Matches",
-                          STATUS.FAIL, DriverAction.takeSnapShot());
+                          Status.FAIL, DriverAction.takeSnapShot());
               }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
 
     }

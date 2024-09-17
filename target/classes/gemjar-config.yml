@@ -7,12 +7,11 @@ jewel_user: pallaviarora
 jewel_bridge_token: 9dbeea5c-65e3-4e2b-b115-91b731cbf3991722920219348
 enter_point: https://apis.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 report_name: Athena_Report
-email_report: Y
-email_to: pallavi.arora@geminisolutions.com
-email_cc: abhishek.gautam@geminisolutions.com
+email_report: N
 jewel_screen_shots: Y/N
 #tags: '@cucumber_tag'
-glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
+#glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
+glue_code: com.gemini.athenaUi.stepDefinitions
 #glue_code: com.gemini.athena.stepdefinitions
 #browser_name: chrome
 #launch_url: https://athena-dev.geminisolutions.com
@@ -20,9 +19,9 @@ glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
 
 prod:
   browser_name: chrome
-  launch_url: https://athena-dev.geminisolutions.com
-#  launch_url: http://localhost:4200/athena
-  browser_timeout: 100
+  launch_url: https://dev-athena.geminisolutions.com/
+#  launch_url: http://localhost:4200/
+  browser_timeout: 300
   authenticate_url : https://devapi.geminisolutions.com/gemassessment/authenticate
   getAllUsers : https://devapi.geminisolutions.com/gemassessment/api/users
   saveUser : https://devapi.geminisolutions.com/gemassessment/api/registerUser

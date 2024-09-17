@@ -471,7 +471,7 @@ Feature:API testing
       |Endpoint |Method |StatusCode|SampleName |
       |removeComprehensionQuestionAssoc  |put   |200       |removeComprehensionQuestionAssoc |
 
-  Scenario Outline: Update test status
+  Scenario Outline: Update test Status
     Given Set endpoint "<Endpoint>" and Method "<Method>"
     Then Verify Status code <StatusCode>
     Examples:

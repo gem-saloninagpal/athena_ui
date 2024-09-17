@@ -21,31 +21,31 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png |Logical |abc        |              |                 |
 
 
-#  @regression012 @2 @fail
-#  Scenario Outline: Complete Resumed course->Download certificate->Validate certificate downloaded
-#    When Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Complete the Course and Download the certificate
-#
-#    Examples:
-#      |option1|
-#      |Learner|
+  @regression012 @2 @fixed
+  Scenario Outline: Complete Resumed course->Download certificate->Validate certificate downloaded
+    When Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Complete the Course and Download the certificate
+
+    Examples:
+      |option1|
+      |Learner|
 
 
-#  @regression012 @3 @fail
-#  Scenario Outline: Validate Ongoing and Completed Course Count
-#    When Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Validate the count of Ongoing and Completed Course
-#    And Switch to Completed Tab and validate it functionality
-#    And Validate Course Summary
-#
-#    Examples:
-#      |option1|
-#      |Learner|
+  @regression012 @3 @fixed
+  Scenario Outline: Validate Ongoing and Completed Course Count
+    When Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Validate the count of Ongoing and Completed Course
+    And Switch to Completed Tab and validate it functionality
+    And Validate Course Summary
+
+    Examples:
+      |option1|
+      |Learner|
 
 
-    @4
+  @4
   Scenario Outline: Create Course-> switch to Course catalog->validate Enroll button functionality
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -61,22 +61,22 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |
 
 
-#@5 @fail
-#  Scenario Outline: Create Course->Switch to Course catalog->Validate course overview
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Click the button until it appear "Create Course"
-#    Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
-#    And Expand user dropdown from navbar
-#    Then Verify the options present in dropdown and select it "<option1>"
-#    And Switch to Course Catalog Screen
-#    Then Validate course overview
-#
-#    Examples:
-#      |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|
-#      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |
+  @5 @fixed
+  Scenario Outline: Create Course->Switch to Course catalog->Validate course overview
+    Given Select "<module>", "<submodule>" from sidebar
+    When Click the button until it appear "Create Course"
+    Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
+    And Expand user dropdown from navbar
+    Then Verify the options present in dropdown and select it "<option1>"
+    And Switch to Course Catalog Screen
+    Then Validate course overview
+
+    Examples:
+      |submodule|module|option1|courseType|duration|courseTag|fileLocation                                                                 |category|description|contentMessage|assignmentMessage|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|Logical |abc        |              |                 |
 
 
-@6
+  @6
   Scenario Outline: Create Course->Start Course->Validate Upload assignment file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -92,7 +92,7 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\athena.zip|
 
 
-    @7
+  @7
   Scenario Outline: Create Course->Start Course->Validate View Upload file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -109,7 +109,7 @@ Feature: Learner module features
       |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\athena.zip|
 
 
-      @8
+  @8
   Scenario Outline: Validate non existing course
     When Expand user dropdown from navbar
     And Verify the options present in dropdown and select it "<option1>"
@@ -128,4 +128,3 @@ Feature: Learner module features
     Examples:
       |option1|
       |Learner|
-

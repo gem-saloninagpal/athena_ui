@@ -8,12 +8,12 @@ Feature:Manage Sections Module features
   Scenario Outline: Switched to Manage Sections->Create Section->Validate section is created
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Section"
-    And Enter Section Name and Section Description in Create section fields "<popUpMessage>"
+    And Enter Section Name and Section Description in Create section fields
     Then Validate section is created
 
-    Examples:
-      | module        |submodule     |popUpMessage|
-      | Manage Sections|             |Section Type Added Successfully|
+  Examples:
+    | module        |submodule     |
+    | Manage Sections|             |
 
 
 #  @2 @toBeFixed

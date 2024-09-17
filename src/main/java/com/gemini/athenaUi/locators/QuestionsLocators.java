@@ -29,7 +29,7 @@ public class QuestionsLocators {
     public static By uploadBtn=By.xpath("//p-button[@ng-reflect-label=\"Upload\"]");
     public static By chooseBtn=By.xpath("//input[contains(@accept,'video')]");
     public static By video=By.xpath("//source[contains(@src,'questions')]//parent::video");
-    public static By expandVideo=By.xpath("(//athena-video-questions//button[contains(@class,'p-button-rounded')])[1]");
+    public static By expandVideo=By.xpath("(//button[@ng-reflect-icon='pi pi-chevron-right'])[1]");
     public static By videoQuestions= By.xpath("(//athena-video-questions//p-table//tbody[contains(@class,'datatable')])[2]//td[1]");
     public static By videoName=By.xpath("//athena-video-questions//tr[1]/td[3]");
 
@@ -43,7 +43,9 @@ public class QuestionsLocators {
     public static By passageActionsIcon2=By.xpath("((//tbody)[2]//tr//td[3]//button)[1]");
     public static By comprehensionDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[text()='Comprehension']");
     public static By rcPassage=By.xpath("//div[contains(@class,'p-dialog')]//athena-comprehension-info//p");
-    public static By videoActionsIcon=By.xpath("((//tbody[@class='p-datatable-tbody'])[3]//tr//td[5]//button)[1]");
+//    public static By videoActionsIcon=By.xpath("((//tbody[@class='p-datatable-tbody'])[3]//tr//td[5]//button)[1]");
+    public static By videoActionsIcon=By.xpath("//*[@id='pr_id_11-table']/tbody/tr[3]/td[3]/athena-action/p-button/button");
+
     public static By videoDialog=By.xpath("//div[contains(@class,'p-dialog-header')]//span[contains(text(),'Video Based')]");
 
     public static By videoNameDescriptionOnView=By.xpath("//p-dynamicdialog//h4[@class='test-info']");
@@ -51,7 +53,7 @@ public class QuestionsLocators {
     public static By videoSearchbox=By.xpath("//input[@type='search' and @placeholder='Video Name']");
     public static By passageSearchbox=By.xpath("//input[@placeholder='Passage Statement']");
     public static By deleteAssociatedQuestion=By.xpath("//i[@ptooltip=\"Remove Associated question\"]");
-    public static By deleteAssociatedVideoQuestions=By.xpath("//i[@ptooltip=\"Remove associated question\"]");
+    public static By deleteAssociatedVideoQuestions=By.xpath("//i[@ptooltip='Remove associated question']");
     public static By editComprehensionBasedQuestion=By.xpath("//i[@ptooltip='Edit']");
     public static By comprehensionQuestionTextarea=By.xpath("(//div[@data-gramm=\"false\"]/p)[2]");
     public static By uploadingIcon=By.xpath("//i[contains(@class,'pi pi-arrow')]");
@@ -67,4 +69,5 @@ public class QuestionsLocators {
     public static By expandLanguageDropdown=By.xpath("//p-multiselect[@formcontrolname=\"acceptedLanguages\"]");
     public static String codingLanguageOptions="//p-multiselectitem[@ng-reflect-label='input']";
     public static By plusIcon=By.xpath("//span[contains(@class,'plus')]//parent::button");
+    public static By deleteNew = By.xpath("//*[@id=\"p-tabpanel-1\"]/athena-comprehensions/p-table/div[2]/div/div[3]/label[2]");
 }

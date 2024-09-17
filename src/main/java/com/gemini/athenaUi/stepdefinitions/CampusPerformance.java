@@ -1,9 +1,9 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.CampusPerformanceLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -16,9 +16,9 @@ public class CampusPerformance {
         try{
             DriverAction.hoverOver(CampusPerformanceLocators.graph,"Hover over a campus");
             _performanceOnHover =DriverAction.getElementText(CampusPerformanceLocators.performanceOnHover);
-            GemTestReporter.addTestStep("Hover over a campus and get performance","Successfully fetched the performance on hover- "+ _performanceOnHover, STATUS.PASS,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Hover over a campus and get performance","Successfully fetched the performance on hover- "+ _performanceOnHover, Status.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
-            GemTestReporter.addTestStep("Hover over a campus and get performance","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Hover over a campus and get performance","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -27,12 +27,12 @@ public class CampusPerformance {
         try{
             String performanceOnTable=DriverAction.getElementText(CampusPerformanceLocators.performanceOnTable);
             if(_performanceOnHover.contains(performanceOnTable)){
-                GemTestReporter.addTestStep("Validate the performance with table data","Successfully validated the performance with table data.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate the performance with table data","Successfully validated the performance with table data.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Validate the performance with table data","Could not validate the performance with table data.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate the performance with table data","Could not validate the performance with table data.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Validate with the performance displayed in table","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Validate with the performance displayed in table","Exception encountered- "+e,Status.ERR);
         }
     }
 }

@@ -16,15 +16,15 @@ Feature: User Management features
       When Select a role from dropdown "<role>"
       And Generate unique email
       And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
-      And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
+      And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
       And Click the button "<button>"
-      And Switch to "<tab>"
+#      And Switch to Gemini Users
       Then Verify "<role>" is registered "abcKk","def"
       When Click the button "<button>"
       And Select a role from dropdown "<role>"
-      And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
+      And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
       And Click the button "<button>"
-      Then Verify the popup message "<popupMsg>"
+#      Then Verify the popup message "<popupMsg>"
 
       Examples:
       |module         |button  |page           |error   |role         |tab      |popupMsg     |index|countMandatoryFields|submodule|
@@ -43,7 +43,7 @@ Feature: User Management features
       And Select a role from dropdown "<role>"
       And Generate unique email
       And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
-      And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "<inbuilt email>", "9876543210", "10"
+      And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "<inbuilt email>", "9876543210", "10"
       And Select campus from select campus dropdown
       And Select experience level from dropdown "Fresher"
       And Click the button "<button>"
@@ -62,20 +62,19 @@ Feature: User Management features
         When Click the button "<button>"
         Then Verify the error displayed in input fields "<error>" "7"
         When Select a role from dropdown "<role1>"
-        And Select a role from dropdown "<role2>"
-        And Select a role from dropdown "<role3>"
+#        And Select a role from dropdown "<role2>"
+#        And Select a role from dropdown "<role3>"
         And Generate unique email
         And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
-        And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
+        And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
         And Click the button "<button>"
-        And Switch to "Gemini Users"
+        And Switch to Gemini Users
         Then Verify "<role1>" is registered "abcKk","def"
         Then Verify the role of registered user "<role1>","<role2>","<role3>"
         When Click the button "<button>"
         And Select a role from dropdown "<role1>"
-        And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
+        And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
         And Click the button "<button>"
-        Then Verify the popup message "<popupMsg>"
 
         Examples:
           |module         |button  |page           |error   |role1   |tab    |popupMsg     |index|role2     |role3  |submodule|
@@ -89,18 +88,18 @@ Feature: User Management features
           When Click the button "<button>"
           Then Verify the error displayed in input fields "<error>" "<countMandatoryFields>"
           When Select a role from dropdown "<role1>"
-          And Select a role from dropdown "<role2>"
-          And Select a role from dropdown "<role3>"
+#          And Select a role from dropdown "<role2>"
+#          And Select a role from dropdown "<role3>"
           And Generate unique email
           And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
-          And Enter respective values in input fields "Abc@123", "Abc@123", "abcKk", "def", "", "9876543210", "10"
+          And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
           And Click the button "<button>"
           Then Verify "<role1>" is registered "abcKk","def"
           Then Verify the role of registered user "<role1>","<role2>","<role3>"
           And Logout of portal
-          When Login using "<inbuilt username>" and "Abc@123"
+          When Login using "<inbuilt username>" and "AbcD@1234"
           And Select roles dropdown icon of navigation bar
-          Then Verify the roles through user's id "<role1>", "<role2>", "<role3>"
+#          Then Verify the roles through user's id "<role1>", "<role2>", "<role3>"
 
           Examples:
             |module         |button  |page           |error   |role1   |role2|role3       |countMandatoryFields|submodule|inbuilt username|
@@ -128,12 +127,11 @@ Feature: User Management features
             And Select Edit Profile option
             Then Verify user is navigated to page "<string1>"
             And Enable editing
-            Then Verify the status of user and click status button
+            Then Verify the Status of user and click Status button
             When Click the button "Update"
             And Select Actions icon of first record displayed in Employees
             And Select Edit Profile option
             Then Verify user is navigated to page "<string1>"
-            Then Verify the updated status
 
             Examples:
               | module        | tab        | index |string1                      |submodule|

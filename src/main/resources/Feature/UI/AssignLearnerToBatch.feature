@@ -2,7 +2,7 @@ Feature: Assign learner to batch
 
   Background:
     And Navigate to login page
-    And Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+    And Login using "pallavi.arora@geminisolutions.com" and "Pallavi1@"
 
   Scenario Outline: Validate count on assigning learner
     Given Select "<module>", "<submodule>" from sidebar
@@ -14,7 +14,7 @@ Feature: Assign learner to batch
 
     Examples:
     |module        |submodule|learner|message                                |
-    |Manage Courses|Batches  |saloni |Learner added successfully to the batch|
+    |Manage Courses|Batches  |pallavi |Learner added successfully to the batch|
 
   Scenario Outline: Validate count on unassigning learner
     Given Select "<module>", "<submodule>" from sidebar
@@ -26,7 +26,7 @@ Feature: Assign learner to batch
 
     Examples:
       |module        |submodule|learner|message                                    |
-      |Manage Courses|Batches  |saloni |Learner removed successfully from the batch|
+      |Manage Courses|Batches  |pallavi |Learner removed successfully from the batch|
 
   Scenario Outline: Validate assign selected
     Given Select "<module>", "<submodule>" from sidebar
@@ -60,16 +60,16 @@ Feature: Assign learner to batch
       |module        |submodule|message|
       |Manage Courses|Batches  |removed successfully|
 
-  Scenario Outline: Filter by status
+  Scenario Outline: Filter by Status
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
     And Expand the dropdown "Status"
     And Select "Assigned" from dropdown
-    Then Validate records get filtered on the basis of status "<status>"
+    Then Validate records get filtered on the basis of Status "<Status>"
 
     Examples:
-    |module        |submodule|status  |
+    |module        |submodule|Status  |
     |Manage Courses|Batches  |Assigned|
 
   Scenario Outline: Filter by category

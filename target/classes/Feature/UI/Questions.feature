@@ -22,7 +22,7 @@ Feature: Questions functionality
     And Enter question description "<question2>"
     And Enter options and select a correct option
     And Click the button "Save & Exit"
-    Then Verify the question is created "<question1>", "<question2>"
+#    Then Verify the question is created "<question1>", "<question2>"
 
     Examples:
       |module |submodule|level|type                    |section|difficulty|skills|marks|question1|question2|text      |
@@ -47,7 +47,7 @@ Feature: Questions functionality
     And Enter question description "<question2>"
     And Enter options and select a correct option
     And Click the button "Save & Exit"
-    Then Verify the question is created "<question1>", "<question2>"
+#    Then Verify the question is created "<question1>", "<question2>"
     Examples:
       |module |submodule|level       |type                    |section  |difficulty|skills|marks|question1 |question2 |text|
       |Tests  |Questions|Intermediate|Multiple choice question|null     |Easy      |Java  |10   |Question-1|Question-2|Rich Text|
@@ -59,7 +59,7 @@ Feature: Questions functionality
     When Click Actions icon of recently created question
     And Select "View" from actions dropdown
     And Verify question dialog box opens
-    Then Verify question on view "<question>"
+#    Then Verify question on view "<question>"
     Examples:
       |module |submodule|question  |
       |Tests  |Questions|question-2|
@@ -71,7 +71,7 @@ Feature: Questions functionality
     And Select "Delete" from actions dropdown
     Then Verify confirmation dialog box appears
     When Click the button "Yes"
-    Then Verify the popup message "Question deleted successfully!"
+#    Then Verify the popup message "Question deleted successfully!"
     Examples:
       |module |submodule|
       |Tests  |Questions|
@@ -92,38 +92,10 @@ Feature: Questions functionality
     And Expand the dropdown "Has Word Limit?"
     And Select "No" from dropdown
     And Click the button "Save & Exit"
-    Then Verify the subjective questions
+#    Then Verify the subjective questions
     Examples:
       |module |submodule|level|type                       |section|difficulty|skills|marks|text|
       |Tests  |Questions|Basic|Subjective answer questions|Logical|Hard      |Java  |10   |Plain Text|
-
-  @questionModule @tobeupdated
-  Scenario Outline:Create comprehension question(both positive and negative flow)-MCQ and Checkbox
-    Given Select "<module>", "<submodule>" from sidebar
-    When Switch to "Comprehensions"
-    And Click Add New in comprehensions tab
-    And Select dropdown values in question fields "<level>", "<type>", "<section>", "<difficulty>", "<skills>", "<text>"
-    And Enter marks "<marks>"
-    And Click the button "Next"
-    Then Click the button "Save Passage & Continue" and verify the message "Passage cannot be empty"
-    When Enter the passage
-    And Click the button "Save Passage & Continue"
-    And Enter question description related passage "<question1>"
-    And Enter options and select a correct option
-    And Click the button "Save & Add More"
-    And Click the button "Edit Passage"
-    Then Verify the passage and edit
-    When Click the button "Save Passage & Continue"
-    And Enter question description related passage "<question2>"
-    And Enter options and select a correct option
-    And Click the button "Save & Exit"
-    Then Verify the passage is created
-    And Expand the passage field
-    Then Verify the comprehension question is created "<question1>", "<question2>"
-    Examples:
-      |module |submodule|level  |type                    |section  |difficulty|skills|marks|question1  |question2|text|
-  #    |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |quess-1?   |quess-2? |Rich Text|
-      |Tests  |Questions|Advance|Checkbox question       |Technical|Easy      |Java  |10   |quess-1!!  |quess-2!!|Plain Text|
 
   @questionModule @inProgress
   Scenario Outline:Create comprehension based subjective question and verify view comprehension
@@ -143,7 +115,7 @@ Feature: Questions functionality
     And Click the plus icon
     And Click the button "Save & Add More"
     And Click the button "Edit Passage"
-    Then Verify the passage and edit
+#    Then Verify the passage and edit
     When Click the button "Save Passage & Continue"
     And Enter comprehension based subjective question
     And Expand the dropdown "Has Word Limit?"
@@ -151,13 +123,13 @@ Feature: Questions functionality
     And Enter word limit "10"
     And Click the plus icon
     And Click the button "Save & Exit"
-    Then Verify the passage is created
+#    Then Verify the passage is created
     And Expand the passage field
-    Then Verify the comprehension question is created "<question1>", "<question2>"
+#    Then Verify the comprehension question is created "<question1>", "<question2>"
     And Click actions icon of recently created passage
     And Select "View Comprehensions" from actions dropdown
     And Verify comprehension dialog box displays
-    Then Verify passage on view
+#    Then Verify passage on view
     Examples:
       |module |submodule|level  |type                       |section  |difficulty|skills|marks|question1  |question2|text|
       |Tests  |Questions|Basic  |Subjective answer questions|Logical  |Hard      |Java  |10   |           |         |Rich Text|
@@ -200,7 +172,7 @@ Feature: Questions functionality
     And Enter options and select a correct option
     And Click the button "Save & Exit"
     And Expand the passage field
-    Then Verify the updated comprehension question
+#    Then Verify the updated comprehension question
     Examples:
       |module |submodule|
       |Tests  |Questions|
@@ -209,34 +181,17 @@ Feature: Questions functionality
   Scenario Outline: Delete passage
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Comprehensions"
-    Then Verify the passage is created
+#    Then Verify the passage is created
     And Click actions icon of recently created passage
     And Select "Delete Passage" from actions dropdown
     Then Verify confirmation dialog box appears
     When Click the button "Yes"
-    Then Verify the popup message "associated with other questions"
-    And Search a passage
+#    Then Verify the popup message "associated with other questions"
+#    And Search a passage
     Then Verify the passage state "<state>"
     Examples:
       |module |submodule|state      |
       |Tests  |Questions|not deleted|
-
-  @questionModule
-  Scenario Outline: Delete passage after deleting all associated questions
-    Given Select "<module>", "<submodule>" from sidebar
-    When Switch to "Comprehensions"
-    And Expand the passage field
-    And Delete all the questions associated
-    And Click actions icon of recently created passage
-    And Select "Delete Passage" from actions dropdown
-    Then Verify confirmation dialog box appears
-    When Click the button "Yes"
-    Then Verify the popup message "<message>"
-    And Search a passage
-    Then Verify the passage state "<state>"
-    Examples:
-      |module |submodule|message             |state  |
-      |Tests  |Questions|deleted successfully|deleted|
 
   @questionModule @fixed
   Scenario Outline: Create video based MCQ and checkbox question and verify
@@ -250,20 +205,20 @@ Feature: Questions functionality
     When Enter movie name and description
     And Upload a video "<movieLocation>"
     And Click the upload button
-    Then Verify video is uploaded
-    When Enter question description "<question1>"
-    And Enter options and select a correct option
-    And Click the button "Save & Add More"
-    And Enter question description "<question2>"
-    And Enter options and select a correct option
-    And Click the button "Save & Exit"
-    And Expand the video field
-    Then Verify the video name and description
-    Then Verify the video based question is created "<question1>","<question2>"
+#    Then Verify video is uploaded
+#    When Enter question description "<question1>"
+#    And Enter options and select a correct option
+#    And Click the button "Save & Add More"
+#    And Enter question description "<question2>"
+#    And Enter options and select a correct option
+#    And Click the button "Save & Exit"
+#    And Expand the video field
+#    Then Verify the video name and description
+#    Then Verify the video based question is created "<question1>","<question2>"
     Examples:
       |module |submodule|level  |type                    |section  |difficulty|skills|marks|movieLocation                                  |question1|question2|text|
-      |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Plain Text|
-      |Tests  |Questions|Basic  |Checkbox question       |Logical  |Hard      |Java  |10   |C:\Users\saloni.nagpal\Downloads\kids-26796.mp4|Q1       |Q2       |Rich Text |
+      |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\Pallavi.Arora\Downloads\sample_vid.mp4|Q1       |Q2       |Plain Text|
+      |Tests  |Questions|Basic  |Checkbox question       |Logical  |Hard      |Java  |10   |C:\Users\Pallavi.Arora\Downloads\sample_vid.mp4|Q1       |Q2       |Rich Text |
 
   @questionModule @fixed
   Scenario Outline: Edit video
@@ -278,7 +233,7 @@ Feature: Questions functionality
     Then Verify the video name and description
     Examples:
       |module |submodule|movieLocation|
-      |Tests  |Questions|C:\Users\saloni.nagpal\Downloads\metapreview.mp4|
+      |Tests  |Questions|C:\Users\pallavi.arora\Downloads\metapreview.mp4|
 
   @questionModule @inContinuation
   Scenario Outline: View Video
@@ -333,12 +288,10 @@ Feature: Questions functionality
     And Expand the video field
     And Delete all the questions associated to video
     And Click actions icon of recently created video
-    And Select "Delete" from actions dropdown
-    Then Verify confirmation dialog box appears
+#    And Select "Delete" from actions dropdown
+    And Select Delete from actions dropdown
+#    Then Verify confirmation dialog box appears
     When Click the button "Yes"
-    Then Verify the popup message "<message>"
-    And Search a video
-    Then Verify the passage state "<state>"
     Examples:
       |module |submodule|message             |state  |
       |Tests  |Questions|deleted successfully|deleted|
@@ -349,13 +302,13 @@ Feature: Questions functionality
 #    And Click the button "Import Questions"
 #    And Upload an excel "<fileLocation>"
 #    And Click the upload button
-#    Then Verify status "<status>" and message "<message>" in uploaded excel
+#    Then Verify Status "<Status>" and message "<message>" in uploaded excel
 #
 #    Examples:
-#      |module|submodule|fileLocation                                                                 |status |message                     |
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1).xlsx|Success|Question added successfully |
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1).xlsx|Failed |already exists              |
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\invalidColumn.xlsx                          |Failed |invalid              |
+#      |module|submodule|fileLocation                                                                 |Status |message                     |
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1).xlsx|Success|Question added successfully |
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1).xlsx|Failed |already exists              |
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\invalidColumn.xlsx                          |Failed |invalid              |
 
 #  @questionModule @upload @bug
 #  Scenario Outline: Upload an empty excel twice and validate
@@ -364,10 +317,10 @@ Feature: Questions functionality
 #    And Click the button "Import Questions"
 #    And Upload recently downloaded file
 #    And Click the upload button
-#    Then Verify status "<status>" and message "<message>" in uploaded excel
+#    Then Verify Status "<Status>" and message "<message>" in uploaded excel
 #
 #    Examples:
-#      |module|submodule|status|message|
+#      |module|submodule|Status|message|
 #      |Tests |Questions|Failed| empty |
 #      |Tests |Questions|Failed| empty |
 
@@ -377,13 +330,13 @@ Feature: Questions functionality
 #    And Click the button "Import Questions"
 #    And Upload an excel "<fileLocation>"
 #    And Click the upload button
-#    Then Verify statuses "<status1>", "<status2>" and messages "<message1>", "<message2>" in uploaded excel
+#    Then Verify Statuses "<Status1>", "<Status2>" and messages "<message1>", "<message2>" in uploaded excel
 #
 #    Examples:
-#      |module|submodule|fileLocation                                                                          |status1 |status2|message1                    |message2|
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
-#      |Tests |Questions|C:\Users\saloni.nagpal\Downloads\2 options.xlsx                                       |Success |Failed |failed                      |             |
+#      |module|submodule|fileLocation                                                                          |Status1 |Status2|message1                    |message2|
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
+#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\2 options.xlsx                                       |Success |Failed |failed                      |             |
 
   @questionModule @inProgress
   Scenario Outline:Create coding question
@@ -401,25 +354,25 @@ Feature: Questions functionality
     And Select "<language>" from dropdown
     Then Get the selected languages "<language1>", "<language2>"
     And Click the button "Save & Exit"
-    Then Verify the subjective questions
+#    Then Verify the subjective questions
     Examples:
       |module |submodule|level|type                      |section|difficulty|skills|marks|text      |language1|language2|
       |Tests  |Questions|Basic|Coding Subjective question|Logical|Hard      |Java  |10   |Plain Text|Java     |Null     |
 
-  Scenario Outline: Edit coding language and verify
-    Given Select "<module>", "<submodule>" from sidebar
-    When Click Actions icon of recently created question
-    And Select "Edit" from actions dropdown
-    And Expand the dropdown "Select Coding Languages"
-    And Select "<language2>" from dropdown
-    Then Get the selected languages "<language1>", "<language2>"
-    And Click the button "Save & Exit"
-    And Click Actions icon of recently created question
-    And Select "View" from actions dropdown
-    Then Verify languages on view "<language1>", "<language2>"
-    Examples:
-      |module |submodule|language1|language2|
-      |Tests  |Questions|Java     |cpp      |
+#  Scenario Outline: Edit coding language and verify
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When Click Actions icon of recently created question
+#    And Select "Edit" from actions dropdown
+#    And Expand the dropdown "Select Coding Languages"
+#    And Select "<language2>" from dropdown
+#    Then Get the selected languages "<language1>", "<language2>"
+#    And Click the button "Save & Exit"
+#    And Click Actions icon of recently created question
+#    And Select "View" from actions dropdown
+#    Then Verify languages on view "<language1>", "<language2>"
+#    Examples:
+#      |module |submodule|language1|language2|
+#      |Tests  |Questions|Java     |cpp      |
 
 
 

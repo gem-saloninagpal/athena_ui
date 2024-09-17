@@ -55,7 +55,7 @@ public class MyLocators {
     public static By rolesField=By.xpath("//p-multiselect[@formcontrolname='roleDetails']//input");
     public static By rolesField1=By.xpath("//p-multiselect[@formcontrolname='roleDetails']");
     public static By userStatus=By.xpath("//p-togglebutton//span[@class='p-button-label']");
-    public static By statusButton=By.xpath("//p-togglebutton");
+    public static By StatusButton=By.xpath("//p-togglebutton");
     public static By employeeActionsIcon=By.xpath("(//div[@class='p-tabview-panels']//button)[1]");
     public static By yesBtn=By.xpath("//span[contains(text(),'Yes')]//parent::button");
     public static By currentRole=By.xpath("//div[contains(@class,'multiselect-label')]//div");
@@ -135,7 +135,7 @@ public class MyLocators {
     public static By contentTagDisplayed=By.xpath("//tbody//tr//td[2]");
     public static By contentDurationDisplayed=By.xpath("//tbody//tr//td[3]");
     public static By switchStatus=By.xpath("//p-inputswitch[@ng-reflect-text='Active']");
-    public static By statusDropdown=By.xpath("//p-dropdown[@placeholder='Status']");
+    public static By StatusDropdown=By.xpath("//p-dropdown[@placeholder='Status']");
     public static By inactiveStatusBar= By.xpath("//tbody//tr//p-inputswitch");
     public static By getTestName=By.xpath("//div[@class='card hover-effect']//h6//div");
     public static By loginVia=By.xpath("//p-dropdown[@placeholder='Select Option']");
@@ -172,6 +172,7 @@ public class MyLocators {
     public static By backToDashboardBtn = By.xpath("//*[@label='Back To Dashboard']");
     public static By viewReportBtn = By.xpath("(//button[@label='View Report'])[2]");
     public static By addNewAssignment = By.xpath("//button[@label='Add New']");
+    public static By geminiUsers = By.xpath("(//a)[1]");
 
     public static String selectTab(int i) {
 

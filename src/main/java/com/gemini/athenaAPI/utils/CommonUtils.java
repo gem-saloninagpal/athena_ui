@@ -1,13 +1,15 @@
 package com.gemini.athenaAPI.utils;
 
 import com.gemini.athenaAPI.stepDefinition.APIStepDefinition;
-import com.gemini.generic.api.utils.ApiInvocation;
-import com.gemini.generic.api.utils.ProjectSampleJson;
-import com.gemini.generic.api.utils.Request;
-import com.gemini.generic.api.utils.Response;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.utils.ProjectConfigData;
+import com.gemini.gemjar.utils.api.ApiInvocation;
+import com.gemini.gemjar.utils.api.ProjectSampleJson;
+import com.gemini.gemjar.utils.api.Request;
+import com.gemini.gemjar.utils.api.Response;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.app.ProjectConfigData;
+import com.gemini.gemjar.utils.api.Request;
+import com.gemini.gemjar.utils.api.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -28,7 +30,7 @@ public class CommonUtils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            GemTestReporter.addTestStep("Url of the test case", url, STATUS.INFO);
+            GemTestReporter.addTestStep("Url of the test case", url, Status.INFO);
             request.setURL(url);
             request.setHeader("Authorization", "Bearer " + tokenForAuth);
             request.setMethod(method);
@@ -41,16 +43,16 @@ public class CommonUtils {
             }
             response = ApiInvocation.handleRequest(request);
 //            token =response.getJsonObject().get("jwttoken").toString();
-            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), Status.INFO);
             if ((response.getResponseBody()) != null) {
-                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
+                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), Status.INFO);
             } else {
-                GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
+                GemTestReporter.addTestStep("Response Body", "No-Response", Status.INFO);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
-            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", Status.FAIL);
+            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), Status.INFO);
         }
         return response;
     }
@@ -60,7 +62,7 @@ public class CommonUtils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            GemTestReporter.addTestStep("Url of the test case", url, STATUS.INFO);
+            GemTestReporter.addTestStep("Url of the test case", url, Status.INFO);
             request.setURL(url);
             request.setHeader("Authorization", "Bearer " + tokenForAuth);
             request.setMethod(method);
@@ -80,16 +82,16 @@ public class CommonUtils {
             }
 //            response = ApiInvocation.handleRequest(request);
 //            token =response.getJsonObject().get("jwttoken").toString();
-            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), Status.INFO);
             if ((response.getResponseBody()) != null) {
-                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
+                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), Status.INFO);
             } else {
-                GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
+                GemTestReporter.addTestStep("Response Body", "No-Response", Status.INFO);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
-            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", Status.FAIL);
+            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), Status.INFO);
         }
         return response;
     }
@@ -99,7 +101,7 @@ public class CommonUtils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            GemTestReporter.addTestStep("Url of the test case", url, STATUS.INFO);
+            GemTestReporter.addTestStep("Url of the test case", url, Status.INFO);
             request.setURL(url);
             request.setMethod(method);
             if (step != null) {
@@ -117,10 +119,10 @@ public class CommonUtils {
         return response;
     }
 
-    public static void statusValidation(int actual, int expected) {
-        STATUS status = actual == expected ? STATUS.PASS : STATUS.FAIL;
+    public static void StatusValidation(int actual, int expected) {
+        Status Status = actual == expected ? com.gemini.gemjar.enums.Status.PASS : com.gemini.gemjar.enums.Status.FAIL;
         GemTestReporter.addTestStep("Status Validation", "Expected: " + expected
-                + " Actual: " + actual, status);
+                + " Actual: " + actual, Status);
     }
 
     public static Map<String, Object> jsonElementToMap(JsonElement jsonElement) {

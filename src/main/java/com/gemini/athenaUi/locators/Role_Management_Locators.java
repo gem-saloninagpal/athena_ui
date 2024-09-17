@@ -6,9 +6,19 @@ public class Role_Management_Locators {
 
     public static By createRoleBtn=By.xpath("//button//span[text()='Create Role']");
 
-    public static String roleFields="(//input)[itr]";
+//    public static String roleFields="(//input)[itr]";
+
+    public static By roleName = By.xpath("//input[@id='roleName']");
+
+    public static By roleDesc = By.xpath("//input[@id='roleDescription']");
+
+    public static By roleDisplay = By.xpath("//input[@id='roleDisplayName']");
+    public static By permissionExpand = By.xpath("(//div[@role='tablist'])[2]");
+    public static By permissionCheckbox = By.xpath("//input[@value='7']");
+    public static By submit = By.xpath("//button[@label='Submit']");
 
     public static By submitBtn=By.xpath("//button//span[text()='Submit']");
+    public static By createRole = By.xpath("//button[@label='Create Role']");
 
     public static String permissionsCheckbox="//div[text()='permissions']/following-sibling::input";
 
@@ -48,9 +58,9 @@ public class Role_Management_Locators {
     //div[@aria-labelledby='p-accordiontab-itr']//div[@class='pl-4 ml-4']//div
 
 
-    public static By status=By.xpath("(//table[@role='grid']//td)[6]//p-inputswitch");
+    public static By Status=By.xpath("(//table[@role='grid']//td)[6]//p-inputswitch");
 
-    public static By statusInternal=By.xpath("((//table[@role='grid'])[2]//td)[5]//p-inputswitch");
+    public static By StatusInternal=By.xpath("((//table[@role='grid'])[2]//td)[5]//p-inputswitch");
 
 
 

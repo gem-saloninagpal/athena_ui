@@ -13,7 +13,7 @@ public class AssignLearnerInBatchLocators {
     public static By nextPage=By.xpath("//span[contains(@class,'angle-right')]//parent::button");
     public static By selectAssignedCheckbox=By.xpath("(//td[@ng-reflect-text=\"Assigned\"]//parent::tr//p-tablecheckbox)[1]");
     public static By rows=By.xpath("//tbody[@class=\"p-datatable-tbody\"]/tr/td[6]");
-    public static By status=By.xpath("//span[text()='Status']//parent::td//span[2]");
+    public static By Status=By.xpath("//span[text()='Status']//parent::td//span[2]");
     public static By expandSelectedCategory=By.xpath("//p-dropdown[contains(@class,'selected-category')]");
     public static By assignSelected=By.xpath("//button[@ng-reflect-label='Assign Selected']");
     public static By unassignSelected=By.xpath("//button[@ng-reflect-label=\"Unassign Selected\"]");

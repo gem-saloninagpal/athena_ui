@@ -1,9 +1,9 @@
 //package com.gemini.athenaUi.stepdefinitions;
 //
 //import com.gemini.athenaUi.locators.*;
-//import com.gemini.generic.reporting.GemTestReporter;
-//import com.gemini.generic.reporting.STATUS;
-//import com.gemini.generic.ui.utils.DriverAction;
+//import com.gemini.gemjar.reporting.GemTestReporter;
+//import com.gemini.gemjar.enums.Status;
+//import com.gemini.gemjar.utils.ui.DriverAction;
 //import io.cucumber.java.en.And;
 //import io.cucumber.java.en.Then;
 //import io.cucumber.java.en.When;
@@ -48,7 +48,7 @@
 //
 //            }
 //        } catch (Exception e) {
-//            GemTestReporter.addTestStep("Enter respective values in content input fields", "Exception encountered- " + e, STATUS.ERR);
+//            GemTestReporter.addTestStep("Enter respective values in content input fields", "Exception encountered- " + e, Status.ERR);
 //        }
 //    }
 //
@@ -59,7 +59,7 @@
 //            DriverAction.typeText(MyLocators.textarea,description);
 //        }catch(Exception e){
 //
-//            GemTestReporter.addTestStep("Enter description","Exception encountered- "+e,STATUS.ERR);
+//            GemTestReporter.addTestStep("Enter description","Exception encountered- "+e,Status.ERR);
 //        }
 //    }
 //
@@ -77,12 +77,12 @@
 //                }
 //            }
 //            if (c == contentData.length) {
-//                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", STATUS.PASS, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", Status.PASS, DriverAction.takeSnapShot());
 //            } else {
-//                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", STATUS.FAIL, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", Status.FAIL, DriverAction.takeSnapShot());
 //            }
 //        }catch(Exception e){
-//            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,STATUS.ERR);
+//            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,Status.ERR);
 //        }
 //
 //
@@ -96,7 +96,7 @@
 //            DriverAction.typeText(MyLocators.assignmentDescription,description);
 //        }catch(Exception e){
 //
-//            GemTestReporter.addTestStep("Enter assignment description","Exception encountered- "+e,STATUS.ERR);
+//            GemTestReporter.addTestStep("Enter assignment description","Exception encountered- "+e,Status.ERR);
 //        }
 //    }
 //
@@ -132,7 +132,7 @@
 //
 //            }
 //        } catch (Exception e) {
-//            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, STATUS.ERR);
+//            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, Status.ERR);
 //        }
 //
 //
@@ -151,12 +151,12 @@
 //                }
 //            }
 //            if (c == contentData.length) {
-//                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", STATUS.PASS, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", Status.PASS, DriverAction.takeSnapShot());
 //            } else {
-//                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", STATUS.FAIL, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", Status.FAIL, DriverAction.takeSnapShot());
 //            }
 //        }catch(Exception e){
-//            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,STATUS.ERR);
+//            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,Status.ERR);
 //        }
 //    }
 //
@@ -178,12 +178,12 @@
 //                }
 //            }
 //            if (c == contentData.length) {
-//                GemTestReporter.addTestStep("Verify content is updated successfully", "Verified the successful update of content.", STATUS.PASS, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is updated successfully", "Verified the successful update of content.", Status.PASS, DriverAction.takeSnapShot());
 //            } else {
-//                GemTestReporter.addTestStep("Verify content is updated successfully", "Could not verify the successful update of content.", STATUS.FAIL, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify content is updated successfully", "Could not verify the successful update of content.", Status.FAIL, DriverAction.takeSnapShot());
 //            }
 //        }catch(Exception e){
-//            GemTestReporter.addTestStep("Verify content is updated successfully","Exception encountered- "+e,STATUS.ERR);
+//            GemTestReporter.addTestStep("Verify content is updated successfully","Exception encountered- "+e,Status.ERR);
 //        }
 //
 //

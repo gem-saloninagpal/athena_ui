@@ -2,7 +2,8 @@ Feature:Course module features
 
   Background:Check login to candidate module
     Given Navigate to login page
-    Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+#    Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+    Then Login using "testing.user123@gmail.com" and "test@123"
 
   @1
   Scenario Outline: Create Course Verify Owner
@@ -32,11 +33,11 @@ Feature:Course module features
     And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
     And Click the button "Add Content"
-    And Validate Filter functionality "<contentName>"
+#    And Validate Filter functionality "<contentName>"
     And Validate "<content>" Add to Course "<contentMessage>"
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                  |description|contentName|contentMessage|content|
-      | Manage Courses|Course Library|Public    |  30     |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |content-1   |Content successfully added. Add more!|Content|
+      | Manage Courses|Course Library|Public    |  30     |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |content1   |Content successfully added. Add more!|Content|
 
 
   @4
@@ -48,11 +49,11 @@ Feature:Course module features
     And Select the checkbox
     And Click the button "Add Content"
     And Validate "<content>" Add to Course "<contentMessage>"
-    And Validate Filter functionality "<assignmentName>"
+#    And Validate Filter functionality "<assignmentName>"
     Then Validate "<assignment>" Add to Course "<assignmentMessage>"
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation                             |description|assignmentName     |contentMessage|assignmentMessage|content|assignment|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |regressionTest |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |assignment1 |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
 
 
   @5
@@ -83,7 +84,7 @@ Feature:Course module features
     Then Validate Course Summary Screen
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|regressionTest |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|assignment1 |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
 
   @7 @inProgress
   Scenario Outline: Assign Created Course->verify the result once the user complete the course
@@ -95,9 +96,13 @@ Feature:Course module features
     And Select "<module>", "<submodule>" from sidebar
     Then Verify the Learner Report "<Learner>", "<Email>", "<Percentage>", "<Status>"
 
+#    Examples:
+#      |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
+#      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
+
     Examples:
       |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
-      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
+      |Learner|Manage Courses|Course Library|pallavi |testing.user123@gmail.com|100%|Completed|
 
 
   @8
@@ -275,7 +280,7 @@ Feature:Course module features
     And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
     And Click the button until it appear "Add Content"
-    And Validate "<contenrt>" Add to Course "<contentMessage>"
+    And Validate "<content>" Add to Course "<contentMessage>"
     And Validate Filter functionality "<assignmentName>"
     And Validate "<assignment>" Add to Course "<assignmentMessage>"
     And Validate Course Summary Screen

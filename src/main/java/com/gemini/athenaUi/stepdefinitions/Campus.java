@@ -2,9 +2,9 @@ package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.CampusLocators;
 import com.gemini.athenaUi.locators.MyLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebElement;
@@ -30,22 +30,22 @@ public class Campus {
             for (int i = 0; i < campusFields.size(); i++) {
                 campusFields.get(i).clear();
                 campusFields.get(i).sendKeys(campusValues[i]);
-                GemTestReporter.addTestStep("Enter " + campusValues[i] + "in " + campusFields.get(i), "Successfully entered the value.", STATUS.PASS);
+                GemTestReporter.addTestStep("Enter " + campusValues[i] + "in " + campusFields.get(i), "Successfully entered the value.", Status.PASS);
             }
 
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in input fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter respective values in input fields", "Exception encountered- " + e, Status.ERR);
         }
     }
 
     @And("^Search a campus$")
     public void searchCampus() {
         try {
-            Thread.sleep(3000);
-            DriverAction.isExist(MyLocators.searchbox,7);
+            Thread.sleep(5000);
+//            DriverAction.isExist(MyLocators.searchbox,7);
             DriverAction.typeText(MyLocators.searchbox, _name);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Search a campus", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -53,9 +53,9 @@ public class Campus {
     public void selectActionsOfCampus() {
         try {
             DriverAction.click(CampusLocators.actionsIcon);
-            GemTestReporter.addTestStep("Select action icon of campus", "Successfully selected the actions icon of campus", STATUS.PASS);
+            GemTestReporter.addTestStep("Select action icon of campus", "Successfully selected the actions icon of campus", Status.PASS);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Select actions icon of campus", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Select actions icon of campus", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -64,12 +64,12 @@ public class Campus {
         try {
             String campus = DriverAction.getElementText(CampusLocators.registeredCampus);
             if (campus.contains(_name)) {
-                GemTestReporter.addTestStep("Verify campus is registered", "Successfully registered the campus", STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify campus is registered", "Successfully registered the campus", Status.PASS,DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify campus is registered", "Could not verify the registered campus", STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify campus is registered", "Could not verify the registered campus", Status.FAIL,DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify campus is registered", "Exception encountered- " + e, STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify campus is registered", "Exception encountered- " + e, Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -90,12 +90,12 @@ public class Campus {
             }
             //verifies if the count matches
             if (c == row.size() - 1) {
-                GemTestReporter.addTestStep("Verify campus is updated", "Successfully verified the campus is updated.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify campus is updated", "Successfully verified the campus is updated.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify campus is updated", "Could not verify the campus is updated.", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify campus is updated", "Could not verify the campus is updated.", Status.FAIL);
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify campus is updated","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify campus is updated","Exception encountered- "+e,Status.ERR);
         }
     }
 }

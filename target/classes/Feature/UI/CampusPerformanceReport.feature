@@ -8,7 +8,7 @@ Feature: Campus performance report
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Campus-Performance"
     And Hover over a campus and get performance
-    Then Validate with the performance displayed in table
+    Then Validate wi1th the performance displayed in table
     Examples:
     |module|submodule          |
     |Reports|                  |

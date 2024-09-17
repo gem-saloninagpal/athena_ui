@@ -145,7 +145,7 @@ public class Course_Locators {
 
     //div//button[text()=' Back ']
 
-    public static By statusDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[4]");
+    public static By StatusDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[4]");
     public static By categoryDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[2]");
 
     public static By selectedCategoryDropdown=By.xpath("(//span[contains(@class,'pi pi-chevron-down')])[3]");

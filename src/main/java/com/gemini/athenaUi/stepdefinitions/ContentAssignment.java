@@ -1,9 +1,9 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.MyLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -57,7 +57,7 @@ public class ContentAssignment {
 
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in content input fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter respective values in content input fields", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -68,7 +68,7 @@ public class ContentAssignment {
             DriverAction.typeText(MyLocators.textarea,description);
         }catch(Exception e){
 
-            GemTestReporter.addTestStep("Enter description","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Enter description","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -93,12 +93,12 @@ public class ContentAssignment {
                 DriverAction.waitSec(1);
             }
             if (c == contentData.length) {
-                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content is created successfully", "Verified the successful creation of content.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content is created successfully", "Could not verify the successful creation of content.", Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify content is created successfully","Exception encountered- "+e,Status.ERR);
         }
 
 
@@ -112,7 +112,7 @@ public class ContentAssignment {
             DriverAction.typeText(MyLocators.assignmentDescription,description);
         }catch(Exception e){
 
-            GemTestReporter.addTestStep("Enter assignment description","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Enter assignment description","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -155,7 +155,7 @@ public class ContentAssignment {
 
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Enter respective values in assignment input fields", "Exception encountered- " + e, Status.ERR,DriverAction.takeSnapShot());
         }
 
 
@@ -179,12 +179,12 @@ public class ContentAssignment {
                 DriverAction.waitSec(1);
             }
             if (c == contentData.length) {
-                GemTestReporter.addTestStep("Verify assignment is created successfully", "Verified the successful creation of assignment.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify assignment is created successfully", "Verified the successful creation of assignment.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify assignment is created successfully", "Could not verify the successful creation of assignment.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify assignment is created successfully", "Could not verify the successful creation of assignment.", Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify assignment is created successfully","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify assignment is created successfully","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -194,7 +194,7 @@ public class ContentAssignment {
             Thread.sleep(5000);
             DriverAction.click(MyLocators.contentActionsIcon,"Click Actions icon of recently created content/assignment","Successfully clicked actions icon of recently created content/assignment.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click Actions icon of recently created content/assignment","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click Actions icon of recently created content/assignment","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -215,7 +215,7 @@ public class ContentAssignment {
             //enter marks
             DriverAction.typeText(MyLocators.assignmentMarks, marks,"Update marks in assignment","Successfully updated assignment marks.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Update values in assignment fields","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Update values in assignment fields","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -228,12 +228,12 @@ public class ContentAssignment {
             String tagDisplayed = DriverAction.getElementText(MyLocators.assignmentTagDisplayed);
             String marksDisplayed = DriverAction.getElementText(MyLocators.assignmentMarksDisplayed);
             if (tagDisplayed.contains(tag) && marksDisplayed.equals(marks)) {
-                GemTestReporter.addTestStep("Verify assignment is updated", "Successfully verified the assignment is updated", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify assignment is updated", "Successfully verified the assignment is updated", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify assignment is updated", "Could not verify the updated assignment", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify assignment is updated", "Could not verify the updated assignment", Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify assignment is updated","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify assignment is updated","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -246,7 +246,7 @@ public class ContentAssignment {
             DriverAction.click(By.xpath(MyLocators.option.replace("input", tags)));
             DriverAction.typeText(MyLocators.contentDuration, duration);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Update values in content fields","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Update values in content fields","Exception encountered- "+e,Status.ERR);
         }
 
     }
@@ -258,30 +258,30 @@ public class ContentAssignment {
             String tagDisplayed = DriverAction.getElementText(MyLocators.contentTagDisplayed);
             String durationDisplayed = DriverAction.getElementText(MyLocators.contentDurationDisplayed);
             if (tagDisplayed.contains(tag) && durationDisplayed.equals(duration)) {
-                GemTestReporter.addTestStep("Verify content is updated", "Successfully verified the content is updated", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content is updated", "Successfully verified the content is updated", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify content is updated", "Could not verify the updated content", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content is updated", "Could not verify the updated content", Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify content is updated","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify content is updated","Exception encountered- "+e,Status.ERR);
         }
     }
 
-    @When("^Deactivate content/assignment status$")
+    @When("^Deactivate content/assignment Status$")
     public void deactivateStatus() {
         try{
             DriverAction.click(MyLocators.switchStatus);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Deactivate content status","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Deactivate content Status","Exception encountered- "+e,Status.ERR);
         }
     }
 
-    @And("^Expand the dropdown containing status$")
+    @And("^Expand the dropdown containing Status$")
     public void expandStatus() {
         try{
-            DriverAction.click(MyLocators.statusDropdown);
+            DriverAction.click(MyLocators.StatusDropdown);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Expand dropdown containing sections","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Expand dropdown containing sections","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -290,14 +290,14 @@ public class ContentAssignment {
         try{
             Thread.sleep(4000);
             String value=DriverAction.getAttributeName(MyLocators.inactiveStatusBar,"ng-reflect-model");
-            //if status bar's attribute is false that means content/assignment is deactivated
+            //if Status bar's attribute is false that means content/assignment is deactivated
             if(value.equals("false")){
-                GemTestReporter.addTestStep("Verify deactivated content","Successfully verified deactivated content.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify deactivated content","Successfully verified deactivated content.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify deactivated content","Could not verify deactivated content.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify deactivated content","Could not verify deactivated content.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify deactivated content","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify deactivated content","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -307,7 +307,7 @@ public class ContentAssignment {
         try {
             DriverAction.click(MyLocators.addNewAssignment);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Button not found", "Exception encountered : " + e,STATUS.ERR);
+            GemTestReporter.addTestStep("Button not found", "Exception encountered : " + e,Status.ERR);
         }
     }
 }

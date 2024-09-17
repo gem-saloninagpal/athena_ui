@@ -2,7 +2,7 @@ Feature:UserDashboard Module features
 
   Background:Check login to candidate module
     Given Navigate to login page
-    And Login using "saloni.nagpal@geminisolutions.com" and "abc@123"
+    And Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
 
     @1
   Scenario Outline: Create Course->Assigned Learner->Validate Assigned Learner in UserDashboard
@@ -20,7 +20,7 @@ Feature:UserDashboard Module features
     Then Validate Assigned on UserDash Board
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
       @2
@@ -40,7 +40,7 @@ Feature:UserDashboard Module features
     Then Validate Unassigned on UserDash Board
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
         @3
@@ -63,7 +63,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
 @4
@@ -87,7 +87,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
   @5
@@ -108,7 +108,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
 
@@ -132,7 +132,7 @@ Feature:UserDashboard Module features
 
     Examples:
       | module        |submodule     |courseType|duration|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|module1|submodule1|content|assignment|
-      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\saloni.nagpal\Pictures\Athena-1.PNG |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
+      | Manage Courses|Course Library|Public    |  30  | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|new assignment-01 |Content successfully added. Add more!|Assignment successfully added. Add more!|User Dashboard||Content|Assignment|
 
 
     @7

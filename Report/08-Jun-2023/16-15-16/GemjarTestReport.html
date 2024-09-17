@@ -187,7 +187,7 @@
     color: white;
   }
 
-  .statusColorPass {
+  .StatusColorPass {
     background-color: #2cae21 !important;
     color: white !important;
     padding: 5%;
@@ -195,7 +195,7 @@
     text-align: center;
   }
 
-  .statusColorInfo {
+  .StatusColorInfo {
     background-color: #f3bb2a !important;
     color: white !important;
     padding: 5%;
@@ -203,7 +203,7 @@
     text-align: center;
   }
 
-  .statusColorFail {
+  .StatusColorFail {
     background-color: #ea3e3e !important;
     color: white !important;
     padding: 5%;
@@ -211,7 +211,7 @@
     text-align: center;
   }
 
-  .statusColorWarn {
+  .StatusColorWarn {
     background-color: #ff6c37 !important;
     color: white !important;
     padding: 5%;
@@ -219,7 +219,7 @@
     text-align: center;
   }
 
-  .statusColorIncomplete {
+  .StatusColorIncomplete {
     background-color: #f25c5c !important;
     color: white !important;
     padding: 5%;
@@ -227,7 +227,7 @@
     text-align: center;
   }
 
-  .statusColorOthers {
+  .StatusColorOthers {
     background-color: #9e9e9e !important;
     color: white !important;
     padding: 5%;
@@ -638,7 +638,7 @@ height: 100%;
                                    style="width: 270px" />
                         </div>
                         <div class="col-sm-2 col-md-2 col-lg-2">
-                            <select class="custom-select search-key" style="width: 270px" id="status"></select>
+                            <select class="custom-select search-key" style="width: 270px" id="Status"></select>
                         </div>
                     </div>
                     <div class="mx-4 mt-3">
@@ -673,7 +673,7 @@ height: 100%;
     1: "rgba(91, 170, 147)",
     2: "rgba(143, 210, 190)",
   };
-  var obj = {"report_product":"GEMJAR","suits_details":{"os":"Windows 10","s_run_id":"null_DEV_01cf6d2d-61df-43dc-99fc-d65ff0b94744","s_start_time":1686221116000,"s_end_time":1686221168000,"status":"FAIL","user":"Saloni.Nagpal","env":"dev","machine":"GEMGN-210334","report_name":"GemjarTestReport","testcase_details":[{"base_user":"Saloni.Nagpal","invoke_user":"Saloni.Nagpal","tc_run_id":"Navigation between the sections_5cb15985-bb35-470e-9305-b76fc750b267_1686221116000","start_time":1.686221116E12,"end_time":1.686221168E12,"run_type":"ON DEMAND","run_mode":"Windows 10","name":"Navigation between the sections","category":"CandidateModule","status":"FAIL","machine":"GEMGN-210334","ignore":false,"Reason of failure":"[java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0 Exception occured while verifying the options present in dropdown.]"}],"testcase_info":{"FAIL":1,"PASS":0,"TOTAL":1},"framework_name":"GEMJAR"},"teststep_details":{"Navigation between the sections_5cb15985-bb35-470e-9305-b76fc750b267_1686221116000":{"steps":[{"step name":"Maximize Browser","step description":"Browser Maximize Successful ","status":"PASS","ScreenShot":"SS/SS_null_1686221119495.png"},{"step name":"Launch Url","step description":"Url ~https://athena-dev.geminisolutions.com","status":"PASS","ScreenShot":"SS/SS_null_1686221120546.png"},{"step name":"Navigate to page login","step description":"Successfully : Successfully navigated to page login","status":"PASS","ScreenShot":"SS/SS_null_1686221123143.png"},{"step name":"Enter text : test1@hotmail.com","step description":"Enter text : test1@hotmail.com","status":"PASS","ScreenShot":"SS/SS_null_1686221129577.png"},{"step name":"Enter text : abc@123","step description":"Enter text : abc@123","status":"PASS","ScreenShot":"SS/SS_null_1686221130566.png"},{"step name":"Click on LOGIN","step description":"Successfully : Clicked on LOGIN","status":"PASS","ScreenShot":"SS/SS_null_1686221133510.png"},{"step name":"Click on Start Test","step description":"Successfully : Clicked on Start Test","status":"PASS","ScreenShot":"SS/SS_null_1686221138901.png"},{"step name":"Click the start test button of test-test1yr","step description":"Start test button of-test1yr is clicked successfully.","status":"PASS"},{"step name":"Verify instructions video is displayed","step description":"Successfully displayed the instructions video on clicking start test button.","status":"PASS"},{"step name":"Click on element","step description":"Failed to: Clicked on elementelement click intercepted: Element <div class=\"p-checkbox-box\" ng-reflect-ng-class=\"[object Object]\">...</div> is not clickable at point (169, 492). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_65}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //div[@class='p-checkbox-box']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","status":"FAIL","ScreenShot":"SS/SS_null_1686221140631.png"},{"step name":"Check the instructions checkbox","step description":"Successfully checked the instructions checkbox.","status":"PASS"},{"step name":"Click on NEXT","step description":"Failed to: Clicked on NEXTelement click intercepted: Element <button _ngcontent-yyo-c297=\"\" pbutton=\"\" label=\"NEXT\" icon=\"pi pi-arrow-right\" iconpos=\"right\" class=\"instBtn p-button p-component\" ng-reflect-label=\"NEXT\" ng-reflect-icon=\"pi pi-arrow-right\" ng-reflect-icon-pos=\"right\" disabled=\"\">...</button> is not clickable at point (1134, 501). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_74}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //button[@label='NEXT']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","status":"FAIL","ScreenShot":"SS/SS_null_1686221142051.png"},{"step name":"Verify confirmation dialog box appears","step description":"Could not verify confirmation dialog box.","status":"FAIL"},{"step name":"Click the yes button","step description":"Failed to: Successfully clicked Yes button.null","status":"FAIL","ScreenShot":"SS/SS_null_1686221148342.png"},{"step name":"Click on element","step description":"Failed to: Clicked on elementnull","status":"FAIL","ScreenShot":"SS/SS_null_1686221154608.png"},{"step name":"Verify user navigates to questions screen","step description":"Could not verify user navigates to questions screen.","status":"FAIL"},{"step name":"Click the sections dropdown","step description":"Failed to: Sections dropdown is expanded successfully.element click intercepted: Element <button _ngcontent-yyo-c85=\"\" type=\"button\" pbutton=\"\" icon=\"pi pi-caret-down\" ng-reflect-icon=\"pi pi-caret-down\" class=\"p-button p-component p-button-icon-only\">...</button> is not clickable at point (1244, 31). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_76}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //button[@type='button']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","status":"FAIL","ScreenShot":"SS/SS_null_1686221159045.png"},{"step name":"Select Logical from dropdown","step description":"Failed to: Successfully selected Logical from dropdown.null","status":"FAIL","ScreenShot":"SS/SS_null_1686221165331.png"},{"step name":"Verify user navigates to questions screen","step description":"Could not verify user navigates to questions screen.","status":"FAIL"}],"meta_data":[{"TESTCASE NAME":"Navigation between the sections","SERVICE PROJECT":"NONE","DATE OF EXECUTION":{"value":1686221116000,"type":"date"}},{"EXECUTION STARTED ON":{"value":1686221116000,"type":"datetime"},"EXECUTION ENDED ON":{"value":1686221168000,"type":"datetime"},"EXECUTION DURATION":"52.0 seconds"},{"TOTAL":19,"PASS":10,"FAIL":9}]}}};
+  var obj = {"report_product":"GEMJAR","suits_details":{"os":"Windows 10","s_run_id":"null_DEV_01cf6d2d-61df-43dc-99fc-d65ff0b94744","s_start_time":1686221116000,"s_end_time":1686221168000,"Status":"FAIL","user":"Saloni.Nagpal","env":"dev","machine":"GEMGN-210334","report_name":"GemjarTestReport","testcase_details":[{"base_user":"Saloni.Nagpal","invoke_user":"Saloni.Nagpal","tc_run_id":"Navigation between the sections_5cb15985-bb35-470e-9305-b76fc750b267_1686221116000","start_time":1.686221116E12,"end_time":1.686221168E12,"run_type":"ON DEMAND","run_mode":"Windows 10","name":"Navigation between the sections","category":"CandidateModule","Status":"FAIL","machine":"GEMGN-210334","ignore":false,"Reason of failure":"[java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0 Exception occured while verifying the options present in dropdown.]"}],"testcase_info":{"FAIL":1,"PASS":0,"TOTAL":1},"framework_name":"GEMJAR"},"teststep_details":{"Navigation between the sections_5cb15985-bb35-470e-9305-b76fc750b267_1686221116000":{"steps":[{"step name":"Maximize Browser","step description":"Browser Maximize Successful ","Status":"PASS","ScreenShot":"SS/SS_null_1686221119495.png"},{"step name":"Launch Url","step description":"Url ~https://athena-dev.geminisolutions.com","Status":"PASS","ScreenShot":"SS/SS_null_1686221120546.png"},{"step name":"Navigate to page login","step description":"Successfully : Successfully navigated to page login","Status":"PASS","ScreenShot":"SS/SS_null_1686221123143.png"},{"step name":"Enter text : test1@hotmail.com","step description":"Enter text : test1@hotmail.com","Status":"PASS","ScreenShot":"SS/SS_null_1686221129577.png"},{"step name":"Enter text : abc@123","step description":"Enter text : abc@123","Status":"PASS","ScreenShot":"SS/SS_null_1686221130566.png"},{"step name":"Click on LOGIN","step description":"Successfully : Clicked on LOGIN","Status":"PASS","ScreenShot":"SS/SS_null_1686221133510.png"},{"step name":"Click on Start Test","step description":"Successfully : Clicked on Start Test","Status":"PASS","ScreenShot":"SS/SS_null_1686221138901.png"},{"step name":"Click the start test button of test-test1yr","step description":"Start test button of-test1yr is clicked successfully.","Status":"PASS"},{"step name":"Verify instructions video is displayed","step description":"Successfully displayed the instructions video on clicking start test button.","Status":"PASS"},{"step name":"Click on element","step description":"Failed to: Clicked on elementelement click intercepted: Element <div class=\"p-checkbox-box\" ng-reflect-ng-class=\"[object Object]\">...</div> is not clickable at point (169, 492). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_65}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //div[@class='p-checkbox-box']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","Status":"FAIL","ScreenShot":"SS/SS_null_1686221140631.png"},{"step name":"Check the instructions checkbox","step description":"Successfully checked the instructions checkbox.","Status":"PASS"},{"step name":"Click on NEXT","step description":"Failed to: Clicked on NEXTelement click intercepted: Element <button _ngcontent-yyo-c297=\"\" pbutton=\"\" label=\"NEXT\" icon=\"pi pi-arrow-right\" iconpos=\"right\" class=\"instBtn p-button p-component\" ng-reflect-label=\"NEXT\" ng-reflect-icon=\"pi pi-arrow-right\" ng-reflect-icon-pos=\"right\" disabled=\"\">...</button> is not clickable at point (1134, 501). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_74}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //button[@label='NEXT']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","Status":"FAIL","ScreenShot":"SS/SS_null_1686221142051.png"},{"step name":"Verify confirmation dialog box appears","step description":"Could not verify confirmation dialog box.","Status":"FAIL"},{"step name":"Click the yes button","step description":"Failed to: Successfully clicked Yes button.null","Status":"FAIL","ScreenShot":"SS/SS_null_1686221148342.png"},{"step name":"Click on element","step description":"Failed to: Clicked on elementnull","Status":"FAIL","ScreenShot":"SS/SS_null_1686221154608.png"},{"step name":"Verify user navigates to questions screen","step description":"Could not verify user navigates to questions screen.","Status":"FAIL"},{"step name":"Click the sections dropdown","step description":"Failed to: Sections dropdown is expanded successfully.element click intercepted: Element <button _ngcontent-yyo-c85=\"\" type=\"button\" pbutton=\"\" icon=\"pi pi-caret-down\" ng-reflect-icon=\"pi pi-caret-down\" class=\"p-button p-component p-button-icon-only\">...</button> is not clickable at point (1244, 31). Other element would receive the click: <div class=\"ng-tns-c187-15 p-dialog-mask p-component-overlay p-dialog-mask-scrollblocker\" ng-reflect-ng-class=\"[object Object]\" style=\"z-index: 1000;\">...</div>\n  (Session info: chrome=114.0.5735.110)\nBuild info: version: '4.1.1', revision: 'e8fcc2cecf'\nSystem info: host: 'GEMGN-210334', ip: '10.50.1.54', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.18'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCommand: [e4acd188ea9f4349c3c46ca7c18c2a36, clickElement {id=2B3A0011261335CFBE805BA9E5AB75E5_element_76}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 114.0.5735.110, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\\Users\\SALONI~1.NAG\\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:64171}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:64171/devtoo..., se:cdpVersion: 114.0.5735.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nElement: [[ChromeDriver: chrome on WINDOWS (e4acd188ea9f4349c3c46ca7c18c2a36)] -> xpath: //button[@type='button']]\nSession ID: e4acd188ea9f4349c3c46ca7c18c2a36","Status":"FAIL","ScreenShot":"SS/SS_null_1686221159045.png"},{"step name":"Select Logical from dropdown","step description":"Failed to: Successfully selected Logical from dropdown.null","Status":"FAIL","ScreenShot":"SS/SS_null_1686221165331.png"},{"step name":"Verify user navigates to questions screen","step description":"Could not verify user navigates to questions screen.","Status":"FAIL"}],"meta_data":[{"TESTCASE NAME":"Navigation between the sections","SERVICE PROJECT":"NONE","DATE OF EXECUTION":{"value":1686221116000,"type":"date"}},{"EXECUTION STARTED ON":{"value":1686221116000,"type":"datetime"},"EXECUTION ENDED ON":{"value":1686221168000,"type":"datetime"},"EXECUTION DURATION":"52.0 seconds"},{"TOTAL":19,"PASS":10,"FAIL":9}]}}};
   // console.log(stepobj);
   console.log(obj);
   if (obj.report_product === "GEMPYP") {
@@ -696,7 +696,7 @@ height: 100%;
   var sortType = "";
   var lastsortHeader = "";
   var exeHeaders = {
-    STATUS: "status",
+    Status: "Status",
     "PROJECT NAME": "project_name",
     "REPORT NAME": "report_name",
     ENV: "env",
@@ -716,7 +716,7 @@ height: 100%;
     var el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
-    $("#status").append(el);
+    $("#Status").append(el);
   }
 
   function changeFormat(value) {
@@ -883,25 +883,25 @@ height: 100%;
             att.value = cols[j];
           }
           cell.setAttributeNode(att);
-          if (cols[j] === "STATUS") {
+          if (cols[j] === "Status") {
             // cell.innerHTML = list[i][cols[j]];
             var link = document.createElement("div");
             link.className = "btn-sm";
-            cell.setAttribute("class", "status");
+            cell.setAttribute("class", "Status");
             link.innerHTML = list[i][cols[j]]["value"];
             cell.appendChild(link);
             if (list[i][cols[j]]["value"] === "PASS") {
-              link.className = "statusColorPass";
+              link.className = "StatusColorPass";
             } else if (list[i][cols[j]]["value"] === "FAIL") {
-              link.className = "statusColorFail";
+              link.className = "StatusColorFail";
             } else if (list[i][cols[j]]["value"] === "INFO") {
-              link.className = "statusColorInfo";
+              link.className = "StatusColorInfo";
             } else if (list[i][cols[j]]["value"] === "WARN") {
-              link.className = "statusColorWarn";
+              link.className = "StatusColorWarn";
             } else if (list[i][cols[j]]["value"] === "INCOMPLETE") {
-              link.className = "statusColorIncomplete";
+              link.className = "StatusColorIncomplete";
             } else {
-              link.className = "statusColorOthers";
+              link.className = "StatusColorOthers";
             }
             // link.style.width='fit-content';
           } else if ((cols[j].includes("START TIME")) || (cols[j].includes("END TIME"))) {
@@ -1026,7 +1026,7 @@ height: 100%;
         theme[2].substring(0, theme[2].length - 1) + ", 0.1)";
       theader.innerHTML = cols[i].toUpperCase();
       theader.id = cols[i] + "_tcaccord";
-      if (cols[i] === "STATUS" || cols[i] === "status") {
+      if (cols[i] === "Status" || cols[i] === "Status") {
         theader.style.width = "130px";
       }
       // Append columnName to the table row
@@ -1115,21 +1115,21 @@ height: 100%;
           a.target = "_blank";
           a.innerHTML = list[i][cols[j]]["LinkName"];
           cell.appendChild(a);
-        } else if (cols[j] === "STATUS" || cols[j] === "status") {
+        } else if (cols[j] === "Status" || cols[j] === "Status") {
           var cont = document.createElement("div");
 
           if (list[i][cols[j]] === "PASS") {
-            cont.className = "statusColorPass statusAccord ";
+            cont.className = "StatusColorPass StatusAccord ";
           } else if (list[i][cols[j]] === "FAIL") {
-            cont.className = "statusColorFail statusAccord";
+            cont.className = "StatusColorFail StatusAccord";
           } else if (list[i][cols[j]] === "INFO") {
-            cont.className = "statusColorInfo statusAccord";
+            cont.className = "StatusColorInfo StatusAccord";
           } else if (list[i][cols[j]] === "WARN") {
-            cont.className = "statusColorWarn statusAccord";
+            cont.className = "StatusColorWarn StatusAccord";
           } else if (list[i][cols[j]] === "INCOMPLETE") {
-            cont.className = "statusColorIncomplete statusAccord";
+            cont.className = "StatusColorIncomplete StatusAccord";
           } else {
-            cont.className = "statusColorOthers statusAccord";
+            cont.className = "StatusColorOthers StatusAccord";
           }
           cont.innerText = list[i][cols[j]];
           cell.appendChild(cont);
@@ -1180,21 +1180,21 @@ height: 100%;
     }
     for (var colIndex = 0; colIndex < cols.length; colIndex++) {
       var val = data[exeHeaders[cols[colIndex]]];
-      if (cols[colIndex].toUpperCase().includes("STATUS")) {
+      if (cols[colIndex].toUpperCase().includes("Status")) {
         val = document.createElement("div");
         val.innerText = data[exeHeaders[cols[colIndex]]];
         if (data[exeHeaders[cols[colIndex]]] === "PASS") {
-          val.className = "statusColorPass";
+          val.className = "StatusColorPass";
         } else if (data[exeHeaders[cols[colIndex]]] === "FAIL") {
-          val.className = "statusColorFail";
+          val.className = "StatusColorFail";
         } else if (data[exeHeaders[cols[colIndex]]] === "INFO") {
-          val.className = "statusColorInfo";
+          val.className = "StatusColorInfo";
         } else if (data[exeHeaders[cols[colIndex]]] === "WARN") {
-          val.className = "statusColorWarn";
+          val.className = "StatusColorWarn";
         } else if (data[exeHeaders[cols[colIndex]]] === "INCOMPLETE") {
-          val.className = "statusColorIncomplete";
+          val.className = "StatusColorIncomplete";
         } else {
-          val.className = "statusColorOthers";
+          val.className = "StatusColorOthers";
         }
       }
       else if ((cols[colIndex].toUpperCase().includes("START TIME")) || (cols[colIndex].toUpperCase().includes("END TIME"))) {
@@ -1454,7 +1454,7 @@ height: 100%;
         .filter(function () {
           return (
             $(this).filter(function () {
-              var tdText = $(this).find(".statusAccord").text().toLowerCase();
+              var tdText = $(this).find(".StatusAccord").text().toLowerCase();
 
               if (val === "TOTAL") {
                 val = "";
@@ -1566,7 +1566,7 @@ height: 100%;
 
           $("#tab").find("tbody").find("tr").not(".accordRow").not(".checkCollapse").not(":first").fadeOut("fast");
 
-          statusSearch(event.currentTarget.firstChild.firstChild.innerText, event.currentTarget.firstChild.lastChild.innerText);
+          StatusSearch(event.currentTarget.firstChild.firstChild.innerText, event.currentTarget.firstChild.lastChild.innerText);
         });
       }
       flex.append(card);
@@ -1627,7 +1627,7 @@ height: 100%;
     var options = new Set();
     options.add("All");
     for (var i = 0; i < val.length; i++) {
-      options.add(val[i]["STATUS"]["value"]);
+      options.add(val[i]["Status"]["value"]);
     }
     return Array.from(options);
   }
@@ -1897,7 +1897,7 @@ height: 100%;
   function myFunction() {
     var inputs = $(".search-key");
     for (var i = 0; i < inputs.length; i++) {
-      if (inputs[i].id === "status") {
+      if (inputs[i].id === "Status") {
         inputs[i].value = "All";
       } else {
         inputs[i].value = "";
@@ -2014,24 +2014,24 @@ height: 100%;
       for (var j = 0; j < cols.length; j++) {
         var cell = trow.insertCell(-1);
         cell.setAttribute("class", "align-middle setWidth");
-        if (cols[j] === "status") {
+        if (cols[j] === "Status") {
           // cell.innerHTML = list[i][cols[j]];
           var link = document.createElement("div");
           link.className = "btn-sm";
           link.innerHTML = list[i][cols[j]];
           cell.appendChild(link);
           if (list[i][cols[j]] === "PASS") {
-            link.className = "statusColorPass";
+            link.className = "StatusColorPass";
           } else if (list[i][cols[j]] === "FAIL") {
-            link.className = "statusColorFail";
+            link.className = "StatusColorFail";
           } else if (list[i][cols[j]] === "INFO") {
-            link.className = "statusColorInfo";
+            link.className = "StatusColorInfo";
           } else if (list[i][cols[j]] === "WARN") {
-            link.className = "statusColorWarn";
+            link.className = "StatusColorWarn";
           } else if (list[i][cols[j]] === "INCOMPLETE") {
-            link.className = "statusColorIncomplete";
+            link.className = "StatusColorIncomplete";
           } else {
-            link.className = "statusColorOthers";
+            link.className = "StatusColorOthers";
           }
         } else {
           cell.innerHTML = list[i][cols[j]];
@@ -2044,7 +2044,7 @@ height: 100%;
   }
 
 
-  function statusSearch(val, count) {
+  function StatusSearch(val, count) {
     if (count > 0) {
       var $filterableRows = $("#tab")
         .find("tbody")
@@ -2055,7 +2055,7 @@ height: 100%;
         .filter(function () {
           return (
             $(this).filter(function () {
-              var tdText = $(this).find(".status").text().toLowerCase();
+              var tdText = $(this).find(".Status").text().toLowerCase();
               // console.log(tdText);
 
 

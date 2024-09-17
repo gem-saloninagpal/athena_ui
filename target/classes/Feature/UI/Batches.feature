@@ -19,7 +19,7 @@ Feature: Batches functionality
 
     Examples:
       |module        |submodule|fileLocation                                                  |owner |batchName|
-      |Manage Courses|Batches  |C:\Users\Pallavi.Arora\Downloads\athena.png|rahul|null     |
+      |Manage Courses|Batches  |C:\Users\Pallavi.Arora\Downloads\athena.png|rahul|abc     |
 
     @regression @batch
     Scenario Outline: Add a course in batch and verify from batch summary
