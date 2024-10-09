@@ -28,6 +28,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+import static org.codehaus.groovy.reflection.ClassInfo.size;
+
 public class LearnerModule {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
 
@@ -606,15 +608,15 @@ public class LearnerModule {
     @Then("Validate the Enroll button functionality")
     public void validateTheEnrollButtonFunctionality() {
         try{
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(12);
        if(DriverAction.isExist(LearnerModule_Locators.enrollList,120))
        {
            GemTestReporter.addTestStep("Validate Enroll button is visible on course", "Button is visible", STATUS.PASS, DriverAction.takeSnapShot());
            DriverAction.click(LearnerModule_Locators.enrollList);
-           DriverAction.waitSec(4);
+           DriverAction.waitSec(9);
            if(DriverAction.isExist(LearnerModule_Locators.startCourse,120))
            {
-               DriverAction.click(LearnerModule_Locators.startCourse);
+               DriverAction.click(LearnerModule_Locators.startCourseBtn1);
                if(DriverAction.isExist(LearnerModule_Locators.startCourseBtn,120))
                {
                    GemTestReporter.addTestStep("Validate Enroll button is working properly", "It is working properly", STATUS.PASS, DriverAction.takeSnapShot());
@@ -745,6 +747,7 @@ public class LearnerModule {
            GemTestReporter.addTestStep("Error Occur", "Fail to click on Save Course button", STATUS.FAIL,
                    DriverAction.takeSnapShot());
        }
+       Thread.sleep(3000);
        if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes")))) {
            DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Yes")));
 
@@ -825,7 +828,7 @@ assessmentCount=count[0];
                         DriverAction.click(LearnerModule_Locators.uploadFileBtn);
 
                         DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation1);
-                        DriverAction.waitSec(5);
+                        DriverAction.waitSec(7);
                         if(DriverAction.isExist(LearnerModule_Locators.uploadBtn,120))
                         {
                             DriverAction.click(LearnerModule_Locators.uploadBtn);
@@ -949,6 +952,7 @@ else {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type into course search input", STATUS.FAIL,
                         DriverAction.takeSnapShot());
             }
+            Thread.sleep(2000);
             if(DriverAction.isDisplayed(LearnerModule_Locators.noCourseMessage))
             {
                 GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "No course display successfully", STATUS.PASS,
@@ -1000,6 +1004,27 @@ else {
         catch (Exception e) {
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+        }
+    }
+
+    @And("Search a course in course catalog")
+    public void searchACourseInCourseCatalog() throws InterruptedException {
+        Thread.sleep(2000);
+        DriverAction.typeText(MyLocators.searchbox,_courseName);
+    }
+
+    @Then("^Verify course content$")
+    public void verifyCourseContent() {
+        try{
+            List<WebElement>contentCount=DriverAction.getElements(LearnerModule_Locators.contents);
+            List<WebElement>assignmentCount=DriverAction.getElements(LearnerModule_Locators.assignments);
+            if(contentCount.size()==1&assignmentCount.size()==1){
+                GemTestReporter.addTestStep("Verify content and assignment added in course","Successfully verified the content and assignment added.",STATUS.PASS,DriverAction.takeSnapShot());
+            }else{
+                GemTestReporter.addTestStep("Verify content and assignment added in course","Could not verify the content and assignment added.",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify content and assignment added in course","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
         }
     }
 }

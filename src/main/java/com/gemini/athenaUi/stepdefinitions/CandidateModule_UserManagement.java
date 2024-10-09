@@ -44,6 +44,7 @@ public class CandidateModule_UserManagement {
     public void login(String username, String password) {
 
         try {
+            DriverAction.waitUntilElementClickable(MyLocators.signInBtn, 120);
             System.out.println(_randomString);
 
             //enter username and password then click the sign-in button
@@ -1582,7 +1583,7 @@ public class CandidateModule_UserManagement {
     }
 
     @And("Navigate to login page")
-    public void onavigateToLoginPage() {
+    public void navigateToLoginPage() {
         try {
             DriverAction.waitUntilElementClickable(MyLocators.loginPageLink, 130);
             DriverAction.click(MyLocators.loginPageLink, "Navigate to login page");

@@ -16,6 +16,7 @@ public class LearnerModule_Locators {
     public static By optionList=By.xpath("//ul[@class='p-dropdown-items ng-tns-c114-12']//span");
     public static By viewCourseBtn=By.xpath("//button//span[text()='View Course']");
     public static By startCourseBtn=By.xpath("//span[text()='Start Course']");
+    public static By startCourseBtn1=By.xpath("//button[@ng-reflect-label='Start Course']");
 
     public static By enrollBtn1=By.xpath("(//span[text()='Enroll'])[2]");
     public static By backBtn=By.xpath("//button[text()=' Back ']");
@@ -100,7 +101,7 @@ public class LearnerModule_Locators {
 
     public static By cancelBtn=By.xpath("(//span[contains(@class,'pi pi-times')])[2]");
 
-    public static By errorMessageforEmptyFeild=By.xpath("//small[text()='This Field is required']");
+    public static By errorMessageforEmptyFeild=By.xpath("//small[text()='This field is required']");
 
 
     public static By viewUploadBtn=By.xpath("//button//img");
@@ -118,5 +119,8 @@ public class LearnerModule_Locators {
 
     public static By gettingStartedList=By.xpath("//p-accordion//div[@role='tablist']");
     public static By remainingTest=By.xpath("//div[contains(@class,'test-display')]//i[contains(@class,'question')]");
+    public static By contents=By.xpath("//small[contains(text(),'Reading')]");
+
+    public static By assignments=By.xpath("//small[contains(text(),'Assignment')]");
 }
 

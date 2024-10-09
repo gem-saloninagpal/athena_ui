@@ -319,8 +319,8 @@ else {
     GemTestReporter.addTestStep("Error Occur", "popup does not appear", STATUS.FAIL,
             DriverAction.takeSnapShot());
 }
-String getContent=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[1]//td[1]"));
-String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
+String getContent=DriverAction.getElementText(By.xpath("(//i[@ptooltip=\"Add Content\"]//preceding::td[4])[1]"));
+String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//tbody[contains(@class,'tbody')])[2]//tr//td[1]"));
 if(getContent.equals(contentAfterSelecting))
 {
     GemTestReporter.addTestStep(type+" is added to Course Div",type+" is added successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -764,7 +764,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     if(DriverAction.isDisplayed(Course_Locators.nameFilterInput))
                     {
                         DriverAction.waitSec(5);
-                        DriverAction.typeText(Course_Locators.nameFilterInput,"pallavi.arora@geminisolutions.com");
+                        DriverAction.typeText(Course_Locators.nameFilterInput,"saloni.nagpal@geminisolutions.com");
                         DriverAction.waitSec(5);
 //                        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                         DriverAction.click(Course_Locators.addIcon);
