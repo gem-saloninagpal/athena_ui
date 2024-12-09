@@ -1,6 +1,6 @@
-//package com.gemini.athenaUi.stepdefinitions;
+//package com.qa.athenaUi.stepdefinitions;
 //
-//import com.gemini.athenaUi.locators.*;
+//import com.qa.athenaUi.locators.*;
 //import com.gemini.gemjar.reporting.GemTestReporter;
 //import com.gemini.gemjar.enums.Status;
 //import com.gemini.gemjar.utils.ui.DriverAction;

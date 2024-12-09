@@ -1,6 +1,6 @@
 package com.qa.athenaUi.stepdefinitions;
 
-import com.gemini.athenaUi.locators.AssignLearnerInBatchLocators;
+import com.qa.athenaUi.locators.AssignLearnerInBatchLocators;
 import java.util.List;
 
 import com.qa.athenaUi.locators.MyLocators;
@@ -160,7 +160,7 @@ public class AssignLearnerToBatch {
     public void validateRecordsGetFilteredOnTheBasisOfStatus(String Status_user) {
         try {
             DriverAction.waitSec(3);
-            List<WebElement> rows = DriverAction.getElements(AssignLearnerInBatchLocators.Status);
+            List<WebElement> rows = DriverAction.getElements(AssignLearnerInBatchLocators.status);
             boolean isPassed = true;
             for (WebElement row : rows) {
                 String getStatus = row.getText();

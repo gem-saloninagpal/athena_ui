@@ -1,6 +1,6 @@
 package com.qa.athenaUi.stepdefinitions;
 
-import com.gemini.athenaUi.locators.*;
+import com.qa.athenaUi.locators.*;
 import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.enums.Status;
 import com.gemini.gemjar.utils.ui.DriverAction;
@@ -418,8 +418,8 @@ public class Tests_TestControl {
                 }
             }
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Tests_TestControl_Locators.StatusColumn)) {
-                String Status_col = DriverAction.getElementText(Tests_TestControl_Locators.StatusColumn);
+            if (DriverAction.isExist(Tests_TestControl_Locators.statusColumn)) {
+                String Status_col = DriverAction.getElementText(Tests_TestControl_Locators.statusColumn);
                 if (Status_col != "Unattempted") {
                     GemTestReporter.addTestStep("Verify Candidate have completed the test or not", "Candidate Successfully Completed the Test", Status.PASS, DriverAction.takeSnapShot());
                 } else {
@@ -859,8 +859,8 @@ public class Tests_TestControl {
             }
 
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Tests_TestControl_Locators.StatusColumn)) {
-                String Status_unattempted = DriverAction.getElementText(Tests_TestControl_Locators.StatusColumn);
+            if (DriverAction.isExist(Tests_TestControl_Locators.statusColumn)) {
+                String Status_unattempted = DriverAction.getElementText(Tests_TestControl_Locators.statusColumn);
                 if (Status_unattempted != "Unattempted") {
                     GemTestReporter.addTestStep("Verify Candidate have completed the test or not", "Candidate Successfully Completed the Test", Status.PASS, DriverAction.takeSnapShot());
                 } else {
@@ -1167,9 +1167,9 @@ public class Tests_TestControl {
             }
             DriverAction.waitSec(3);
             DriverAction.scrollToBottom();
-            if(DriverAction.isExist(Tests_TestControl_Locators.Status))
+            if(DriverAction.isExist(Tests_TestControl_Locators.status))
             {
-                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.Status);
+                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.status);
                 if(fetchedStatus.equals("PASS")||fetchedStatus.equals("FAIL"))
                 {
                     GemTestReporter.addTestStep("Verify Candidate is Evaluated Successfully ", "Evaluated Successfully", Status.PASS, DriverAction.takeSnapShot());
@@ -1242,9 +1242,9 @@ public class Tests_TestControl {
             }
             DriverAction.waitSec(3);
             DriverAction.scrollToBottom();
-            if(DriverAction.isExist(Tests_TestControl_Locators.Status))
+            if(DriverAction.isExist(Tests_TestControl_Locators.status))
             {
-                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.Status);
+                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.status);
                 if(fetchedStatus.equals("PASS")||fetchedStatus.equals("FAIL"))
                 {
                     GemTestReporter.addTestStep("Verify Candidate is Evaluated Successfully ", "Evaluated Successfully", Status.PASS, DriverAction.takeSnapShot());
@@ -1619,8 +1619,8 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon))
             }
 
             DriverAction.waitSec(5);
-            if (DriverAction.isExist(Tests_TestControl_Locators.StatusColumn)) {
-                String Status_col = DriverAction.getElementText(Tests_TestControl_Locators.StatusColumn);
+            if (DriverAction.isExist(Tests_TestControl_Locators.statusColumn)) {
+                String Status_col = DriverAction.getElementText(Tests_TestControl_Locators.statusColumn);
                 if (Status_col != "Unattempted") {
                     GemTestReporter.addTestStep("Verify Candidate have completed the test or not", "Candidate Successfully Completed the Test", Status.PASS, DriverAction.takeSnapShot());
                 } else {
@@ -1829,9 +1829,9 @@ if(DriverAction.isExist(Tests_TestControl_Locators.threeDotIcon))
             }
             DriverAction.waitSec(3);
             DriverAction.scrollToBottom();
-            if(DriverAction.isExist(Tests_TestControl_Locators.Status))
+            if(DriverAction.isExist(Tests_TestControl_Locators.status))
             {
-                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.Status);
+                String fetchedStatus=DriverAction.getElementText(Tests_TestControl_Locators.status);
                 if(fetchedStatus.equals("PASS")||fetchedStatus.equals("FAIL"))
                 {
                     GemTestReporter.addTestStep("Verify Candidate is Evaluated Successfully ", "Evaluated Successfully", Status.PASS, DriverAction.takeSnapShot());

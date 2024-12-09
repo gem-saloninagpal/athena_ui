@@ -535,7 +535,7 @@ public class CandidateModule_UserManagement {
             }
 
             //checks Status after clicking the Status button.
-            DriverAction.click(MyLocators.StatusButton, "Click on the Status button.", "Successfully clicked the Status button");
+            DriverAction.click(MyLocators.statusButton, "Click on the Status button.", "Successfully clicked the Status button");
             if (_Status.equalsIgnoreCase("Active")) {
                 _updatedStatus = "Inactive";
             } else {
@@ -550,7 +550,7 @@ public class CandidateModule_UserManagement {
     public void verifyTheUpdatedStatus() {
         try {
             //verify if the current Status displays the expected tooltip on hovering
-            String tooltip = DriverAction.getAttributeName(MyLocators.StatusButton, "ng-reflect-text");
+            String tooltip = DriverAction.getAttributeName(MyLocators.statusButton, "ng-reflect-text");
             if (_updatedStatus.equals("Inactive") && tooltip.equals("Click to Activate the user")) {
                 GemTestReporter.addTestStep("Verify the updated Status", "Updated Status is Active.", Status.PASS, DriverAction.takeSnapShot());
             } else if (_updatedStatus.equals("Active") && tooltip.equals("Click to deactivate the user")) {

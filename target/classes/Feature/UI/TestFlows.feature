@@ -9,7 +9,7 @@ Feature: Server Side rendered test
   Scenario Outline:Create server side rendered test
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Test"
-    And Add Test Info "<Duration>", "<Campus>", "<Level>"
+    And Add Test Info
     And Enter Test Description "<Description>"
     And Click the button "Next"
     And Fill all the fields in select options section "Yes","Yes","Yes","Yes","Yes","Yes"

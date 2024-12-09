@@ -11,7 +11,7 @@ email_report: N
 jewel_screen_shots: Y/N
 #tags: '@cucumber_tag'
 glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
-#glue_code: com.gemini.athenaUi.stepDefinitions
+#glue_code: com.qa.athenaUi.stepDefinitions
 #glue_code: com.gemini.athena.stepdefinitions
 browser_name: chrome
 launch_url: https://dev-athena.geminisolutions.com/
@@ -110,3 +110,4 @@ prod:
   sendMonthlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendMonthlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
   sendQuarterlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendQuarterlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
   sendYearlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendYearlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  getAllTopScorers: https://devapi.geminisolutions.com/gemassessment/api/getAllTopScorers
