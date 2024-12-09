@@ -1,0 +1,310 @@
+{
+    "deptName": "",
+    "comprehensionQuestionDetails": {"comprehensionId": 1},
+    "isUserSuperAdmin": true,
+    "endDate": "2024-10-11T23:59:00.000",
+    "pageSize": 15,
+    "maxMarks": 10,
+    "password": "YWJjZEAxMjM=",
+    "permissions": [
+        {
+            "permissionId": 2,
+            "permissionCode": "VIEW_TEST",
+            "permissionName": "View Test"
+        },
+        {
+            "permissionId": 4,
+            "permissionCode": "CREATE_EDIT_TEST",
+            "permissionName": "Create/Edit Test"
+        }
+    ],
+    "hasWordLimit": false,
+    "options": [
+        {
+            "optionDescription": "<p>RPFYLIF<\/p>",
+            "isActive": true,
+            "optionMasterId": 3828,
+            "isCorrect": false
+        },
+        {
+            "optionDescription": "<p>YMWURXB<\/p>",
+            "isActive": true,
+            "optionMasterId": 3826,
+            "isCorrect": false
+        },
+        {
+            "optionDescription": "<p>DUFCERO<\/p>",
+            "isActive": true,
+            "optionMasterId": 3827,
+            "isCorrect": true
+        }
+    ],
+    "candidateAnswerId": 21910,
+    "newPassword": "abcd@123",
+    "userDetails": {
+        "college": "KEC",
+        "firstName": "Arpit",
+        "lastName": "Agrawal",
+        "experienceLevel": "Experienced",
+        "university": "UPTU",
+        "contact": "9988474657",
+        "location": "Jaipur",
+        "experience": "6",
+        "email": "manasdbf@abc.com"
+    },
+    "tags": "Java",
+    "courseName": "check_4285",
+    "roleName": "API_TEST",
+    "courseMasterId": "",
+    "startDate": "2024-07-01T00:00:00.000",
+    "status": "",
+    "questionId": 12009,
+    "answerOptionId": 3,
+    "testStartDate": "2024-06-19T12:51:10.730+00:00",
+    "candidateTestId": 1,
+    "login": {
+        "userName": "manas7865",
+        "userId": 45
+    },
+    "courseIdList": [
+        1,
+        2,
+        3
+    ],
+    "isRichText": true,
+    "sectionName": "apiAutomation",
+    "isSearchByLocation": false,
+    "userSearchParams": {
+        "deptName": "App Strategy",
+        "isSearchByDept": true,
+        "isLearner": true
+    },
+    "email": "pallavi.arora@geminisolutions.com",
+    "cc": "saloni.nagpal@geminisolutions.com",
+    "languageUsed": null,
+    "sectionId": 81,
+    "marks": "10",
+    "userId": 6,
+    "timeTaken": 15000,
+    "questionMasterId": "1348",
+    "to": "pallavi.arora@geminisolutions.com",
+    "optionMasterId": null,
+    "pageNumber": 0,
+    "keywords": null,
+    "dcList": ["Tata Aig"],
+    "subject": "Testing Email API",
+    "isActive": true,
+    "body": "testing send email api",
+    "isTestSubmitted": false,
+    "previousPassword": "YWJjZEAxMjM=",
+    "engineeringCouncil": "",
+    "numberOfCandidates": 5,
+    "roleDetails": [{
+        "roleId": 1,
+        "roleName": "ROLE_USER"
+    }],
+    "from": "pallavi.arora@geminisolutions.com",
+    "answerDiscription": "m mkm    k",
+    "comprehensionId": 0,
+    "testDuration": "3 hours",
+    "testTag": "Tnew",
+    "testName": "Testingnew",
+    "allowTestWithoutAssign": "false",
+    "cutoffPercentage": 25,
+    "questionDescription": "<p>ques-1!<\/p>",
+    "isComprehensive": true,
+    "isSearchByDC": false,
+    "endDateTime": "2024-07-02T23:00:00",
+    "sections": [{
+        "totalQuestions": "1",
+        "questions": [
+            {
+                "questionDescription": "Test save question MCQ 1",
+                "updatedBy": "gem_admin",
+                "createdDateTime": "2021-07-15T08:57:41.217+00:00",
+                "marks": "14",
+                "isActive": true,
+                "isSubjective": true,
+                "wordLimit": null,
+                "updatedDateTime": "2021-07-15T08:57:41.217+00:00",
+                "tags": "test 1",
+                "hasMultipleAnswers": false,
+                "difficulty": null,
+                "createdBy": "gem_admin",
+                "hasWordLimit": null,
+                "options": [
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "test 1 option 1",
+                        "createdDateTime": "2021-07-15T08:57:41.219+00:00",
+                        "isActive": true,
+                        "optionMasterId": 4,
+                        "updatedDateTime": "2021-07-15T08:57:41.219+00:00",
+                        "isCorrect": false
+                    },
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "test 1 option 2",
+                        "createdDateTime": "2021-07-15T08:57:41.221+00:00",
+                        "isActive": true,
+                        "optionMasterId": 5,
+                        "updatedDateTime": "2021-07-15T08:57:41.221+00:00",
+                        "isCorrect": true
+                    },
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "test 1 option 3333",
+                        "createdDateTime": "2021-07-15T08:57:41.223+00:00",
+                        "isActive": true,
+                        "optionMasterId": 6,
+                        "updatedDateTime": "2021-07-15T08:57:41.223+00:00",
+                        "isCorrect": false
+                    }
+                ],
+                "questionMasterId": 2,
+                "sectionTypeId": null,
+                "questionOrder": 1,
+                "correctAnswer": null,
+                "questionType": {
+                    "updatedBy": null,
+                    "createdBy": null,
+                    "createdDateTime": null,
+                    "description": "Ex: MCQ, true/false etc.",
+                    "isActive": null,
+                    "questionTypeId": 2,
+                    "questionType": "Multiple choice question",
+                    "updatedDateTime": null
+                }
+            },
+            {
+                "questionDescription": "Test save 4 question with comprehension",
+                "isComprehensive": true,
+                "updatedBy": "gem_admin",
+                "comprehensionQuestionDetails": {
+                    "description": null,
+                    "comprehensionId": 1
+                },
+                "createdDateTime": "2022-01-12T10:41:33.723+00:00",
+                "marks": "15",
+                "isActive": true,
+                "isSubjective": false,
+                "wordLimit": null,
+                "updatedDateTime": "2022-01-12T10:41:33.723+00:00",
+                "tags": "comprehension 1 q4",
+                "hasMultipleAnswers": false,
+                "difficulty": null,
+                "createdBy": "gem_admin",
+                "hasWordLimit": false,
+                "options": [
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "MCQ 3 option 2",
+                        "createdDateTime": "2022-01-12T10:41:33.735+00:00",
+                        "isActive": true,
+                        "optionMasterId": 32,
+                        "updatedDateTime": "2022-01-12T10:41:33.735+00:00",
+                        "isCorrect": true
+                    },
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "MCQ 3 option 1",
+                        "createdDateTime": "2022-01-12T10:41:33.737+00:00",
+                        "isActive": true,
+                        "optionMasterId": 33,
+                        "updatedDateTime": "2022-01-12T10:41:33.737+00:00",
+                        "isCorrect": false
+                    },
+                    {
+                        "updatedBy": "gem_admin",
+                        "createdBy": "gem_admin",
+                        "optionDescription": "MCQ 3 option 3",
+                        "createdDateTime": "2022-01-12T10:41:33.739+00:00",
+                        "isActive": true,
+                        "optionMasterId": 34,
+                        "updatedDateTime": "2022-01-12T10:41:33.739+00:00",
+                        "isCorrect": false
+                    }
+                ],
+                "questionMasterId": 20,
+                "sectionTypeId": 2,
+                "questionOrder": 2,
+                "correctAnswer": null,
+                "questionLevel": null,
+                "questionType": {
+                    "updatedBy": null,
+                    "createdBy": null,
+                    "createdDateTime": null,
+                    "description": "Ex: MCQ, true/false etc.",
+                    "isActive": null,
+                    "questionTypeId": 1,
+                    "questionType": "Multiple choice question",
+                    "updatedDateTime": null
+                }
+            }
+        ],
+        "sectionTotalMarks": 50,
+        "sectionCutOffMarks": 25,
+        "allowSwitching": true,
+        "sectionType": {
+            "sectionName": "technical",
+            "updatedBy": null,
+            "createdBy": "manas",
+            "createdDateTime": null,
+            "description": "Testing section",
+            "sectionTypeId": 2,
+            "isActive": true,
+            "updatedDateTime": null
+        },
+        "sectionDuration": "1 hours",
+        "enableNegativeMarking": true
+    }],
+    "subjectiveAnswer": "",
+    "difficulty": "Hard",
+    "isTestAttempted": false,
+    "collegeName": "testingCOllege",
+    "isSearchByDept": false,
+    "sectionTypeId": 1,
+    "candidateId": 52983,
+    "questionLevel": "Basic",
+    "tpoEmail": "testUni@test.in",
+    "searchParam": "java",
+    "university": "TestUni",
+    "description": "new comprehension save api 2",
+    "hasImage": true,
+    "testTotalMarks": 50,
+    "isSubjective": false,
+    "questionTypeId": 1,
+    "isSearchByEC": false,
+    "collegeEmail": "test@test.in",
+    "hasMovie": true,
+    "timeTakenToAnswer": 15000,
+    "imageUrl": "",
+    "comments": "test assigned",
+    "tpoContactNumber": 9876474644,
+    "movieQuestionDetails": {"movieId": 1},
+    "isReattemptAllowed": false,
+    "hasMultipleAnswers": true,
+    "testEndDate": "2024-06-20T12:51:10.730+00:00",
+    "tpoContactName": "Sunny",
+    "deliveryCouncil": "",
+    "testId": 1516,
+    "location": "chd",
+    "comment": "",
+    "questionType": {
+        "updatedBy": null,
+        "createdBy": "system",
+        "createdDateTime": "2023-07-13T12:48:58.729+00:00",
+        "description": "Ex: Questions with multiple answer",
+        "isActive": true,
+        "questionTypeId": 2,
+        "questionType": "Checkbox question",
+        "updatedDateTime": null
+    },
+    "updatedPassword": "YWJjZEAxMjM=",
+    "username": "pallavi.arora@geminisolutions.com"
+}

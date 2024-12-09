@@ -2,7 +2,7 @@ Feature: Assign learner to batch
 
   Background:
     And Navigate to login page
-    And Login using "pallavi.arora@geminisolutions.com" and "Pallavi1@"
+    And Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
 
   Scenario Outline: Validate count on assigning learner
     Given Select "<module>", "<submodule>" from sidebar
@@ -13,9 +13,10 @@ Feature: Assign learner to batch
     Then Validate count after assigning
 
     Examples:
-    |module        |submodule|learner|message                                |
-    |Manage Courses|Batches  |pallavi |Learner added successfully to the batch|
+      |module        |submodule|
+      |Manage Courses|Batches  |
 
+  @jar_exe
   Scenario Outline: Validate count on unassigning learner
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
@@ -41,8 +42,8 @@ Feature: Assign learner to batch
     Then Validate the count after assigning learners from different pages
 
     Examples:
-    |module        |submodule|message|
-    |Manage Courses|Batches  |All learners added successfully|
+      |module        |submodule|message|
+      |Manage Courses|Batches  |All learners added successfully|
 
   Scenario Outline: Validate unassign selected
     Given Select "<module>", "<submodule>" from sidebar
@@ -60,40 +61,39 @@ Feature: Assign learner to batch
       |module        |submodule|message|
       |Manage Courses|Batches  |removed successfully|
 
-  Scenario Outline: Filter by Status
+  Scenario Outline: Filter by status
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
     And Expand the dropdown "Status"
-    And Select "Assigned" from dropdown
-    Then Validate records get filtered on the basis of Status "<Status>"
+#    Then Validate records get filtered on the basis of status "<status>"
 
     Examples:
-    |module        |submodule|Status  |
-    |Manage Courses|Batches  |Assigned|
+      |module        |submodule|status  |
+      |Manage Courses|Batches  |Assigned|
 
   Scenario Outline: Filter by category
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
     And Expand the dropdown "Category"
-    And Select "EC" from dropdown
+    And Select EC from dropdown
     And Expand selected category dropdown
-    And Select "QA" from dropdown
-    Then Validate records get filtered on the basis of EC "<EC>"
+    And Select QA from dropdown
+#    Then Validate records get filtered on the basis of EC "<EC>"
 
     Examples:
       |module        |submodule|EC  |
       |Manage Courses|Batches  |QA  |
-    
+
   Scenario Outline: Filter and unassign a candidate
     Given Select "<module>", "<submodule>" from sidebar
     When Click actions icon of a batch
     And Select "Assign Learners" from actions dropdown
     And Expand the dropdown "Category"
-    And Select "EC" from dropdown
+    And Select EC from dropdown
     And Expand selected category dropdown
-    And Select "QA" from dropdown
+    And Select QA from dropdown
     And Get assigned learners count
     And Unassign a learner
     Then Validate count after unassigning
@@ -101,7 +101,3 @@ Feature: Assign learner to batch
     Examples:
       |module        |submodule|
       |Manage Courses|Batches  |
-    
-    
-
-

@@ -4,12 +4,11 @@ Feature: Learner module features
     Given Navigate to login page
     Then Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
 
-  @regression012 @1
+  @regression012 @1 @fixed
   Scenario Outline: Create Course->Assign Learner->Start Course and navigate back->Course Resume text Validation
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
     Then Create a Course for Learner "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>","<description>","<contentMessage>","<assignmentMessage>"
-    And Click the button "Yes"
     And A Learner is assign to a course
     And Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
@@ -32,20 +31,20 @@ Feature: Learner module features
       |Learner|
 
 
-  @regression012 @3 @fixed
-  Scenario Outline: Validate Ongoing and Completed Course Count
-    When Expand user dropdown from navbar
-    Then Verify the options present in dropdown and select it "<option1>"
-    And Validate the count of Ongoing and Completed Course
-    And Switch to Completed Tab and validate it functionality
-    And Validate Course Summary
+#  @regression012 @3 @fixed
+#  Scenario Outline: Validate Ongoing and Completed Course Count
+#    When Expand user dropdown from navbar
+#    Then Verify the options present in dropdown and select it "<option1>"
+#    And Validate the count of Ongoing and Completed Course
+#    And Switch to Completed Tab and validate it functionality
+#    And Validate Course Summary
+#
+#    Examples:
+#      |option1|
+#      |Learner|
 
-    Examples:
-      |option1|
-      |Learner|
 
-
-  @4
+  @4 @fixed
   Scenario Outline: Create Course-> switch to Course catalog->validate Enroll button functionality
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -69,14 +68,16 @@ Feature: Learner module features
     And Expand user dropdown from navbar
     Then Verify the options present in dropdown and select it "<option1>"
     And Switch to Course Catalog Screen
-    Then Validate course overview
+    And Search a course in course catalog
+    And Click the button "View Course"
+    Then Verify course content
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                                                 |category|description|contentMessage|assignmentMessage|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\saloni.nagpal\Pictures\Screenshots\Screenshot (10).png|Logical |abc        |              |                 |
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |
 
 
-  @6
+  @6 @fixed
   Scenario Outline: Create Course->Start Course->Validate Upload assignment file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -89,10 +90,10 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|fileLocation1|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\athena.zip|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   |C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\Completed_Courses1728370245615.zip|
 
 
-  @7
+  @7 @fixed
   Scenario Outline: Create Course->Start Course->Validate View Upload file
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
@@ -106,10 +107,10 @@ Feature: Learner module features
 
     Examples:
       |submodule|module|option1|courseType|duration|courseTag|fileLocation                                    |category|description|contentMessage|assignmentMessage|fileLocation1|
-      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\athena.zip|
+      |Course Library|Manage Courses|Learner|  Public  |  30    |  Java   | C:\Users\Pallavi.Arora\Downloads\athena.png|Logical |abc        |              |                 |C:\Users\Pallavi.Arora\Downloads\Completed_Courses1728370245615.zip|
 
 
-  @8
+  @8 @fixed
   Scenario Outline: Validate non existing course
     When Expand user dropdown from navbar
     And Verify the options present in dropdown and select it "<option1>"

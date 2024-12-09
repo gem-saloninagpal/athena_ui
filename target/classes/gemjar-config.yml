@@ -4,17 +4,17 @@ jewel_user: pallaviarora
 #jewel_bridge_token: 3c746c90-69da-4365-b530-ea1cdfb37ae21716282288009
 #enter_point: https://betaapi.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 #prod token
-jewel_bridge_token: 9dbeea5c-65e3-4e2b-b115-91b731cbf3991722920219348
+jewel_bridge_token: f33cdb19-547e-41e0-b47b-73c34ce0294a1728625231954
 enter_point: https://apis.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 report_name: Athena_Report
 email_report: N
 jewel_screen_shots: Y/N
 #tags: '@cucumber_tag'
-#glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
-glue_code: com.gemini.athenaUi.stepDefinitions
+glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
+#glue_code: com.gemini.athenaUi.stepDefinitions
 #glue_code: com.gemini.athena.stepdefinitions
-#browser_name: chrome
-#launch_url: https://athena-dev.geminisolutions.com
+browser_name: chrome
+launch_url: https://dev-athena.geminisolutions.com/
 #launch_url: http://localhost:4200/athena
 
 prod:
@@ -29,23 +29,23 @@ prod:
   findAllUser : https://devapi.geminisolutions.com/gemassessment/api/findActiveusers
   getQuestionTypes : https://devapi.geminisolutions.com/gemassessment/api/getQuestionTypes
   getAllQuestions : http://devapi.geminisolutions.com/gemassessment/api/getQuestions
-  getQuestionById : http://devapi.geminisolutions.com/gemassessment/api/getQuestion/19
+  getQuestionById : http://devapi.geminisolutions.com/gemassessment/api/getQuestion/1
   forgotPassword : http://devapi.geminisolutions.com/gemassessment/user/forgotPassword
   getTestMaster : https://devapi.geminisolutions.com/gemassessment/api/getTest
   getTestById : https://devapi.geminisolutions.com/gemassessment/api/getTest/17
   addCandidateTest : https://devapi.geminisolutions.com/gemassessment/api/addCandidateTest
-  getRandomQuestions : https://devapi.geminisolutions.com/gemassessment/api/getRandomQuestions?questionCount=5&sectionTypeId=1&difficulty=Medium&questionTypeId=2&tags=test
+  getRandomQuestions : https://devapi.geminisolutions.com/gemassessment/api/getRandomQuestions?questionCount=1&sectionTypeId=1&difficulty=Easy&questionTypeId=2&tags=Java
   paginatedGetTest : https://devapi.geminisolutions.com/gemassessment/api/getAllPaginatedTests?testTag=mat&pageNumber=0&pageSize=9
-  getAllCandidatesByTestId : https://devapi.geminisolutions.com/gemassessment/api/getAllCandidates/1
+  getAllCandidatesByTestId :  https://devapi.geminisolutions.com/gemassessment/api/getAllCandidates/1
   getAllActiveCandidate : https://devapi.geminisolutions.com/gemassessment/api/getAllActiveCandidateUsers?pageIndex=0&pageSize=2
   getActiveTestAndQuestionCount : https://devapi.geminisolutions.com/gemassessment/api/getActiveTestQuestionCountAndSectionTypeCount
-  removeCandidateFromTest : https://devapi.geminisolutions.com/gemassessment/api/removeCandidateFromTest/12/1
+  removeCandidateFromTest : https://devapi.geminisolutions.com/gemassessment/api/removeCandidateFromTest/1/1
   getCandidateAnswer : https://devapi.geminisolutions.com/gemassessment/api/getAllAnswer/20
   generateReport: https://devapi.geminisolutions.com/gemassessment/api/generateReport/1
   getAllTests: https://devapi.geminisolutions.com/gemassessment/api/getAllAssignedTests/10
   getAllUsersPaginated: https://devapi.geminisolutions.com/gemassessment/api/allUsersPaginated?pageIndex=0&pageSize=50&roles=2&roles=3&roles=4&roles=1001
   clearAnswer: https://devapi.geminisolutions.com/gemassessment/api/clearAnswer/
-  addTest: https://devapi.geminisolution.com/gemassessment/api/addTest
+  addTest: https://devapi.geminisolutions.com/gemassessment/api/addTest
   getUserById: https://devapi.geminisolutions.com/gemassessment/api/user/1
   addSection: https://devapi.geminisolutions.com/gemassessment/api/addSection
   getSection: https://devapi.geminisolutions.com/gemassessment/api/sections
@@ -99,3 +99,14 @@ prod:
   updateQuestion: https://devapi.geminisolutions.com/gemassessment/api/updateQuestion
   getComprehensionAssocQuestions: https://devapi.geminisolutions.com/gemassessment/api/getComprehensionAssocQuestions/1
   assignRandomEvaluators: https://devapi.geminisolutions.com/gemassessment/api/assignRandomEvaluators/26?emailList=abc@gmail.com
+  updateDateOfAllCoursesForUser: https://devapi.geminisolutions.com/gemassessment/api/updateDateOfAllCoursesForUser
+  updateDateOfSelectedCoursesForUser: https://devapi.geminisolutions.com/gemassessment/api/updateDateOfSelectedCoursesForUser
+  getAllCourseDetails: https://devapi.geminisolutions.com/gemassessment/api/external/getAllCourseDetails?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  getAllCompletedCoursesCandidatesView: https://devapi.geminisolutions.com/gemassessment/api/getAllCompletedCoursesCandidatesView
+  getDefaulters: https://devapi.geminisolutions.com/gemassessment/api/external/getDefaulters?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  getCertifiedLearnersByCategory: https://devapi.geminisolutions.com/gemassessment/api/external/getCertifiedLearnersByCategory?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R&category=Technical
+  getCertifiedLearnersByCourse: https://devapi.geminisolutions.com/gemassessment/api/external/getCertifiedLearnersByCourse?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R&course=sub_check
+  getOngoingCourseData: https://devapi.geminisolutions.com/gemassessment/api/external/getOngoingCourseData?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  sendMonthlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendMonthlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  sendQuarterlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendQuarterlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  sendYearlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendYearlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R

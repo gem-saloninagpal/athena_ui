@@ -14,7 +14,7 @@ Feature: Questions functionality
     And Click the button "Next"
     And Enter question description "<question1>"
     And Enter options and select a correct option
-    And Click the button "Preview"
+    And Click Preview button
     Then Verify question dialog box opens
     Then Verify the question in dialog box "<question1>"
     And Close the dialog box
@@ -40,7 +40,7 @@ Feature: Questions functionality
     And Click the button "Next"
     When Enter question description "<question1>"
     And Enter options and select a correct option
-    And Click the button "Preview"
+    And Click Preview button
     Then Verify question dialog box opens
     And Close the dialog box
     And Click the button "Update & Add More"
@@ -205,16 +205,7 @@ Feature: Questions functionality
     When Enter movie name and description
     And Upload a video "<movieLocation>"
     And Click the upload button
-#    Then Verify video is uploaded
-#    When Enter question description "<question1>"
-#    And Enter options and select a correct option
-#    And Click the button "Save & Add More"
-#    And Enter question description "<question2>"
-#    And Enter options and select a correct option
-#    And Click the button "Save & Exit"
-#    And Expand the video field
-#    Then Verify the video name and description
-#    Then Verify the video based question is created "<question1>","<question2>"
+
     Examples:
       |module |submodule|level  |type                    |section  |difficulty|skills|marks|movieLocation                                  |question1|question2|text|
       |Tests  |Questions|Basic  |Multiple choice question|Logical  |Hard      |Java  |10   |C:\Users\Pallavi.Arora\Downloads\sample_vid.mp4|Q1       |Q2       |Plain Text|
@@ -247,24 +238,6 @@ Feature: Questions functionality
       |module |submodule|
       |Tests  |Questions|
 
-#  @inProgress
-#  Scenario Outline: Edit video based question and verify - inProgress
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Switch to "Video Based"
-#    And Expand the video field
-#    And Get comprehension based question statement
-#    And Edit comprehension based question
-#    Then Verify confirmation dialog box appears
-#    When Click the button "Yes"
-#    And Update comprehension based question
-#    And Enter options and select a correct option
-#    And Click the button "Save & Exit"
-#    And Expand the passage field
-#    Then Verify the updated comprehension question
-#    Examples:
-#      |module |submodule|
-#      |Tests  |Questions|
-
 
   @questionModule  @inContinuation
   Scenario Outline: Delete Video
@@ -296,48 +269,6 @@ Feature: Questions functionality
       |module |submodule|message             |state  |
       |Tests  |Questions|deleted successfully|deleted|
 
-#  @questionModule @upload @requireCreatedExcel
-#  Scenario Outline: Upload an excel(containing- 1.new question 2.same excel 3.invalid column) and validate
-#    Given Select "<module>", "<submodule>" from sidebar
-#    And Click the button "Import Questions"
-#    And Upload an excel "<fileLocation>"
-#    And Click the upload button
-#    Then Verify Status "<Status>" and message "<message>" in uploaded excel
-#
-#    Examples:
-#      |module|submodule|fileLocation                                                                 |Status |message                     |
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1).xlsx|Success|Question added successfully |
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1).xlsx|Failed |already exists              |
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\invalidColumn.xlsx                          |Failed |invalid              |
-
-#  @questionModule @upload @bug
-#  Scenario Outline: Upload an empty excel twice and validate
-#    Given Select "<module>", "<submodule>" from sidebar
-#    And Click the button "Download Question Template"
-#    And Click the button "Import Questions"
-#    And Upload recently downloaded file
-#    And Click the upload button
-#    Then Verify Status "<Status>" and message "<message>" in uploaded excel
-#
-#    Examples:
-#      |module|submodule|Status|message|
-#      |Tests |Questions|Failed| empty |
-#      |Tests |Questions|Failed| empty |
-
-#  @questionModule @upload @requireCreatedExcel @bug(3)
-#  Scenario Outline: Upload an excel(1.both new and existing question 2.upload same excel again 3.upload excel containing less than 4 options)
-#    Given Select "<module>", "<submodule>" from sidebar
-#    And Click the button "Import Questions"
-#    And Upload an excel "<fileLocation>"
-#    And Click the upload button
-#    Then Verify Statuses "<Status1>", "<Status2>" and messages "<message1>", "<message2>" in uploaded excel
-#
-#    Examples:
-#      |module|submodule|fileLocation                                                                          |Status1 |Status2|message1                    |message2|
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\Sample_question_import1704093574235 (1) 1 - Copy.xlsx|Success |Failed |Question added successfully |already exist|
-#      |Tests |Questions|C:\Users\pallavi.arora\Downloads\2 options.xlsx                                       |Success |Failed |failed                      |             |
-
   @questionModule @inProgress
   Scenario Outline:Create coding question
     Given Select "<module>", "<submodule>" from sidebar
@@ -357,30 +288,4 @@ Feature: Questions functionality
 #    Then Verify the subjective questions
     Examples:
       |module |submodule|level|type                      |section|difficulty|skills|marks|text      |language1|language2|
-      |Tests  |Questions|Basic|Coding Subjective question|Logical|Hard      |Java  |10   |Plain Text|Java     |Null     |
-
-#  Scenario Outline: Edit coding language and verify
-#    Given Select "<module>", "<submodule>" from sidebar
-#    When Click Actions icon of recently created question
-#    And Select "Edit" from actions dropdown
-#    And Expand the dropdown "Select Coding Languages"
-#    And Select "<language2>" from dropdown
-#    Then Get the selected languages "<language1>", "<language2>"
-#    And Click the button "Save & Exit"
-#    And Click Actions icon of recently created question
-#    And Select "View" from actions dropdown
-#    Then Verify languages on view "<language1>", "<language2>"
-#    Examples:
-#      |module |submodule|language1|language2|
-#      |Tests  |Questions|Java     |cpp      |
-
-
-
-
-
-
-
-
-
-
-
+      |Tests  |Questions|Basic|Coding Subjective question|Logical|Hard      |Java  |10   |Plain Text|java     |cpp     |

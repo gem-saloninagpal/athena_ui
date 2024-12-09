@@ -1,0 +1,15 @@
+{
+  "pageNumber": 0,
+  "pageSize": 10,
+  "courseMasterId": "",
+  "startDate": "2024-07-01T00:00:00.000",
+  "endDate": "2024-10-11T23:59:00.000",
+  "status": "",
+  "deliveryCouncil": "",
+  "engineeringCouncil": "",
+  "deptName": "",
+  "isSearchByEC": false,
+  "isSearchByDept": false,
+  "isSearchByDC": false,
+  "isSearchByLocation": false
+}

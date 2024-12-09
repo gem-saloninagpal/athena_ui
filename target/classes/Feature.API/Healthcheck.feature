@@ -1,4 +1,4 @@
-Feature:API testing
+Feature:API HealthCheck
 
   Background:
     Given Set authenticate "authenticate_url" method "post" and SampleName "authenticate_sampleJson"
@@ -79,8 +79,7 @@ Feature:API testing
         Then Verify response message "<message>"
         Examples:
           |Endpoint               |Method|StatusCode|message                                   |
-          |removeCandidateFromTest|delete|200       | Candidate has already attempted the test.|
-
+          |removeCandidateFromTest|delete|200       |Candidate has already attempted the test.|
 
       Scenario Outline: Clear answer
         Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
@@ -140,6 +139,41 @@ Feature:API testing
         Examples:
           |Endpoint |Method |StatusCode|SampleName |
           |assignAllUsersToTest  |post   |200       |assignAllUsersToTest |
+
+  Scenario Outline: Update date of all courses for user
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |updateDateOfAllCoursesForUser  |put   |200       |updateDateOfAllCoursesForUser |
+
+  Scenario Outline: Update date of selected courses for user
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |updateDateOfSelectedCoursesForUser  |put   |200       |updateDateOfSelectedCoursesForUser |
+
+  Scenario Outline: Get all course details
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllCourseDetails|get   |200 |
+
+  Scenario Outline: Update date of selected courses for user
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |getAllCompletedCoursesCandidatesView  |post   |200       |getAllCompletedCoursesCandidatesView |
+
+  Scenario Outline: Get ongoing course data
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |getOngoingCourseData  |post   |200       |getOngoingCourseData |
 
 
 

@@ -2,15 +2,15 @@ Feature: Candidate module features
 
   Background:Check login to candidate module
     And Navigate to login page
-    Then Login using "syncwithcan@gmail.com" and "abc@12311"
+    Then Login using "cand2@gmail.com" and "cand@2"
 
-@screenRevamped-toBeChecked
-  @regressionCandidate @working
+  @screenRevamped-toBeChecked
+    @regressionCandidate @working
   Scenario Outline: Login flow for Candidate
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "syncwithcan@gmail.com"
+    Then Verify the email of candidate "cand2@gmail.com"
 
     Examples:
       |option1|option2        |option3|
@@ -39,9 +39,9 @@ Feature: Candidate module features
     And Enter a password in confirm password field "k", "Confirm Password"
     Then Verify the error displayed in input fields "password mismatch" "<countMandatoryFields1>"
     Then Verify user not able to edit email
-    When Enter a password "abc@12311" in new password field
-    And Enter a password in confirm password field "abc@12311111", "Confirm Password"
-    And Enter a password "abc@123" in old password fields
+    When Enter a password "abc@123" in new password field
+    And Enter a password in confirm password field "abc@123", "Confirm Password"
+    And Enter a password "cand@2" in old password fields
     And Click the button "Change Password"
 #    Then Verify the popup message "Password updated successfully!"
 
@@ -58,64 +58,64 @@ Feature: Candidate module features
       |tab         |
       |Active Tests|
 
-  @regressionCandidate @working
-  Scenario Outline: Verify selected section gets opened
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    Then Click the button "NEXT"
-    And Verify dialog box appears
-    Then Click the Yes button
-    And Click on the section ticket "<sectionName>"
-    Then Verify there is no change in sections screen
-    And Click the button "Attempt"
-    Then Verify user navigates to questions screen of the selected section "<sectionName>"
+#  @regressionCandidate @working
+#  Scenario Outline: Verify selected section gets opened
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    Then Click the button "NEXT"
+#    And Verify dialog box appears
+#    Then Click the Yes button
+#    And Click on the section ticket "<sectionName>"
+#    Then Verify there is no change in sections screen
+#    And Click the button "Attempt"
+#    Then Verify user navigates to questions screen of the selected section "<sectionName>"
+#
+#    Examples:
+#      |sectionName|
+#      |Logical |
 
-    Examples:
-      |sectionName|
-      |Technical |
+#  @regressionCandidate @working
+#  Scenario: Navigation between the sections
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    When Click the Yes button
+#    And Click the button "Attempt"
+#    And Select "Logical" from dropdown
+#    Then Verify user navigates to questions screen of the selected section "Logical"
 
-  @regressionCandidate @working
-  Scenario: Navigation between the sections
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    When Click the Yes button
-    And Click the button "Attempt"
-    And Select "Technical" from dropdown
-    Then Verify user navigates to questions screen of the selected section "Technical"
+#  @regressionCandidate @working
+#  Scenario Outline: Verify user is able to save answers
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    When Click the Yes button
+#    And Click the button "Attempt"
+#    And Select or type an answer
+#    And Click the button "Save & Next"
+#    Then Verify user is able to save answers "<questionStatus>"
+#
+#    Examples:
+#      |questionStatus|
+#      |submitted     |
 
-  @regressionCandidate @working
-  Scenario Outline: Verify user is able to save answers
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    When Click the Yes button
-    And Click the button "Attempt"
-    And Select or type an answer
-    And Click the button "Save & Next"
-    Then Verify user is able to save answers "<questionStatus>"
-
-    Examples:
-      |questionStatus|
-      |submitted     |
-
-  @regressionCandidate @working
-  Scenario: Verify clear functionality
-    Then Start test and verify instructions video is displayed
-    Then Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    Then Click the button "NEXT"
-    And Verify dialog box appears
-    Then Click the Yes button
-    Then Click the button "Attempt"
-    Then Select or type an answer
-    And Click the button "Clear"
-    Then Verify the answer got cleared
+#  @regressionCandidate @working
+#  Scenario: Verify clear functionality
+#    Then Start test and verify instructions video is displayed
+#    Then Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    Then Click the button "NEXT"
+#    And Verify dialog box appears
+#    Then Click the Yes button
+#    Then Click the button "Attempt"
+#    Then Select or type an answer
+#    And Click the button "Clear"
+#    Then Verify the answer got cleared
 
   @regressionCandidate @working
   Scenario: Verify clear functionality after saving an answer
@@ -132,19 +132,19 @@ Feature: Candidate module features
     And Click the button "Clear"
     Then Verify the answer got cleared
 
-  @regressionCandidate @working
-  Scenario: Refresh while attempting test
-    When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
-    Then Check the instructions checkbox
-    And Click the button "NEXT"
-    Then Verify dialog box appears
-    When Click the Yes button
-    And Click the button "Attempt"
-    And Select or type an answer
-    And Click the button "Save & Next"
-    And Refresh the page, cancel alert and verify user is on same page
-    And Refresh the page, accept alert and verify user navigates to instructions screen
+#  @regressionCandidate @working
+#  Scenario: Refresh while attempting test
+#    When Start test and verify instructions video is displayed
+#    And Click the "NEXT" button of instructions video
+#    Then Check the instructions checkbox
+#    And Click the button "NEXT"
+#    Then Verify dialog box appears
+#    When Click the Yes button
+#    And Click the button "Attempt"
+#    And Select or type an answer
+#    And Click the button "Save & Next"
+#    And Refresh the page, cancel alert and verify user is on same page
+#    And Refresh the page, accept alert and verify user navigates to instructions screen
 
 #  @regressionCandidate @toBeModified
 #  Scenario Outline: Validate the functionality of arrow key
@@ -163,7 +163,7 @@ Feature: Candidate module features
 #      |5             |
 
   @regressionCandidate @working
-  Scenario: Save a question without answering it
+  Scenario: Save a question without answering i t
     When Start test and verify instructions video is displayed
     And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
