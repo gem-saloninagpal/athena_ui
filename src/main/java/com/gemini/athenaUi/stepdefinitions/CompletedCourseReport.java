@@ -2,9 +2,9 @@ package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.CampusPerformanceLocators;
 import com.gemini.athenaUi.locators.CompletedCourseReportLocator;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
@@ -26,7 +26,7 @@ public class CompletedCourseReport {
      //       DriverAction.waitUntilElementAppear(MyLocators.searchbox,5);
             DriverAction.typeText(CampusPerformanceLocators.nameEmailSearchbox,text,"Enter name or email");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Enter name or email in searchbox","Exception encountered- "+e, STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Enter name or email in searchbox","Exception encountered- "+e, Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -48,12 +48,12 @@ public class CompletedCourseReport {
                 email=DriverAction.getElements(CampusPerformanceLocators.email);
             }
             if(isPassed){
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of key searched.","Successfully validated the records on the basis of key searched.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of key searched.","Successfully validated the records on the basis of key searched.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of key searched.","Could not validate the records on the basis of key searched.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of key searched.","Could not validate the records on the basis of key searched.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Validate records get filtered on the basis of name and email","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Validate records get filtered on the basis of name and email","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -71,12 +71,12 @@ public class CompletedCourseReport {
                 }
             }
             if (isPassed) {
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Successfully validated the filtered records.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Successfully validated the filtered records.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Could not validate the filtered records.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Could not validate the filtered records.", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Exception encountered- " + e, STATUS.ERR, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Validate records get filtered on the basis of location", "Exception encountered- " + e, Status.ERR, DriverAction.takeSnapShot());
         }
 
     }
@@ -95,12 +95,12 @@ public class CompletedCourseReport {
                 }
             }
             if (isPassed) {
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Successfully validated the filtered records.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Successfully validated the filtered records.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Could not validate the filtered records.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Could not validate the filtered records.", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Exception encountered- " + e, STATUS.ERR, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Validate records get filtered on the basis of selected category", "Exception encountered- " + e, Status.ERR, DriverAction.takeSnapShot());
         }
     }
 
@@ -121,7 +121,7 @@ public class CompletedCourseReport {
             System.out.println(formattedStartDate);
             System.out.println(formattedEndDate);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Select start date and end date","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Select start date and end date","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -156,12 +156,12 @@ public class CompletedCourseReport {
                 }
             }
             if(c==10){
-                GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Successfully verified the filtered records on the basis of date.",STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Successfully verified the filtered records on the basis of date.",Status.PASS, DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Could not verify the filtered records on the basis of date.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Could not verify the filtered records on the basis of date.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify records get filtered on the basis of date","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -180,12 +180,12 @@ public class CompletedCourseReport {
                 email=DriverAction.getElements(CampusPerformanceLocators.email);
             }
             if(!isPassed){
-                GemTestReporter.addTestStep("Validate records get unfiltered.","Successfully validated the unfiltered records.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get unfiltered.","Successfully validated the unfiltered records.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Validate records get unfiltered.","Could not validate the unfiltered records.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate records get unfiltered.","Could not validate the unfiltered records.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Validate records get unfiltered","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Validate records get unfiltered","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -197,13 +197,13 @@ public class CompletedCourseReport {
 
             if (downloadedFile != null && downloadedFile.exists()) {
                 if(downloadedFile.getName().contains(file)){
-                    GemTestReporter.addTestStep("Verify the file gets downloaded","Successfully verified the downloaded file.",STATUS.PASS,DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify the file gets downloaded","Successfully verified the downloaded file.",Status.PASS,DriverAction.takeSnapShot());
                 }
             }else {
-                GemTestReporter.addTestStep("Verify the file gets downloaded","Could not verify the downloaded file.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the file gets downloaded","Could not verify the downloaded file.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the file gets downloaded","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the file gets downloaded","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
     private static File getLatestDownloadedFile(String downloadDir) {
@@ -225,7 +225,7 @@ public class CompletedCourseReport {
         try{
             DriverAction.click(By.xpath(CompletedCourseReportLocator.selectedCategoryDropdown.replace("input",selectedCategory)),"Expand selected category dropdown- "+selectedCategory,"Successfully expanded the selected category dropdown.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Expand selected category dropdown- "+selectedCategory,"Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Expand selected category dropdown- "+selectedCategory,"Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 

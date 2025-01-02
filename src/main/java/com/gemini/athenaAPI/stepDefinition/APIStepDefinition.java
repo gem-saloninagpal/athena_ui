@@ -1,9 +1,9 @@
 package com.gemini.athenaAPI.stepDefinition;
 
 import com.gemini.athenaAPI.utils.CommonUtils;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.RestAssured;
@@ -81,12 +81,12 @@ public class APIStepDefinition {
         try{
           String getMessage= CommonUtils.response.getResponseBodyJson().getAsJsonObject().get("message").getAsString();
           if(getMessage.contains(message)){
-              GemTestReporter.addTestStep("Verify response message","Successfully verified response message- "+message, STATUS.PASS,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Verify response message","Successfully verified response message- "+message, Status.PASS,DriverAction.takeSnapShot());
           }else{
-              GemTestReporter.addTestStep("Verify response message","Could not verify response message- "+message, STATUS.FAIL,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Verify response message","Could not verify response message- "+message, Status.FAIL,DriverAction.takeSnapShot());
           }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify response message","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify response message","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

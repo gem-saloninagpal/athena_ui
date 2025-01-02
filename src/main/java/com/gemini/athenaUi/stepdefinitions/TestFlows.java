@@ -1,9 +1,9 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.TestFlowLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -31,7 +31,7 @@ public class TestFlows {
             DriverAction.typeText(TestFlowLocators.questionsForEachUser,"4","Successfully entered question for each user.");
             DriverAction.typeText(TestFlowLocators.totalMarks,"2","Successfully entered total marks of test.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Fill all the fields in select options section","Exception encountered- "+e, STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Fill all the fields in select options section","Exception encountered- "+e, Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -39,12 +39,12 @@ public class TestFlows {
     public void validateServerSideSectionIsCreated() {
         try{
             if(DriverAction.getElementText(TestFlowLocators.ticketCreated).equals("Server Side")){
-                GemTestReporter.addTestStep("Validate Server Side section is created","Successfully created server side rendered section.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate Server Side section is created","Successfully created server side rendered section.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Validate Server Side section is created","Server side section is not created.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validate Server Side section is created","Server side section is not created.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Validate Server Side section is created","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Validate Server Side section is created","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -56,7 +56,7 @@ public class TestFlows {
                 DriverAction.click(questions.get(i),"Add a question","Successfully added a question.");
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Add questions in test","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Add questions in test","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -65,7 +65,7 @@ public class TestFlows {
         try{
             DriverAction.typeText(TestFlowLocators.percentageColumn,percentage,"Add cut off percentage as- "+percentage);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Add cut off percentage","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Add cut off percentage","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

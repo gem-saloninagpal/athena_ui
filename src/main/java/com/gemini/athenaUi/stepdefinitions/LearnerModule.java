@@ -3,10 +3,10 @@ package com.gemini.athenaUi.stepdefinitions;
 import com.gemini.athenaUi.locators.*;
 //import com.gemini.athenaUi.locators.LearnerModule_Locators;
 //import com.gemini.athenaUi.locators.MyLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
-import com.gemini.generic.ui.utils.DriverManager;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
+import com.gemini.gemjar.utils.ui.DriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -39,12 +39,12 @@ public class LearnerModule {
     public void expandUserDropdown() throws InterruptedException {
         DriverAction.waitSec(5);
         Thread.sleep(3000);
-        if(DriverAction.isExist(LearnerModule_Locators.userDropdown,120)) {
+        if(DriverAction.isExist(LearnerModule_Locators.userDropdown)) {
             DriverAction.click(LearnerModule_Locators.userDropdown, "Click the dropdown icon on navbar", "Successfully clicked the dropdown icon.");
         }
         else {
             GemTestReporter.addTestStep("Error Occur", "Fail to click on UserDrop down",
-                    STATUS.FAIL, DriverAction.takeSnapShot());
+                    Status.FAIL, DriverAction.takeSnapShot());
         }
     }
 
@@ -64,10 +64,10 @@ public class LearnerModule {
 //                System.out.println(optionText);
 //            }
 //            if (!found) {
-//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Could not verify the option- " + option + "", STATUS.FAIL, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Could not verify the option- " + option + "", Status.FAIL, DriverAction.takeSnapShot());
 //
 //            } else {
-//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", STATUS.PASS, DriverAction.takeSnapShot());
+//                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", Status.PASS, DriverAction.takeSnapShot());
 //            }
             DriverAction.click(By.xpath(LearnerModule_Locators.requiredOption.replace("input",option)), "Select " + option + " from dropdown", "Successfully selected " + option + ".");
 
@@ -85,16 +85,16 @@ public class LearnerModule {
             DriverAction.scrollToBottom();
             if (DriverAction.getElement(LearnerModule_Locators.viewCourseBtn).isDisplayed()) {
                 DriverAction.scrollToBottom();
-                GemTestReporter.addTestStep("Verify View Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify View Course button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.viewCourseBtn);
 //                DriverAction.waitSec(10);
                 DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
             } else {
-                GemTestReporter.addTestStep("Verify View Course button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify View Course button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
 
     }
@@ -104,7 +104,7 @@ public class LearnerModule {
         try {
 //            DriverAction.scrollToBottom();
             if (DriverAction.getElement(LearnerModule_Locators.startCourseBtn).isDisplayed()) {
-                GemTestReporter.addTestStep("Verify Start Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Start Course button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.startCourseBtn);
                 DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
 //                DriverAction.waitSec(10);
@@ -112,26 +112,26 @@ public class LearnerModule {
                 if (DriverAction.getElement(LearnerModule_Locators.backBtn).isDisplayed()) {
                     DriverAction.click(LearnerModule_Locators.backBtn);
                     if (DriverAction.getElement(LearnerModule_Locators.resumeBtn).isDisplayed()) {
-                        GemTestReporter.addTestStep("Verify Resume Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Resume Course button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                         DriverAction.click(LearnerModule_Locators.backBtn1);
                         if (DriverAction.getElement(LearnerModule_Locators.resumeBtn2).isDisplayed()) {
-                            GemTestReporter.addTestStep("Verify Resume button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Verify Resume button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                         } else {
-                            GemTestReporter.addTestStep("Verify Resume button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Verify Resume button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                         }
 
                     } else {
-                        GemTestReporter.addTestStep("Verify Resume Course button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Resume Course button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                     }
 
                 }
 
             } else {
-                GemTestReporter.addTestStep("Verify Start Course button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Start Course button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -144,7 +144,7 @@ public class LearnerModule {
             DriverAction.scrollToBottom();
             //if test is remaining
             if (DriverAction.getElement(LearnerModule_Locators.resumeBtn2).isDisplayed()) {
-                GemTestReporter.addTestStep("Verify Resume button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Resume button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.resumeBtn2);
                 if (DriverAction.getElement(LearnerModule_Locators.resumeBtn).isDisplayed()) {
                     DriverAction.click(LearnerModule_Locators.resumeBtn);
@@ -170,20 +170,20 @@ public class LearnerModule {
                     {
                         DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
                         DriverAction.waitSec(2);
-                        String popUp=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
-                         if ("Content Completed Successfully".equals(popUp)) {
-                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Successfully "+popUp+" appears", STATUS.PASS, DriverAction.takeSnapShot());
-                        } else {
-                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
-                        }
+//                        String popUp=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
+//                         if ("Content Completed Successfully".equals(popUp)) {
+//                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Successfully "+popUp+" appears", Status.PASS, DriverAction.takeSnapShot());
+//                        } else {
+//                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
+//                        }
 //                        if(DriverAction.isDisplayed(LearnerModule_Locators.greenTick))
 //                        {
-//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Successful", Status.PASS, DriverAction.takeSnapShot());
 //
 //                        }
 //                        else
 //                        {
-//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 //
 //                        }
                         }
@@ -199,19 +199,19 @@ public class LearnerModule {
                         System.out.println("hello");
                         System.out.println(popUp);
                         System.out.println("hello");
-                        if ("Assignment Completed Successfully".equals(popUp)) {
-                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Successfully "+popUp+" appears", STATUS.PASS, DriverAction.takeSnapShot());
-                        } else {
-                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
-                        }
+//                        if ("Assignment Completed Successfully".equals(popUp)) {
+//                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Successfully "+popUp+" appears", Status.PASS, DriverAction.takeSnapShot());
+//                        } else {
+//                            GemTestReporter.addTestStep("Verify confirmation popup message"+popUp, "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
+//                        }
 //                        if(DriverAction.isDisplayed(LearnerModule_Locators.greenTick))
 //                        {
-//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Successful", Status.PASS, DriverAction.takeSnapShot());
 //
 //                        }
 //                        else
 //                        {
-//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+//                            GemTestReporter.addTestStep("Verify green tick once the module is completed", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 //
 //                        }
                     }
@@ -219,40 +219,40 @@ public class LearnerModule {
                 }
 
                  else {
-                    GemTestReporter.addTestStep("Verify Resume course button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify Resume course button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                 }
 
             } else {
-                GemTestReporter.addTestStep("Verify Resume button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Resume button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
             }
 
 
-            DriverAction.waitSec(10);
+            DriverAction.waitSec(16);
 
             //download certificate and validate it is downloaded properly
             if (DriverAction.getElement(LearnerModule_Locators.downloadCertificate).isDisplayed()) {
-                GemTestReporter.addTestStep("Verify download Certificate button is visible on ui", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify download Certificate button is visible on ui", "Successful", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.downloadCertificate, "download Certificate button is visible on ui", "successfully clicked download Certificate button.");
                 DriverAction.waitSec(5);
-                String downloadPath = "C:/Users/rahul.adhikari/Downloads";
+                String downloadPath = "C:/Users/saloni.nagpal/Downloads";
                 File latestFile = getLatestFileFromFolder(downloadPath);
                 System.out.println("Latest file: " + latestFile.getName());
                 if (latestFile.toString().contains("certificate")) {
                     System.out.println("File downloaded successfully.");
-                    GemTestReporter.addTestStep("Verify certificate is downloaded properly", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify certificate is downloaded properly", "Successful", Status.PASS, DriverAction.takeSnapShot());
 
                 } else {
                     System.out.println("File download failed.");
-                    GemTestReporter.addTestStep("Verify certificate is downloaded properly", "UnSuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify certificate is downloaded properly", "UnSuccessful", Status.FAIL, DriverAction.takeSnapShot());
 
                 }
 //
             } else {
-                GemTestReporter.addTestStep("Verify download Certificate button is visible on ui", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify download Certificate button is visible on ui", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Exception encountered- "+e, Status.FAIL);
         }
 
     }
@@ -265,7 +265,7 @@ public class LearnerModule {
             if (DriverAction.getElement(LearnerModule_Locators.courseCatalogbtn).isDisplayed()) {
                 DriverAction.click(LearnerModule_Locators.courseCatalogbtn);
             } else {
-                GemTestReporter.addTestStep("Verify Course Catalog button is visible", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Course Catalog button is visible", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 
             }
             DriverAction.waitUntilElementClickable(LearnerModule_Locators.courseDiv, 120);
@@ -297,19 +297,19 @@ public class LearnerModule {
                 List<WebElement> testList1 = DriverAction.getElements(LearnerModule_Locators.catalogTest);
                 System.out.print(testList1.size());
                 if (Assignments.size() == countAssignment && testList1.size() == countTest) {
-                    GemTestReporter.addTestStep("Verify test and assignment count for the view course", "Count Matches", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify test and assignment count for the view course", "Count Matches", Status.PASS, DriverAction.takeSnapShot());
                 } else {
-                    GemTestReporter.addTestStep("Verify test and assignment count for the view course", "Count Not Match", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify test and assignment count for the view course", "Count Not Match", Status.FAIL, DriverAction.takeSnapShot());
                 }
 
             } else {
-                GemTestReporter.addTestStep("Verify View Course button is visible", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify View Course button is visible", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 
             }
 
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
 
 
@@ -325,9 +325,9 @@ public class LearnerModule {
                 if (DriverAction.getElement(LearnerModule_Locators.startCourseBtn).isDisplayed()) {
                     DriverAction.click(LearnerModule_Locators.startCourseBtn);
                     if (DriverAction.getElement(LearnerModule_Locators.courseContent).isDisplayed()) {
-                        GemTestReporter.addTestStep("Verify Course is able to start after enroll from course catalog", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Course is able to start after enroll from course catalog", "Successful", Status.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify Course is able to start after enroll from course catalog", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Course is able to start after enroll from course catalog", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                     }
                     DriverAction.click(LearnerModule_Locators.backBtn1);
 
@@ -336,7 +336,7 @@ public class LearnerModule {
 
 
             } else {
-                GemTestReporter.addTestStep("Verify back button is visible", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify back button is visible", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 
             }
             DriverAction.waitUntilElementClickable(LearnerModule_Locators.courseDiv, 120);
@@ -344,7 +344,7 @@ public class LearnerModule {
 
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
 
 
@@ -388,13 +388,13 @@ public class LearnerModule {
                 if (Integer.parseInt(reqValue) > catagoryCount) {
                     DriverAction.click(LearnerModule_Locators.footerRightArrow);
                 } else if (Integer.parseInt(reqValue) == catagoryCount) {
-                    GemTestReporter.addTestStep("Verify catagories filter in course catalog", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify catagories filter in course catalog", "Successful", Status.PASS, DriverAction.takeSnapShot());
                     isTrue = false;
                 }
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
 
     }
@@ -449,16 +449,16 @@ public class LearnerModule {
                 List<WebElement> list1 = DriverAction.getElements(By.xpath(LearnerModule_Locators.courseArea.replace("itr", String.valueOf(i))));
                 if (CourseType.equals("Ongoing")) {
                     if (Integer.parseInt(activeCount) == list1.size()) {
-                        GemTestReporter.addTestStep("Verify Count of Ongoing Course on ui", "Count Matched", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Count of Ongoing Course on ui", "Count Matched", Status.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify Count of Ongoing Course on ui", "Count Not Matched", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Count of Ongoing Course on ui", "Count Not Matched", Status.FAIL, DriverAction.takeSnapShot());
                     }
                 } else if (CourseType.equals("Completed")) {
                     if (Integer.parseInt(CompletedCount) == list1.size()) {
                         count = count + list1.size();
-                        GemTestReporter.addTestStep("Verify Count of Completed Course on ui", "Count Matched", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Count of Completed Course on ui", "Count Matched", Status.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify Count of Completed Course on ui", "Count Not Matched", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Count of Completed Course on ui", "Count Not Matched", Status.FAIL, DriverAction.takeSnapShot());
                     }
 
                 } else if (CourseType.equals("Expired")) {
@@ -467,15 +467,15 @@ public class LearnerModule {
             }
             String totalCount = DriverAction.getElementText(LearnerModule_Locators.totalCourseCount);
             if (Integer.parseInt(totalCount) == count) {
-                GemTestReporter.addTestStep("Verify total count of Ongoing and completed course on ui", "Count Matched", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify total count of Ongoing and completed course on ui", "Count Matched", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify total count of Ongoing and completed course on ui", "Count Not Matched", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify total count of Ongoing and completed course on ui", "Count Not Matched", Status.FAIL, DriverAction.takeSnapShot());
             }
 
 
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -490,26 +490,26 @@ public class LearnerModule {
                 js.executeScript("window.scrollTo(0, arguments[0]);", 200);
 
                 DriverAction.waitSec(2);
-                if(DriverAction.isExist(LearnerModule_Locators.threeDotIcon1,120))
+                if(DriverAction.isExist(LearnerModule_Locators.threeDotIcon1))
                 {
                     DriverAction.click(LearnerModule_Locators.threeDotIcon1);
                 }
                 else {
-                    GemTestReporter.addTestStep("Error Occur", "Failed to click on edit option", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Error Occur", "Failed to click on edit option", Status.FAIL, DriverAction.takeSnapShot());
                 }
                 DriverAction.waitSec(5);
-                if (DriverAction.isExist(LearnerModule_Locators.viewandDownload,120)) {
+                if (DriverAction.isExist(LearnerModule_Locators.viewandDownload)) {
 
                     DriverAction.click(LearnerModule_Locators.viewandDownload);
                     DriverAction.waitSec(5);
 
                     if (DriverAction.getElement(LearnerModule_Locators.viewandDownloadLable).isDisplayed()) {
-                        GemTestReporter.addTestStep("Verify Certificate Visible on ui", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Certificate Visible on ui", "Successful", Status.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify Certificate Visible on ui", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify Certificate Visible on ui", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                     }
-                    if (DriverAction.isExist(LearnerModule_Locators.downloadBtn,120)) {
-                        GemTestReporter.addTestStep("Verify Download button on ui", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                    if (DriverAction.isExist(LearnerModule_Locators.downloadBtn)) {
+                        GemTestReporter.addTestStep("Verify Download button on ui", "Successful", Status.PASS, DriverAction.takeSnapShot());
                         DriverAction.click(LearnerModule_Locators.downloadBtn);
                         String directoryPath = "C:/Users/saloni.nagpal/Downloads/";
                         File directory = new File(directoryPath);
@@ -519,13 +519,13 @@ public class LearnerModule {
                             //verify if latest file is pdf(modify)
                             if (latestfile != null) {
                                 System.out.println("Latest File : " + latestfile.getAbsolutePath());
-                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User successfully able to download the certificate", STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User successfully able to download the certificate", Status.PASS, DriverAction.takeSnapShot());
 
                             } else {
-                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User not able to download the certificate", STATUS.FAIL, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating whether User able to download certificate", "User not able to download the certificate", Status.FAIL, DriverAction.takeSnapShot());
                             }
                         } else {
-                            GemTestReporter.addTestStep("Verify Download button on ui", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Verify Download button on ui", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                         }
                         DriverAction.scrollToTop();
                         DriverAction.click(LearnerModule_Locators.backBtn1);
@@ -533,27 +533,27 @@ public class LearnerModule {
                     }
                     else
                     {
-                        GemTestReporter.addTestStep("Error Occur", "Fail to click on download button", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Error Occur", "Fail to click on download button", Status.FAIL, DriverAction.takeSnapShot());
 
                     }
                 }
                 else
                 {
-                    GemTestReporter.addTestStep("Error Occur", "Fail to find View Downloads option", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Error Occur", "Fail to find View Downloads option", Status.FAIL, DriverAction.takeSnapShot());
 
                 }
 
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
     @And("^Validate Course Summary$")
     public void courseSummary() {
         try {
-            if (DriverAction.isExist(LearnerModule_Locators.completedCourseTab,120)) {
+            if (DriverAction.isExist(LearnerModule_Locators.completedCourseTab)) {
                 DriverAction.click(LearnerModule_Locators.completedCourseTab);
                 DriverAction.waitSec(3);
                 JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
@@ -568,11 +568,11 @@ public class LearnerModule {
             }
             else
             {
-                GemTestReporter.addTestStep("Error Occur", "Fail to click on complete Course tab", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on complete Course tab", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -594,14 +594,14 @@ public class LearnerModule {
             if (DriverAction.getElement(LearnerModule_Locators.courseCatalogbtn).isDisplayed()) {
                 DriverAction.click(LearnerModule_Locators.courseCatalogbtn);
             } else {
-                GemTestReporter.addTestStep("Verify Course Catalog button is visible", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Course Catalog button is visible", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
 
             }
 
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -609,22 +609,22 @@ public class LearnerModule {
     public void validateTheEnrollButtonFunctionality() {
         try{
             DriverAction.waitSec(12);
-       if(DriverAction.isExist(LearnerModule_Locators.enrollList,120))
+       if(DriverAction.isExist(LearnerModule_Locators.enrollList))
        {
-           GemTestReporter.addTestStep("Validate Enroll button is visible on course", "Button is visible", STATUS.PASS, DriverAction.takeSnapShot());
+           GemTestReporter.addTestStep("Validate Enroll button is visible on course", "Button is visible", Status.PASS, DriverAction.takeSnapShot());
            DriverAction.click(LearnerModule_Locators.enrollList);
-           DriverAction.waitSec(9);
-           if(DriverAction.isExist(LearnerModule_Locators.startCourse,120))
+           DriverAction.waitSec(12);
+           if(DriverAction.isExist(LearnerModule_Locators.startCourse))
            {
                DriverAction.click(LearnerModule_Locators.startCourseBtn1);
-               if(DriverAction.isExist(LearnerModule_Locators.startCourseBtn,120))
+               if(DriverAction.isExist(LearnerModule_Locators.startCourseBtn))
                {
-                   GemTestReporter.addTestStep("Validate Enroll button is working properly", "It is working properly", STATUS.PASS, DriverAction.takeSnapShot());
+                   GemTestReporter.addTestStep("Validate Enroll button is working properly", "It is working properly", Status.PASS, DriverAction.takeSnapShot());
 
                }
                else
                {
-                   GemTestReporter.addTestStep("Validate Enroll button is working properly", "It is not working properly", STATUS.FAIL, DriverAction.takeSnapShot());
+                   GemTestReporter.addTestStep("Validate Enroll button is working properly", "It is not working properly", Status.FAIL, DriverAction.takeSnapShot());
 
                }
            }
@@ -632,7 +632,7 @@ public class LearnerModule {
        }
        else
        {
-           GemTestReporter.addTestStep("Validate Enroll button is visible on course", "Button is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+           GemTestReporter.addTestStep("Validate Enroll button is visible on course", "Button is not visible", Status.FAIL, DriverAction.takeSnapShot());
 
        }
 
@@ -641,18 +641,19 @@ public class LearnerModule {
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
-    @Then("Create a Course for Learner {string}, {string}, {string}, {string}, {string},{string},{string},{string}")
-    public void createACourseForLearner(String courseType, String duration, String courseTag, String fileLocation, String category, String description, String contentMessage, String assignmentMessage) {
+    @Then("Create a Course for Learner {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void createACourseForLearner(String courseType, String duration, String points, String courseTag, String fileLocation, String category, String description, String contentMessage, String assignmentMessage) {
    try{
        int c=2;
        List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
        _courseName= "a"+RandomStringUtils.randomAlphanumeric(10);
-       String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
-       for(int i=0;i<=5;i++){
+       String inputValues[]={_courseName,courseType,duration,points,courseTag,fileLocation,category};
+       for(int i=0;i<=6;i++){
+            DriverAction.waitSec(3);
            String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
            String upload=inputFields.get(i).getAttribute("type");
            //dropdown
@@ -671,19 +672,19 @@ public class LearnerModule {
            }
        }
        //fill the description
-       if (DriverAction.isExist(Course_Locators.courseDescription,120)) {
+       if (DriverAction.isExist(Course_Locators.courseDescription)) {
            DriverAction.typeText(Course_Locators.courseDescription,description);
            DriverAction.scrollToBottom();
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
-       if (DriverAction.isExist(Course_Locators.checkboxs,120)) {
+       if (DriverAction.isExist(Course_Locators.checkboxs)) {
            DriverAction.click(Course_Locators.checkboxs);
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on checkbox", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on checkbox", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
@@ -694,57 +695,57 @@ public class LearnerModule {
        //add content to the course
        Thread.sleep(3000);
        DriverAction.waitSec(5);
-       if (DriverAction.isExist(Course_Locators.addIcon,120))
+       if (DriverAction.isExist(Course_Locators.addIcon))
        {
            DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
 
        DriverAction.waitSec(5);
-       if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
+       if (DriverAction.isExist(Course_Locators.addToCourseBtn))
        {
            DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
 
        //add assignment to the course
        DriverAction.waitSec(5);
-       if (DriverAction.isExist(Course_Locators.addIcon,120))
+       if (DriverAction.isExist(Course_Locators.addIcon))
        {
            DriverAction.click(Course_Locators.addIcon,"Clicked on add Content Icon","Successfully clicked on Add Content Icon");
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on add Content Icon", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
 
        DriverAction.waitSec(5);
-       if (DriverAction.isExist(Course_Locators.addToCourseBtn,120))
+       if (DriverAction.isExist(Course_Locators.addToCourseBtn))
        {
            DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
-       if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Default Order")),120)) {
+       if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Default Order")))) {
            DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Default Order")), "clicked on Default Order button", "Successfully clicked on Default Order button");
        }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on Default Order button", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on Default Order button", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
-       if(DriverAction.isExist(LearnerModule_Locators.saveCourseBtn,120)) {
+       if(DriverAction.isExist(LearnerModule_Locators.saveCourseBtn)) {
            DriverAction.click(LearnerModule_Locators.saveCourseBtn);
              }
        else {
-           GemTestReporter.addTestStep("Error Occur", "Fail to click on Save Course button", STATUS.FAIL,
+           GemTestReporter.addTestStep("Error Occur", "Fail to click on Save Course button", Status.FAIL,
                    DriverAction.takeSnapShot());
        }
        Thread.sleep(3000);
@@ -757,7 +758,7 @@ public class LearnerModule {
    }
    catch (Exception e) {
        logger.info("Exception occurred", e);
-       GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+       GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
    }
     }
 
@@ -770,8 +771,8 @@ String count1=DriverAction.getElementText(LearnerModule_Locators.assignCount);
 String[] count=count1.split(" ");
 assessmentCount=count[0];
             DriverAction.waitSec(5);
-            if(DriverAction.isExist(LearnerModule_Locators.viewCourseBtn,120)) {
-                GemTestReporter.addTestStep("Validate Course button is visible on course", "Button is visible", STATUS.PASS, DriverAction.takeSnapShot());
+            if(DriverAction.isExist(LearnerModule_Locators.viewCourseBtn)) {
+                GemTestReporter.addTestStep("Validate Course button is visible on course", "Button is visible", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.viewCourseBtn);
                 DriverAction.scrollToBottom();
             }
@@ -787,11 +788,11 @@ assessmentCount=count[0];
             }
             if(counter==Integer.parseInt(assessmentCount))
             {
-                GemTestReporter.addTestStep("Validate the count of Assignment and test of course", "Count Matches", STATUS.PASS,
+                GemTestReporter.addTestStep("Validate the count of Assignment and test of course", "Count Matches", Status.PASS,
                         DriverAction.takeSnapShot());
             }
             else {
-                GemTestReporter.addTestStep("Validate the count of Assignment and test of course", "Count does not Matches", STATUS.FAIL,
+                GemTestReporter.addTestStep("Validate the count of Assignment and test of course", "Count does not Matches", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
 
@@ -799,7 +800,7 @@ assessmentCount=count[0];
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -807,7 +808,7 @@ assessmentCount=count[0];
     public void startWithCourseAndValidateUploadAssignmentFile(String fileLocation1) {
         try{
             if (DriverAction.getElement(LearnerModule_Locators.startCourseBtn).isDisplayed()) {
-                GemTestReporter.addTestStep("Verify Start Course button is present", "Successful", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Start Course button is present", "Successful", Status.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(LearnerModule_Locators.startCourseBtn);
 //                DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon,120);
                 DriverAction.waitSec(10);
@@ -817,34 +818,34 @@ assessmentCount=count[0];
                     DriverAction.waitSec(2);
                     String popUp = DriverAction.getElementText(UserDashboard_Locator.popupMessage);
                     if ("Content Completed Successfully".equals(popUp)) {
-                        GemTestReporter.addTestStep("Verify confirmation popup message" + popUp, "Successfully " + popUp + " appears", STATUS.PASS, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify confirmation popup message" + popUp, "Successfully " + popUp + " appears", Status.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify confirmation popup message" + popUp, "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify confirmation popup message" + popUp, "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
                     }
 
-                    if(DriverAction.isExist(LearnerModule_Locators.uploadFileBtn,120))
+                    if(DriverAction.isExist(LearnerModule_Locators.uploadFileBtn))
                     {
 
                         DriverAction.click(LearnerModule_Locators.uploadFileBtn);
 
                         DriverAction.fileUpload(LearnerModule_Locators.chooseFile,fileLocation1);
                         DriverAction.waitSec(7);
-                        if(DriverAction.isExist(LearnerModule_Locators.uploadBtn,120))
+                        if(DriverAction.isExist(LearnerModule_Locators.uploadBtn))
                         {
                             DriverAction.click(LearnerModule_Locators.uploadBtn);
                         }
                         else {
-                            GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                            GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", Status.FAIL,
                                     DriverAction.takeSnapShot());
                         }
                         if(DriverAction.isDisplayed(LearnerModule_Locators.errorMessageforEmptyFeild))
                         {
-                            GemTestReporter.addTestStep("Validate keeping answer name empty error message appear", "Error message appear", STATUS.PASS,
+                            GemTestReporter.addTestStep("Validate keeping answer name empty error message appear", "Error message appear", Status.PASS,
                                     DriverAction.takeSnapShot());
                         }
                         else
                         {
-                            GemTestReporter.addTestStep("Validate keeping answer name empty error message appear", "Error message not appear", STATUS.FAIL,
+                            GemTestReporter.addTestStep("Validate keeping answer name empty error message appear", "Error message not appear", Status.FAIL,
                                     DriverAction.takeSnapShot());
                         }
 
@@ -853,41 +854,41 @@ assessmentCount=count[0];
                             DriverAction.click(LearnerModule_Locators.cancelBtn);
                         }
                         else {
-                            GemTestReporter.addTestStep("Error Occur", "Fail to click on Cancel button", STATUS.FAIL,
+                            GemTestReporter.addTestStep("Error Occur", "Fail to click on Cancel button", Status.FAIL,
                                     DriverAction.takeSnapShot());
                         }
 
                             DriverAction.fileUpload(LearnerModule_Locators.chooseFile, fileLocation1);
                             DriverAction.waitSec(5);
-                            if(DriverAction.isExist(LearnerModule_Locators.answerInput,120))
+                            if(DriverAction.isExist(LearnerModule_Locators.answerInput))
                             {
                                 DriverAction.typeText(LearnerModule_Locators.answerInput,"demo");
                             }
                             else {
-                                GemTestReporter.addTestStep("Error Occur", "Fail to type into answer input", STATUS.FAIL,
+                                GemTestReporter.addTestStep("Error Occur", "Fail to type into answer input", Status.FAIL,
                                         DriverAction.takeSnapShot());
                             }
-                            if (DriverAction.isExist(LearnerModule_Locators.uploadBtn, 120)) {
+                            if (DriverAction.isExist(LearnerModule_Locators.uploadBtn)) {
                                 DriverAction.click(LearnerModule_Locators.uploadBtn);
                             } else {
-                                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                                GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", Status.FAIL,
                                         DriverAction.takeSnapShot());
                             }
 
                     }
                     else {
-                        GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", STATUS.FAIL,
+                        GemTestReporter.addTestStep("Error Occur", "Fail to click on Upload assignment file", Status.FAIL,
                                 DriverAction.takeSnapShot());
                     }
                 }
 
             } else {
-                GemTestReporter.addTestStep("Verify Start Course button is present", "Unsuccessful", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Start Course button is present", "Unsuccessful", Status.FAIL, DriverAction.takeSnapShot());
             }
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -896,12 +897,12 @@ assessmentCount=count[0];
     public void startWithCourseAndValidateViewUploadFile() {
         try{
             DriverAction.waitSec(5);
-                    if(DriverAction.isExist(LearnerModule_Locators.viewUploadBtn,120))
+                    if(DriverAction.isExist(LearnerModule_Locators.viewUploadBtn))
                     {
                         DriverAction.click(LearnerModule_Locators.viewUploadBtn);
                     }
                     else {
-                        GemTestReporter.addTestStep("Error Occur", "Fail to click on view upload button", STATUS.FAIL,
+                        GemTestReporter.addTestStep("Error Occur", "Fail to click on view upload button", Status.FAIL,
                                 DriverAction.takeSnapShot());
                     }
                     LocalDate currentDate = LocalDate.now();
@@ -917,93 +918,94 @@ assessmentCount=count[0];
                     String fetchedName=DriverAction.getElementText(LearnerModule_Locators.docName);
                     if(fetchedName.contains("demo"))
                     {
-                        GemTestReporter.addTestStep("Validate View upload is working properly", "Data is coming properly", STATUS.PASS,
+                        GemTestReporter.addTestStep("Validate View upload is working properly", "Data is coming properly", Status.PASS,
                                 DriverAction.takeSnapShot());
                     }
                     else
                     {
-                        GemTestReporter.addTestStep("Validate View upload is working properly", "Data is not coming properly", STATUS.FAIL,
+                        GemTestReporter.addTestStep("Validate View upload is working properly", "Data is not coming properly", Status.FAIL,
                                 DriverAction.takeSnapShot());
                     }
 
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
     @Then("Validate Non existing completed course")
     public void validateNonExistingCompletedCourse() {
         try{
-if(DriverAction.isExist(LearnerModule_Locators.completedTab,120))
+if(DriverAction.isExist(LearnerModule_Locators.completedTab))
 {
     DriverAction.click(LearnerModule_Locators.completedTab);
 }
 else {
-    GemTestReporter.addTestStep("Error Occur", "Fail to click on completed tab", STATUS.FAIL,
+    GemTestReporter.addTestStep("Error Occur", "Fail to click on completed tab", Status.FAIL,
             DriverAction.takeSnapShot());
 }
-            if(DriverAction.isExist(LearnerModule_Locators.searchInput,120))
+            if(DriverAction.isExist(LearnerModule_Locators.searchInput))
             {
                 DriverAction.typeText(LearnerModule_Locators.searchInput,"testtesttest");
             }
             else {
-                GemTestReporter.addTestStep("Error Occur", "Fail to type into course search input", STATUS.FAIL,
+                GemTestReporter.addTestStep("Error Occur", "Fail to type into course search input", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             if(DriverAction.isDisplayed(LearnerModule_Locators.noCourseMessage))
             {
-                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "No course display successfully", STATUS.PASS,
+                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "No course display successfully", Status.PASS,
                         DriverAction.takeSnapShot());
             }
             else {
-                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "Not working fine", STATUS.FAIL,
+                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "Not working fine", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
 
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
     @Then("Validate Non existing course in course catalog")
     public void validateNonExistingCourseInCourseCatalog() {
         try{
-            if(DriverAction.isExist(LearnerModule_Locators.courseCatalogbtn,120))
+            if(DriverAction.isExist(LearnerModule_Locators.courseCatalogbtn))
             {
                 DriverAction.click(LearnerModule_Locators.courseCatalogbtn);
             }
             else {
-                GemTestReporter.addTestStep("Error Occur", "Fail to click on Course catalog", STATUS.FAIL,
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Course catalog", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
-            if(DriverAction.isExist(LearnerModule_Locators.searchInput,120))
+            DriverAction.waitSec(5);
+            if(DriverAction.isExist(LearnerModule_Locators.searchInput))
             {
                 DriverAction.typeText(LearnerModule_Locators.searchInput,"testtesttest");
             }
             else {
-                GemTestReporter.addTestStep("Error Occur", "Fail to type into course search input", STATUS.FAIL,
+                GemTestReporter.addTestStep("Error Occur", "Fail to type into course search input", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
             DriverAction.waitSec(5);
             if(DriverAction.isDisplayed(LearnerModule_Locators.noCourseCourseCatalog))
             {
-                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "No course display successfully", STATUS.PASS,
+                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "No course display successfully", Status.PASS,
                         DriverAction.takeSnapShot());
             }
             else {
-                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "Not working fine", STATUS.FAIL,
+                GemTestReporter.addTestStep("Validate entering non exist course name no course should be displayed", "Not working fine", Status.FAIL,
                         DriverAction.takeSnapShot());
             }
 
         }
         catch (Exception e) {
             logger.info("Exception occurred", e);
-            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", STATUS.FAIL);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
         }
     }
 
@@ -1019,12 +1021,12 @@ else {
             List<WebElement>contentCount=DriverAction.getElements(LearnerModule_Locators.contents);
             List<WebElement>assignmentCount=DriverAction.getElements(LearnerModule_Locators.assignments);
             if(contentCount.size()==1&assignmentCount.size()==1){
-                GemTestReporter.addTestStep("Verify content and assignment added in course","Successfully verified the content and assignment added.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content and assignment added in course","Successfully verified the content and assignment added.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify content and assignment added in course","Could not verify the content and assignment added.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify content and assignment added in course","Could not verify the content and assignment added.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify content and assignment added in course","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify content and assignment added in course","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

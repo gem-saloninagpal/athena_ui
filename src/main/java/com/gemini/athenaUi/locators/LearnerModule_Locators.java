@@ -114,7 +114,7 @@ public class LearnerModule_Locators {
 
     public static By noCourseMessage=By.xpath("//h5[text()='No Completed Courses!']");
 
-    public static By noCourseCourseCatalog=By.xpath("//h5[text()='No courses found!']");
+    public static By noCourseCourseCatalog=By.xpath("//h5[text()='No Records Found!']");
 
 
     public static By gettingStartedList=By.xpath("//p-accordion//div[@role='tablist']");

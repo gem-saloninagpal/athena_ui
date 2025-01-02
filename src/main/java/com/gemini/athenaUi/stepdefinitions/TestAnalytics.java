@@ -1,9 +1,9 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.TestAnalyticsLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,9 +27,9 @@ public class TestAnalytics {
         try{
             DriverAction.waitUntilElementAppear(TestAnalyticsLocators.activeStats,5);
             _activeStatistics = DriverAction.getElements(TestAnalyticsLocators.activeStats).size();
-            GemTestReporter.addTestStep("Get active test statistics","The active statistics are- "+ _activeStatistics, STATUS.PASS,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Get active test statistics","The active statistics are- "+ _activeStatistics, Status.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
-            GemTestReporter.addTestStep("Get active test statistics","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Get active test statistics","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -42,12 +42,12 @@ public class TestAnalytics {
              _upcomingEvents =DriverAction.getElements(TestAnalyticsLocators.events).size();
              //sum of ongoing and upcoming tests should be equal to active tests
              if(_ongoingEvents + _upcomingEvents == _activeStatistics){
-                 GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Successfully validated the ongoing and upcoming events.",STATUS.PASS,DriverAction.takeSnapShot());
+                 GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Successfully validated the ongoing and upcoming events.",Status.PASS,DriverAction.takeSnapShot());
              }else{
-                 GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Could not validate the ongoing and upcoming events.",STATUS.FAIL,DriverAction.takeSnapShot());
+                 GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Could not validate the ongoing and upcoming events.",Status.FAIL,DriverAction.takeSnapShot());
              }
          }catch(Exception e){
-             GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Exception encountered- "+e,STATUS.ERR);
+             GemTestReporter.addTestStep("Compare ongoing and upcoming events with active statistics","Exception encountered- "+e,Status.ERR);
          }
     }
 
@@ -60,9 +60,9 @@ public class TestAnalytics {
             //count of candidates passed from a particular campus
             _count =DriverAction.getElementText(TestAnalyticsLocators.passCount);
             _passCount =Integer.parseInt(_count);
-            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Successfully fetched the pass count as- "+ _passCount +" of campus- "+ _campusName,STATUS.PASS,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Successfully fetched the pass count as- "+ _passCount +" of campus- "+ _campusName,Status.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
-            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Get the pass count of first campus displayed","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -78,12 +78,12 @@ public class TestAnalytics {
                     _passedCandidates += Integer.parseInt(passed);
             }
             if(_passedCandidates == _passCount){
-                GemTestReporter.addTestStep("Verify the passed candidates","Successfully verified the passed candidates",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passed candidates","Successfully verified the passed candidates",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify the passed candidates","Could not verify the passed candidates",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passed candidates","Could not verify the passed candidates",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the passed candidates","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the passed candidates","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

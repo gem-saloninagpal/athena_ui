@@ -2,9 +2,9 @@ package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.MyLocators;
 import com.gemini.athenaUi.locators.QuestionsLocators;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -49,10 +49,10 @@ public class Questions {
                 DriverAction.waitSec(3);
                 DriverAction.click(dropdowns.get(i));
                 DriverAction.click(By.xpath(QuestionsLocators.dropdownValue.replace("input", fields[i])));
-                GemTestReporter.addTestStep("Select " + fields[0] + " in " + fieldName[i], "Successfully selected " + fields[i], STATUS.PASS);
+                GemTestReporter.addTestStep("Select " + fields[0] + " in " + fieldName[i], "Successfully selected " + fields[i], Status.PASS);
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Select dropdown values in question fields", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Select dropdown values in question fields", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -60,9 +60,9 @@ public class Questions {
     public void enterMarks(String marks) {
         try {
             DriverAction.typeText(QuestionsLocators.marksField, marks);
-            GemTestReporter.addTestStep("Enter marks-" + marks + " in marks field", "Successfully entered the marks- " + marks, STATUS.PASS);
+            GemTestReporter.addTestStep("Enter marks-" + marks + " in marks field", "Successfully entered the marks- " + marks, Status.PASS);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter marks", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter marks", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -75,12 +75,12 @@ public class Questions {
             }else if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)){
                 DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
             }else{
-                GemTestReporter.addTestStep("Enter question description","Could not enter question description.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Enter question description","Could not enter question description.",Status.FAIL,DriverAction.takeSnapShot());
             }
       //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
-            GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, STATUS.PASS);
+            GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, Status.PASS);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -92,9 +92,9 @@ public class Questions {
                 DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
             }
             //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
-            GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, STATUS.PASS);
+            GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, Status.PASS);
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -117,13 +117,13 @@ public class Questions {
                 }
                 DriverAction.waitUntilElementClickable(QuestionsLocators.addButton, 5);
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
-                GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, STATUS.PASS);
+                GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, Status.PASS);
             }
          //   Thread.sleep(6000);
             DriverAction.waitUntilElementClickable(QuestionsLocators.selectOption,3);
             DriverAction.click(QuestionsLocators.selectOption, "Successfully selected the option");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter options", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter options", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -143,12 +143,12 @@ public class Questions {
                 }
             }
             if (c == 2) {
-                GemTestReporter.addTestStep("Verify question is saved", "Successfully verified that question is saved.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify question is saved", "Successfully verified that question is saved.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify question is saved", "Could not verify that question is saved.", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify question is saved", "Could not verify that question is saved.", Status.FAIL);
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify the question is saved", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify the question is saved", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -157,9 +157,9 @@ public class Questions {
         try {
             DriverAction.waitUntilElementAppear(QuestionsLocators.wordLimitTextbox,5);
             DriverAction.typeText(QuestionsLocators.wordLimitTextbox, words);
-            GemTestReporter.addTestStep("Enter word limit", "Successfully entered the limit", STATUS.PASS, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Enter word limit", "Successfully entered the limit", Status.PASS, DriverAction.takeSnapShot());
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter word limit", "Exception encountered- " + e, STATUS.ERR, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Enter word limit", "Exception encountered- " + e, Status.ERR, DriverAction.takeSnapShot());
         }
 
     }
@@ -173,7 +173,7 @@ public class Questions {
             DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox1,4);
             DriverAction.typeText(QuestionsLocators.questionBox1, _question, "Successfully entered the question description.");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter question description in subjective", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter question description in subjective", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -185,7 +185,7 @@ public class Questions {
             _question = generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.codingQuestionBox, _question, "Successfully entered the question description.");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter coding question description", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter coding question description", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -196,7 +196,7 @@ public class Questions {
             _passage = generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.passageBox, _passage, "Successfully entered the passage.");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Enter the passage", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter the passage", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -204,13 +204,13 @@ public class Questions {
     public void verifyPassageAndEdit() {
         String text = DriverAction.getElementText(QuestionsLocators.passage);
         if (text.contains(_passage)) {
-            GemTestReporter.addTestStep("Verify the passage", "Successfully verified the passage.", STATUS.PASS, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the passage", "Successfully verified the passage.", Status.PASS, DriverAction.takeSnapShot());
         } else {
-            GemTestReporter.addTestStep("Verify the passage", "Could not verify the passage.", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the passage", "Could not verify the passage.", Status.FAIL, DriverAction.takeSnapShot());
         }
         _passage = "updated passage is- " + _passage;
         DriverAction.typeText(QuestionsLocators.passage, _passage);
-        GemTestReporter.addTestStep("Edit the passage", "Successfully edited the passage.", STATUS.PASS);
+        GemTestReporter.addTestStep("Edit the passage", "Successfully edited the passage.", Status.PASS);
     }
 
     @Then("^Verify the passage is created$")
@@ -219,12 +219,12 @@ public class Questions {
             DriverAction.waitUntilElementAppear(QuestionsLocators.passageStatement,5);
             String text = DriverAction.getElementText(QuestionsLocators.passageStatement);
             if (text.contains(_passage)) {
-                GemTestReporter.addTestStep("Verify the passage is created", "Successfully verified the passage.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passage is created", "Successfully verified the passage.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify the passage is created", "Could not verify the passage.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passage is created", "Could not verify the passage.", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify the passage is created", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify the passage is created", "Exception encountered- " + e, Status.ERR);
         }
 
     }
@@ -236,7 +236,7 @@ public class Questions {
             DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
             DriverAction.waitSec(2);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Expand the passage field","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Expand the passage field","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -259,12 +259,12 @@ public class Questions {
                 }
             }
             if (c == 2) {
-                GemTestReporter.addTestStep("Verify comprehension question is saved", "Successfully verified that question is saved.", STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify comprehension question is saved", "Successfully verified that question is saved.", Status.PASS,DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify comprehension question is saved", "Could not verify that question is saved.", STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify comprehension question is saved", "Could not verify that question is saved.", Status.FAIL,DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify comprehension question is saved", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify comprehension question is saved", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -273,7 +273,7 @@ public class Questions {
         try {
             DriverAction.click(QuestionsLocators.addNewComprehension);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click Add New in comprehensions tab","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click Add New in comprehensions tab","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -285,7 +285,7 @@ public class Questions {
             DriverAction.waitUntilElementClickable(QuestionsLocators.passageQuestionBox,6);
             DriverAction.typeText(QuestionsLocators.passageQuestionBox, ques);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Enter question description related passage","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Enter question description related passage","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -302,12 +302,12 @@ public class Questions {
             String errorMessage = DriverAction.getElementText(MyLocators.popupMsg);
             //verifying popup message after clicking the button
             if (errorMessage.contains(message)) {
-                GemTestReporter.addTestStep("Verify the popup message", "Successfully verified popup message " + errorMessage, STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the popup message", "Successfully verified popup message " + errorMessage, Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify the popup message", "Could not verify the popup message " + errorMessage, STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the popup message", "Could not verify the popup message " + errorMessage, Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click the button- "+buttonName+" and verify message- "+message,"Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click the button- "+buttonName+" and verify message- "+message,"Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -326,12 +326,12 @@ public class Questions {
                 }
             }
             if (c == 2) {
-                GemTestReporter.addTestStep("Verify the subjective question is saved", "Successfully verified that subjective question is saved.", STATUS.PASS);
+                GemTestReporter.addTestStep("Verify the subjective question is saved", "Successfully verified that subjective question is saved.", Status.PASS);
             } else {
-                GemTestReporter.addTestStep("Verify the subjective question is saved", "Could not verify that subjective question is saved.", STATUS.FAIL);
+                GemTestReporter.addTestStep("Verify the subjective question is saved", "Could not verify that subjective question is saved.", Status.FAIL);
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify the subjective question is saved", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify the subjective question is saved", "Exception encountered- " + e, Status.ERR);
         }
 
     }
@@ -347,7 +347,7 @@ public class Questions {
             _comprehensionSubjectiveQues2 = _passageQues;
             DriverAction.typeText(QuestionsLocators.passageQuestionBox, _passageQues);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Enter comprehension based subjective question", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Enter comprehension based subjective question", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -360,12 +360,12 @@ public class Questions {
     public void verifyUploadMovieClipDialog() {
         try{
             if(DriverAction.isDisplayed(QuestionsLocators.movieDialog)){
-                GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Successfully verified the movie clip dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Successfully verified the movie clip dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Could not verify the movie clip dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Could not verify the movie clip dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify upload movie clip dialog box displays","Exception encountered- "+e,Status.ERR);
 
         }
     }
@@ -379,7 +379,7 @@ public class Questions {
             DriverAction.typeText(QuestionsLocators.movieNameInputBox, _movieName,"Successfully entered the movie name- "+ _movieName);
             DriverAction.typeText(QuestionsLocators.movieDescription, _movieDescription,"Successfully entered the movie description- "+ _movieDescription);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Enter movie name and description","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Enter movie name and description","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -388,7 +388,7 @@ public class Questions {
         try {
             DriverAction.fileUpload(QuestionsLocators.chooseBtn, movieLocation);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Upload a video","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Upload a video","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -397,7 +397,7 @@ public class Questions {
         try{
             DriverAction.click(QuestionsLocators.uploadBtn,"Click the upload button");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click the upload button","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click the upload button","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -406,12 +406,12 @@ public class Questions {
         try{
             DriverAction.waitUntilElementAppear(MyLocators.popupMsg,20);
             if(DriverAction.isDisplayed(QuestionsLocators.video)){
-                GemTestReporter.addTestStep("Verify video is uploaded","Successfully verified the uploaded video",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video is uploaded","Successfully verified the uploaded video",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify video is uploaded","Could not verify the uploaded video",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video is uploaded","Could not verify the uploaded video",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify video is uploaded","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify video is uploaded","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -422,7 +422,7 @@ public class Questions {
             DriverAction.waitUntilElementClickable(QuestionsLocators.expandVideo,10);
             DriverAction.click(QuestionsLocators.expandVideo, "Expand the video field");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -440,12 +440,12 @@ public class Questions {
                 }
             }
             if (c == 2) {
-                GemTestReporter.addTestStep("Verify video question is saved", "Successfully verified that question is saved.", STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video question is saved", "Successfully verified that question is saved.", Status.PASS,DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify video question is saved", "Could not verify that question is saved.", STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video question is saved", "Could not verify that question is saved.", Status.FAIL,DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify video question is saved", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify video question is saved", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -456,13 +456,13 @@ public class Questions {
             String videoName = DriverAction.getElementText(QuestionsLocators.videoName);
             String description = DriverAction.getElementText(QuestionsLocators.videoDescription);
             if (videoName.contains(_movieName) && description.contains(_movieDescription)) {
-                GemTestReporter.addTestStep("Verify the video name and description", "Successfully verified the video name and description.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the video name and description", "Successfully verified the video name and description.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify the video name and description", "Could not verify the video name and description.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the video name and description", "Could not verify the video name and description.", Status.FAIL, DriverAction.takeSnapShot());
             }
 
         }catch (Exception e){
-            GemTestReporter.addTestStep("Verify the video name and description","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the video name and description","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -472,7 +472,7 @@ public class Questions {
             Thread.sleep(5000);
             DriverAction.click(MyLocators.contentActionsIcon);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click Actions icon of recently created question","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click Actions icon of recently created question","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -481,7 +481,7 @@ public class Questions {
         try {
             DriverAction.click(QuestionsLocators.editIcon, "Click the edit icon");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click the edit icon","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click the edit icon","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -489,12 +489,12 @@ public class Questions {
     public void verifyQuestionDialogBoxOpens() {
         try{
             if(DriverAction.isDisplayed(QuestionsLocators.questionDialog)){
-                GemTestReporter.addTestStep("Verify question dialog box opens","Successfully verified the question dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify question dialog box opens","Successfully verified the question dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify question dialog box opens","Could not verify the question dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify question dialog box opens","Could not verify the question dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify question dialog box opens","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify question dialog box opens","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -503,12 +503,12 @@ public class Questions {
         try {
             String getQuestion = DriverAction.getElementText(QuestionsLocators.questionInDialogBox);
             if (getQuestion.contains(question)) {
-                GemTestReporter.addTestStep("Verify question on view", "Successfully verified the question", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify question on view", "Successfully verified the question", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify question on view", "Could not verify the question", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify question on view", "Could not verify the question", Status.FAIL, DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the question on view","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the question on view","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -516,12 +516,12 @@ public class Questions {
     public void verifyConfirmationDialogBoxAppears() {
         try{
             if(DriverAction.isDisplayed(QuestionsLocators.confirmationDialog)){
-                GemTestReporter.addTestStep("Verify confirmation dialog box appears","Successfully verified the confirmation dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify confirmation dialog box appears","Successfully verified the confirmation dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify confirmation dialog box appears","Could not verify the confirmation dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify confirmation dialog box appears","Could not verify the confirmation dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify confirmation dialog box appears","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify confirmation dialog box appears","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -532,7 +532,7 @@ public class Questions {
             DriverAction.waitUntilElementClickable(QuestionsLocators.passageActionsIcon2,6);
             DriverAction.click(QuestionsLocators.passageActionsIcon2,"Click Actions icon of recently created passage");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,Status.ERR);
         }
 
     }
@@ -541,13 +541,13 @@ public class Questions {
     public void verifyComprehensionDialogBoxDisplays() {
         try{
             if(DriverAction.isDisplayed(QuestionsLocators.comprehensionDialog)){
-                GemTestReporter.addTestStep("Verify comprehension dialog box displays","Successfully verified the comprehension dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify comprehension dialog box displays","Successfully verified the comprehension dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify comprehension dialog box displays","Could not verify the comprehension dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify comprehension dialog box displays","Could not verify the comprehension dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
 
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify comprehension dialog box displays","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify comprehension dialog box displays","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -556,12 +556,12 @@ public class Questions {
         try{
             String rcPassage=DriverAction.getElementText(QuestionsLocators.rcPassage);
             if(rcPassage.contains(_passage)){
-                GemTestReporter.addTestStep("Verify passage on view","Successfully verified the passage on view.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify passage on view","Successfully verified the passage on view.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify passage on view","Could not verify the passage on view.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify passage on view","Could not verify the passage on view.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify passage on view","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify passage on view","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -573,7 +573,7 @@ public class Questions {
             _updatedPassage = generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.passageBox, _updatedPassage, "Update the passage");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Update the passage","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Update the passage","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -582,12 +582,12 @@ public class Questions {
         try {
             String text = DriverAction.getElementText(QuestionsLocators.passageStatement);
             if (text.contains(_updatedPassage)) {
-                GemTestReporter.addTestStep("Verify the passage is updated", "Successfully verified the updated passage.", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passage is updated", "Successfully verified the updated passage.", Status.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify the passage is updated", "Could not verify the updated passage.", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the passage is updated", "Could not verify the updated passage.", Status.FAIL, DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Verify the passage is updated", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Verify the passage is updated", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -598,7 +598,7 @@ public class Questions {
             DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon1,20);
             DriverAction.click(QuestionsLocators.videoActionsIcon1,"Click Actions icon of recently created passage");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -606,13 +606,13 @@ public class Questions {
     public void verifyVideoDialogBoxDisplays() {
         try{
             if(DriverAction.isDisplayed(QuestionsLocators.videoDialog)){
-                GemTestReporter.addTestStep("Verify video dialog box displays","Successfully verified the video dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video dialog box displays","Successfully verified the video dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify video dialog box displays","Could not verify the video dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify video dialog box displays","Could not verify the video dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
 
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify video dialog box displays","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify video dialog box displays","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -621,12 +621,12 @@ public class Questions {
         try{
             String videoNameDescription=DriverAction.getElementText(QuestionsLocators.videoNameDescriptionOnView);
             if(videoNameDescription.contains(_movieName)&&videoNameDescription.contains(_movieDescription)){
-                GemTestReporter.addTestStep("Verify movie name and description on view","Successfully verified movie name and description on view.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify movie name and description on view","Successfully verified movie name and description on view.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify movie name and description on view","Could not verify movie name and description on view.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify movie name and description on view","Could not verify movie name and description on view.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify movie name and description on view","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify movie name and description on view","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -640,15 +640,15 @@ public class Questions {
               isPresent=true;
           }
           if(!isPresent && videoState.equals("not deleted")){
-              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,STATUS.PASS,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
           }else if(isPresent && videoState.equals("deleted")){
-              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,STATUS.PASS,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
           }
           else{
-              GemTestReporter.addTestStep("Verify the state of video","Could not verify the video state as- "+videoState,STATUS.FAIL,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Verify the state of video","Could not verify the video state as- "+videoState,Status.FAIL,DriverAction.takeSnapShot());
           }
       }catch(Exception e){
-          GemTestReporter.addTestStep("Verify the state of video","Exception encountered- "+e,STATUS.ERR);
+          GemTestReporter.addTestStep("Verify the state of video","Exception encountered- "+e,Status.ERR);
       }
     }
 
@@ -657,7 +657,7 @@ public class Questions {
         try {
             DriverAction.typeText(QuestionsLocators.videoSearchbox, _movieName,"Search movie name");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Search a video", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Search a video", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -666,7 +666,7 @@ public class Questions {
         try {
             DriverAction.typeText(QuestionsLocators.passageSearchbox, _updatedPassage,"Search a passage");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Search a passage", "Exception encountered- " + e, STATUS.ERR);
+            GemTestReporter.addTestStep("Search a passage", "Exception encountered- " + e, Status.ERR);
         }
     }
 
@@ -681,15 +681,15 @@ public class Questions {
                 isPresent=true;
             }
             if(!isPresent && state.equals("not deleted")){
-                GemTestReporter.addTestStep("Verify the state of passage","Successfully verified the passage state as- "+state,STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the state of passage","Successfully verified the passage state as- "+state,Status.PASS,DriverAction.takeSnapShot());
             }else if(isPresent && state.equals("deleted")){
-                GemTestReporter.addTestStep("Verify the state of passage","Successfully verified the passage state as- "+state,STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the state of passage","Successfully verified the passage state as- "+state,Status.PASS,DriverAction.takeSnapShot());
             }
             else{
-                GemTestReporter.addTestStep("Verify the state of passage","Could not verify the passage state as- "+state,STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the state of passage","Could not verify the passage state as- "+state,Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the state of passage","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Verify the state of passage","Exception encountered- "+e,Status.ERR);
         }
     }
 
@@ -704,7 +704,7 @@ public class Questions {
                 clickButton("Yes");
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Delete all the questions associated","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Delete all the questions associated","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -718,7 +718,7 @@ public class Questions {
                 clickButton("Yes");
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Delete all the questions associated to video","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Delete all the questions associated to video","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -726,9 +726,9 @@ public class Questions {
     public void getComprehensionBasedQuestionStatement() {
         try{
             String question=DriverAction.getElementText(QuestionsLocators.expandPassageFirstColumn);
-            GemTestReporter.addTestStep("Get comprehension based question statement","Successfully fetched the question statement- "+question,STATUS.PASS,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Get comprehension based question statement","Successfully fetched the question statement- "+question,Status.PASS,DriverAction.takeSnapShot());
         }catch(Exception e){
-            GemTestReporter.addTestStep("Get comprehension based question statement","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Get comprehension based question statement","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -737,7 +737,7 @@ public class Questions {
         try{
             DriverAction.click(QuestionsLocators.editComprehensionBasedQuestion,"Click the edit icon","Successfully clicked the edit icon");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Click the edit icon","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Click the edit icon","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -750,7 +750,7 @@ public class Questions {
             DriverAction.clearText(QuestionsLocators.comprehensionQuestionTextarea);
             DriverAction.typeText(QuestionsLocators.comprehensionQuestionTextarea, _updateComprehensionQuestion,"Update comprehension based question");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Update comprehension based question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Update comprehension based question","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -759,12 +759,12 @@ public class Questions {
         try{
             String updatedQuestion=DriverAction.getElementText(QuestionsLocators.expandPassageFirstColumn);//first column of expanded passage is the updated question
             if(updatedQuestion.equals(_updateComprehensionQuestion)){
-                GemTestReporter.addTestStep("Verify the updated comprehension question","Successfully updated the comprehension question.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the updated comprehension question","Successfully updated the comprehension question.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify the updated comprehension question","Could not update the comprehension question.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the updated comprehension question","Could not update the comprehension question.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the updated question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the updated question","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -773,11 +773,11 @@ public class Questions {
         try {
             DriverAction.fileUpload(QuestionsLocators.chooseQuestionBtn,fileLocation);
         }catch(Exception e){
-            GemTestReporter.addTestStep("Upload an excel","Exception encountered- "+e,STATUS.ERR);
+            GemTestReporter.addTestStep("Upload an excel","Exception encountered- "+e,Status.ERR);
         }
     }
 
-    @Then("^Verify status \"([^\"]*)\" and message \"([^\"]*)\" in uploaded excel$")
+    @Then("^Verify Status \"([^\"]*)\" and message \"([^\"]*)\" in uploaded excel$")
     public void verifyQuestionsGetUploaded(String expectedStatus, String expectedMessage) {
         try{
             DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
@@ -785,7 +785,7 @@ public class Questions {
             if(message.contains("upload is in progress")){
                 Thread.sleep(120000);//wait until tick displays
                 if(DriverAction.isDisplayed(QuestionsLocators.uploadingIcon)){//if file keeps on uploading after 90 sec
-                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",STATUS.FAIL,DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",Status.FAIL,DriverAction.takeSnapShot());
                 }else{
 
                     //fetch recent excel file
@@ -801,16 +801,16 @@ public class Questions {
                     String excelStatus = sheet.getRow(1).getCell(16).getStringCellValue();
                     String excelMessage=sheet.getRow(1).getCell(17).getStringCellValue();
                     if(excelStatus.equals(expectedStatus)&&excelMessage.equalsIgnoreCase(expectedMessage)){
-                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",STATUS.PASS,DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",Status.PASS,DriverAction.takeSnapShot());
                     }else{
-                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",STATUS.FAIL,DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",Status.FAIL,DriverAction.takeSnapShot());
                     }
                 }
             }else {
-                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,STATUS.ERR,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,Status.ERR,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify status and message after uploading excel","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify Status and message after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -845,15 +845,15 @@ public class Questions {
                     return mostRecentFile;
                 }
 
-    @Then("^Verify statuses \"([^\"]*)\", \"([^\"]*)\" and messages \"([^\"]*)\", \"([^\"]*)\" in uploaded excel$")
-    public void verifyStatusesAndMessagesInUploadedExcel(String status1, String status2, String message1, String message2) {
+    @Then("^Verify Statuses \"([^\"]*)\", \"([^\"]*)\" and messages \"([^\"]*)\", \"([^\"]*)\" in uploaded excel$")
+    public void verifyStatusesAndMessagesInUploadedExcel(String Status1, String Status2, String message1, String message2) {
         try{
             DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
             String message=DriverAction.getElementText(MyLocators.popupMsg);
             if(message.contains("upload is in progress")){
                 Thread.sleep(120000);//wait until tick displays
                 if(DriverAction.isDisplayed(QuestionsLocators.uploadingIcon)){//if file keeps on uploading after 90 sec
-                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",STATUS.FAIL,DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Verify if question gets uploaded","File keeps on uploading",Status.FAIL,DriverAction.takeSnapShot());
                 }else{
 
                     //fetch recent excel file
@@ -870,17 +870,17 @@ public class Questions {
                     String excelMessage1=sheet.getRow(1).getCell(17).getStringCellValue();
                     String excelStatus2 = sheet.getRow(2).getCell(16).getStringCellValue();
                     String excelMessage2=sheet.getRow(2).getCell(17).getStringCellValue();
-                    if(excelStatus1.equals(status1)&&excelMessage1.equalsIgnoreCase(message1)&&excelStatus2.equals(status2)&&excelMessage2.equalsIgnoreCase(message2)){
-                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",STATUS.PASS,DriverAction.takeSnapShot());
+                    if(excelStatus1.equals(Status1)&&excelMessage1.equalsIgnoreCase(message1)&&excelStatus2.equals(Status2)&&excelMessage2.equalsIgnoreCase(message2)){
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",Status.PASS,DriverAction.takeSnapShot());
                     }else{
-                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",STATUS.FAIL,DriverAction.takeSnapShot());
+                        GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",Status.FAIL,DriverAction.takeSnapShot());
                     }
                 }
             }else {
-                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,STATUS.ERR,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,Status.ERR,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-                GemTestReporter.addTestStep("Verify statuses and messages after uploading excel","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Statuses and messages after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -891,30 +891,30 @@ public class Questions {
             if(language2.equals("null")) {
                 _getLanguage1 = languages.get(0).getText();
                 if (_getLanguage1.equals(language1)) {
-                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the first language.", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the first language.", Status.PASS, DriverAction.takeSnapShot());
                 }else{
-                    GemTestReporter.addTestStep("Get the selected languages", "First language fetched is not correct.", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Get the selected languages", "First language fetched is not correct.", Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else if(language1.equals("existing language")){
                 _getLanguage2=languages.get(1).getText();
                 if(_getLanguage1.equals(language1)&&_getLanguage2.equals(language2)){
-                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", Status.PASS, DriverAction.takeSnapShot());
                 }else{
-                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",STATUS.FAIL,DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",Status.FAIL,DriverAction.takeSnapShot());
                 }
             }
 //            else{
 //                _getLanguage1=languages.get(0).getText();
 //                _getLanguage2=languages.get(1).getText();
 //                if(_getLanguage1.equals(language1)&&_getLanguage2.equals(language2)){
-//                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", STATUS.PASS, DriverAction.takeSnapShot());
+//                    GemTestReporter.addTestStep("Get the selected languages", "Successfully fetched the selected languages.", Status.PASS, DriverAction.takeSnapShot());
 //                }else{
-//                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",STATUS.FAIL,DriverAction.takeSnapShot());
+//                    GemTestReporter.addTestStep("Get the selected languages","Languages fetched are not expected.",Status.FAIL,DriverAction.takeSnapShot());
 //                }
 //            }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Get the selected languages","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Get the selected languages","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -924,7 +924,7 @@ public class Questions {
             clickButton("Preview");
 
         }catch(Exception e){
-          GemTestReporter.addTestStep("Preview question","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+          GemTestReporter.addTestStep("Preview question","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -932,12 +932,12 @@ public class Questions {
     public void verifyQuestionInDialogBox(String question) {
         try{
             if(DriverAction.getElementText(QuestionsLocators.questionOnPreview).contains(question)){
-                GemTestReporter.addTestStep("Verify the question in dialog box","Successfully verified the question in dialog box.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the question in dialog box","Successfully verified the question in dialog box.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify the question in dialog box","Could not verify the question in dialog box.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify the question in dialog box","Could not verify the question in dialog box.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify the question in dialog box","Exception encountered- "+e,STATUS.ERR, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify the question in dialog box","Exception encountered- "+e,Status.ERR, DriverAction.takeSnapShot());
         }
     }
 
@@ -947,7 +947,7 @@ public class Questions {
             DriverAction.waitUntilElementClickable(QuestionsLocators.closeDialogBox,4);
             DriverAction.click(QuestionsLocators.closeDialogBox,"Close the preview dialog box.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Close the dialog box","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Close the dialog box","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -956,12 +956,12 @@ public class Questions {
         try{
             String languagesOnView=DriverAction.getElementText(QuestionsLocators.languageOnView);
             if(languagesOnView.contains(language1)&&languagesOnView.contains(language2)){
-                GemTestReporter.addTestStep("Verify languages on view.","Successfully verified the languages on view.",STATUS.PASS,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify languages on view.","Successfully verified the languages on view.",Status.PASS,DriverAction.takeSnapShot());
             }else{
-                GemTestReporter.addTestStep("Verify languages on view.","Could not verify the languages on view.",STATUS.FAIL,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify languages on view.","Could not verify the languages on view.",Status.FAIL,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify languages on view.","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify languages on view.","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -970,7 +970,7 @@ public class Questions {
         try{
             DriverAction.click(QuestionsLocators.expandLanguageDropdown,"Expand select coding languages dropdown","Successfully expands select coding language dropdown.");
         }catch(Exception e){
-            GemTestReporter.addTestStep("Expand select coding languages dropdown","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Expand select coding languages dropdown","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -979,7 +979,7 @@ public class Questions {
         try {
             DriverAction.click(QuestionsLocators.plusIcon,"Click the plus icon while creating subjective question");
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Click the plus icon","Exception encountered- "+e,STATUS.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Click the plus icon","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 }

@@ -18,7 +18,7 @@ public class Course_Locators {
     public static By treeList=By.xpath("//div[@class='p-steps p-component p-readonly']//ul//li");
     public static String tree="(//div[@class='p-steps p-component p-readonly']//ul//li//span[@class='p-steps-title ng-star-inserted'])[itr]";
     public static By checkboxs=By.xpath("(//div[@class='p-checkbox-box'])[1]");
-    public static By courseInputFields=By.xpath("//form[@class='ng-untouched ng-pristine ng-invalid']//input");
+    public static By courseInputFields=By.xpath("//span[@class=\"p-float-label\"]//input");
 
     public static String option="//li[@aria-label='input']";
     public static String dropdownIcon="(//span[contains(@class,'chevron-down')]//parent::div)[itr]";
@@ -160,6 +160,7 @@ public class Course_Locators {
     public static By assignLearners=By.xpath("//label[text()='Assign Learners']");
     public static By searchbox=By.xpath("//input[contains(@class,'search')]");
     public static By actionsIcon=By.xpath("(//button[contains(@class,'p-ripple')])[1]");
+    public static By actionsIcon1=By.xpath("(//athena-action//button[@type='button'])[1]");
     public static By rolesDropdown=By.xpath("");
 
 

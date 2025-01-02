@@ -1,16 +1,14 @@
 package com.gemini.athenaUi.stepdefinitions;
 
 import com.gemini.athenaUi.locators.*;
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
-import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.*;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.List;
@@ -32,13 +30,13 @@ public class Role_Management {
             {
                 DriverAction.typeText(By.xpath(Role_Management_Locators.roleFields.replace("itr",String.valueOf(i))),arr[i-2]);
             }
-           if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Manage Tests ")),120))
+           if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Manage Tests "))))
            {
               DriverAction.click(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Manage Tests ")));
-              if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Placement Drives ")),120))
+              if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Placement Drives "))))
               {
                   DriverAction.click(By.xpath(Role_Management_Locators.permissionDropdown.replace("permissionType"," Placement Drives ")));
-                  if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test ")),120))
+                  if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test "))))
                   {
                       DriverAction.click(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test ")),"clicked on View My Test checkbox");
                   }
@@ -57,15 +55,15 @@ public class Role_Management {
             stringSet.addAll(roles);
             if (stringSet.contains(roleName)) {
                 GemTestReporter.addTestStep("Validate Role is created and added to Table", "Role is created successfully",
-                        STATUS.PASS, DriverAction.takeSnapShot());
+                        Status.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Validate Role is created and added to Table", "Fail to create Role",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
 
 
         } catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -96,18 +94,18 @@ public class Role_Management {
 
             if (isTrue)
             {
-                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))), 120)) {
+                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))))) {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))));
-                    if (DriverAction.isExist(Role_Management_Locators.editRole, 120)) {
+                    if (DriverAction.isExist(Role_Management_Locators.editRole)) {
                         DriverAction.click(Role_Management_Locators.editRole);
                     } else {
                         GemTestReporter.addTestStep("Error Occur", "Fail to click edit role option",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
 
                     }
                 } else {
                     GemTestReporter.addTestStep("Error Occur", "Fail to click edit icon",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
 
                 }
         }
@@ -122,12 +120,12 @@ public class Role_Management {
                     DriverAction.waitSec(4);
                   for(int i=0;i<permissionsList.length;i++)
                   {
-                      if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" ")),120))
+                      if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" "))))
                       {
                           DriverAction.click(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" ")),"clicked on "+permissionsList[i]+" checkbox");
                       }
                   }
-//                    if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test ")),120))
+//                    if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test "))))
 //                    {
 //                        DriverAction.click(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," View My Test ")),"clicked on View My Test checkbox");
 //                    }
@@ -136,7 +134,7 @@ public class Role_Management {
                 {
                     for(int i=0;i<permissionsList.length;i++)
                     {
-                        if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" ")),120))
+                        if(DriverAction.isExist(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" "))))
                         {
                             DriverAction.click(By.xpath(Role_Management_Locators.permissionsCheckbox.replace("permissions"," "+permissionsList[i]+" ")),"clicked on "+permissionsList[i]+" checkbox");
                         }
@@ -153,7 +151,7 @@ public class Role_Management {
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -161,10 +159,10 @@ public class Role_Management {
     public void switchTheUserTo(String role) {
         try{
             //in this function we are switching the required role
-if(DriverAction.isExist(Role_Management_Locators.roleDropdown,120))
+if(DriverAction.isExist(Role_Management_Locators.roleDropdown))
 {
     DriverAction.click(Role_Management_Locators.roleDropdown);
-    if(DriverAction.isExist(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)),120))
+    if(DriverAction.isExist(By.xpath(Role_Management_Locators.selectedRole.replace("role",role))))
     {
         DriverAction.click(By.xpath(Role_Management_Locators.selectedRole.replace("role",role)));
     }
@@ -172,11 +170,11 @@ if(DriverAction.isExist(Role_Management_Locators.roleDropdown,120))
 else
 {
     GemTestReporter.addTestStep("Error Occur", "Fail to click on dropdown icon",
-            STATUS.FAIL, DriverAction.takeSnapShot());
+            Status.FAIL, DriverAction.takeSnapShot());
 }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -201,10 +199,10 @@ else
                     }
                     if (c == actions.size()) {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                com.gemini.gemjar.enums.Status.PASS, DriverAction.takeSnapShot());
                     } else {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                 } else {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
@@ -216,13 +214,13 @@ else
                     }
                     if (c == actions.size()) {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                Status.PASS, DriverAction.takeSnapShot());
+
                     } else {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                com.gemini.gemjar.enums.Status.FAIL, DriverAction.takeSnapShot());
                     }
                 }
-                System.out.println(status);
             }
             else if(testType.equals("Internal Tests"))
             {
@@ -237,10 +235,10 @@ else
                     }
                     if (c == actions.size()) {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                com.gemini.gemjar.enums.Status.PASS, DriverAction.takeSnapShot());
                     } else {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                 } else {
                     DriverAction.click(Role_Management_Locators.editIconInternal);
@@ -252,13 +250,12 @@ else
                     }
                     if (c == actions.size()) {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                                STATUS.PASS, DriverAction.takeSnapShot());
+                                Status.PASS, DriverAction.takeSnapShot());
                     } else {
                         GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                 }
-                System.out.println(status);
             }
             else
             {
@@ -273,15 +270,15 @@ else
                 }
                 if (c == actions.size()) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -293,17 +290,17 @@ else
             if(subModule.equals("Questions")) {
                 int c = 0;
                 List<List<String>> dataList = data.asLists(String.class);
-                if(DriverAction.isExist(Role_Management_Locators.addNewBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.addNewBtn))
                 {
                     GemTestReporter.addTestStep("Validate Add button is present for Create Permission", "Button is present",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
 
                 }
                 else
                 {
                     isTrue=true;
                     GemTestReporter.addTestStep("Validate Add button is present for Create Permission", "Button is not present",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 //validate the option in Question Screen
                 DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
@@ -315,25 +312,25 @@ else
                 }
                 if (c == actions.size()&&isTrue) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else if(subModule.equals("Course Library")) {
                 int c = 0;
                 List<List<String>> dataList = data.asLists(String.class);
-                if(DriverAction.isExist(Role_Management_Locators.createCourseBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.createCourseBtn))
                 {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Button is present",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     isTrue=true;
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Button is not present",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
 
                 }
                 //validate the option in Question Screen
@@ -346,10 +343,10 @@ else
                 }
                 if (c == actions.size()&&isTrue) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
 
             }
@@ -357,16 +354,16 @@ else
             {
                 int c = 0;
                 List<List<String>> dataList = data.asLists(String.class);
-                if(DriverAction.isExist(Role_Management_Locators.createBatchBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.createBatchBtn))
                 {
                     isTrue=true;
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Button is present",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
                 DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
@@ -377,26 +374,26 @@ else
                 }
                 if (c == actions.size()&&isTrue) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else if(subModule.equals("Campus"))
             {
                 int c = 0;
                 List<List<String>> dataList = data.asLists(String.class);
-                if(DriverAction.isExist(Role_Management_Locators.registerCampusBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.registerCampusBtn))
                 {
                     isTrue=true;
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Button is present",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
                 DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
@@ -407,26 +404,26 @@ else
                 }
                 if (c == actions.size()) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else if(subModule.equals("User Management"))
             {
                 int c = 0;
                 List<List<String>> dataList = data.asLists(String.class);
-                if(DriverAction.isExist(Role_Management_Locators.registerBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.registerBtn))
                 {
                     isTrue=true;
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Button is present",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
                 DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
@@ -437,10 +434,10 @@ else
                 }
                 if (c == actions.size()) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else
@@ -458,15 +455,15 @@ else
                 }
                 if (c == actions.size()) {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Permissions are matched successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions matched which are selected", "Fail to match permissions",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -494,13 +491,13 @@ else
                   {
                       isTrue=true;
                       GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "Validated successfully",
-                              STATUS.PASS, DriverAction.takeSnapShot());
+                              Status.PASS, DriverAction.takeSnapShot());
                   }
                 else
                   {
 
                       GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "They are Visible",
-                              STATUS.FAIL, DriverAction.takeSnapShot());
+                              Status.FAIL, DriverAction.takeSnapShot());
                   }
                 DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
@@ -513,10 +510,10 @@ else
                 }
                 if (c==0&&isTrue) {
                     GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "Permissions are not Granted Successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "They are Visible",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
             else
@@ -532,16 +529,16 @@ else
                 }
                 if (c == 0) {
                     GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "Permissions are not Granted Successfully",
-                            STATUS.PASS, DriverAction.takeSnapShot());
+                            Status.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "They are Visible",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
 
     }
@@ -572,35 +569,35 @@ else
 
             if (isTrue)
             {
-                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))), 120)) {
+                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))))) {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))));
-                    if (DriverAction.isExist(Role_Management_Locators.removeRole, 120)) {
+                    if (DriverAction.isExist(Role_Management_Locators.removeRole)) {
                         DriverAction.click(Role_Management_Locators.removeRole);
                     } else {
                         GemTestReporter.addTestStep("Error Occur", "Fail to click remove role option",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
 
                     }
                 } else {
                     GemTestReporter.addTestStep("Error Occur", "Fail to click remove icon",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
 
                 }
 
-                if(DriverAction.isExist(Role_Management_Locators.yesBtn,120))
+                if(DriverAction.isExist(Role_Management_Locators.yesBtn))
                 {
                     DriverAction.click(Role_Management_Locators.yesBtn);
                 }
                 else
                 {
                     GemTestReporter.addTestStep("Error Occur", "Fail to click yes button",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
             }
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -609,17 +606,17 @@ else
     public void isUnassignedWithTheWhichIsGoingToBeDelete(String user, String role) {
         try{
             DriverAction.waitSec(4);
-            if(DriverAction.isExist(Role_Management_Locators.userInput,120))
+            if(DriverAction.isExist(Role_Management_Locators.userInput))
             {
                 DriverAction.typeText(Role_Management_Locators.userInput,user);
                 DriverAction.waitSec(4);
-                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))), 120)) {
+                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))))) {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
-                    if (DriverAction.isExist(Role_Management_Locators.editProfile, 120)) {
+                    if (DriverAction.isExist(Role_Management_Locators.editProfile)) {
                         DriverAction.click(Role_Management_Locators.editProfile);
                     } else {
                         GemTestReporter.addTestStep("Error Occur", "Fail to click remove role option",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                 }
 
@@ -627,22 +624,22 @@ else
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in input",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
-            if(DriverAction.isExist(Role_Management_Locators.slider,120))
+            if(DriverAction.isExist(Role_Management_Locators.slider))
             {
                 DriverAction.click(Role_Management_Locators.slider);
             }
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click on Enable editing",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
 
-            if(DriverAction.isExist(Role_Management_Locators.userRoleDropdown,120))
+            if(DriverAction.isExist(Role_Management_Locators.userRoleDropdown))
             {
                 DriverAction.click(Role_Management_Locators.userRoleDropdown);
-                if(DriverAction.isExist(Role_Management_Locators.input,120))
+                if(DriverAction.isExist(Role_Management_Locators.input))
                 {
                     DriverAction.typeText(Role_Management_Locators.input,role);
                 }
@@ -651,22 +648,22 @@ else
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click on Dropdown",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
-            if(DriverAction.isExist(Role_Management_Locators.updateBtn,120))
+            if(DriverAction.isExist(Role_Management_Locators.updateBtn))
             {
                 DriverAction.click(Role_Management_Locators.updateBtn);
             }
                   else
                 {
                     GemTestReporter.addTestStep("Error Occur", "Fail to click on Update button",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
                 }
 
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -695,19 +692,19 @@ else
 
             if (isTrue)
             {
-                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))), 120)) {
+                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))))) {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(idx))));
-                    if (DriverAction.isExist(Role_Management_Locators.removeRole, 120)) {
+                    if (DriverAction.isExist(Role_Management_Locators.removeRole)) {
                         DriverAction.click(Role_Management_Locators.removeRole);
                         DriverAction.click(Role_Management_Locators.yesBtn);
                     } else {
                         GemTestReporter.addTestStep("Error Occur", "Fail to click Remove role option",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
 
                     }
                 } else {
                     GemTestReporter.addTestStep("Error Occur", "Fail to click Remove icon",
-                            STATUS.FAIL, DriverAction.takeSnapShot());
+                            Status.FAIL, DriverAction.takeSnapShot());
 
                 }
             }
@@ -728,18 +725,18 @@ else
             if(!isTrue)
             {
                 GemTestReporter.addTestStep("Validate Role is deleted Successfully", "Role is deleted successfully",
-                        STATUS.PASS, DriverAction.takeSnapShot());
+                        Status.PASS, DriverAction.takeSnapShot());
             }
             else {
                 GemTestReporter.addTestStep("Validate Role is deleted Successfully", "Not able to delete Role",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
 
             }
 
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 
@@ -749,17 +746,17 @@ else
         try{
             //assign role to the user
             DriverAction.waitSec(4);
-            if(DriverAction.isExist(Role_Management_Locators.userInput,120))
+            if(DriverAction.isExist(Role_Management_Locators.userInput))
             {
                 DriverAction.typeText(Role_Management_Locators.userInput,user);
                 DriverAction.waitSec(4);
-                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))), 120)) {
+                if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))))) {
                     DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
-                    if (DriverAction.isExist(Role_Management_Locators.editProfile, 120)) {
+                    if (DriverAction.isExist(Role_Management_Locators.editProfile)) {
                         DriverAction.click(Role_Management_Locators.editProfile);
                     } else {
                         GemTestReporter.addTestStep("Error Occur", "Fail to click remove role option",
-                                STATUS.FAIL, DriverAction.takeSnapShot());
+                                Status.FAIL, DriverAction.takeSnapShot());
                     }
                 }
 
@@ -767,22 +764,22 @@ else
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to type in input",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
-            if(DriverAction.isExist(Role_Management_Locators.slider,120))
+            if(DriverAction.isExist(Role_Management_Locators.slider))
             {
                 DriverAction.click(Role_Management_Locators.slider);
             }
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click on Enable editing",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
 
-            if(DriverAction.isExist(Role_Management_Locators.userRoleDropdown,120))
+            if(DriverAction.isExist(Role_Management_Locators.userRoleDropdown))
             {
                 DriverAction.click(Role_Management_Locators.userRoleDropdown);
-                if(DriverAction.isExist(Role_Management_Locators.input,120))
+                if(DriverAction.isExist(Role_Management_Locators.input))
                 {
                     DriverAction.typeText(Role_Management_Locators.input,role);
                 }
@@ -792,20 +789,20 @@ else
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click on Dropdown",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
-            if(DriverAction.isExist(Role_Management_Locators.updateBtn,120))
+            if(DriverAction.isExist(Role_Management_Locators.updateBtn))
             {
                 DriverAction.click(Role_Management_Locators.updateBtn);
                 String popupMessage=DriverAction.getElementText(UserDashboard_Locator.popupMessage);
                 String reqPopUpMessage="User updated successfully.";
                 if(reqPopUpMessage.equals(popupMessage))
                 {
-                    GemTestReporter.addTestStep("Validate user is assign successfully", "User is assigned Successfully" , STATUS.PASS,
+                    GemTestReporter.addTestStep("Validate user is assign successfully", "User is assigned Successfully" , Status.PASS,
                             DriverAction.takeSnapShot());
                 }
                 else {
-                    GemTestReporter.addTestStep("Validate user is assign successfully", "Fail to assign the user" , STATUS.FAIL,
+                    GemTestReporter.addTestStep("Validate user is assign successfully", "Fail to assign the user" , Status.FAIL,
                             DriverAction.takeSnapShot());
                 }
 
@@ -813,13 +810,13 @@ else
             else
             {
                 GemTestReporter.addTestStep("Error Occur", "Fail to click on Update button",
-                        STATUS.FAIL, DriverAction.takeSnapShot());
+                        Status.FAIL, DriverAction.takeSnapShot());
             }
 
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
         }
     }
 }
