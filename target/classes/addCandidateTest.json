@@ -1,8 +1,0 @@
-{
-  "testId": 100,
-  "userId": 5,
-  "isTestAttempted": true,
-  "isTestSubmitted": true,
-  "timeTaken": 15000,
-  "comments": "test Started"
-}

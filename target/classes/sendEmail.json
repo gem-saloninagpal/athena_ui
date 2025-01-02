@@ -1,7 +1,0 @@
-{
-  "from": "pallavi.arora@geminisolutions.com",
-  "subject": "Testing Email API",
-  "to": "pallavi.arora@geminisolutions.com",
-  "cc": "saloni.nagpal@geminisolutions.com",
-  "body": "testing send email api"
-}
