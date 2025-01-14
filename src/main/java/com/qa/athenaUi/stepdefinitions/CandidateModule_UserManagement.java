@@ -9,6 +9,7 @@ import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.enums.Status;
 import com.gemini.gemjar.utils.ui.DriverAction;
 
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -158,7 +159,7 @@ public class CandidateModule_UserManagement {
         try {
 
             Thread.sleep(8000);
-            if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More") || buttonName.equals("Finish Test") || buttonName.equals("Preview")) {
+            if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More") || buttonName.equals("Finish Test") || buttonName.equals("Preview") || buttonName.equals("Add courses")) {
                 DriverAction.scrollToBottom();
             }
             if (DriverAction.isDisplayed(By.xpath(MyLocators.button1.replace("input", buttonName)))) {
@@ -172,6 +173,7 @@ public class CandidateModule_UserManagement {
                 GemTestReporter.addTestStep("Click the button- " + buttonName, "Button not found!", Status.FAIL, DriverAction.takeSnapShot());
             }
             Thread.sleep(2500);
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
 
         } catch (Exception e) {
             System.out.print("Exception encountered!");

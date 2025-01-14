@@ -162,12 +162,6 @@ public class Course_Locators {
     public static By actionsIcon=By.xpath("(//button[contains(@class,'p-ripple')])[1]");
     public static By rolesDropdown=By.xpath("");
     public static By saveAsDraftBtn = By.xpath("(//button/span[text()='Save As Draft'])[2]");
+    public static By points = By.xpath("//input[@id='points']");
 
-
-    //img[@class='calender-icon']
-
-    //input[@placeholder='Name/Email']
-
-
-    //tbody[@class='p-datatable-tbody']//tr[1]//td[7]//div[contains(@class,'text-style')]
 }

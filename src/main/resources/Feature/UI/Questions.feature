@@ -30,7 +30,7 @@ Feature: Questions functionality
       |Tests  |Questions|Basic|Checkbox question       |Logical|Hard      |Java  |10   |ques-1!  |richTextQuestion  |Rich Text |
 
 
-  @questionModule @fixed
+  @questionModule
   Scenario Outline: Edit a question and verify
     Given Select "<module>", "<submodule>" from sidebar
     When Click Actions icon of recently created question
@@ -128,7 +128,7 @@ Feature: Questions functionality
 #    Then Verify the comprehension question is created "<question1>", "<question2>"
     And Click actions icon of recently created passage
     And Select "View Comprehensions" from actions dropdown
-    And Verify comprehension dialog box displays
+    Then Verify comprehension dialog box displays
 #    Then Verify passage on view
     Examples:
       |module |submodule|level  |type                       |section  |difficulty|skills|marks|question1  |question2|text|
@@ -226,7 +226,7 @@ Feature: Questions functionality
       |module |submodule|movieLocation|
       |Tests  |Questions|C:\Users\pallavi.arora\Downloads\metapreview.mp4|
 
-  @questionModule @inContinuation
+  @questionModule
   Scenario Outline: View Video
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
@@ -239,7 +239,7 @@ Feature: Questions functionality
       |Tests  |Questions|
 
 
-  @questionModule  @inContinuation
+  @questionModule
   Scenario Outline: Delete Video
     Given Select "<module>", "<submodule>" from sidebar
     When Switch to "Video Based"
@@ -282,7 +282,7 @@ Feature: Questions functionality
     And Click the button "Save & Add More"
     And Enter subjective question description for coding
     And Expand the dropdown "Select Coding Languages"
-    And Select "<language>" from dropdown
+    And Select "<language2>" from dropdown
     Then Get the selected languages "<language1>", "<language2>"
     And Click the button "Save & Exit"
 #    Then Verify the subjective questions

@@ -1,16 +1,17 @@
 package com.qa.athenaUi.stepdefinitions;
 
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import com.qa.athenaUi.locators.Course_Locators;
 import com.qa.athenaUi.locators.MyLocators;
-import com.gemini.gemjar.reporting.GemTestReporter;
-import com.gemini.gemjar.enums.Status;
-import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.sql.Driver;
 import java.util.List;
 
 public class Batches {
@@ -23,7 +24,8 @@ public class Batches {
     public void batchActionsIcon(){
         try {
             //expand the action icon of batch
-            DriverAction.waitSec(7);
+            DriverAction.waitSec(2);
+            DriverAction.waitUntilElementIsClickable(MyLocators.batchActionsIcon);
             DriverAction.click(MyLocators.batchActionsIcon);
             GemTestReporter.addTestStep("Click actions icon of batch","Successfully clicked the actions icon", Status.PASS);
         }catch (Exception e){
@@ -34,10 +36,9 @@ public class Batches {
     @And("^Select \"([^\"]*)\" from actions dropdown$")
     public void selectFromActionsDropdown(String option) throws InterruptedException {
         try {
-            DriverAction.waitSec(4);
-            _courseState = option;
+//            _courseState = option;
             //select option from dropdown
-            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.editOptions.replace("input", option)),4);
+//            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.editOptions.replace("input", option)));
             DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
         }catch(Exception e){
             GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,Status.ERR);
@@ -48,7 +49,7 @@ public class Batches {
     public void addCourseInBatch() {
         try{
             //add a course in batch
-            Thread.sleep(3000);
+            DriverAction.waitUntilElementIsClickable(MyLocators.addCourse);
             DriverAction.click(MyLocators.addCourse);
             List<WebElement>addedCourses=DriverAction.getElements(MyLocators.addedCourseName);
             int total= addedCourses.size();
@@ -65,7 +66,7 @@ public class Batches {
     @Then("^Verify added course displays in batch summary$")
     public void verifyCourseInBatchSummary() {
         try {
-            Thread.sleep(5000);
+            DriverAction.waitSec(5);
             DriverAction.scrollToBottom();
             //get the list of all added courses and verify the last course is recently added
             List<WebElement>courses=DriverAction.getElements(MyLocators.recentlyAddedCourse);
@@ -74,8 +75,8 @@ public class Batches {
             for(int i=0;i<total;i++) {
                 String course = DriverAction.getElementText(courses.get(i));
                 if (course.contains(_courseName)) {
-                   c++;
-                   break;
+                    c++;
+                    break;
                 }
             }
             if(c==0){
@@ -102,7 +103,7 @@ public class Batches {
     @Then("^Verify owner of a batch is selected by default$")
     public void verifyOwnerOfBatchSelected() {
         try {
-            Thread.sleep(4000);
+            DriverAction.waitUntilElementAppear(MyLocators.owner, 5);
             String owner = DriverAction.getElementText(MyLocators.owner);
             if (_email.contains(owner)) {
                 GemTestReporter.addTestStep("Verify owner of a batch is selected by default", "Successfully verified the owner of batch is selected by default.", Status.PASS);
@@ -130,7 +131,7 @@ public class Batches {
                 if(i==1&& _courseState.equals("Edit")){
                     continue;
                 }
-                Thread.sleep(2000);
+                DriverAction.waitSec(2);
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("id");
                 //dropdown
@@ -167,7 +168,7 @@ public class Batches {
     public void verifyBatchCreatedUpdated() {
 
         try {
-            Thread.sleep(8000);
+            DriverAction.waitUntilElementAppear(MyLocators.batchCreated, 5);
             String batch = DriverAction.getElementText(MyLocators.batchCreated);
             if (batch.contains(_batchName)) {
                 GemTestReporter.addTestStep("Verify batch is created/updated", "Successfully verified the batch is created/updated.", Status.PASS);
@@ -175,13 +176,13 @@ public class Batches {
                 GemTestReporter.addTestStep("Verify batch is created/updated", "Could not verify the created/updated batch", Status.FAIL);
             }
         }catch(Exception e){
-                GemTestReporter.addTestStep("Verify batch is created/updated","Exception encountered- "+e,Status.ERR);
+            GemTestReporter.addTestStep("Verify batch is created/updated","Exception encountered- "+e,Status.ERR);
         }
     }
 
     @And("^Click the button in batch \"([^\"]*)\"$")
     public void clickCreateBatch(String button) throws InterruptedException {
-        Thread.sleep(5000);
+        DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.createBatch.replace("input",button)));
         DriverAction.click(By.xpath(MyLocators.createBatch.replace("input",button)));
     }
 
@@ -201,7 +202,7 @@ public class Batches {
                 if(i==1&& _courseState.equals("Edit")){
                     continue;
                 }
-                Thread.sleep(2000);
+                DriverAction.waitSec(2);
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("id");
                 //dropdown
@@ -237,7 +238,7 @@ public class Batches {
     @Then("^Verify added course after editing displays in batch summary$")
     public void verifyCourseAfterEditingInBatchSummary() {
         try {
-            Thread.sleep(5000);
+            DriverAction.waitSec(5);
             DriverAction.scrollToBottom();
             String course=DriverAction.getElementText(MyLocators.recentlyAddedCourseAfterEdit);
             if (course.contains(_courseName)) {

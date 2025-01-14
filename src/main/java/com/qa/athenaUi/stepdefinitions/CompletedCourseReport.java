@@ -1,10 +1,10 @@
 package com.qa.athenaUi.stepdefinitions;
 
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import com.qa.athenaUi.locators.CampusPerformanceLocators;
 import com.qa.athenaUi.locators.CompletedCourseReportLocator;
-import com.gemini.gemjar.reporting.GemTestReporter;
-import com.gemini.gemjar.enums.Status;
-import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
@@ -23,7 +23,7 @@ public class CompletedCourseReport {
     @And("^Enter name or email in searchbox \"([^\"]*)\"$")
     public void searchByNameEmail(String text) {
         try{
-     //       DriverAction.waitUntilElementAppear(MyLocators.searchbox,5);
+            //       DriverAction.waitUntilElementAppear(MyLocators.searchbox,5);
             DriverAction.typeText(CampusPerformanceLocators.nameEmailSearchbox,text,"Enter name or email");
         }catch(Exception e){
             GemTestReporter.addTestStep("Enter name or email in searchbox","Exception encountered- "+e, Status.ERR,DriverAction.takeSnapShot());
@@ -33,12 +33,13 @@ public class CompletedCourseReport {
     @Then("Validate records get filtered on the basis of name and email {string}")
     public void validateRecordsOnTheBasisOfNameAndEmail(String searchedKey) {
         try{
+            DriverAction.waitSec(5);
             List<WebElement> firstname=DriverAction.getElements(CampusPerformanceLocators.name);
             List<WebElement> lastname=DriverAction.getElements(CampusPerformanceLocators.lastname);
             List<WebElement> email=DriverAction.getElements(CampusPerformanceLocators.email);
             boolean isPassed=true;
             for(int i=0;i<firstname.size()&&i<email.size()&&i<lastname.size();i++){
-             //   String abc=name.get(i).getAttribute("ng-reflect-text");
+                //   String abc=name.get(i).getAttribute("ng-reflect-text");
                 if(!firstname.get(i).getAttribute("ng-reflect-text").contains(searchedKey) && !lastname.get(i).getAttribute("ng-reflect-text").contains(searchedKey) && !email.get(i).getAttribute("ng-reflect-text").contains(searchedKey)){
                     isPassed=false;
                     break;
@@ -107,7 +108,7 @@ public class CompletedCourseReport {
     @And("^Select start date and end date$")
     public void selectStartDateAndEndDate() {
         try {
-       //     String startDate;
+            //     String startDate;
             DriverAction.click(CampusPerformanceLocators.expandStartDateCalendar, "Expand start date calendar", "Successfully expanded the start date calendar.");
             DriverAction.click(CampusPerformanceLocators.selectDate, "Select start date", "Successfully selected the start date.");
             _startDate = DriverAction.getAttributeName(CampusPerformanceLocators.selectedStartDate, "ng-reflect-model");
@@ -125,21 +126,21 @@ public class CompletedCourseReport {
         }
     }
 
-        private static String convertDate(String dateString) {
-            // Parse the date string using the specified format
+    private static String convertDate(String dateString) {
+        // Parse the date string using the specified format
 //            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 //            LocalDate date = LocalDate.parse(dateString, inputFormatter);
 //
 //            // Format the date object to the desired output format
 //            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //            return date.format(outputFormatter);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd yyyy");
-            LocalDate date = LocalDate.parse(dateString, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd yyyy");
+        LocalDate date = LocalDate.parse(dateString, formatter);
         //    System.out.println(date);
-            String _date= String.valueOf(date);
-            String formattedDate = _date.substring(5, 7) + "/" + _date.substring(8) + "/" + _date.substring(0, 4);
-             return formattedDate;
-        }
+        String _date= String.valueOf(date);
+        String formattedDate = _date.substring(5, 7) + "/" + _date.substring(8) + "/" + _date.substring(0, 4);
+        return formattedDate;
+    }
 
     @Then("^Verify records get filtered on the basis of date$")
     public void verifyRecordsGetFilteredOnTheBasisOfDate() {
@@ -168,6 +169,7 @@ public class CompletedCourseReport {
     @Then("^Validate records get unfiltered \"([^\"]*)\"$")
     public void validateRecordsGetUnfiltered(String searchedKey) {
         try{
+            DriverAction.waitSec(5);
             List<WebElement> name=DriverAction.getElements(CampusPerformanceLocators.name);
             List<WebElement> email=DriverAction.getElements(CampusPerformanceLocators.email);
             boolean isPassed=true;
@@ -192,7 +194,7 @@ public class CompletedCourseReport {
     @Then("^Verify the file gets downloaded \"([^\"]*)\"$")
     public void verifyTheFileGetsDownloaded(String file) {
         try{
-       //     File downloadedFile = getLatestDownloadedFile(file);
+            //     File downloadedFile = getLatestDownloadedFile(file);
             File downloadedFile=verifyTheDownloadedFile(file);
 
             if (downloadedFile != null && downloadedFile.exists()) {
@@ -218,7 +220,7 @@ public class CompletedCourseReport {
             return latestFile;
         }
         return null;
-}
+    }
 
     @And("^Expand selected category dropdown \"([^\"]*)\"$")
     public void expandSelectedCategoryDropdown(String selectedCategory) {
@@ -270,5 +272,12 @@ public class CompletedCourseReport {
 
         }
         return null;
+    }
+
+    @And("Click the button Export")
+    public void clickTheButtonExport() {
+        DriverAction.waitSec(8);
+        DriverAction.waitUntilElementAppear(By.xpath("(//button[@label='Export'])[1]"), 10);
+        DriverAction.click(By.xpath("(//button[@label='Export'])[1]"));
     }
 }

@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class Course {
     Logger logger = LoggerFactory.getLogger(LearnerModule.class);
-    String _courseName=" ";
+    public  String _courseName=" ";
     String _assignedCourseName=" ";
     int _ActiveCourseCount=0;
     int _viewListActiveCount=0;
@@ -150,8 +150,8 @@ public class Course {
         courseName += RandomStringUtils.randomAlphanumeric(length - 1); // Generate the rest of the string
         return courseName;
     }
-    @Then("^Enter respective values in course fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
-    public void enterAssignment(String courseType, String duration,String courseTag, String fileLocation, String category) {
+    @Then("^Enter respective values in course fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" \"([^\"]*)\"$")
+    public void enterAssignment(String courseType, String duration,String courseTag, String fileLocation, String category, int points) {
     try{
         int c=2;
         List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
@@ -159,12 +159,15 @@ public class Course {
 //        courseName= RandomStringUtils.randomAlphanumeric(10);
         String inputValues[]={_courseName,courseType,duration,courseTag,fileLocation,category};
         for(int i=0;i<=5;i++){
+            DriverAction.waitSec(2);
             String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
             String upload=inputFields.get(i).getAttribute("type");
             //dropdown
             if(dropdown!=null&&dropdown.equals("listbox")){
+                DriverAction.waitSec(2);
                 DriverAction.click(By.xpath(Course_Locators.dropdownIcon.replace("itr",String.valueOf(c))));
                 c++;
+                DriverAction.waitSec(2);
                 DriverAction.click(By.xpath(Course_Locators.option.replace("input",inputValues[i])));
             }
             //file-upload
@@ -188,16 +191,20 @@ public class Course {
             //in this we are filling the description
             if (DriverAction.isExist(Course_Locators.courseDescription)) {
                 DriverAction.typeText(Course_Locators.courseDescription,description);
+                DriverAction.waitSec(2);
                 DriverAction.scrollToBottom();
             }
             else {
             GemTestReporter.addTestStep("Error Occur", "Fail to enter text in course description", Status.FAIL,
                     DriverAction.takeSnapShot());
         }
+            DriverAction.waitSec(2);
             DriverAction.scrollToBottom();
+            DriverAction.scrollIntoView(Course_Locators.checkboxs);
             DriverAction.waitUntilElementIsClickable(Course_Locators.checkboxs);
-            DriverAction.click(Course_Locators.checkboxs);
-
+//            DriverAction.click(Course_Locators.checkboxs);
+            DriverAction.waitSec(2);
+            DriverAction.scrollToBottom();
         }catch(Exception e){
             logger.info("Exception occurred", e);
             GemTestReporter.addTestStep("Enter course description","Exception encountered- "+e,Status.ERR);
@@ -371,7 +378,7 @@ public void editAndVerify(){
         try{
             //in this function we are editing and validating it is edit properly or not
             DriverAction.scrollToTop();
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(5);
 //            DriverAction.isDisplayed(Course_Locators.courseSummaryDiv);
             DriverAction.click(Course_Locators.defaultOrderButton);
             DriverAction.waitUntilElementIsClickable(By.xpath(Course_Locators.button.replace("input","Save As Draft")));
@@ -546,7 +553,7 @@ public void editAndVerify(){
 }
 @Then("^Validate Course Summary Screen$")
     public void validateCourseSummary(){
-       try{
+       try {
 
            // In this we are validating Course Summary screen it's functionality all.
 
@@ -557,128 +564,19 @@ public void editAndVerify(){
            //here we are checking the Default order button functionality
 
            Thread.sleep(2000);
-           List<WebElement> firstTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
-           int firstTableSize=firstTable.size();
-           DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
-           List<WebElement> secondTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
-           int secondTableSize=secondTable.size();
-           if(firstTableSize==secondTableSize)
-           {
+           List<WebElement> firstTable = DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
+           int firstTableSize = firstTable.size();
+           DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Default Order")), "clicked on Default Order button", "Successfully clicked on Default Order button");
+           List<WebElement> secondTable = DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
+           int secondTableSize = secondTable.size();
+           if (firstTableSize == secondTableSize) {
                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Successfully added the data", Status.PASS, DriverAction.takeSnapShot());
-           }
-           else
-           {
+           } else {
                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Data is not added", Status.FAIL, DriverAction.takeSnapShot());
            }
 
            //here we are checking the reset button functionality
-           DriverAction.click(By.xpath(Course_Locators.button.replace("input","Reset")),"Clicked on Reset Button","Successfully clicked on Reset button");
-           List<WebElement> tableAfterReset=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
-           if(tableAfterReset.size()!=firstTableSize)
-           {
-               GemTestReporter.addTestStep("Data is Reset after clicking the Reset button", "Successfully get reset", Status.PASS, DriverAction.takeSnapShot());
-           }
-           else
-           {
-               GemTestReporter.addTestStep("Data is Reset after clicking the Reset button", "Not able to Reset the data", Status.FAIL, DriverAction.takeSnapShot());
-           }
-           DriverAction.click(By.xpath(Course_Locators.button.replace("input","Default Order")),"clicked on Default Order button","Successfully clicked on Default Order button");
-
-           //here we are checking the Save as Draft button functionality
-           DriverAction.click(By.xpath(Course_Locators.button.replace("input","Save As Draft")),"Clicked on Save As Draft Button","Successfully clicked on Save As Draft button");
-
-   //        DriverAction.waitSec(2);
-//           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
-           String popUpMessage=DriverAction.getElementText(By.xpath("(//div[contains(@class,'p-toast-message')])[3]"));
-
-         if("Course Created Successfully".equals(popUpMessage))
-           {
-               GemTestReporter.addTestStep("Course is drafted","course is drafted successfully", Status.PASS, DriverAction.takeSnapShot());
-           }
-           else {
-               GemTestReporter.addTestStep("Course is drafted","course is not drafted", Status.FAIL, DriverAction.takeSnapShot());
-
-           }
-
-//           DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
-           DriverAction.waitSec(5);
-           DriverAction.click(Course_Locators.courseTypeDropdown);
-           DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
-           DriverAction.click(Course_Locators.draftOrPublishDropdown);
-           DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Draft")));
-           DriverAction.waitSec(5);
-           String fetchedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
-           if(fetchedCourseName.equals(_courseName))
-           {
-               GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","Successfully", Status.PASS, DriverAction.takeSnapShot());
-
-           }
-           else
-           {
-               GemTestReporter.addTestStep("Course is saved in draft and can be edit to publish finally","UnSuccessfully", Status.FAIL, DriverAction.takeSnapShot());
-
-           }
-
-           //here we are checking the Save Course & Publish button functionality
-////           DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"));
-//
-DriverAction.waitSec(5);
-if(DriverAction.isDisplayed(Course_Locators.editIcon))
-{
-    DriverAction.click(Course_Locators.editIcon,"clicked on edit icon","Successfully clicked");
-    if(DriverAction.isDisplayed(Course_Locators.editOption))
-    {
-        DriverAction.click(Course_Locators.editOption,"clicked on edit option","Successfully clicked");
-        DriverAction.waitSec(5);
-//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
-        DriverAction.scrollToBottom();
-        DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add Content")));
-        DriverAction.waitSec(5);
-//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
-
-        DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-//        DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
-        DriverAction.waitSec(5);
-
-        DriverAction.click(By.xpath(Course_Locators.button.replace("input","Add To Course")));
-        if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Update Course & Publish"))))
-        {
-            DriverAction.scrollToBottom();
-            DriverAction.click(Course_Locators.publishButton);
-//            DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"));
-           DriverAction.waitSec(3);
-            if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes"))))
-            {
-                DriverAction.click(By.xpath(Course_Locators.button.replace("input","Yes")));
-                if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes")))) {
-                    DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Yes")));
-                }
-//                DriverAction.waitUntilElementDisappear(By.xpath("//*[@class='p-progress-spinner-svg']"));
-
-                    DriverAction.waitSec(5);
-                DriverAction.click(Course_Locators.courseTypeDropdown);
-                DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
-                DriverAction.click(Course_Locators.draftOrPublishDropdown);
-                DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Published")));
-                DriverAction.waitSec(5);
-                String fetchedPublishedCourseName=DriverAction.getElementText(Course_Locators.draftedCourse);
-
-                if(fetchedPublishedCourseName.equals(_courseName))
-                {
-                    GemTestReporter.addTestStep("Course is published finally","Successfully", Status.PASS, DriverAction.takeSnapShot());
-
-                }
-                else
-                {
-                    GemTestReporter.addTestStep("Course is published finally","UnSuccessfully", Status.FAIL, DriverAction.takeSnapShot());
-
-                }
-
-            }
-
-        }
-    }
-}
+           DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Reset")), "Clicked on Reset Button", "Successfully clicked on Reset button");
        }
        catch (Exception e) {
            logger.info("Exception occurred", e);
@@ -740,16 +638,21 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     public void filterCompleteCourse(){
         try{
             //in this we are completing the course
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(8);
             if(DriverAction.isDisplayed(Course_Locators.courseFilterInput))
             {
                 DriverAction.typeText(Course_Locators.courseFilterInput,_assignedCourseName);
 
             }
+            DriverAction.waitSec(3);
+            DriverAction.scrollToBottom();
+            DriverAction.waitSec(2);
+            DriverAction.scrollIntoView(LearnerModule_Locators.viewCourseBtn);
             DriverAction.scrollToBottom();
             if(DriverAction.isDisplayed(LearnerModule_Locators.viewCourseBtn))
             {
                 DriverAction.click(LearnerModule_Locators.viewCourseBtn,"clicked on View Course Button","Successfully clicked on view course button");
+                DriverAction.waitSec(3);
                 if(DriverAction.isDisplayed(LearnerModule_Locators.startCourseBtn))
                 {
                     DriverAction.click(LearnerModule_Locators.startCourseBtn,"clicked on Start Course Button","Successfully clicked on Start course button");
@@ -760,7 +663,12 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
                     DriverAction.click(LearnerModule_Locators.completeAndContinueBtn);
                 }
                 //Assignment
+                DriverAction.waitSec(10);
+                DriverAction.waitUntilElementAppear(By.xpath("//div[text()='ASSIGNMENT']"), 150);
                 DriverAction.typeText(LearnerModule_Locators.answerArea, "demo_content");
+                DriverAction.waitSec(2);
+                DriverAction.scrollToBottom();
+                DriverAction.scrollIntoView(LearnerModule_Locators.completeAndContinueBtn);
                 DriverAction.waitUntilElementClickable((LearnerModule_Locators.completeAndContinueBtn),90);
 
                 if(DriverAction.isEnabled(LearnerModule_Locators.completeAndContinueBtn))
@@ -2214,6 +2122,53 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
         Thread.sleep(5000);
         DriverAction.waitUntilElementIsClickable(Course_Locators.checkboxs);
         DriverAction.click(Course_Locators.checkboxs);
+    }
+
+    @And("Click the button Add Content")
+    public void clickTheButtonAddContent() {
+        DriverAction.scrollToBottom();
+        DriverAction.waitSec(5);
+        DriverAction.scrollIntoView(MyLocators.addContentBtn);
+        DriverAction.scrollToBottom();
+//        DriverAction.scrollToBottom();
+        DriverAction.click(MyLocators.addContentBtn);
+    }
+
+    @And("^Enter respective values in course fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
+    public void enterRespectiveValuesInCourseFields(String courseType, String duration, String courseTag, String fileLocation, String category) {
+        try{
+            int c=2;
+            List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
+            _courseName = generateRandomCourseName(10);
+//        courseName= RandomStringUtils.randomAlphanumeric(10);
+//            DriverAction.typeText(Course_Locators.points, points);
+            String inputValues[]={_courseName,courseType,duration, courseTag,fileLocation,category};
+            for(int i=0;i<=5;i++){
+                DriverAction.waitSec(2);
+                String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
+                String upload=inputFields.get(i).getAttribute("type");
+                //dropdown
+                if(dropdown!=null&&dropdown.equals("listbox")){
+                    DriverAction.waitSec(2);
+                    DriverAction.click(By.xpath(Course_Locators.dropdownIcon.replace("itr",String.valueOf(c))));
+                    c++;
+                    DriverAction.waitSec(2);
+                    DriverAction.click(By.xpath(Course_Locators.option.replace("input",inputValues[i])));
+                }
+                //file-upload
+                else if(upload!=null&&upload.equals("file")){
+                    DriverAction.fileUpload(inputFields.get(i),fileLocation);
+                }
+                //textbox
+                else{
+                    DriverAction.typeText(inputFields.get(i),inputValues[i]);
+                }
+            }
+        }
+        catch (Exception e) {
+            logger.info("Exception occurred", e);
+            GemTestReporter.addTestStep("Error!!", "Something Wrong happened", Status.FAIL);
+        }
     }
 }
 

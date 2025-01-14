@@ -117,8 +117,12 @@ public class Tests_TestControl {
     @And("^Add Question to the section$")
     public void addQuestionSection() {
         try {
+//            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
+            DriverAction.waitSec(2);
             DriverAction.scrollToBottom();
-
+            DriverAction.waitSec(2);
+            DriverAction.scrollIntoView(Tests_TestControl_Locators.addQuestion);
+            DriverAction.scrollToBottom();
             //click on Add Question for the following test
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.addQuestion)) {
                 DriverAction.click(Tests_TestControl_Locators.addQuestion,"Validate user able to click on add question button","User successfully able to click on question button");
@@ -131,6 +135,7 @@ public class Tests_TestControl {
             //filling the Question Details
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.questionTypeDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.questionTypeDropdown);
+                DriverAction.waitSec(3);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Multiple choice question")))) {
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Multiple choice question")),"Validate user able to select the required option","User successfully select Multiple choice option");
                 }
@@ -142,6 +147,7 @@ public class Tests_TestControl {
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.difficultyDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.difficultyDropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Hard")))) {
+                    DriverAction.waitSec(3);
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Hard")),"Validate user able to select the required option","User successfully select Hard option");
                 }
             }
@@ -149,19 +155,26 @@ public class Tests_TestControl {
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.levelDropdown)) {
                 DriverAction.click(Tests_TestControl_Locators.levelDropdown);
                 if (DriverAction.isDisplayed(By.xpath(Tests_TestControl_Locators.options.replace("input", "Basic")))) {
+                    DriverAction.waitSec(3);
                     DriverAction.click(By.xpath(Tests_TestControl_Locators.options.replace("input", "Basic")),"Validate user able to select the required option","User successfully select Basic option");
                 }
             }
+            DriverAction.waitSec(2);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.submitButton)) {
                 DriverAction.click(Tests_TestControl_Locators.submitButton,"Validate user able to click on submit button","User successfully submit the import random question form");
             }
             DriverAction.scrollToBottom();
+            DriverAction.waitSec(2);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.saveButton)) {
                 DriverAction.click(Tests_TestControl_Locators.saveButton,"Validate user able to click on save button","Test was saved successfully");
             }
             DriverAction.scrollToBottom();
+            DriverAction.waitSec(2);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.continueButton)) {
                 DriverAction.click(Tests_TestControl_Locators.continueButton);
+                GemTestReporter.addTestStep("Questions added", "Questions were added successfully", Status.PASS);
+            } else {
+                GemTestReporter.addTestStep("Questions not added", "Questions were not added", Status.PASS);
             }
         } catch (Exception e) {
             logger.info("Exception occurred", e);

@@ -175,6 +175,12 @@ Feature:API HealthCheck
       |Endpoint |Method |StatusCode|SampleName |
       |getOngoingCourseData  |post   |200       |getOngoingCourseData |
 
+  Scenario Outline: Get all top scorers - leaderboard
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllTopScorers|get   |200 |
 
 
 

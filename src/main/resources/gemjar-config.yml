@@ -10,7 +10,7 @@ report_name: Athena_Report
 email_report: N
 jewel_screen_shots: Y/N
 #tags: '@cucumber_tag'
-glue_code: com.gemini.athenaAPI.stepDefinition.APIStepDefinition
+glue_code: com.qa.athenaAPI.stepDefinition.APIStepDefinition
 #glue_code: com.qa.athenaUi.stepDefinitions
 #glue_code: com.gemini.athena.stepdefinitions
 browser_name: chrome

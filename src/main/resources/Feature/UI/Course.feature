@@ -30,59 +30,61 @@ Feature:Course module features
   Scenario Outline: Create Course verify Add Content
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
-    And Click the button "Add Content"
+    And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
     Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                  |description|contentName|contentMessage|content|
-      | Manage Courses|Course Library|Public    |  30     |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |content1   |Content successfully added. Add more!|Content|
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                  |description|contentName|contentMessage|content| points |
+      | Manage Courses|Course Library|Public    |  30     |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |content1   |Content successfully added. Add more!|Content| 10 |
 
 
   @4
   Scenario Outline: Create Course verify Add Assignment
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Select the checkbox
-    And Click the button "Add Content"
+    And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
 #    And Validate Filter functionality "<assignmentName>"
     Then Validate "<assignment>" Add to Course "<assignmentMessage>"
     Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                             |description|assignmentName     |contentMessage|assignmentMessage|content|assignment|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |assignment1 |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                             |description|assignmentName     |contentMessage|assignmentMessage|content|assignment|points|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |assignment1 |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|10|
 
 
   @5
   Scenario Outline: Create Course->Edit and verify the course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
-    And Enter course description "<description>" without checkbox
-    And Click the button "Add Content"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
+    And Enter course description "<description>"
+    And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
     Then Edit the Created Course and Verify
 
     Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                    |description|assignmentName     |contentMessage                      |assignmentMessage                       |content|assignment|
-      | Manage Courses|Course Library|Public    |  30    |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |regressionTest |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                    |description|assignmentName     |contentMessage                      |assignmentMessage                       |content|assignment|points|
+      | Manage Courses|Course Library|Public    |  30    |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc        |regressionTest |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|10          |
+
 
 
   @6 @working
   Scenario Outline: Create Course->Complete Course->verify Course Summary
     Given Select "<module>", "<submodule>" from sidebar
-    When Click the button until it appear "Create Course"
+    When Click the button "Create Course"
     And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
+    And Select the checkbox
     And Click the button until it appear "Add Content"
     And Validate "<content>" Add to Course "<contentMessage>"
     And Validate "<assignment>" Add to Course "<assignmentMessage>"
     Then Validate Course Summary Screen
     Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|points|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|10|
 
   @7 @inProgress
   Scenario Outline: Assign Created Course->verify the result once the user complete the course
@@ -113,7 +115,7 @@ Feature:Course module features
       |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
 
 
-  @9 @fix
+  @9
   Scenario Outline: Validate count of Course on Course Library and List View should match
     Given Select "<module>", "<submodule>" from sidebar
     When Count of Active Test from Course Library
@@ -216,7 +218,7 @@ Feature:Course module features
   Scenario Outline: Create Course->verify Course Summary->Assign a Learner and update the date of Unattempted course->Validate date is updated successfully
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button until it appear "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Click the button until it appear "Add Content"
     And Validate "<content>" Add to Course "<contentMessage>"
@@ -227,8 +229,8 @@ Feature:Course module features
     Then Assign "<email>" Learner and edit date for course
 
     Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|email|Learners Assigned|course|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|check123@gmail.com|Assign Learners|course|
+      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|email|Learners Assigned|course|points|
+      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|check123@gmail.com|Assign Learners|course|10|
 
 
 #  @new @toBeChecked
@@ -249,7 +251,7 @@ Feature:Course module features
 #  Scenario Outline: Create Course->Complete Course->verify Course Summary->Assign a Learner->Keep the course in Progress->Validate date is updated for In progress course successfully
 #    Given Select "<module>", "<submodule>" from sidebar
 #    When Click the button until it appear "Create Course"
-#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
 #    And Enter course description "<description>"
 #    And Click the button until it appear "Add Content"
 #    And Validate "<content>" Add to Course "<contentMessage>"

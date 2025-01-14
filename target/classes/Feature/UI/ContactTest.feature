@@ -7,7 +7,8 @@ Feature: Contact us form
   Scenario: Fill contact us form
     Given user clicks on Contact Us tab
     When user enters required details
-    Then user clicks on submit button
+    And user clicks on submit button
+    Then verify form is submitted
 
   Scenario: Not entering details
     Given user clicks on Contact Us tab

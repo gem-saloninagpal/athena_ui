@@ -198,4 +198,11 @@ public class Tests_TestControl_Locators {
     public static By noRecords = By.xpath("//div[@class='text-center']");
     public static By clearIcon = By.xpath("//i[contains(@class, 'p-dropdown-clear')]");
     public static By threeDotPlacement = By.xpath("(//span[contains(@class,'pi pi-ellipsis')])[1]");
+    public static By updateQuestionTypeDD = By.xpath("(//div//span[text()='Question Type'])[3]");
+    public static By updateDifficultyDD = By.xpath("(//div//span[text()='Difficulty'])[3]");
+    public static By updateLevelDD = By.xpath("(//div//span[text()='Level'])[3]");
+    public static By updateQuestionTypeTraining = By.xpath("(//div//span[text()='Question Type'])[13]");
+    public static By updateLevelTraining = By.xpath("(//div//span[text()='Level'])[13]");
+    public static By difficultyTraining = By.xpath("(//div//span[text()='Difficulty'])[13]");
+
 }

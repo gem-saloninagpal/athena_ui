@@ -1,7 +1,10 @@
 package com.qa.athenaUi.stepdefinitions;
 
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.GemTestReporter;
 import com.qa.athenaUi.locators.ContactUsLocators;
 import com.gemini.gemjar.utils.ui.DriverAction;
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -41,8 +44,16 @@ public class ContactUsForm_StepDef {
 
     @Then("^verify Submit button is disabled$")
     public void verifySubmitButtonIsDisabled() throws InterruptedException {
-        Thread.sleep(1000);
-        DriverAction.isExist(ContactUsLocators.submit_disabled);
+        try {
+            DriverAction.waitSec(2);
+            if(DriverAction.isExist(ContactUsLocators.submit_disabled)) {
+                GemTestReporter.addTestStep("submit button disabled", "submit button is disabled due to incomplete/incorrect details", Status.PASS);
+            } else {
+                GemTestReporter.addTestStep("submit button not disabled", "submit button is not disabled", Status.FAIL);
+            }
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("submit button not disabled", "submit button is not disabled", Status.ERR);
+        }
     }
 
     @When("user enters invalid name")
@@ -70,5 +81,19 @@ public class ContactUsForm_StepDef {
         DriverAction.typeText(ContactUsLocators.email, "abc@gmail.com");
         DriverAction.typeText(ContactUsLocators.contact, "abc");
         DriverAction.typeText(ContactUsLocators.desc, "ejbejsbe");
+    }
+
+    @Then("verify form is submitted")
+    public void verifyFormIsSubmitted() {
+        try {
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader,150);
+            if(DriverAction.isDisplayed(ContactUsLocators.toast_msg)) {
+                GemTestReporter.addTestStep("Form submitted", "Form submitted successfully", Status.PASS);
+            } else {
+                GemTestReporter.addTestStep("Form not submitted", "Form not submitted", Status.FAIL);
+            }
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Form not submitted", "Form not submitted", Status.ERR);
+        }
     }
 }

@@ -173,6 +173,7 @@ public class MyLocators {
     public static By viewReportBtn = By.xpath("(//button[@label='View Report'])[2]");
     public static By addNewAssignment = By.xpath("//button[@label='Add New']");
     public static By geminiUsers = By.xpath("(//a)[1]");
+    public static By addContentBtn = By.xpath("//span[text()='Add Content']//parent::button");
 
     public static String selectTab(int i) {
 

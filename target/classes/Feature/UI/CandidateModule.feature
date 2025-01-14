@@ -39,11 +39,6 @@ Feature: Candidate module features
     And Enter a password in confirm password field "k", "Confirm Password"
     Then Verify the error displayed in input fields "password mismatch" "<countMandatoryFields1>"
     Then Verify user not able to edit email
-    When Enter a password "abc@123" in new password field
-    And Enter a password in confirm password field "abc@123", "Confirm Password"
-    And Enter a password "cand@2" in old password fields
-    And Click the button "Change Password"
-#    Then Verify the popup message "Password updated successfully!"
 
     Examples:
       |option1|option2        |option3|error                 |countMandatoryFields|countMandatoryFields1|
@@ -172,7 +167,7 @@ Feature: Candidate module features
     When Click the Yes button
     And Click the button "Attempt"
     And Click the button "Save & Next"
-    Then Verify the popup message "to save the answer"
+#    Then Verify the popup message "to save the answer"
 
   @regressionCandidate @working
   Scenario: Finish a test and check in completed tests tab

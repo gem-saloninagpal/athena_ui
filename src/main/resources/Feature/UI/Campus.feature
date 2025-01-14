@@ -42,7 +42,7 @@ Feature: Create campus functionality
 
     Examples:
       |module|submodule|location|university|tpoName|tpoEmail   |tpoContact|description|
-      |Campus|         |chd     |chitkara  |xyz    |x@gmail.com|8907543256|desc       |
+      |Campus|         |chd     |chitkara  |xyz    | |8907543256|desc       |
 
 
 

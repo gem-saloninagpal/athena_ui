@@ -1,10 +1,10 @@
 package com.qa.athenaUi.stepdefinitions;
 
+import com.gemini.gemjar.enums.Status;
+import com.gemini.gemjar.reporting.GemTestReporter;
+import com.gemini.gemjar.utils.ui.DriverAction;
 import com.qa.athenaUi.locators.MyLocators;
 import com.qa.athenaUi.locators.QuestionsLocators;
-import com.gemini.gemjar.reporting.GemTestReporter;
-import com.gemini.gemjar.enums.Status;
-import com.gemini.gemjar.utils.ui.DriverAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,13 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.qa.athenaUi.stepdefinitions.CandidateModule_UserManagement.clickButton;
-import static com.qa.athenaUi.stepdefinitions.CandidateModule_UserManagement.generateUniqueEmail;
 public class Questions {
     String _question;
     static String _passage;
@@ -50,6 +49,7 @@ public class Questions {
                 DriverAction.click(dropdowns.get(i));
                 DriverAction.click(By.xpath(QuestionsLocators.dropdownValue.replace("input", fields[i])));
                 GemTestReporter.addTestStep("Select " + fields[0] + " in " + fieldName[i], "Successfully selected " + fields[i], Status.PASS);
+                DriverAction.scrollToTop();
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Select dropdown values in question fields", "Exception encountered- " + e, Status.ERR);
@@ -69,15 +69,17 @@ public class Questions {
     @And("Enter question description {string}")
     public void enterQuestionDescription(String questionStatement) {
         try {
+            DriverAction.waitSec(5);
             DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox1,10);
-            if(DriverAction.isDisplayed(QuestionsLocators.questionBox1)) {
+            if(DriverAction.isExist(QuestionsLocators.questionBox1)) {
+                DriverAction.waitSec(2);
                 DriverAction.typeText(QuestionsLocators.questionBox1, questionStatement);
             }else if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)){
                 DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
             }else{
                 GemTestReporter.addTestStep("Enter question description","Could not enter question description.",Status.FAIL,DriverAction.takeSnapShot());
             }
-      //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
+            //      DriverAction.typeText(QuestionsLocators.questionBox, questionStatement);
             GemTestReporter.addTestStep("Enter question description", "Successfully added the question- " + questionStatement, Status.PASS);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter question description", "Exception encountered- " + e, Status.ERR);
@@ -87,7 +89,7 @@ public class Questions {
     @And("Enter second question description {string}")
     public void enterSecondQuestion(String questionStatement) {
         try {
-            DriverAction.waitSec(4);
+            DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox2, 5);
             if(DriverAction.isDisplayed(QuestionsLocators.questionBox2)) {
                 DriverAction.typeText(QuestionsLocators.questionBox2, questionStatement);
             }
@@ -104,7 +106,7 @@ public class Questions {
             String text = "";
             for (int i = 0; i < 3; i++) {
                 //call generate unique mail function and remove @gmail.com
-                text = generateUniqueEmail();
+                text = CandidateModule_UserManagement.generateUniqueEmail();
                 //enter option and add
                 //   DriverAction.typeText(QuestionsLocators.optionsBox, text);
                 if (DriverAction.isDisplayed(QuestionsLocators.enterOption)){
@@ -119,7 +121,7 @@ public class Questions {
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
                 GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, Status.PASS);
             }
-         //   Thread.sleep(6000);
+            //   Thread.sleep(6000);
             DriverAction.waitUntilElementClickable(QuestionsLocators.selectOption,3);
             DriverAction.click(QuestionsLocators.selectOption, "Successfully selected the option");
         } catch (Exception e) {
@@ -168,8 +170,8 @@ public class Questions {
     public void questionDescriptionSubjective() {
         try {
             _existingQues = _question;
-        //    _existingQues = generateUniqueEmail();
-            _question = generateUniqueEmail();
+            //    _existingQues = generateUniqueEmail();
+            _question = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.waitUntilElementAppear(QuestionsLocators.questionBox1,4);
             DriverAction.typeText(QuestionsLocators.questionBox1, _question, "Successfully entered the question description.");
         } catch (Exception e) {
@@ -182,7 +184,7 @@ public class Questions {
         try {
             DriverAction.waitSec(3);
             _existingQues = _question;
-            _question = generateUniqueEmail();
+            _question = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.codingQuestionBox, _question, "Successfully entered the question description.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter coding question description", "Exception encountered- " + e, Status.ERR);
@@ -193,7 +195,7 @@ public class Questions {
     public void enterPassage() {
         try {
             //here generateUniqueEmail function is generating a unique string
-            _passage = generateUniqueEmail();
+            _passage = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.passageBox, _passage, "Successfully entered the passage.");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enter the passage", "Exception encountered- " + e, Status.ERR);
@@ -234,7 +236,6 @@ public class Questions {
         try {
             DriverAction.waitUntilElementClickable(QuestionsLocators.expandPassage,8);
             DriverAction.click(QuestionsLocators.expandPassage, "Expand the passage field", "Successfully expanded the passage field");
-            DriverAction.waitSec(2);
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand the passage field","Exception encountered- "+e,Status.ERR);
         }
@@ -245,7 +246,7 @@ public class Questions {
         try {
             String[]ques;
             if(!question1.isEmpty() && !question2.isEmpty()) {
-                 ques = new String[]{question2, question1};
+                ques = new String[]{question2, question1};
             }else{
                 ques=new String[]{_comprehensionSubjectiveQues1, _comprehensionSubjectiveQues2};
             }
@@ -281,7 +282,7 @@ public class Questions {
     public void enterQuestionDescriptionRelatedPassage(String ques) {
         try {
             //here the function generates unique string
-            _passageQues = generateUniqueEmail();
+            _passageQues = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.waitUntilElementClickable(QuestionsLocators.passageQuestionBox,6);
             DriverAction.typeText(QuestionsLocators.passageQuestionBox, ques);
         }catch(Exception e){
@@ -292,7 +293,7 @@ public class Questions {
     @Then("^Click the button \"([^\"]*)\" and verify the message \"([^\"]*)\"$")
     public void clickTheButtonAndVerifyTheMessage(String buttonName, String message) {
         try {
-            Thread.sleep(4000);
+            DriverAction.waitSec(5);
 
             if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More")) {
                 DriverAction.scrollToBottom();
@@ -340,7 +341,7 @@ public class Questions {
     public void enterComprehensionBasedSubjectiveQuestion() {
         try {
             //generating unique string
-            _passageQues = generateUniqueEmail();
+            _passageQues = CandidateModule_UserManagement.generateUniqueEmail();
             //assigning question2 to question1
             _comprehensionSubjectiveQues1 = _comprehensionSubjectiveQues2;
             //assigning new string to question1
@@ -353,8 +354,8 @@ public class Questions {
 
     @And("^Click Add New in video tab$")
     public void clickAddNewInVideoTab() {
-            DriverAction.click(QuestionsLocators.addNewVideoQuestion);
-        }
+        DriverAction.click(QuestionsLocators.addNewVideoQuestion);
+    }
 
     @Then("^Verify upload movie clip dialog box displays$")
     public void verifyUploadMovieClipDialog() {
@@ -374,8 +375,8 @@ public class Questions {
     public void enterMovieNameAndDescription() {
         try{
             //generating unique string
-            _movieName =generateUniqueEmail();
-            _movieDescription =generateUniqueEmail();
+            _movieName = CandidateModule_UserManagement.generateUniqueEmail();
+            _movieDescription = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.movieNameInputBox, _movieName,"Successfully entered the movie name- "+ _movieName);
             DriverAction.typeText(QuestionsLocators.movieDescription, _movieDescription,"Successfully entered the movie description- "+ _movieDescription);
         }catch(Exception e){
@@ -418,8 +419,7 @@ public class Questions {
     @And("^Expand the video field$")
     public void expandVideoField() {
         try {
-            DriverAction.waitSec(2);
-            DriverAction.waitUntilElementClickable(QuestionsLocators.expandVideo,10);
+            DriverAction.waitUntilElementIsClickable(QuestionsLocators.expandVideo);
             DriverAction.click(QuestionsLocators.expandVideo, "Expand the video field");
         }catch(Exception e){
             GemTestReporter.addTestStep("Expand the video field","Exception encountered- "+e,Status.ERR);
@@ -469,7 +469,7 @@ public class Questions {
     @When("^Click Actions icon of recently created question$")
     public void clickActionsIconOfRecentlyCreatedQuestion() throws InterruptedException {
         try {
-            Thread.sleep(5000);
+            DriverAction.waitUntilElementIsClickable(MyLocators.contentActionsIcon);
             DriverAction.click(MyLocators.contentActionsIcon);
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created question","Exception encountered- "+e,Status.ERR);
@@ -570,7 +570,7 @@ public class Questions {
         try {
             DriverAction.clearText(QuestionsLocators.passageBox);
             //generating unique string
-            _updatedPassage = generateUniqueEmail();
+            _updatedPassage = CandidateModule_UserManagement.generateUniqueEmail();
             DriverAction.typeText(QuestionsLocators.passageBox, _updatedPassage, "Update the passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Update the passage","Exception encountered- "+e,Status.ERR);
@@ -595,8 +595,7 @@ public class Questions {
     @And("^Click actions icon of recently created video$")
     public void clickActionsIconOfRecentlyCreatedVideo() {
         try{
-            Thread.sleep(5000);
-            DriverAction.waitUntilElementClickable(QuestionsLocators.videoActionsIcon,20);
+            DriverAction.waitUntilElementIsClickable(QuestionsLocators.videoActionsIcon);
             DriverAction.click(QuestionsLocators.videoActionsIcon,"Click Actions icon of recently created passage");
         }catch(Exception e){
             GemTestReporter.addTestStep("Click Actions icon of recently created passage","Exception encountered- "+e,Status.ERR);
@@ -633,24 +632,24 @@ public class Questions {
 
     @Then("^Verify the state of video \"([^\"]*)\"$")
     public void verifyVideoState(String videoState) {
-      try{
-          //verifying if video is deleted or not
-          boolean isPresent=false;
-          String video=DriverAction.getElementText(QuestionsLocators.videoName);
-          if(video.equals(_movieName)){
-              isPresent=true;
-          }
-          if(!isPresent && videoState.equals("not deleted")){
-              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
-          }else if(isPresent && videoState.equals("deleted")){
-              GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
-          }
-          else{
-              GemTestReporter.addTestStep("Verify the state of video","Could not verify the video state as- "+videoState,Status.FAIL,DriverAction.takeSnapShot());
-          }
-      }catch(Exception e){
-          GemTestReporter.addTestStep("Verify the state of video","Exception encountered- "+e,Status.ERR);
-      }
+        try{
+            //verifying if video is deleted or not
+            boolean isPresent=false;
+            String video=DriverAction.getElementText(QuestionsLocators.videoName);
+            if(video.equals(_movieName)){
+                isPresent=true;
+            }
+            if(!isPresent && videoState.equals("not deleted")){
+                GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
+            }else if(isPresent && videoState.equals("deleted")){
+                GemTestReporter.addTestStep("Verify the state of video","Successfully verified the video state as- "+videoState,Status.PASS,DriverAction.takeSnapShot());
+            }
+            else{
+                GemTestReporter.addTestStep("Verify the state of video","Could not verify the video state as- "+videoState,Status.FAIL,DriverAction.takeSnapShot());
+            }
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Verify the state of video","Exception encountered- "+e,Status.ERR);
+        }
     }
 
     @When("^Search a video$")
@@ -702,7 +701,7 @@ public class Questions {
             for(WebElement e:deleteAssociatedQuestions){
                 DriverAction.click(e,"Delete all the questions associated","Successfully deleted all the associated questions.");
                 verifyConfirmationDialogBoxAppears();
-                clickButton("Yes");
+                CandidateModule_UserManagement.clickButton("Yes");
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Delete all the questions associated","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
@@ -716,7 +715,7 @@ public class Questions {
             for(WebElement e:deleteAssociatedQuestions){
                 DriverAction.click(e,"Delete all the questions associated to video","Successfully deleted all the video associated questions.");
                 verifyConfirmationDialogBoxAppears();
-                clickButton("Yes");
+                CandidateModule_UserManagement.clickButton("Yes");
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Delete all the questions associated to video","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
@@ -746,7 +745,7 @@ public class Questions {
     public void updateComprehensionBasedQuestion() {
         try{
             //generating unique string
-            _updateComprehensionQuestion =generateUniqueEmail();
+            _updateComprehensionQuestion = CandidateModule_UserManagement.generateUniqueEmail();
             //deleting the previous question and entering a new question
             DriverAction.clearText(QuestionsLocators.comprehensionQuestionTextarea);
             DriverAction.typeText(QuestionsLocators.comprehensionQuestionTextarea, _updateComprehensionQuestion,"Update comprehension based question");
@@ -778,7 +777,7 @@ public class Questions {
         }
     }
 
-    @Then("^Verify Status \"([^\"]*)\" and message \"([^\"]*)\" in uploaded excel$")
+    @Then("^Verify status \"([^\"]*)\" and message \"([^\"]*)\" in uploaded excel$")
     public void verifyQuestionsGetUploaded(String expectedStatus, String expectedMessage) {
         try{
             DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
@@ -811,14 +810,14 @@ public class Questions {
                 GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,Status.ERR,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-            GemTestReporter.addTestStep("Verify Status and message after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify status and message after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
     @And("^Upload recently downloaded file$")
     public void uploadRecentlyDownloadedFile() {
         // Get the path of the most recently downloaded file in the default Downloads directory
-   //     DriverAction.click(QuestionsLocators.chooseQuestionBtn);
+        //     DriverAction.click(QuestionsLocators.chooseQuestionBtn);
         String downloadPath = "C:\\Users\\saloni.nagpal\\Downloads";
         File mostRecentFile = getLastModifiedFile(downloadPath);
 
@@ -826,28 +825,28 @@ public class Questions {
         DriverAction.fileUpload(QuestionsLocators.chooseQuestionBtn, String.valueOf(mostRecentFile));
     }
 
-                private static File getLastModifiedFile(String directoryPath)
+    private static File getLastModifiedFile(String directoryPath)
 
-                {
-                    File directory = new File(directoryPath);
-                    File[] files = directory.listFiles();
-                    if (files == null || files.length == 0) {
-                        return
+    {
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+        if (files == null || files.length == 0) {
+            return
 
-                                null; // Handle the case where no files are found
-                    }
+                    null; // Handle the case where no files are found
+        }
 
-                    File mostRecentFile = files[0];
-                    for (File file : files) {
-                        if (file.lastModified() > mostRecentFile.lastModified()) {
-                            mostRecentFile = file;
-                        }
-                    }
-                    return mostRecentFile;
-                }
+        File mostRecentFile = files[0];
+        for (File file : files) {
+            if (file.lastModified() > mostRecentFile.lastModified()) {
+                mostRecentFile = file;
+            }
+        }
+        return mostRecentFile;
+    }
 
-    @Then("^Verify Statuses \"([^\"]*)\", \"([^\"]*)\" and messages \"([^\"]*)\", \"([^\"]*)\" in uploaded excel$")
-    public void verifyStatusesAndMessagesInUploadedExcel(String Status1, String Status2, String message1, String message2) {
+    @Then("^Verify statuses \"([^\"]*)\", \"([^\"]*)\" and messages \"([^\"]*)\", \"([^\"]*)\" in uploaded excel$")
+    public void verifyStatusesAndMessagesInUploadedExcel(String status1, String status2, String message1, String message2) {
         try{
             DriverAction.waitUntilElementAppear(MyLocators.popupMsg,50);
             String message=DriverAction.getElementText(MyLocators.popupMsg);
@@ -871,7 +870,7 @@ public class Questions {
                     String excelMessage1=sheet.getRow(1).getCell(17).getStringCellValue();
                     String excelStatus2 = sheet.getRow(2).getCell(16).getStringCellValue();
                     String excelMessage2=sheet.getRow(2).getCell(17).getStringCellValue();
-                    if(excelStatus1.equals(Status1)&&excelMessage1.equalsIgnoreCase(message1)&&excelStatus2.equals(Status2)&&excelMessage2.equalsIgnoreCase(message2)){
+                    if(excelStatus1.equals(status1)&&excelMessage1.equalsIgnoreCase(message1)&&excelStatus2.equals(status2)&&excelMessage2.equalsIgnoreCase(message2)){
                         GemTestReporter.addTestStep("Verify if question gets uploaded","Successfully verified the uploaded question.",Status.PASS,DriverAction.takeSnapShot());
                     }else{
                         GemTestReporter.addTestStep("Verify if question gets uploaded","Could not verify the uploaded question.",Status.FAIL,DriverAction.takeSnapShot());
@@ -881,7 +880,7 @@ public class Questions {
                 GemTestReporter.addTestStep("Verify if question gets uploaded","Invalid popup message- " + message,Status.ERR,DriverAction.takeSnapShot());
             }
         }catch(Exception e){
-                GemTestReporter.addTestStep("Verify Statuses and messages after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify statuses and messages after uploading excel","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -922,10 +921,10 @@ public class Questions {
     @And("^Preview question$")
     public void previewQuestion() {
         try{
-            clickButton("Preview");
+            CandidateModule_UserManagement.clickButton("Preview");
 
         }catch(Exception e){
-          GemTestReporter.addTestStep("Preview question","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Preview question","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
         }
     }
 
@@ -986,8 +985,16 @@ public class Questions {
 
     @And("Select Delete from actions dropdown")
     public void selectDeleteFromActionsDropdown() throws InterruptedException {
-        Thread.sleep(2000);
+        DriverAction.waitUntilElementIsClickable(QuestionsLocators.deleteNew);
         DriverAction.click(QuestionsLocators.deleteNew);
+    }
+
+    @And("Click Preview button")
+    public void clickPreviewButton() {
+        DriverAction.waitSec(5);
+        DriverAction.scrollToBottom();
+        DriverAction.waitSec(3);
+        DriverAction.click(QuestionsLocators.previewBtn);
     }
 }
 
