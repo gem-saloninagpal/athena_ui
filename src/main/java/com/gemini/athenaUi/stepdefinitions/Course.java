@@ -953,8 +953,10 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     @Then("^Click the button until it appear \"([^\"]*)\"$")
     public void clickTheButtonWithWait(String buttonName) throws InterruptedException {
         try {
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
-            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(MyLocators.button.replace("input", buttonName))));
+            Thread.sleep(6000);
+            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.button.replace("input", buttonName)),20);
+//            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 50);
+//            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(MyLocators.button.replace("input", buttonName))));
             DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
         }catch(Exception e){
             System.out.print("Exception encountered!");
@@ -2240,8 +2242,9 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     @And("^Search a course completed by learner$")
     public void searchCompletedCourse() {
         try{
+            DriverAction.waitSec(5);
             if(DriverAction.isDisplayed(MyLocators.searchbox)) {
-                DriverAction.typeText(MyLocators.searchbox, _currentCourse, "Search a currently completed course- " + _currentCourse);
+                DriverAction.typeText(MyLocators.searchbox, _courseName, "Search a currently completed course- " + _courseName);
             }
         }catch(Exception e){
             GemTestReporter.addTestStep("Search a course completed by learner","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());
@@ -2251,7 +2254,7 @@ if(DriverAction.isDisplayed(Course_Locators.editIcon))
     @When("^Click actions icon of a course$")
     public void courseActionsIcon(){
         try{
-            DriverAction.waitSec(3);
+            Thread.sleep(7000);
             DriverAction.waitUntilElementClickable(Course_Locators.actionsIcon1,10);
             DriverAction.click(Course_Locators.actionsIcon1,"Click actions icon of a course","Successfully clicked actions icon.");
         }catch(Exception e){

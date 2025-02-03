@@ -18,7 +18,7 @@ public class MyLocators {
 
     public static String header="(//h6[contains(@class,'text')])[1]";
     public static By fieldsError=By.xpath("//input//following::small");
-    public static By crossIcon=By.xpath("//button[contains(@class,'close')]");
+    public static By crossIcon=By.xpath("//button[contains(@class,'sidebar-close')]");
     public static By dropdownIcon=By.xpath("(//span[contains(@class,'chevron-down')]//parent::div)[2]");
     public static By fieldsDropdown=By.xpath("//div[@fxlayout='row wrap']//span[contains(@class,'chevron-down')]//parent::div");
     public static By dropdownIcon1=By.xpath("//div[contains(@class,'placeholder')]//following::span[contains(@class,'chevron-down')]//parent::div");
@@ -172,6 +172,7 @@ public class MyLocators {
     public static By backToDashboardBtn = By.xpath("//*[@label='Back To Dashboard']");
     public static By viewReportBtn = By.xpath("(//button[@label='View Report'])[2]");
     public static By addNewAssignment = By.xpath("//button[@label='Add New']");
+    public static By submit=By.xpath("//button[@label='Submit']");
 
     public static String selectTab(int i) {
 

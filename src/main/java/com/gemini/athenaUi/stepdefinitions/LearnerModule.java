@@ -70,7 +70,7 @@ public class LearnerModule {
 //                GemTestReporter.addTestStep("Verify the option present in dropdown", "Successfully verified the option- " + option + "", Status.PASS, DriverAction.takeSnapShot());
 //            }
             DriverAction.click(By.xpath(LearnerModule_Locators.requiredOption.replace("input",option)), "Select " + option + " from dropdown", "Successfully selected " + option + ".");
-
+            Thread.sleep(4000);
 
         } catch (Exception e) {
             GemTestReporter.addReasonOfFailure(e + " Exception occured while verifying the options present in dropdown.");
@@ -653,6 +653,7 @@ public class LearnerModule {
        _courseName= "a"+RandomStringUtils.randomAlphanumeric(10);
        String inputValues[]={_courseName,courseType,duration,points,courseTag,fileLocation,category};
        for(int i=0;i<=6;i++){
+
             DriverAction.waitSec(3);
            String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
            String upload=inputFields.get(i).getAttribute("type");

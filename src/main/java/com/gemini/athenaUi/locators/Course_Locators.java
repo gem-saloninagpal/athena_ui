@@ -1,5 +1,6 @@
 package com.gemini.athenaUi.locators;
 
+import org.apache.logging.log4j.core.lookup.StrSubstitutor;
 import org.openqa.selenium.By;
 
 public class Course_Locators {
@@ -162,6 +163,11 @@ public class Course_Locators {
     public static By actionsIcon=By.xpath("(//button[contains(@class,'p-ripple')])[1]");
     public static By actionsIcon1=By.xpath("(//athena-action//button[@type='button'])[1]");
     public static By rolesDropdown=By.xpath("");
+    public static By additionalCommentField=By.xpath("//textarea[@formcontrolname='certificateComment']");
+    public static By completedCourseActionIcon=By.xpath("(//p-tabpanel[@header='Completed']//button[contains(@class,'icon')])[1]");
+    public static By certificateComment=By.xpath("//label[@class='certificate-comment']//strong");
+    public static String viewDownloadCertificate="//label[text()='input']//parent::div";
+    public static By certificateMessage=By.xpath("(//label[contains(text(),'Additional Comment')]//parent::span//following::small)[1]");
 
 
     //img[@class='calender-icon']

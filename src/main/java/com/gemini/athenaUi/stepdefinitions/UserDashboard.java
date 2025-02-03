@@ -55,11 +55,106 @@ static String _CourseName=" ";
         }
 
     }
-catch (Exception e) {
+
+    catch (Exception e) {
         GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
     }
 
 }
+
+    @And("^Update and publish the course$")
+    public void updatePublishedCourse()
+    {
+        try{
+            //in this function we are publishing the course
+            DriverAction.scrollToTop();
+            if(DriverAction.isExist(Course_Locators.courseSummaryDiv))
+            {
+                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Reset")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save As Draft")))&&DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
+                {
+                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled", "It is Enabled", Status.FAIL, DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Initially Reset,Save As Draft,Save Course & Publish buttons should be disabled","It is Disabled", Status.PASS, DriverAction.takeSnapShot());
+
+                }
+                if(DriverAction.isEnabled(By.xpath(Course_Locators.button.replace("input","Default Order"))))
+                {
+                    GemTestReporter.addTestStep("Initially Default Order button should be enabled", "It is Enabled", Status.PASS, DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Initially Default Order button should be enabled","It is Disabled", Status.FAIL, DriverAction.takeSnapShot());
+                }
+            }
+            //here we are checking the Default order button functionality
+
+            List<WebElement> firstTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr"));
+            int firstTableSize=firstTable.size();
+            if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Default Order")))) {
+                DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Default Order")), "clicked on Default Order button", "Successfully clicked on Default Order button");
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Default Order button", Status.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            List<WebElement> secondTable=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
+            int secondTableSize=secondTable.size();
+            if(firstTableSize==secondTableSize)
+            {
+                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Successfully added the data", Status.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Data added after clicking the Default Order button", "Data is not added", Status.FAIL, DriverAction.takeSnapShot());
+            }
+            //here we are checking the reset button functionality
+
+            if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Reset")))) {
+                DriverAction.click(By.xpath(Course_Locators.button.replace("input","Reset")),"Clicked on Reset Button","Successfully clicked on Reset button");
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Reset button", Status.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+            List<WebElement> tableAfterReset=DriverAction.getElements(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr"));
+            if(tableAfterReset.size()==firstTableSize)
+            {
+                GemTestReporter.addTestStep("Data is Reset after clicking the Reset button", "Successfully get reset", Status.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Data is Reset after clicking the Reset button", "Not able to Reset the data", Status.FAIL, DriverAction.takeSnapShot());
+            }
+            if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Default Order")))) {
+                DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Default Order")), "clicked on Default Order button", "Successfully clicked on Default Order button");
+            }
+            else {
+                GemTestReporter.addTestStep("Error Occur", "Fail to click on Default Order button", Status.FAIL,
+                        DriverAction.takeSnapShot());
+            }
+
+            if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Update Course & Publish"))))
+            {
+                DriverAction.scrollToBottom();
+                    DriverAction.click(UserDashboard_Locator.updateAndPublishBtn,"clicked on Update Course and Publish button","Successfully clicked on Update Course and Publish button");
+                DriverAction.waitSec(3);
+
+                if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes"))))
+                {
+                    DriverAction.click(By.xpath(Course_Locators.button.replace("input","Yes")));
+                    if(DriverAction.isDisplayed(MyLocators.submit)) {
+                        DriverAction.click(MyLocators.submit);
+                    }
+                }
+
+            }
+        }
+        catch (Exception e) {
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
+        }
+    }
 
 @And("^publish the course$")
     public void publishCourse()
@@ -134,18 +229,19 @@ try{
                 DriverAction.takeSnapShot());
     }
 
-    if(DriverAction.isExist(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
+    if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Save Course & Publish"))))
     {
         DriverAction.scrollToBottom();
         DriverAction.click(UserDashboard_Locator.publishBtn,"clicked on Save Course and Publish button","Successfully clicked on Save Course and Publish button");
         DriverAction.waitSec(3);
+
         if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes"))))
         {
             DriverAction.click(By.xpath(Course_Locators.button.replace("input","Yes")));
 //            if(DriverAction.isDisplayed(By.xpath(Course_Locators.button.replace("input","Yes")))) {
 //                DriverAction.click(By.xpath(Course_Locators.button.replace("input", "Yes")));
 //            }
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(8);
             DriverAction.click(Course_Locators.courseTypeDropdown);
             DriverAction.click(By.xpath(Course_Locators.dropdownValue.replace("type","Public")));
             DriverAction.click(Course_Locators.draftOrPublishDropdown);
@@ -356,10 +452,10 @@ catch (Exception e) {
     @And("^Manually completed course$")
     public void manuallyCompleted(){
     try{
+        DriverAction.waitSec(4);
         DriverAction.click(By.xpath(MyLocators.backBtnIcon.replace("input", "Back")));
-   
         //in this we are manually completing the course
-        DriverAction.waitSec(3);
+        DriverAction.waitSec(4);
 if(DriverAction.isExist(UserDashboard_Locator.courseFilterInput))
 {
     DriverAction.typeText(UserDashboard_Locator.courseFilterInput,_CourseName);
@@ -1002,6 +1098,7 @@ else {
     @And("^Add a content$")
     public void addAContent() {
     try{
+        DriverAction.waitUntilElementClickable(UserDashboard_Locator.addContentInCourse,10);
         DriverAction.click(UserDashboard_Locator.addContentInCourse);
     }catch(Exception e){
         GemTestReporter.addTestStep("Add a content","Exception encountered- "+e,Status.ERR,DriverAction.takeSnapShot());

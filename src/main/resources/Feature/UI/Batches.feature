@@ -2,8 +2,7 @@ Feature: Batches functionality
 
   Background:
     #  And Logout of portal
-    And Navigate to login page
-    And Login using "pallavi.arora@geminisolutions.com" and "abcd@123"
+    Then Login using "saloni.nagpal@geminisolutions.com" and "abc@1234"
 
   @regression @batch
   Scenario Outline: Create a batch and verify
@@ -18,8 +17,8 @@ Feature: Batches functionality
     Then Verify batch is created/updated
 
     Examples:
-      |module        |submodule|fileLocation                                                  |owner |batchName|
-      |Manage Courses|Batches  |C:\Users\Pallavi.Arora\Downloads\athena.png|rahul|null     |
+      |module        |submodule|fileLocation                                |owner |batchName|
+      |Manage Courses|Batches  |C:\Users\saloni.nagpal\Pictures\Athena-5.PNG|rahul|null     |
 
     @regression @batch
     Scenario Outline: Add a course in batch and verify from batch summary
@@ -67,8 +66,8 @@ Feature: Batches functionality
   #    Then Verify added course after editing displays in batch summary
 
         Examples:
-        |module        |submodule|fileLocation                                                  |owner |
-        |Manage Courses|Batches  |C:\Users\Pallavi.Arora\Downloads\athena.png|athena|
+        |module        |submodule|fileLocation                               |owner |
+        |Manage Courses|Batches  |C:\Users\saloni.nagpal\Pictures\Athena-5.PNG|athena|
 
 
 

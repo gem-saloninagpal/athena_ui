@@ -67,4 +67,5 @@ public class UserDashboard_Locator {
     public static By searchCourse=By.xpath("(//input[contains(@placeholder,'Course Name')])[1]");
     public static By addContentInCourse=By.xpath("(//i[@ptooltip=\"Add Content\"])[1]");
     public static By confirmationDialog=By.xpath("//span[text()='Confirmation']");
+    public static By updateAndPublishBtn=By.xpath("(//button[@ng-reflect-label='Update Course & Publish'])[2]");
 }

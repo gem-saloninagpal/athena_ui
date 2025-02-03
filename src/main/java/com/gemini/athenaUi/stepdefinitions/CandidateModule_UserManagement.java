@@ -101,7 +101,8 @@ public class CandidateModule_UserManagement {
                 DriverAction.click(By.xpath(MyLocators.selectModule.replace("input", submodule)));
             }
             //close sidebar
-            DriverAction.click(MyLocators.crossIcon, "Click the cross icon of sidebar", "Successfully clicked the cross icon.");
+            Thread.sleep(3000);
+            DriverAction.click(MyLocators.crossIcon);
 //            int timestamp=TimeDifference();
 //            System.out.print(timestamp);
         } catch (Exception e) {
@@ -133,6 +134,9 @@ public class CandidateModule_UserManagement {
     public static void clickTheButton(String buttonName) throws InterruptedException {
         try {
 
+            if(buttonName.contains("View")){
+                System.out.println("wait");
+            }
             if(buttonName.equals("No")){
                 System.out.print("No clicked");
             }
@@ -721,9 +725,10 @@ public class CandidateModule_UserManagement {
     @Then("Switch to {string}")
     public void switchTo(String tab) {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(8000);
+            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.testTab.replace("input", tab)));
             if (DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input", tab)))) ;
-            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input", tab)), 25000);
+            DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input", tab)), 20);
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input", tab)), "Switch to " + tab, "Successfully switched to tab " + tab);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Switch test tab", e + " Exception occured while switching test tab.", Status.ERR);

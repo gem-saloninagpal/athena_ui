@@ -4,7 +4,7 @@ jewel_user: saloni
 #jewel_bridge_token: 3c746c90-69da-4365-b530-ea1cdfb37ae21716282288009
 #enter_point: https://betaapi.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 #prod token
-jewel_bridge_token: c1409352-d4d4-4c80-bd5d-8f3d5aa18bb91729848243628
+jewel_bridge_token: 33f2c882-2ad7-4673-8a75-dac75c2d9c3b1737966704220
 enter_point: https://apis.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 report_name: Athena_Report
 email_report: N
