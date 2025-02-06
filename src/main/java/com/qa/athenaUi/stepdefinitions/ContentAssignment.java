@@ -35,7 +35,7 @@ public class ContentAssignment {
                 if (dropdown != null && dropdown.equals("listbox")) {
 
                     List<WebElement> dropdownFields = DriverAction.getElements(MyLocators.fieldsDropdown);
-
+                    DriverAction.waitSec(2);
                     DriverAction.click(dropdownFields.get(k));
                     k++;
                     DriverAction.click(By.xpath(MyLocators.option.replace("input", inputValues[i])));

@@ -26,8 +26,8 @@ Feature: Assign learner to batch
     Then Validate count after unassigning
 
     Examples:
-      |module        |submodule|learner|message                                    |
-      |Manage Courses|Batches  |pallavi |Learner removed successfully from the batch|
+      |module        |submodule|
+      |Manage Courses|Batches  |
 
   Scenario Outline: Validate assign selected
     Given Select "<module>", "<submodule>" from sidebar

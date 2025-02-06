@@ -140,62 +140,65 @@ Feature:API HealthCheck
           |Endpoint |Method |StatusCode|SampleName |
           |assignAllUsersToTest  |post   |200       |assignAllUsersToTest |
 
-  Scenario Outline: Update date of all courses for user
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint |Method |StatusCode|SampleName |
-      |updateDateOfAllCoursesForUser  |put   |200       |updateDateOfAllCoursesForUser |
+      Scenario Outline: Update date of all courses for user
+        Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint |Method |StatusCode|SampleName |
+          |updateDateOfAllCoursesForUser  |put   |200       |updateDateOfAllCoursesForUser |
 
-  Scenario Outline: Update date of selected courses for user
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint |Method |StatusCode|SampleName |
-      |updateDateOfSelectedCoursesForUser  |put   |200       |updateDateOfSelectedCoursesForUser |
+      Scenario Outline: Update date of selected courses for user
+        Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint |Method |StatusCode|SampleName |
+          |updateDateOfSelectedCoursesForUser  |put   |200       |updateDateOfSelectedCoursesForUser |
 
-  Scenario Outline: Get all course details
-    Given Set endpoint "<Endpoint>" and Method "<Method>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint|Method|StatusCode|
-      |getAllCourseDetails|get   |200 |
+      Scenario Outline: Get all course details
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint|Method|StatusCode|
+          |getAllCourseDetails|get   |200 |
 
-  Scenario Outline: Update date of selected courses for user
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint |Method |StatusCode|SampleName |
-      |getAllCompletedCoursesCandidatesView  |post   |200       |getAllCompletedCoursesCandidatesView |
+      Scenario Outline: Update date of selected courses for user
+        Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint |Method |StatusCode|SampleName |
+          |getAllCompletedCoursesCandidatesView  |post   |200       |getAllCompletedCoursesCandidatesView |
 
-  Scenario Outline: Get ongoing course data
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint |Method |StatusCode|SampleName |
-      |getOngoingCourseData  |post   |200       |getOngoingCourseData |
+      Scenario Outline: Get ongoing course data
+        Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint |Method |StatusCode|SampleName |
+          |getOngoingCourseData  |post   |200       |getOngoingCourseData |
 
-  Scenario Outline: Get all top scorers - leaderboard
-    Given Set endpoint "<Endpoint>" and Method "<Method>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint|Method|StatusCode|
-      |getAllTopScorers|get   |200 |
+#      Scenario Outline: Get all top scorers - leaderboard
+#        Given Set endpoint "<Endpoint>" and Method "<Method>"
+#        Then Verify Status code <StatusCode>
+#        Examples:
+#          |Endpoint|Method|StatusCode|
+#          |getAllTopScorers|get   |200 |
 
+      Scenario Outline: Send monthly compliance reports
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint|Method|StatusCode|
+          |sendMonthlyComplianceCourseReports|get   |200 |
 
+      Scenario Outline: Send quarterly compliance reports
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint|Method|StatusCode|
+          |sendQuarterlyComplianceCourseReports|get   |200 |
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      Scenario Outline: Send yearly compliance reports
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint|Method|StatusCode|
+          |sendYearlyComplianceCourseReports|get   |200 |

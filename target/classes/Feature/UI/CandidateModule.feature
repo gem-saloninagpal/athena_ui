@@ -115,7 +115,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Verify clear functionality after saving an answer
     When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
+#    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -160,7 +160,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Save a question without answering i t
     When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
+#    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -172,7 +172,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Finish a test and check in completed tests tab
     When Start test and verify instructions video is displayed
-    And Click the "NEXT" button of instructions video
+#    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears

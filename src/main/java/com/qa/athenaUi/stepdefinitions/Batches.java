@@ -5,6 +5,7 @@ import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.utils.ui.DriverAction;
 import com.qa.athenaUi.locators.Course_Locators;
 import com.qa.athenaUi.locators.MyLocators;
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,6 +25,7 @@ public class Batches {
     public void batchActionsIcon(){
         try {
             //expand the action icon of batch
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
             DriverAction.waitSec(2);
             DriverAction.waitUntilElementIsClickable(MyLocators.batchActionsIcon);
             DriverAction.click(MyLocators.batchActionsIcon);
@@ -39,7 +41,9 @@ public class Batches {
 //            _courseState = option;
             //select option from dropdown
 //            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.editOptions.replace("input", option)));
-            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
+//            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
+            DriverAction.waitSec(5);
+            DriverAction.click(By.xpath("//label[text()='Delete']//parent::div"));
         }catch(Exception e){
             GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,Status.ERR);
         }

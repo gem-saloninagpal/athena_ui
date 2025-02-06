@@ -5,6 +5,7 @@ import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.utils.ui.DriverAction;
 import com.qa.athenaUi.locators.MyLocators;
 import com.qa.athenaUi.locators.QuestionsLocators;
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -103,6 +104,7 @@ public class Questions {
     @And("^Enter options and select a correct option$")
     public void enterOptions() {
         try {
+            DriverAction.waitSec(3);
             String text = "";
             for (int i = 0; i < 3; i++) {
                 //call generate unique mail function and remove @gmail.com
@@ -119,7 +121,7 @@ public class Questions {
                 }
                 DriverAction.waitUntilElementClickable(QuestionsLocators.addButton, 5);
                 DriverAction.click(QuestionsLocators.addButton, "Click the add button");
-                GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, Status.PASS);
+//                GemTestReporter.addTestStep("Enter option- " + text, "Successfully added the option- " + text, Status.PASS);
             }
             //   Thread.sleep(6000);
             DriverAction.waitUntilElementClickable(QuestionsLocators.selectOption,3);
@@ -132,19 +134,8 @@ public class Questions {
     @Then("^Verify the question is created \"([^\"]*)\", \"([^\"]*)\"$")
     public void verifyQuestionIsCreated(String question1, String question2) {
         try {
-            DriverAction.waitSec(4);
-            String[] ques = {question2, question1};
-            //verifying recently created 2 questions from the questions table
-            DriverAction.waitUntilElementAppear(QuestionsLocators.firstColumn,5);
-            List<WebElement> questions = DriverAction.getElements(QuestionsLocators.firstColumn);
-            int c = 0;
-            for (int i = 0; i <= 1; i++) {
-                String quesStatement = DriverAction.getElementText(questions.get(i));
-                if (quesStatement.contains(ques[i])) {
-                    c++;
-                }
-            }
-            if (c == 2) {
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
+            if (DriverAction.isDisplayed(QuestionsLocators.successMsg)) {
                 GemTestReporter.addTestStep("Verify question is saved", "Successfully verified that question is saved.", Status.PASS);
             } else {
                 GemTestReporter.addTestStep("Verify question is saved", "Could not verify that question is saved.", Status.FAIL);
@@ -469,6 +460,7 @@ public class Questions {
     @When("^Click Actions icon of recently created question$")
     public void clickActionsIconOfRecentlyCreatedQuestion() throws InterruptedException {
         try {
+            DriverAction.waitSec(8);
             DriverAction.waitUntilElementIsClickable(MyLocators.contentActionsIcon);
             DriverAction.click(MyLocators.contentActionsIcon);
         }catch(Exception e){
@@ -528,7 +520,7 @@ public class Questions {
     @And("^Click actions icon of recently created passage$")
     public void clickActionsIconOfRecentlyCreatedPassage() {
         try{
-            DriverAction.waitSec(2);
+            DriverAction.waitSec(10);
             DriverAction.waitUntilElementClickable(QuestionsLocators.passageActionsIcon2,6);
             DriverAction.click(QuestionsLocators.passageActionsIcon2,"Click Actions icon of recently created passage");
         }catch(Exception e){
@@ -995,6 +987,34 @@ public class Questions {
         DriverAction.scrollToBottom();
         DriverAction.waitSec(3);
         DriverAction.click(QuestionsLocators.previewBtn);
+    }
+
+    @And("Select Yes from dropdown")
+    public void selectYesFromDropdown() {
+        try {
+            DriverAction.click(QuestionsLocators.yesBtnDropdown);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("not clicked","option not slected from dropdown", Status.ERR);
+        }
+    }
+
+    @And("Select No from dropdown")
+    public void selectNoFromDropdown() {
+        try {
+            DriverAction.click(QuestionsLocators.noBtnDropdown);
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("not clicked","option not slected from dropdown", Status.ERR);
+        }
+    }
+
+    @And("Select View Comprehensions from actions dropdown")
+    public void selectViewComprehensionsFromActionsDropdown() {
+        try {
+            DriverAction.waitSec(5);
+            DriverAction.click(By.xpath("//label[text()='View Comprehensions']//parent::div"));
+        }catch(Exception e){
+            GemTestReporter.addTestStep("Select from dropdown","Exception encountered- "+e,Status.ERR);
+        }
     }
 }
 

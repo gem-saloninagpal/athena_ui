@@ -124,7 +124,7 @@ public class MyLocators {
     public static By learnerLastName=By.xpath("(//tbody)[3]//td[2]");
     public static By candidateLastName=By.xpath("(//tbody)[2]//td[2]");
     public static By employeeLastName=By.xpath("(//tbody)[1]//td[2]");
-    public static By contentActionsIcon=By.xpath("//tr//button[contains(@class,'p-button')]");
+    public static By contentActionsIcon=By.xpath("(//tr//button[contains(@class,'p-button')])[1]");
 
     public static String editOptions="//label[text()='input']//parent::div";
     public static By assignmentMarks=By.xpath("//input[@formcontrolname=\"assignmentMarks\"]");

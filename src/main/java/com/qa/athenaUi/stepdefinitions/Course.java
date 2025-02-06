@@ -588,6 +588,7 @@ public void editAndVerify(){
 
         try {
             //Assign a Learner to a course
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
             DriverAction.waitSec(5);
 //            DriverAction.waitUntilElementDisappear(Course_Locators.loadingIcon);
          if (DriverAction.isDisplayed(Course_Locators.editIcon)) {

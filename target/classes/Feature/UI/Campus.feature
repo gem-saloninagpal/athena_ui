@@ -52,6 +52,3 @@ Feature: Create campus functionality
 
 
 
-
-
-

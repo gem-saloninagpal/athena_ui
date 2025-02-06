@@ -163,16 +163,19 @@ public class CandidateModule_UserManagement {
                 DriverAction.scrollToBottom();
             }
             if (DriverAction.isDisplayed(By.xpath(MyLocators.button1.replace("input", buttonName)))) {
+                DriverAction.scrollIntoView(By.xpath(MyLocators.button1.replace("input", buttonName)));
                 DriverAction.click(By.xpath(MyLocators.button1.replace("input", buttonName)));
             } else if (DriverAction.isDisplayed(By.xpath(MyLocators.button2.replace("input", buttonName)))) {
+                DriverAction.scrollIntoView(By.xpath(MyLocators.button2.replace("input", buttonName)));
                 DriverAction.click(By.xpath(MyLocators.button2.replace("input", buttonName)));
             } else if (DriverAction.isDisplayed(By.xpath(MyLocators.button.replace("input", buttonName)))) {
                 //    DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.button.replace("input", buttonName)));
+                DriverAction.scrollIntoView(By.xpath(MyLocators.button.replace("input", buttonName)));
                 DriverAction.click(By.xpath(MyLocators.button.replace("input", buttonName)));
             } else {
                 GemTestReporter.addTestStep("Click the button- " + buttonName, "Button not found!", Status.FAIL, DriverAction.takeSnapShot());
             }
-            Thread.sleep(2500);
+//            Thread.sleep(2500);
             DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
 
         } catch (Exception e) {
@@ -298,7 +301,7 @@ public class CandidateModule_UserManagement {
     @Then("^Verify the popup message \"([^\"]*)\"$")
     public void verifyTheErrorPopup(String error) {
         try {
-            Thread.sleep(4000);
+//            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
             String errorMessage = DriverAction.getElementText(MyLocators.popupMsg);
             if (errorMessage.contains(error)) {
                 GemTestReporter.addTestStep("Verify the popup message", "Successfully verified popup message " + errorMessage, Status.PASS, DriverAction.takeSnapShot());
@@ -373,7 +376,7 @@ public class CandidateModule_UserManagement {
             DriverAction.click(MyLocators.selectCampusDropdown, "Click on Select Campus dropdown", "Select Campus dropdown is clicked successfully.");
             DriverAction.click(MyLocators.selectCampus, "Select a campus from dropdown", "Campus selected successfully.");
         } catch (Exception e) {
-            GemTestReporter.addReasonOfFailure(e + " Exception occured while selecting campus.");
+            GemTestReporter.addReasonOfFailure(e + " Exception occurred while selecting campus.");
         }
     }
 
@@ -1546,6 +1549,7 @@ public class CandidateModule_UserManagement {
     @And("Expand the dropdown {string}")
     public void expandTheDropdown(String dropdownName) {
         try {
+            DriverAction.waitSec(4);
             if(DriverAction.isDisplayed(By.xpath(MyLocators.dropdown.replace("input", dropdownName)))) {
                 DriverAction.click(By.xpath(MyLocators.dropdown.replace("input", dropdownName)), "Expand the dropdown- " + dropdownName);
             }else{

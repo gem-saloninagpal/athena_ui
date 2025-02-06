@@ -71,4 +71,7 @@ public class QuestionsLocators {
     public static By plusIcon=By.xpath("//span[contains(@class,'plus')]//parent::button");
     public static By deleteNew = By.xpath("//*[@id=\"p-tabpanel-1\"]/athena-comprehensions/p-table/div[2]/div/div[3]/label[2]");
     public static By previewBtn = By.xpath("//span[text()='Preview']//parent::button");
+    public static By successMsg = By.xpath("//div[contains(text(), 'Success')]");
+    public static By yesBtnDropdown = By.xpath("//li[@aria-label='Yes']");
+    public static By noBtnDropdown = By.xpath("//li[@aria-label='No']");
 }

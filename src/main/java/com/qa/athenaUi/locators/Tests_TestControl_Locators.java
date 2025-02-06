@@ -204,5 +204,7 @@ public class Tests_TestControl_Locators {
     public static By updateQuestionTypeTraining = By.xpath("(//div//span[text()='Question Type'])[13]");
     public static By updateLevelTraining = By.xpath("(//div//span[text()='Level'])[13]");
     public static By difficultyTraining = By.xpath("(//div//span[text()='Difficulty'])[13]");
+    public static By testTab = By.xpath("//span[text()='Tests']/parent::a");
+    public static By yesBtnLast = By.xpath("//span[text()='Yes']/parent::button");
 
 }

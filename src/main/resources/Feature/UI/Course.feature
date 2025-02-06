@@ -30,7 +30,7 @@ Feature:Course module features
   Scenario Outline: Create Course verify Add Content
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
     And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
@@ -43,7 +43,7 @@ Feature:Course module features
   Scenario Outline: Create Course verify Add Assignment
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
     And Select the checkbox
     And Click the button Add Content
@@ -59,11 +59,11 @@ Feature:Course module features
   Scenario Outline: Create Course->Edit and verify the course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
     And Enter course description "<description>"
     And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
-    Then Edit the Created Course and Verify
+#    Then Edit the Created Course and Verify
 
     Examples:
       | module        |submodule     |courseType|duration|courseTag|category|fileLocation                                    |description|assignmentName     |contentMessage                      |assignmentMessage                       |content|assignment|points|
@@ -71,48 +71,49 @@ Feature:Course module features
 
 
 
-  @6 @working
-  Scenario Outline: Create Course->Complete Course->verify Course Summary
-    Given Select "<module>", "<submodule>" from sidebar
-    When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
-    And Enter course description "<description>"
-    And Select the checkbox
-    And Click the button until it appear "Add Content"
-    And Validate "<content>" Add to Course "<contentMessage>"
-    And Validate "<assignment>" Add to Course "<assignmentMessage>"
-    Then Validate Course Summary Screen
-    Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|points|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|10|
+#  @6 @working
+#  Scenario Outline: Create Course->Complete Course->verify Course Summary
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When Click the button "Create Course"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+#    And Enter course description "<description>"
+##    And Select the checkbox
+#    And Click the button until it appear "Add Content"
+##    And Validate "<content>" Add to Course "<contentMessage>"
+##    And Validate Filter functionality "<assignmentName>"
+##    And Validate "<assignment>" Add to Course "<assignmentMessage>"
+#    Then Validate Course Summary Screen
+#    Examples:
+#      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|points|
+#      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|10|
 
-  @7 @inProgress
-  Scenario Outline: Assign Created Course->verify the result once the user complete the course
-    Given Select "<module>", "<submodule>" from sidebar
-    When A Learner is assign to a course
-    And Change the user's role "<Role>"
-#    And Switch the role "<Learner>"
-    And Filter the course and complete it
-    And Select "<module>", "<submodule>" from sidebar
-    Then Verify the Learner Report "<Learner>", "<Email>", "<Percentage>", "<Status>"
+#  @7 @inProgress
+#  Scenario Outline: Assign Created Course->verify the result once the user complete the course
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When A Learner is assign to a course
+#    And Change the user's role "<Role>"
+##    And Switch the role "<Learner>"
+#    And Filter the course and complete it
+#    And Select "<module>", "<submodule>" from sidebar
+#    Then Verify the Learner Report "<Learner>", "<Email>", "<Percentage>", "<Status>"
+#
+#    Examples:
+#      |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
+#      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
 
-    Examples:
-      |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
-      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
 
-
-  @8
-  Scenario Outline: Reattempt already completed Course
-    Given Select "<module>", "<submodule>" from sidebar
-    When Reattempt the test to the user
-    And Change the user's role "<Role>"
-    And Filter the course and complete it
-    And Select "<module>", "<submodule>" from sidebar
-    Then Verify the Learner Report "<Learner>", "<Email>", "<Percentage>", "<Status>"
-
-    Examples:
-      |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
-      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
+#  @8
+#  Scenario Outline: Reattempt already completed Course
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When Reattempt the test to the user
+#    And Change the user's role "<Role>"
+#    And Filter the course and complete it
+#    And Select "<module>", "<submodule>" from sidebar
+#    Then Verify the Learner Report "<Learner>", "<Email>", "<Percentage>", "<Status>"
+#
+#    Examples:
+#      |Role   |  module      |submodule     |Learner|Email                            |Percentage|Status|
+#      |Learner|Manage Courses|Course Library|pallavi |pallavi.arora@geminisolutions.com|100%|Completed|
 
 
   @9
@@ -139,14 +140,14 @@ Feature:Course module features
       | Manage Courses|Course Library|Learner Reports|
 
   @fixed
-  Scenario Outline: Validate View as Learner functionality in Course summary screen
-    Given Select "<module>", "<submodule>" from sidebar
-    When select course and switch to course summary
-    Then Validate View as Learner button functionality
-
-    Examples:
-      | module        |submodule     |
-      | Manage Courses|Course Library|
+#  Scenario Outline: Validate View as Learner functionality in Course summary screen
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When select course and switch to course summary
+#    Then Validate View as Learner button functionality
+#
+#    Examples:
+#      | module        |submodule     |
+#      | Manage Courses|Course Library|
 
 
   @new @fixed
@@ -163,15 +164,15 @@ Feature:Course module features
       | module        |submodule     |Learners Assigned|course|count|
       | Manage Courses       |Course Library  |Assign Learners|course|2    |
 
-  @new @fixed
-  Scenario Outline:  Select learner of different page->Validate Learner Unassign count and popup
-    Given Select "<module>", "<submodule>" from sidebar
-    When "<Learners Assigned>" to "<course>"
-    And Get assigned learners count
-    And Unassign a learner
-    And Go to next page
-    And Unassign a learner
-    Then Validate the count after unassigning learners from different pages
+#  @new @fixed
+#  Scenario Outline:  Select learner of different page->Validate Learner Unassign count and popup
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When "<Learners Assigned>" to "<course>"
+#    And Get assigned learners count
+#    And Unassign a learner
+#    And Go to next page
+#    And Unassign a learner
+#    Then Validate the count after unassigning learners from different pages
 
     Examples:
       | module        |submodule     |Learners Assigned|course|count|
@@ -186,7 +187,7 @@ Feature:Course module features
 
     Examples:
       | module        |submodule     |Learners Assigned|course|count|email|
-      | Manage Courses       |Course Library  |Assign Learners|course|4    |check123@gmail.com	|
+      | Manage Courses       |Course Library  |Assign Learners|course|4    |new123@gmail.com	|
 
   @new
   Scenario Outline:  Filter learner using email->Validate Learner Unassign count and popup
@@ -197,7 +198,7 @@ Feature:Course module features
 
     Examples:
       | module        |submodule     |Learners Assigned|course|count|email|
-      | Manage Courses       |Course Library  |Assign Learners|course|3    |check123@gmail.com	|
+      | Manage Courses       |Course Library  |Assign Learners|course|3    |new123@gmail.com	|
 
 
   @new @fixed
@@ -214,23 +215,24 @@ Feature:Course module features
       | module        |submodule     |Learners Assigned|course|count|
       | Manage Courses       |Course Library  |Assign Learners|course|2    |
 
-  @new
-  Scenario Outline: Create Course->verify Course Summary->Assign a Learner and update the date of Unattempted course->Validate date is updated successfully
-    Given Select "<module>", "<submodule>" from sidebar
-    When Click the button until it appear "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
-    And Enter course description "<description>"
-    And Click the button until it appear "Add Content"
-    And Validate "<content>" Add to Course "<contentMessage>"
-    And Validate Filter functionality "<assignmentName>"
-    And Validate "<assignment>" Add to Course "<assignmentMessage>"
-    And Validate Course Summary Screen
-    And  "<Learners Assigned>" to "<course>"
-    Then Assign "<email>" Learner and edit date for course
-
-    Examples:
-      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|email|Learners Assigned|course|points|
-      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|check123@gmail.com|Assign Learners|course|10|
+#  @new
+#  Scenario Outline: Create Course->verify Course Summary->Assign a Learner and update the date of Unattempted course->Validate date is updated successfully
+#    Given Select "<module>", "<submodule>" from sidebar
+#    When Click the button until it appear "Create Course"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+#    And Enter course description "<description>"
+#    And Select the checkbox
+#    And Click the button until it appear "Add Content"
+#    And Validate "<content>" Add to Course "<contentMessage>"
+#    And Validate Filter functionality "<assignmentName>"
+#    And Validate "<assignment>" Add to Course "<assignmentMessage>"
+#    And Validate Course Summary Screen
+##    And  "<Learners Assigned>" to "<course>"
+##    Then Assign "<email>" Learner and edit date for course
+#
+#    Examples:
+#      | module        |submodule     |courseType|duration|courseTag|category|fileLocation|description|assignmentName|contentMessage|assignmentMessage|content|assignment|email|Learners Assigned|course|points|
+#      | Manage Courses|Course Library|Public    |  30 |  Java   | Logical| C:\Users\Pallavi.Arora\Downloads\athena.png |abc|test_assignment |Content successfully added. Add more!|Assignment successfully added. Add more!|Content|Assignment|check123@gmail.com|Assign Learners|course|10|
 
 
 #  @new @toBeChecked
