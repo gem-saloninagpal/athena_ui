@@ -174,13 +174,15 @@ public class MyLocators {
     public static By addNewAssignment = By.xpath("//button[@label='Add New']");
     public static By geminiUsers = By.xpath("(//a)[1]");
     public static By addContentBtn = By.xpath("//span[text()='Add Content']//parent::button");
+    public static By registerBtn = By.xpath("//button[@label=\"Register\"]");
+
+    public static By registeredMsg = By.xpath("//div[contains(text(), 'registered')]");
 
     public static String selectTab(int i) {
 
         String path = "//li[@role='presentation']["+(i)+"]//parent::a";
         return path;
     }
-
 
 }
 

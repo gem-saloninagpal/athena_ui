@@ -35,11 +35,11 @@ public class TestAnalytics {
     @Then("^Compare ongoing and upcoming events with active statistics$")
     public void compareOngoingAndUpcomingEventsWithActiveStatistics() {
          try{
-             Thread.sleep(3000);
+             DriverAction.waitSec(3);
              _ongoingEvents =DriverAction.getElements(TestAnalyticsLocators.events).size();
              DriverAction.click(TestAnalyticsLocators.ongoingEventsDropdown);
              DriverAction.click(TestAnalyticsLocators.selectUpcomingEvents);
-             Thread.sleep(2000);
+             DriverAction.waitSec(2);
              _upcomingEvents =DriverAction.getElements(TestAnalyticsLocators.events).size();
              //sum of ongoing and upcoming tests should be equal to active tests
              if(_ongoingEvents + _upcomingEvents == _activeStatistics){

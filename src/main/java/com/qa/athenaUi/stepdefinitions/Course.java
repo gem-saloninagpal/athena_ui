@@ -202,7 +202,6 @@ public class Course {
             DriverAction.scrollToBottom();
             DriverAction.scrollIntoView(Course_Locators.checkboxs);
             DriverAction.waitUntilElementIsClickable(Course_Locators.checkboxs);
-//            DriverAction.click(Course_Locators.checkboxs);
             DriverAction.waitSec(2);
             DriverAction.scrollToBottom();
         }catch(Exception e){
@@ -280,7 +279,6 @@ public class Course {
         }
         else
         {
-
             GemTestReporter.addTestStep("Initially Add to Course Btn should be disabled","It is Disabled", Status.PASS, DriverAction.takeSnapShot());
         }
     }
@@ -330,24 +328,7 @@ else {
     GemTestReporter.addTestStep("Error Occur", "popup does not appear", Status.FAIL,
             DriverAction.takeSnapShot());
 }
-//String getContent=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[1]//tr[1]//td[1]"));
-//String contentAfterSelecting=DriverAction.getElementText(By.xpath("(//div[@class='p-datatable-wrapper ng-star-inserted']//table)[2]//tr[1]//td[1]"));
-//if(getContent.equals(contentAfterSelecting))
-//{
-//    GemTestReporter.addTestStep(type+" is added to Course Div",type+" is added successfully", Status.PASS, DriverAction.takeSnapShot());
-//}
-//else
-//{
-//    GemTestReporter.addTestStep(type+" is added to Course Div",type+" is not added successfully", Status.FAIL, DriverAction.takeSnapShot());
-//}
-////if (DriverAction.isExist(Course_Locators.addToCourseBtn))
-////{
-////    DriverAction.click(Course_Locators.addToCourseBtn,"Clicked on Add to Course Button","Successfully clicked on Add to course Button");
-////}
-////else {
-////    GemTestReporter.addTestStep("Error Occur", "Fail to click on Add to Course Button", Status.FAIL,
-////            DriverAction.takeSnapShot());
-////}
+
           DriverAction.waitSec(5);
           DriverAction.scrollIntoView(Course_Locators.addToCourseBtn);
           DriverAction.scrollToTop();
@@ -2135,16 +2116,16 @@ public void editAndVerify(){
         DriverAction.click(MyLocators.addContentBtn);
     }
 
-    @And("^Enter respective values in course fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
-    public void enterRespectiveValuesInCourseFields(String courseType, String duration, String courseTag, String fileLocation, String category) {
+    @And("^Enter respective values in course fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
+    public void enterRespectiveValuesInCourseFields(String courseType, String duration, String courseTag, String fileLocation, String category, String points) {
         try{
             int c=2;
             List<WebElement> inputFields= DriverAction.getElements(Course_Locators.courseInputFields);
             _courseName = generateRandomCourseName(10);
 //        courseName= RandomStringUtils.randomAlphanumeric(10);
 //            DriverAction.typeText(Course_Locators.points, points);
-            String inputValues[]={_courseName,courseType,duration, courseTag,fileLocation,category};
-            for(int i=0;i<=5;i++){
+            String inputValues[]={_courseName,courseType,duration,points, courseTag,fileLocation,category};
+            for(int i=0;i<=6;i++){
                 DriverAction.waitSec(2);
                 String dropdown=inputFields.get(i).getAttribute("aria-haspopup");
                 String upload=inputFields.get(i).getAttribute("type");

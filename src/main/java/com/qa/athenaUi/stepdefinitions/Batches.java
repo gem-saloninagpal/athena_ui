@@ -40,10 +40,10 @@ public class Batches {
         try {
 //            _courseState = option;
             //select option from dropdown
-//            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.editOptions.replace("input", option)));
-//            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
+            DriverAction.waitUntilElementIsClickable(By.xpath(MyLocators.editOptions.replace("input", option)));
+            DriverAction.click(By.xpath(MyLocators.editOptions.replace("input", option)),"Select "+option+" from dropdown","Successfully selected "+option+" from dropdown.");
             DriverAction.waitSec(5);
-            DriverAction.click(By.xpath("//label[text()='Delete']//parent::div"));
+//            DriverAction.click(By.xpath("//label[text()='Delete']//parent::div"));
         }catch(Exception e){
             GemTestReporter.addTestStep("Select "+option+" from dropdown","Exception encountered- "+e,Status.ERR);
         }

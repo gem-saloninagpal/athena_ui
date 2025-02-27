@@ -45,7 +45,7 @@ public class Feedback {
     public void verifyFeedbackIsDeleted() {
         try {
             DriverAction.waitSec(2);
-            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
             if(DriverAction.isDisplayed(FeedbackLocators.deletedMsg)) {
                 GemTestReporter.addTestStep("feedback deleted", "feedback successfully deleted", Status.PASS);
             } else {

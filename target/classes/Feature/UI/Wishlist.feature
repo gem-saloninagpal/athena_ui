@@ -2,7 +2,7 @@ Feature: Wishlist Feature
 
   Background:
     And Navigate to login page
-    And Login using "check123@gmail.com" and "check@123"
+    And Login using "priyanka.bansal@geminisolutions.com" and "abcd@123"
 
   Scenario: Add course to wishlist
     Given user is in course catalog

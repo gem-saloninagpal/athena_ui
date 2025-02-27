@@ -22,12 +22,12 @@ Feature: Questions functionality
     And Enter question description "<question2>"
     And Enter options and select a correct option
     And Click the button "Save & Exit"
-#    Then Verify the question is created "<question1>", "<question2>"
+    Then Verify the question is created "<question1>", "<question2>"
 
     Examples:
       |module |submodule|level|type                    |section|difficulty|skills|marks|question1|question2|text      |
       |Tests  |Questions|Basic|Multiple choice question|Logical|Hard      |Java  |10   |ques-1?  |plainTextQuestion  |Plain Text|
-#      |Tests  |Questions|Basic|Checkbox question       |Logical|Hard      |Java  |10   |ques-1!  |richTextQuestion  |Rich Text |
+      |Tests  |Questions|Basic|Checkbox question       |Logical|Hard      |Java  |10   |ques-1!  |richTextQuestion  |Rich Text |
 
 
   @questionModule
@@ -47,11 +47,11 @@ Feature: Questions functionality
     And Enter question description "<question2>"
     And Enter options and select a correct option
     And Click the button "Save & Exit"
-#    Then Verify the question is created "<question1>", "<question2>"
+    Then Verify the question is created "<question1>", "<question2>"
     Examples:
       |module |submodule|level       |type                    |section  |difficulty|skills|marks|question1 |question2 |text|
       |Tests  |Questions|Intermediate|Multiple choice question|null     |Easy      |Java  |10   |Question-1|Question-2|Rich Text|
-#      |Tests  |Questions|Intermediate|Checkbox question       |null     |Hard      |Java  |10   |question-1|question-2|Plain Text|
+      |Tests  |Questions|Intermediate|Checkbox question       |null     |Hard      |Java  |10   |question-1|question-2|Plain Text|
 
   @questionModule
   Scenario Outline: View question
@@ -116,7 +116,7 @@ Feature: Questions functionality
     And Click actions icon of recently created passage
     And Select View Comprehensions from actions dropdown
     Then Verify comprehension dialog box displays
-#    Then Verify passage on view
+    Then Verify passage on view
     Examples:
       |module |submodule|level  |type                       |section  |difficulty|skills|marks|question1  |question2|text|
       |Tests  |Questions|Basic  |Subjective answer questions|Logical  |Hard      |Java  |10   |           |         |Rich Text|

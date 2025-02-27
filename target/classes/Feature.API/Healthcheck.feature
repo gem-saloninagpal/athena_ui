@@ -59,6 +59,27 @@ Feature:API HealthCheck
        |Endpoint         |Method|StatusCode|
        |paginatedGetTest |get   |200       |
 
+  Scenario Outline: Get all active candidate user
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint             |Method|StatusCode|
+      |getAllActiveCandidate|get   |200       |
+
+  Scenario Outline: Get candidate answer
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint          |Method|StatusCode|
+      |getCandidateAnswer|get   |200       |
+
+  Scenario Outline: Generate report
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint      |Method|StatusCode|
+      |generateReport|post   |200      |
+
     Scenario Outline: Get all candidates by test id
       Given Set endpoint "<Endpoint>" and Method "<Method>"
       Then Verify Status code <StatusCode>
@@ -118,6 +139,12 @@ Feature:API HealthCheck
           |Endpoint|Method|StatusCode|
           |getAllActiveCampus|get   |200 |
 
+  Scenario Outline: Get all movie clips
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllMovieClips|get   |200 |
 
       Scenario Outline: Get all comprehensions
         Given Set endpoint "<Endpoint>" and Method "<Method>"
@@ -175,12 +202,12 @@ Feature:API HealthCheck
           |Endpoint |Method |StatusCode|SampleName |
           |getOngoingCourseData  |post   |200       |getOngoingCourseData |
 
-#      Scenario Outline: Get all top scorers - leaderboard
-#        Given Set endpoint "<Endpoint>" and Method "<Method>"
-#        Then Verify Status code <StatusCode>
-#        Examples:
-#          |Endpoint|Method|StatusCode|
-#          |getAllTopScorers|get   |200 |
+      Scenario Outline: Get all top scorers - leaderboard
+        Given Set endpoint "<Endpoint>" and Method "<Method>"
+        Then Verify Status code <StatusCode>
+        Examples:
+          |Endpoint|Method|StatusCode|
+          |getAllTopScorers|get   |200 |
 
       Scenario Outline: Send monthly compliance reports
         Given Set endpoint "<Endpoint>" and Method "<Method>"
@@ -202,3 +229,60 @@ Feature:API HealthCheck
         Examples:
           |Endpoint|Method|StatusCode|
           |sendYearlyComplianceCourseReports|get   |200 |
+
+  Scenario Outline: Get Contripoint Token
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getContripointToken |post   |200 |
+
+  Scenario Outline: Get All Excluded Users
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllExcludedUsers |get   |200 |
+
+  Scenario Outline: Add new section
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |addSection  |post   |200       |addSection |
+
+  Scenario Outline: Get all paginated tests
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |paginatedGetTest|get   |200 |
+
+  Scenario Outline: Get roles
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getRoles|get   |200 |
+
+  Scenario Outline: Get all permissions
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllPermissions|get   |200 |
+
+  Scenario Outline: Get campus performance report
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getCampusPerformanceReport|get   |200 |
+
+  Scenario Outline: Get certified learners by category
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getCertifiedLearnersByCourse|get   |200 |

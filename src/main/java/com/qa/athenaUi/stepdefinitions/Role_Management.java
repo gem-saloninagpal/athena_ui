@@ -1,6 +1,7 @@
 package com.qa.athenaUi.stepdefinitions;
 
 import com.qa.athenaUi.locators.Role_Management_Locators;
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import com.qa.athenaUi.locators.UserDashboard_Locator;
 import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.enums.Status;
@@ -181,6 +182,7 @@ public class Role_Management {
     @And("Switch the user to {string}")
     public void switchTheUserTo(String role) {
         try{
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
             //in this function we are switching the required role
             DriverAction.waitSec(5);
 
@@ -204,7 +206,7 @@ public class Role_Management {
             if(testType.equals("Placement Drives")) {
                 String Status_placement = DriverAction.getAttributeName(Role_Management_Locators.Status, "ng-reflect-disabled");
                 if (Status_placement.equals("true")) {
-                    DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+                    //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                     List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                     for (int i = 0; i < actions.size(); i++) {
                         if (dataList.get(0).get(i+1).equals(actions.get(i))) {
@@ -219,7 +221,7 @@ public class Role_Management {
                                 Status.FAIL, DriverAction.takeSnapShot());
                     }
                 } else {
-                    DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+                    //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                     List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                     for (int i = 0; i < actions.size(); i++) {
                         if (dataList.get(0).get(i+1).equals(actions.get(i))) {
@@ -318,7 +320,7 @@ public class Role_Management {
                             Status.PASS, DriverAction.takeSnapShot());
                 }
                 //validate the option in Question Screen
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -349,7 +351,7 @@ public class Role_Management {
 
                 }
                 //validate the option in Question Screen
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -380,7 +382,7 @@ public class Role_Management {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
                             Status.FAIL, DriverAction.takeSnapShot());
                 }
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -410,7 +412,7 @@ public class Role_Management {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
                             Status.FAIL, DriverAction.takeSnapShot());
                 }
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -440,7 +442,7 @@ public class Role_Management {
                     GemTestReporter.addTestStep("Validate Create button is present for Create Permission", "Not present",
                             Status.FAIL, DriverAction.takeSnapShot());
                 }
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -461,7 +463,7 @@ public class Role_Management {
                 List<List<String>> dataList = data.asLists(String.class);
 
                 //validate the option in Content Library
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 0; i < actions.size(); i++) {
                     if (dataList.get(0).get(i).equals(actions.get(i))) {
@@ -496,7 +498,7 @@ public class Role_Management {
 //            Robot robot = new Robot();
 //            robot.keyPress(KeyEvent.VK_ENTER);
 //            robot.keyRelease(KeyEvent.VK_ENTER);
-//            DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//            //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
 //            DriverAction.waitSec(3);
 
             String data1=dataList.get(0).get(1);
@@ -514,7 +516,7 @@ public class Role_Management {
                       GemTestReporter.addTestStep("Validate Permissions which are not Granted should not be visible on screen", "They are Visible",
                               Status.FAIL, DriverAction.takeSnapShot());
                   }
-                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 2; i < dataList.size(); i++) {
                     for(int j=0;j<actions.size();j++) {
@@ -533,7 +535,7 @@ public class Role_Management {
             }
             else
             {
-//                DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+//                //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                 List<String> actions = DriverAction.getElementsText(Role_Management_Locators.actionList);
                 for (int i = 2; i < dataList.size(); i++) {
                     for(int j=0;j<actions.size();j++) {
@@ -553,7 +555,7 @@ public class Role_Management {
 
         }
         catch (Exception e) {
-            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.FAIL);
+            GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED" + e, Status.ERR);
         }
 
     }
@@ -626,7 +628,7 @@ public class Role_Management {
                 DriverAction.typeText(Role_Management_Locators.userInput,user);
                 DriverAction.waitSec(4);
                 if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))))) {
-                    DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+                    //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                     if (DriverAction.isExist(Role_Management_Locators.editProfile)) {
                         DriverAction.click(Role_Management_Locators.editProfile);
                     } else {
@@ -766,7 +768,7 @@ public class Role_Management {
                 DriverAction.typeText(Role_Management_Locators.userInput,user);
                 DriverAction.waitSec(4);
                 if (DriverAction.isExist(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))))) {
-                    DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
+                    //DriverAction.click(By.xpath(Role_Management_Locators.editIcon.replace("itr", String.valueOf(1))));
                     if (DriverAction.isExist(Role_Management_Locators.editProfile)) {
                         DriverAction.click(Role_Management_Locators.editProfile);
                     } else {

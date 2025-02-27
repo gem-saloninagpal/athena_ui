@@ -2,7 +2,7 @@ Feature: Candidate module features
 
   Background:Check login to candidate module
     And Navigate to login page
-    Then Login using "cand2@gmail.com" and "cand@2"
+    Then Login using "candidateNew@gmail.com" and "cand@2"
 
   @screenRevamped-toBeChecked
     @regressionCandidate @working
@@ -10,7 +10,7 @@ Feature: Candidate module features
     When Expand info dropdown from navbar
     Then Verify the options present in dropdown "<option1>", "<option2>", "<option3>"
     And Select change password from dropdown and verify the dialog box
-    Then Verify the email of candidate "cand2@gmail.com"
+    Then Verify the email of candidate "candidateNew@gmail.com"
 
     Examples:
       |option1|option2        |option3|
@@ -115,7 +115,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Verify clear functionality after saving an answer
     When Start test and verify instructions video is displayed
-#    And Click the "NEXT" button of instructions video
+    And Click the "NEXT" button of instructions video
     Then Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -160,7 +160,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Save a question without answering i t
     When Start test and verify instructions video is displayed
-#    And Click the "NEXT" button of instructions video
+    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears
@@ -172,7 +172,7 @@ Feature: Candidate module features
   @regressionCandidate @working
   Scenario: Finish a test and check in completed tests tab
     When Start test and verify instructions video is displayed
-#    And Click the "NEXT" button of instructions video
+    And Click the "NEXT" button of instructions video
     And Check the instructions checkbox
     And Click the button "NEXT"
     Then Verify dialog box appears

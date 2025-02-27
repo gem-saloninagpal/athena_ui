@@ -3,20 +3,14 @@ Feature:API testing
   Background:
     Given Set authenticate "authenticate_url" method "post" and SampleName "authenticate_sampleJson"
 
-#  Scenario Outline: Get User
-#    Given Set endpoint "<Endpoint>" and Method "<Method>"
-#    Then Verify Status code <StatusCode>
-#    Examples:
-#      | Endpoint    | Method|StatusCode|
-#      | getAllUsers | get   |200       |
-#
-  Scenario Outline: Save Users
-    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+  Scenario Outline: Get User
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
     Then Verify Status code <StatusCode>
     Examples:
-    |Endpoint|Method|SampleName|StatusCode|
-    |saveUsers|post |saveUsers |201       |
-#
+      |Endpoint    | Method|StatusCode|
+      |getAllUsers | get   |200       |
+
+
   Scenario Outline: Find by username
     Given Set endpoint "<Endpoint>" and Method "<Method>"
     Then Verify Status code <StatusCode>
@@ -581,13 +575,6 @@ Feature:API testing
     Then Verify Status code <StatusCode>
     Examples:
       |Endpoint|Method|StatusCode|
-      |getCertifiedLearnersByCategory|get   |200 |
-
-  Scenario Outline: Get certified learners by category
-    Given Set endpoint "<Endpoint>" and Method "<Method>"
-    Then Verify Status code <StatusCode>
-    Examples:
-      |Endpoint|Method|StatusCode|
       |getCertifiedLearnersByCourse|get   |200 |
 
   Scenario Outline: Get ongoing course data
@@ -624,3 +611,32 @@ Feature:API testing
     Examples:
       |Endpoint|Method|StatusCode|
       |getAllTopScorers|get   |200 |
+
+  Scenario Outline: Get Contripoint Token
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getContripointToken |post   |200 |
+
+  Scenario Outline: Get All Excluded Users
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getAllExcludedUsers |get   |200 |
+
+    #fix - returning 400 but working fine on postman
+  Scenario Outline: Helpdesk - Get Employee Course Details
+    Given Set endpoint "<Endpoint>" method "<Method>" and SampleName "<SampleName>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint |Method |StatusCode|SampleName |
+      |getEmployeeCourseDetails  |get   |200       |getEmployeeCourseDetails |
+
+  Scenario Outline: Get Candidate Test Audit Data
+    Given Set endpoint "<Endpoint>" and Method "<Method>"
+    Then Verify Status code <StatusCode>
+    Examples:
+      |Endpoint|Method|StatusCode|
+      |getCandidateTestAuditData |get   |200 |

@@ -30,7 +30,7 @@ Feature:Course module features
   Scenario Outline: Create Course verify Add Content
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
@@ -43,7 +43,7 @@ Feature:Course module features
   Scenario Outline: Create Course verify Add Assignment
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Select the checkbox
     And Click the button Add Content
@@ -59,7 +59,7 @@ Feature:Course module features
   Scenario Outline: Create Course->Edit and verify the course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Click the button Add Content
     And Validate "<content>" Add to Course "<contentMessage>"
@@ -75,7 +75,7 @@ Feature:Course module features
 #  Scenario Outline: Create Course->Complete Course->verify Course Summary
 #    Given Select "<module>", "<submodule>" from sidebar
 #    When Click the button "Create Course"
-#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
 #    And Enter course description "<description>"
 ##    And Select the checkbox
 #    And Click the button until it appear "Add Content"
@@ -187,7 +187,7 @@ Feature:Course module features
 
     Examples:
       | module        |submodule     |Learners Assigned|course|count|email|
-      | Manage Courses       |Course Library  |Assign Learners|course|4    |new123@gmail.com	|
+      | Manage Courses       |Course Library  |Assign Learners|course|4    |priyanka.bansal@geminisolutions.com	|
 
   @new
   Scenario Outline:  Filter learner using email->Validate Learner Unassign count and popup
@@ -198,7 +198,7 @@ Feature:Course module features
 
     Examples:
       | module        |submodule     |Learners Assigned|course|count|email|
-      | Manage Courses       |Course Library  |Assign Learners|course|3    |new123@gmail.com	|
+      | Manage Courses       |Course Library  |Assign Learners|course|3    |priyanka.bansal@geminisolutions.com	|
 
 
   @new @fixed
@@ -219,7 +219,7 @@ Feature:Course module features
 #  Scenario Outline: Create Course->verify Course Summary->Assign a Learner and update the date of Unattempted course->Validate date is updated successfully
 #    Given Select "<module>", "<submodule>" from sidebar
 #    When Click the button until it appear "Create Course"
-#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
 #    And Enter course description "<description>"
 #    And Select the checkbox
 #    And Click the button until it appear "Add Content"
@@ -253,7 +253,7 @@ Feature:Course module features
 #  Scenario Outline: Create Course->Complete Course->verify Course Summary->Assign a Learner->Keep the course in Progress->Validate date is updated for In progress course successfully
 #    Given Select "<module>", "<submodule>" from sidebar
 #    When Click the button until it appear "Create Course"
-#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
+#    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>", "<points>"
 #    And Enter course description "<description>"
 #    And Click the button until it appear "Add Content"
 #    And Validate "<content>" Add to Course "<contentMessage>"

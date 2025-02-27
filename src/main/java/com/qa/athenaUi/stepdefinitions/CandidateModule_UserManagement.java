@@ -158,10 +158,11 @@ public class CandidateModule_UserManagement {
     public static void clickTheButton(String buttonName) throws InterruptedException {
         try {
 
-            Thread.sleep(8000);
+            DriverAction.waitSec(8);
             if (buttonName.equals("Save & Exit") || buttonName.equals("Update & Exit") || buttonName.equals("Save & Add More") || buttonName.equals("Finish Test") || buttonName.equals("Preview") || buttonName.equals("Add courses")) {
                 DriverAction.scrollToBottom();
             }
+            DriverAction.waitSec(5);
             if (DriverAction.isDisplayed(By.xpath(MyLocators.button1.replace("input", buttonName)))) {
                 DriverAction.scrollIntoView(By.xpath(MyLocators.button1.replace("input", buttonName)));
                 DriverAction.click(By.xpath(MyLocators.button1.replace("input", buttonName)));
@@ -225,6 +226,7 @@ public class CandidateModule_UserManagement {
     @Then("^Select a role from dropdown \"([^\"]*)\"$")
     public void selectARoleFromDropdown(String role) throws InterruptedException {
         try {
+            DriverAction.waitSec(3);
             //select a role while registering
             DriverAction.waitUntilElementClickable(MyLocators.dropdownIcon, 5);
             DriverAction.click(MyLocators.dropdownIcon, "Click the dropdown icon", "List of options displays.");
@@ -383,6 +385,7 @@ public class CandidateModule_UserManagement {
     @Then("Select experience level from dropdown {string}")
     public void selectExperienceLevel(String level) {
         try {
+            DriverAction.waitSec(3);
             DriverAction.click(MyLocators.selectExperienceLevelDropdown, "Click on Experience Level dropdown", "Experience Level dropdown is clicked successfully.");
             DriverAction.click(By.xpath(MyLocators.selectLevel.replace("input", level)), "Select experience from dropdown", "Experience selected successfully.");
         } catch (Exception e) {
@@ -500,11 +503,13 @@ public class CandidateModule_UserManagement {
     @Then("^Enable editing$")
     public void enableEditing() throws InterruptedException {
         try {
+            DriverAction.waitSec(2);
+            DriverAction.scrollToBottom();
+            DriverAction.waitSec(2);
             DriverAction.scrollToBottom();
             DriverAction.click(MyLocators.enableEditing, "Enable editing of Registered user", "Successfully clicked Enable Editing option.");
 
-            Thread.sleep(3000);
-
+            DriverAction.waitSec(5);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Enable editing", "Exception encountered- " + e, Status.ERR);
         }
@@ -751,6 +756,7 @@ public class CandidateModule_UserManagement {
             if (DriverAction.isExist(By.xpath(MyLocators.testTab.replace("input", tab)))) ;
             DriverAction.waitUntilElementClickable(By.xpath(MyLocators.testTab.replace("input", tab)), 25000);
             DriverAction.click(By.xpath(MyLocators.testTab.replace("input", tab)), "Switch to " + tab, "Successfully switched to tab " + tab);
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Switch test tab", e + " Exception occured while switching test tab.", Status.ERR);
         }
@@ -1805,5 +1811,36 @@ public class CandidateModule_UserManagement {
     public void switchToGeminiUsers() throws InterruptedException {
         Thread.sleep(2000);
         DriverAction.click(MyLocators.geminiUsers);
+    }
+
+    @And("Click Register button")
+    public void clickRegisterButton() {
+        try {
+            DriverAction.waitSec(3);
+            DriverAction.scrollIntoView(MyLocators.registerBtn);
+            DriverAction.scrollToBottom();
+            if(DriverAction.isDisplayed(MyLocators.registerBtn)) {
+                DriverAction.click(MyLocators.registerBtn);
+                GemTestReporter.addTestStep("button clicked", "button was clicked", Status.PASS);
+            } else {
+                GemTestReporter.addTestStep("button not clicked", "button was not clicked", Status.FAIL);
+            }
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("button not found", "Exception encountered- " + e, Status.ERR);
+        }
+    }
+
+    @Then("verify user is registered")
+    public void verifyUserIsRegistered() {
+        try {
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
+            if(DriverAction.isDisplayed(MyLocators.registeredMsg)) {
+                GemTestReporter.addTestStep("user registered", "User registered successfully", Status.PASS);
+            } else {
+                GemTestReporter.addTestStep("user not registered", "User was not registered successfully", Status.FAIL);
+            }
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("user not registered", "Exception encountered- " + e, Status.ERR);
+        }
     }
 }

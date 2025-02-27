@@ -3,6 +3,7 @@ package com.qa.athenaUi.stepdefinitions;
 import com.gemini.gemjar.enums.Status;
 import com.gemini.gemjar.reporting.GemTestReporter;
 import com.gemini.gemjar.utils.ui.DriverAction;
+import com.qa.athenaUi.locators.SendCustomMail_Locators;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -44,7 +45,7 @@ public class Wishlist {
     @And("user opens wishlist")
     public void userOpensWishlist() {
         try {
-            DriverAction.waitSec(10);
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
             DriverAction.waitUntilElementIsClickable(Wishlist_Locators.wishlist);
             DriverAction.click(Wishlist_Locators.wishlist);
         } catch (Exception e) {
@@ -55,6 +56,7 @@ public class Wishlist {
     @Then("verify course is added to wishlist")
     public void verifyCourseIsAddedToWishlist() {
         try {
+            DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 150);
             if(DriverAction.isDisplayed(Wishlist_Locators.wishlist_course)) {
                 GemTestReporter.addTestStep("Course in wishlist", "Course is added to wishlist", Status.PASS);
             } else {

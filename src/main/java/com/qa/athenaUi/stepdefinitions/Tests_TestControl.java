@@ -713,6 +713,7 @@ public class Tests_TestControl {
     @And("^Switch the User \"([^\"]*)\", \"([^\"]*)\"$")
     public void switchUser(String userName,String passWord){
         try{
+            DriverAction.waitSec(2);
             if(DriverAction.isDisplayed(SendCustomMail_Locators.loader)) {
                 DriverAction.waitUntilElementDisappear(SendCustomMail_Locators.loader, 200);
             }
@@ -780,7 +781,7 @@ public class Tests_TestControl {
             }
             DriverAction.waitSec(2);
             if (DriverAction.isDisplayed(Tests_TestControl_Locators.filterInput)) {
-                DriverAction.typeText(Tests_TestControl_Locators.filterInput, "new123@gmail.com");
+                DriverAction.typeText(Tests_TestControl_Locators.filterInput, "vaibhav.batra@geminisolutions.com");
                 DriverAction.waitSec(5);
                 if (DriverAction.isDisplayed(Course_Locators.addIcon)) {
                     DriverAction.click(Course_Locators.addIcon, "Clicked on add Content Icon", "Successfully clicked on Add Content Icon");
@@ -1195,7 +1196,7 @@ public class Tests_TestControl {
             }
 
             if (DriverAction.isExist(Tests_TestControl_Locators.testControlFilterInputInternal)) {
-                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, "new123@gmail.com");
+                DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInputInternal, "vaibhav.batra@geminisolutions.com");
             }
 
             if(DriverAction.isExist(Tests_TestControl_Locators.percentageIcon))
@@ -1384,7 +1385,7 @@ public class Tests_TestControl {
             }
             DriverAction.waitSec(5);
 
-            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, "new123@gmail.com");
+            DriverAction.typeText(Tests_TestControl_Locators.testControlFilterInput, "vaibhav.batra@geminisolutions.com");
             DriverAction.waitSec(5);
 
             DriverAction.click(Course_Locators.addIcon, "Clicked on add Content Icon", "Successfully clicked on Add Content Icon");

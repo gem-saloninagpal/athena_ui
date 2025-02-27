@@ -7,7 +7,7 @@ Feature: Edit Training Test Feature
   Scenario Outline: Edit test of published course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Select Has Test checkbox
     And Click the button Add Content
@@ -37,7 +37,7 @@ Feature: Edit Training Test Feature
   Scenario Outline: Edit test while creating course
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "Create Course"
-    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>"
+    And Enter respective values in course fields "<courseType>", "<duration>", "<courseTag>", "<fileLocation>", "<category>", "<points>"
     And Enter course description "<description>"
     And Select Has Test checkbox
     And Click the button Add Content

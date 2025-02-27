@@ -9,7 +9,7 @@ enter_point: https://apis.gemecosystem.com/gemEcosystemDashboard/v1/enter-point
 report_name: Athena_Report
 email_report: N
 jewel_screen_shots: Y/N
-#tags: '@cucumber_tag'
+#tags: '@internal_test'
 glue_code: com.qa.athenaAPI.stepDefinition.APIStepDefinition
 #glue_code: com.qa.athenaUi.stepDefinitions
 #glue_code: com.gemini.athena.stepdefinitions
@@ -111,3 +111,7 @@ prod:
   sendQuarterlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendQuarterlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
   sendYearlyComplianceCourseReports: https://devapi.geminisolutions.com/gemassessment/api/external/sendYearlyComplianceCourseReports?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
   getAllTopScorers: https://devapi.geminisolutions.com/gemassessment/api/getAllTopScorers
+  getContripointToken: https://devapi.geminisolutions.com/gemassessment/api/getContripointToken
+  getAllExcludedUsers: https://devapi.geminisolutions.com/gemassessment/api/getAllExcludedUsers
+  getEmployeeCourseDetails: https://devapi.geminisolutions.com/gemassessment/api/external/getEmployeeCourseDetails?key=47yEqIHMW86&token=3z9aKi3rGx6AwvZ6u8SfWHP08R
+  getCandidateTestAuditData: https://devapi.geminisolutions.com/gemassessment/api/getCandidateTestAuditData/826/1855

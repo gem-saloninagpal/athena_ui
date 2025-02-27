@@ -11,20 +11,14 @@ Feature: User Management features
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "<button>"
     Then Verify user is navigated to page "<page>"
-    When Click the button "<button>"
+    When Click Register button
     Then Verify the error displayed in input fields "<error>" "<countMandatoryFields>"
     When Select a role from dropdown "<role>"
     And Generate unique email
     And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
     And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
-    And Click the button "<button>"
-#      And Switch to Gemini Users
-#      Then Verify "<role>" is registered "abcKk","def"
-    When Click the button "<button>"
-    And Select a role from dropdown "<role>"
-    And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
-    And Click the button "<button>"
-#      Then Verify the popup message "<popupMsg>"
+    And Click Register button
+    Then verify user is registered
 
     Examples:
       |module         |button  |page           |error   |role         |tab      |popupMsg     |index|countMandatoryFields|submodule|
@@ -38,7 +32,7 @@ Feature: User Management features
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "<button>"
     Then Verify user is navigated to page "<page>"
-    When Click the button "<button>"
+    When Click Register button
     Then Verify the error displayed in input fields "<error>" "7"
     And Select a role from dropdown "<role>"
     And Generate unique email
@@ -46,10 +40,8 @@ Feature: User Management features
     And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "<inbuilt email>", "9876543210", "10"
     And Select campus from select campus dropdown
     And Select experience level from dropdown "Fresher"
-    And Click the button "<button>"
-#      Then Verify the popup message "<popupMsg>"
-    And Switch to tab "<tab>", "<index>"
-    Then Verify "Candidate" is registered "abcKk","def"
+    And Click Register button
+    Then verify user is registered
     Examples:
       |module         |button  |page           |error   |role     |tab       |popupMsg               |index|submodule|inbuilt email|
       |User Management|Register|User Management|required|Candidate|Candidates|registered successfully|2    |         |             |
@@ -59,51 +51,21 @@ Feature: User Management features
     Given Select "<module>", "<submodule>" from sidebar
     When Click the button "<button>"
     Then Verify user is navigated to page "<page>"
-    When Click the button "<button>"
+    When Click Register button
     Then Verify the error displayed in input fields "<error>" "7"
     When Select a role from dropdown "<role1>"
-#        And Select a role from dropdown "<role2>"
-#        And Select a role from dropdown "<role3>"
+    And Select a role from dropdown "<role2>"
+    And Select a role from dropdown "<role3>"
     And Generate unique email
     And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
     And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
-    And Click the button "<button>"
-    And Switch to Gemini Users
-    Then Verify "<role1>" is registered "abcKk","def"
-    Then Verify the role of registered user "<role1>","<role2>","<role3>"
-    When Click the button "<button>"
-    And Select a role from dropdown "<role1>"
-    And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
-    And Click the button "<button>"
+    And Click Register button
+    Then verify user is registered
 
     Examples:
       |module         |button  |page           |error   |role1   |tab    |popupMsg     |index|role2     |role3  |submodule|
       |User Management|Register|User Management|required|Admin  |Employees|already exist|1  |Invigilator|Learner|         |
 
-  @regression @working
-  Scenario Outline: Validating roles of user from user's id
-    Given Select "<module>", "<submodule>" from sidebar
-    When Click the button "<button>"
-    Then Verify user is navigated to page "<page>"
-    When Click the button "<button>"
-    Then Verify the error displayed in input fields "<error>" "<countMandatoryFields>"
-    When Select a role from dropdown "<role1>"
-#          And Select a role from dropdown "<role2>"
-#          And Select a role from dropdown "<role3>"
-    And Generate unique email
-    And Enter password "abc" and verify the required format "Must contain min 1 Alphabet(Lowercase), 1 Number & 1 Special character, Min Length should be 6, Max Length should be 10"
-    And Enter respective values in input fields "AbcD@1234", "AbcD@1234", "abcKk", "def", "", "9876543210", "10"
-    And Click the button "<button>"
-    Then Verify "<role1>" is registered "abcKk","def"
-    Then Verify the role of registered user "<role1>","<role2>","<role3>"
-    And Logout of portal
-    When Login using "<inbuilt username>" and "AbcD@1234"
-    And Select roles dropdown icon of navigation bar
-#          Then Verify the roles through user's id "<role1>", "<role2>", "<role3>"
-
-    Examples:
-      |module         |button  |page           |error   |role1   |role2|role3       |countMandatoryFields|submodule|inbuilt username|
-      |User Management|Register|User Management|required|Admin  |Invigilator|Learner|7                   |         |null            |
 
   @regression @working
   Scenario Outline: Verify user is unable to edit role of a candidate

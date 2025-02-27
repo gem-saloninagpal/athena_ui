@@ -1,4 +1,4 @@
-Feature: Send Custom Mail Feature
+Feature: Feedback Feature
 
   Background:
     And Navigate to login page

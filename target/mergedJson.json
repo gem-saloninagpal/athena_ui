@@ -72,7 +72,7 @@
         3
     ],
     "isRichText": true,
-    "sectionName": "apiAutomation",
+    "sectionName": "apiAutomation2",
     "isSearchByLocation": false,
     "userSearchParams": {
         "deptName": "App Strategy",
@@ -96,6 +96,7 @@
     "isActive": true,
     "body": "testing send email api",
     "isTestSubmitted": false,
+    "requestFor": "65704194dac8416f5eeb9ec5",
     "previousPassword": "YWJjZEAxMjM=",
     "engineeringCouncil": "",
     "numberOfCandidates": 5,
@@ -284,6 +285,7 @@
     "hasMovie": true,
     "timeTakenToAnswer": 15000,
     "imageUrl": "",
+    "employeeEmailId": "pallavi.arora@geminisolutions.com",
     "comments": "test assigned",
     "tpoContactNumber": 9876474644,
     "movieQuestionDetails": {"movieId": 1},
